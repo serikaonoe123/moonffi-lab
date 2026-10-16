@@ -97,4 +97,16 @@ MOONBIT_FFI_EXPORT void lab_buffer_probe(int32_t mode) {
   if (mode == 4) raise(SIGABRT);
   if (mode == 5) { for (;;) sleep(1); }
 #endif
+  /* Explicit positive detector test, never a discovered external defect.
+   * The normal build rejects this mode before entering the worker. */
+  if (mode == 6) {
+#ifdef __SANITIZE_ADDRESS__
+    volatile uint8_t *canary = (volatile uint8_t *)malloc(8);
+    if (!canary) abort();
+    canary[8] = 1; /* Deliberate one-byte overflow for the ASan canary. */
+    free((void *)canary);
+#else
+    abort(); /* A marker without instrumentation cannot produce a false pass. */
+#endif
+  }
 }

@@ -166,6 +166,13 @@ async fn Controller::launch(self : Controller, trace : @lab.Trace, directory : S
     return make_report(Timeout, "worker terminated after timeout", None, last, executed, elapsed, None)
   }
   if code != 0 {
+    let stderr_text = @fs.read_file(directory + "/stderr.log").text()
+    if asan_category(stderr_text) is Some(category) {
+      return make_report(MemoryError, "AddressSanitizer reported \{category}; see stderr.log; automatic same-root-cause reduction is not supported", Some(code), last, executed, elapsed, None)
+    }
+    if code == -1073741515 && events.is_empty() {
+      return make_report(SetupError, "Windows could not load a required DLL; check the profile runtime and PATH", Some(code), last, executed, elapsed, None)
+    }
     let outcome : @lab.Outcome = if code == 2 { HarnessError } else { Crash }
     return make_report(outcome, "worker exited abnormally; raw exit is not a root-cause fingerprint", Some(code), last, executed, elapsed, None)
   }

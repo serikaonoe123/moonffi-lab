@@ -21,7 +21,7 @@ pub fn BufferAdapter::new() -> BufferAdapter {
 }
 
 ///|
-pub fn supported_modes() -> Array[String] { ["correct", "nul", "share", "error", "crash", "hang"] }
+pub fn supported_modes() -> Array[String] { ["correct", "nul", "share", "error", "crash", "hang", "asan-canary"] }
 
 ///|
 fn mode_number(name : String) -> Int {
@@ -32,6 +32,7 @@ fn mode_number(name : String) -> Int {
     "error" => 3
     "crash" => 4
     "hang" => 5
+    "asan-canary" => 6
     _ => -1
   }
 }
@@ -60,8 +61,10 @@ pub impl @lab.Adapter for BufferAdapter with fn version(_) { "1" }
 pub impl @lab.Adapter for BufferAdapter with fn validate(_, trace) {
   let mode = trace.environment.get("fixture_mode").unwrap_or("correct")
   if mode_number(mode) < 0 { return Some("unknown fixture mode") }
-  if trace.environment.get("profile").unwrap_or("behavior") != "behavior" {
-    return Some("unsupported detector profile: this build provides behavior checks only")
+  let profile = trace.environment.get("profile").unwrap_or("behavior")
+  if profile != "behavior" && profile != "asan" { return Some("unknown detector profile") }
+  if (profile == "asan" || mode == "asan-canary") && !asan_profile_built() {
+    return Some("ASan profile is not built; use scripts/verify-asan.ps1")
   }
   let model : Map[String, Int] = Map([])
   for step in trace.steps {
@@ -221,7 +224,7 @@ pub fn generate(seed : UInt64, mode~ : String = "correct", noise~ : Int = 6) -> 
   operations.push(Close("b"))
   {
     schema: 1, adapter: "buffer", adapter_version: "1", generator_version: "buffer-1",
-    seed: seed.to_string(), environment: { "fixture_mode": mode, "profile": "behavior" },
+    seed: seed.to_string(), environment: { "fixture_mode": mode, "profile": if asan_profile_built() || mode == "asan-canary" { "asan" } else { "behavior" } },
     steps: operations.mapi((index, operation) => operation_step("s\{index}", operation)),
   }
 }

@@ -53,5 +53,13 @@ Buffer 与 Eigen 各运行 10 个独立进程的正确场景，全部通过。
 上次原生测试在启动 `buffer.whitebox_test.exe` 时返回“拒绝访问（os error 5）”，当时已停止，没有用其他方式绕过限制。
 诊断保留在 `results/verify-reducer-boundaries-20261016/tests.log`；本次按用户要求正常重试后通过，没有修改权限或安全设置。
 
-当前仍需补齐 ASan profile/canary、CI 和独立干净环境复现。behavior 测试通过不代表已完成内存检测。
+当前仍需补齐 CI 和独立干净环境复现。behavior 测试通过不代表已完成内存检测。
 参数缩减目前要求 JSON 编码长度严格减少，未覆盖等长数值简化；搜索完成也不宣称任意适配器下的全局最小性。
+
+## ASan stub profile：2026-10-16 22:01
+
+`scripts/verify-asan.ps1 -Out results/asan-20261016-second` 已通过。三个独立工作进程的人工 canary 均产生 heap-buffer-overflow 检测报告，被控制器分类为 MemoryError；Buffer 与 Eigen 各十个正常场景通过。对 canary 请求缩减时明确返回 unsupported_outcome，不把内存错误类别当作同根因指纹。
+
+仅 `fixtures/buffer/buffer.c` 和 `vendor/eigen-binding/eigen_shim.cpp`（含其 Eigen 模板实例）插桩。MoonBit 生成的 C、MoonBit runtime、async C stubs 及其他系统/预编译库未插桩。运行时、二进制哈希和具体范围见该目录 verification.json；所有 stderr 保留。ASan 副本使用本地固定版本依赖源码缓存，未复制已有构建产物，也不构成独立干净环境复现。
+
+第一次 ASan 构建因并行 /Zi 编译争用 vc140.pdb 失败，诊断保存在 results/asan-20261016-first。随后改为保留 moon 默认 /Z7 调试信息、链接时启用 /DEBUG，第二次通过。主源码构建配置没有被临时改写。

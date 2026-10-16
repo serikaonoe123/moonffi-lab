@@ -57,3 +57,13 @@ test "argument reduction preserves operation identity and dependency semantics" 
   assert_true(!same_operation(original, { ..original, uses: ["another-handle"] }))
   assert_true(!same_operation(original, { ..original, releases: ["old-handle"] }))
 }
+
+///|
+test "sanitizer classification requires matching header and summary" {
+  assert_true(asan_category("clang_rt.asan_dynamic-x86_64.dll") is None)
+  assert_true(asan_category("ERROR: AddressSanitizer: heap-buffer-overflow") is None)
+  assert_true(asan_category("ERROR: AddressSanitizer: heap-buffer-overflow\nSUMMARY: AddressSanitizer: heap-use-after-free") is None)
+  assert_true(asan_category("==123==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x123\nSUMMARY: AddressSanitizer: heap-buffer-overflow file.c:1") == Some("heap-buffer-overflow"))
+  let report = make_report(MemoryError, "canary", Some(1), None, 0, 1L, None)
+  assert_true(report.exit_code() == 1)
+}

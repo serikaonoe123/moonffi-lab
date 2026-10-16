@@ -38,6 +38,7 @@ pub(all) struct Completion {
 pub(all) enum Outcome {
   Pass
   PropertyFailure
+  MemoryError
   Crash
   Timeout
   InvalidCase
@@ -138,7 +139,7 @@ pub fn delete_block(trace : Trace, start : Int, count : Int) -> Trace {
 pub fn Report::exit_code(self : Report) -> Int {
   match self.outcome {
     Pass => 0
-    PropertyFailure | Crash => 1
+    PropertyFailure | MemoryError | Crash => 1
     Timeout | Flaky => 3
     InvalidCase | SetupError | HarnessError => 2
   }
