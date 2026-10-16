@@ -1,0 +1,7 @@
+import {
+  "moonbitlang/async",
+  "serikaonoe123/moonffi-lab/runner",
+  "serikaonoe123/moonffi-lab/fixtures/buffer",
+  "moonbitlang/core/env",
+}
+options("is-main": true)

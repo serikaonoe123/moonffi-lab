@@ -1,0 +1,8 @@
+import {
+  "moonbitlang/async",
+  "serikaonoe123/moonffi-lab/core" @lab,
+  "serikaonoe123/moonffi-lab/runner",
+  "moonbitlang/core/env",
+  "moonbitlang/core/string",
+}
+options("is-main": true)

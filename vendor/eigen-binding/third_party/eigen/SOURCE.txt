@@ -1,0 +1,10 @@
+source      = GitHub libigl/eigen @ 1f05f51517ec4fd91eed711e0f89e97a7c028c0e (zip)
+fetch_date  = 2026-10-13
+eigen_ver   = 3.3.90
+commit_sha  = 
+
+获取方式见 scripts/fetch-eigen.ps1：
+  路径 A: git clone GitLab 官方 tag（官方源）
+  路径 B: git clone GitHub 镜像 master
+  路径 C: GitHub 指定 commit 的源码归档 zip
+本目录不入库（见 .gitignore）；依赖版本由本文件记录。

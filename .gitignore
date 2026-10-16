@@ -1,0 +1,7 @@
+/_build/
+/.mooncakes/
+/results/
+*.obj
+*.pdb
+*.ilk
+*.exe

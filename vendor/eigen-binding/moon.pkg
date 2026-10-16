@@ -1,0 +1,13 @@
+import {
+  "moonbitlang/core/builtin",
+  "moonbitlang/core/encoding/utf8",
+}
+pkgtype(kind: "library")
+options(
+  "native-stub": ["eigen_shim.cpp"],
+  link: {
+    "native": {
+      "stub-cc-flags": "/EHsc /utf-8 /bigobj /O1",
+    },
+  },
+)

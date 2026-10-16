@@ -1,0 +1,10 @@
+import {
+  "serikaonoe123/moonffi-lab/core" @lab,
+  "moonbitlang/async",
+  "moonbitlang/async/fs",
+  "moonbitlang/async/process",
+  "moonbitlang/core/json",
+  "moonbitlang/core/string",
+  "moonbitlang/core/env",
+}
+pkgtype(kind: "library")

@@ -1,0 +1,10 @@
+import {
+  "serikaonoe123/moonffi-lab/core" @lab,
+  "moonbitlang/core/json",
+  "moonbitlang/core/encoding/hex",
+  "moonbitlang/core/quickcheck/splitmix",
+}
+pkgtype(kind: "library")
+options(
+  "native-stub": ["buffer.c"],
+)
