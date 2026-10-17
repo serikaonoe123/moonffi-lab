@@ -8,6 +8,8 @@
 
 已验证工具链：moon 0.1.20261012、moonc 0.10.15；依赖锁定 `moonbitlang/async@0.22.5`。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools。
 
+需要安装这份已验证工具链时，可运行 `scripts/install-toolchain.ps1`，按固定 SHA-256 在新目录安装工具包和标准库，支持保留归档后的离线重装。使用方法及滚动下载地址的可用性限制见 [工具链内容锁定](docs/TOOLCHAIN-LOCK.md)。
+
 ```powershell
 Set-Location D:\moonbit\moonffi-lab
 $PSVersionTable.PSVersion # Major 应为 7；从开始菜单打开 PowerShell 7

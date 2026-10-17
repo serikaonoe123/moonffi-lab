@@ -24,28 +24,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Install MoonBit and require the validated versions
+      - name: Install content-locked MoonBit in a fresh directory
         run: |
           $ErrorActionPreference = 'Stop'
-          New-Item -ItemType Directory -Path results/bootstrap -Force | Out-Null
-          $stage = 'download'
-          try {
-            $config = Get-Content toolchain.json -Raw | ConvertFrom-Json
-            $env:MOONBIT_INSTALL_VERSION = $config.installer_version
-            $installer = Join-Path $env:RUNNER_TEMP 'moonbit-install.ps1'
-            Invoke-WebRequest https://cli.moonbitlang.com/install/powershell.ps1 -OutFile $installer
-            Get-FileHash $installer | ConvertTo-Json | Set-Content results/bootstrap/installer-hash.json
-            $stage = 'install'
-            & $installer *> results/bootstrap/install.log
-            if ($LASTEXITCODE) { throw "Installer exited $LASTEXITCODE" }
-            $env:PATH = (Join-Path $env:USERPROFILE '.moon/bin') + ';' + $env:PATH
-            (Join-Path $env:USERPROFILE '.moon/bin') | Add-Content $env:GITHUB_PATH
-            $stage = 'version-check'
-            & ./scripts/assert-toolchain.ps1 -Out results/bootstrap/toolchain.json
-          } catch {
-            @{ stage = $stage; error = $_.Exception.Message } | ConvertTo-Json | Set-Content results/bootstrap/failure.json
-            throw
-          }
+          $toolchainRoot = Join-Path $env:RUNNER_TEMP 'moonffi-locked-toolchain'
+          & ./scripts/install-toolchain.ps1 -Destination $toolchainRoot -Out results/bootstrap
+          "MOON_HOME=$toolchainRoot" | Add-Content $env:GITHUB_ENV
+          (Join-Path $toolchainRoot 'bin') | Add-Content $env:GITHUB_PATH
+      - name: Verify toolchain rejection boundaries
+        if: matrix.suite == 'behavior'
+        run: |
+          & ./scripts/verify-toolchain.ps1 -ArchiveDirectory results/bootstrap/downloads -ToolchainRoot $env:MOON_HOME -Out results/toolchain-checks
       - name: Validate an exported commit with fresh dependencies
         env:
           LAB_SUITE: ${{ matrix.suite }}
@@ -59,7 +48,10 @@ jobs:
           retention-days: 14
           if-no-files-found: warn
           path: |
-            results/bootstrap/
+            results/bootstrap/*.json
+            results/bootstrap/*.log
+            results/toolchain-checks/*.json
+            results/toolchain-checks/*-output/*.json
             results/ci/**/*.json
             results/ci/**/*.jsonl
             results/ci/**/*.log

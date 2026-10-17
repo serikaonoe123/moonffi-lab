@@ -2,6 +2,14 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-17（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
+## 最新阶段：工具链内容锁定
+
+新增 `scripts/install-toolchain.ps1`、`toolchain-common.ps1`、`verify-toolchain.ps1`，增强 assert-toolchain；toolchain.json 固定两个官方归档的大小/SHA、三个工具二进制 SHA 与 core 1,201 源码文件的整体 SHA。全部归档匹配后才解包和执行工具，目标/证据必须为新目录，进程环境在 finally 恢复。CI 五项使用新流程，behavior 另跑 11 项拒绝边界；bootstrap 产物仅保留报告/日志，不上传工具包。
+
+来源 URL 仍为 latest；历史候选地址没有取得成功响应，不能声称取得不可变下载地址。当前实现锁定内容、漂移就失败，并支持保留归档后离线重装。Windows 包摘要与官方清单一致；core 包摘要为本轮 HTTPS 实测，源码身份与原有安装一致。见 TOOLCHAIN-LOCK.md 及 `docs/evidence/toolchain-lock-20261017.json`。
+
+本地两次全新目录安装、11 边界通过；新 MOON_HOME 用 moon update 初始化索引后，43 主模块测试/完整 behavior 与 5 SDK 测试/集成通过。最初索引缺失失败日志保留，SDK 依赖明确使用本地 async 源码。对应提交云端状态需查询实际 Actions，不能沿用下面算术阶段的成功。
+
 ## 最新阶段：Eigen 合法算术
 
 新增 Add/Mul、`--generator arithmetic`（`eigen-arithmetic-1`），旧 default/stateful 的 128 个已记录输入哈希不变。Int64 模型把存储元素限制在 ±10^6，点积中间量不超过 4×10^12，因此对 binary64 结果精确比较。Eigen 改用纯数值状态修整，覆盖删除 Set 后算术越界；所有变更核对全部存活矩阵。真实绑定、core/runner 未改动。

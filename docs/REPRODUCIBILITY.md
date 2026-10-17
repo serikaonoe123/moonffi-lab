@@ -6,9 +6,9 @@
 
 ## 版本与安装
 
-`toolchain.json` 记录当前实际验证过的 moon、moonc、moonrun 版本及 async 版本。`scripts/assert-toolchain.ps1` 要求三个工具的版本字符串完全匹配，并记录可执行文件 SHA-256；不匹配时写出诊断并失败。
+`toolchain.json` 记录实际验证的 moon、moonc、moonrun 版本、三个二进制摘要、core 版本及源码树身份，以及 Windows 工具包/core 归档的固定大小和 SHA-256。`scripts/assert-toolchain.ps1` 先核对二进制，再查询版本和核对 core 的 1,201 个源码文件；漂移时保存诊断并失败。
 
-CI 使用 [MoonBit 官方安装入口](https://www.moonbitlang.com/download/)，通过 `MOONBIT_INSTALL_VERSION` 选择版本。当前配置为 `latest`，随后运行严格的版本检查。这是检测版本漂移的闸门，不是历史安装包或安装脚本的不可变锁定。历史安装标识和包哈希尚未联网确认，因此没有臆造一个日期版本 URL。安装器哈希保存在 CI 的 bootstrap 诊断中。将来升级工具链时，需要一起更新版本记录并重新验收。
+CI 调用仓库内 `scripts/install-toolchain.ps1`，全部归档校验通过后才在新目录解包、查询版本并 bundle core，不执行滚动的上游安装脚本。来源仍是官方 latest URL，内容由仓库中的固定摘要锁定；地址变化后会失败，未声称已取得不可变历史下载地址。保留归档可用 `-ArchiveDirectory` 离线重装。来源确认、安装及范围见 [工具链内容锁定](TOOLCHAIN-LOCK.md)。升级时须一起更新内容身份并重新验收。
 
 Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定；ASan 报告保存实际运行时路径与哈希。只有查看实际云端任务、runner 镜像和验收产物后，才能记录独立环境验收成功。
 
@@ -41,6 +41,8 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 - `behavior/`、`asan/`、`benchmark/`、`generation/`、`sdk/`：所选 suite 的完整证据。
 - `verification.json`：只有全部所选任务成功才产生；出错则保存 `failure.json` 和阶段，保留已有文件。
 
+CI 另保存 `bootstrap` 的归档摘要、前后工具链检查和 core bundle 日志；behavior 任务保存 11 项工具链边界检查。下载的归档、工具链目录及故意损坏的测试二进制不上传到诊断产物。
+
 `fresh_project_build=true` 只说明没有复制项目构建产物。脚本的 `independent_environment=false` 始终表示它自身不能证明主机、标准库或 registry 全局缓存是全新的；CI runner 的独立性须由云端执行记录补充。输出目录不可复用，不自动删除任何证据。
 
 `host_environment` 保存操作系统、PowerShell、进程架构与可用的 GitHub runner 镜像信息；`driver_sha256` 标识实际执行复现脚本的版本。当脚本从一个仓库验证较早提交时，该脚本可能与导出源码中的脚本不同，不能仅凭 source_commit 推断驱动脚本内容。
@@ -53,4 +55,4 @@ sdk suite 的内部工作区仅包含引擎的 core/runner 与外部消费者。
 
 随后 [Actions run 38997018833](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38997018833) 在相同镜像和 PowerShell 版本上通过提交 `ee6bb3a` 的四项验收，新增 generation，32 单测与 512 场景均通过；四份产物的源码归档哈希一致，依赖恢复与版本闸门通过。见 [状态探索版本云端快照](evidence/github-ci-38997018833.json)。该提交的 benchmark 为九例单轮，后续 21 例三轮版本需按其自身提交的运行记录判断。
 
-早期本地安装器下载曾被套接字权限拒绝，经批准的诊断请求又遇到传输 EOF；这些历史失败保留，云端安装成功不改变其记录。已验证的范围是该提交、该 runner 镜像及其工具链，不把 latest 入口视作不可变安装包锁定。
+早期本地安装器下载曾被套接字权限拒绝，经批准的诊断请求又遇到传输 EOF；这些历史失败保留，云端安装成功不改变其记录。本轮下载在保持 TLS 校验的 Git/OpenSSL curl 下成功，固定内容已核对；latest 地址本身仍非不可变来源。已验证范围须按实际提交和运行判断。

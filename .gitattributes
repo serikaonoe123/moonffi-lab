@@ -2,6 +2,8 @@
 *.mbt text eol=lf
 *.c text eol=lf
 *.md text eol=lf
+toolchain.json text eol=lf
+scripts/*toolchain*.ps1 text eol=lf
 examples/stateful/*.json text eol=lf
 examples/eigen-stateful/*.json text eol=lf
 examples/eigen-arithmetic/*.json text eol=lf
