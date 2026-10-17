@@ -1,0 +1,209 @@
+{
+  "schema": 2,
+  "observed_on": "2026-10-17",
+  "tested_commit": "66dcf8f471ca63005412bd9514845a94e59ff82f",
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39025741306",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "native (benchmark)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39025741306/job/117376248525",
+      "startedAt": "2026-10-17T10:39:42Z",
+      "completedAt": "2026-10-17T10:45:12Z"
+    },
+    {
+      "name": "native (behavior)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39025741306/job/117376248580",
+      "startedAt": "2026-10-17T10:39:41Z",
+      "completedAt": "2026-10-17T10:41:27Z"
+    },
+    {
+      "name": "native (asan)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39025741306/job/117376248587",
+      "startedAt": "2026-10-17T10:39:41Z",
+      "completedAt": "2026-10-17T10:40:46Z"
+    },
+    {
+      "name": "native (sdk)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39025741306/job/117376248638",
+      "startedAt": "2026-10-17T10:39:41Z",
+      "completedAt": "2026-10-17T10:40:42Z"
+    },
+    {
+      "name": "native (generation)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39025741306/job/117376248653",
+      "startedAt": "2026-10-17T10:39:42Z",
+      "completedAt": "2026-10-17T10:41:35Z"
+    }
+  ],
+  "checks": {
+    "online_bootstraps_verified": 5,
+    "archive_pins_per_job": 2,
+    "binary_pins_per_job": 3,
+    "core_source_files": 1201,
+    "boundary_checks": 11,
+    "root_unit_tests": 51,
+    "numeric_probe_checks": 4,
+    "sdk_unit_tests": 5,
+    "source_archive_equal": true,
+    "selected_exported_source_files_checked_per_job": 13,
+    "buffer_generation_cases": 512,
+    "eigen_generation_cases": 192,
+    "eigen_input_hashes_match_local": 192,
+    "legacy_input_hashes_checked": 128,
+    "complete_reductions": 189,
+    "repeatable_groups": 63,
+    "proper_subsets_checked": 214,
+    "reduction_structural_rows_match_baseline": 189,
+    "reduction_semantic_traces_match_baseline": 189,
+    "frozen_corpus_semantic_cases_match_baseline": 21,
+    "input_hash_different_rows": 0,
+    "reduced_hash_different_rows": 0,
+    "corrected_replays_passed": 189,
+    "diagnostic_binary_files": 0,
+    "baseline_run": "local numeric-arguments, one repetition"
+  },
+  "lock_sha256": "5A9008CC7EA40DE44E0A47F8EA72DB4F344040A4601A52774493FF1F9DFEFB7F",
+  "source_archive_sha256": "27C25DB9B21B7B98260D82EFE3DA6E9A574F2DFA096A7434F22F3017DFA6D074",
+  "source_verifications": [
+    {
+      "suite": "behavior",
+      "state": "passed",
+      "commit": "66dcf8f471ca63005412bd9514845a94e59ff82f",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "asan",
+      "state": "passed",
+      "commit": "66dcf8f471ca63005412bd9514845a94e59ff82f",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "benchmark",
+      "state": "passed",
+      "commit": "66dcf8f471ca63005412bd9514845a94e59ff82f",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "generation",
+      "state": "passed",
+      "commit": "66dcf8f471ca63005412bd9514845a94e59ff82f",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "sdk",
+      "state": "passed",
+      "commit": "66dcf8f471ca63005412bd9514845a94e59ff82f",
+      "dependency_mode": "registry"
+    }
+  ],
+  "numeric_probe_checks": [
+    {
+      "strategy": "plain",
+      "confirmed": true,
+      "deletion_minimal": true,
+      "argument_executions": 2,
+      "accepted_value": 0,
+      "executions": 12
+    },
+    {
+      "strategy": "dependency",
+      "confirmed": true,
+      "deletion_minimal": true,
+      "argument_executions": 2,
+      "accepted_value": 0,
+      "executions": 12
+    },
+    {
+      "strategy": "state",
+      "confirmed": true,
+      "deletion_minimal": true,
+      "argument_executions": 2,
+      "accepted_value": 0,
+      "executions": 12
+    },
+    {
+      "budget": 6,
+      "executions": 6,
+      "stop_reason": "execution_budget"
+    }
+  ],
+  "sdk": {
+    "state": "passed",
+    "completed_at": "2026-10-17T18:40:37.0772212+08:00",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "consumer_module": "moonffi-example/counter-lab",
+    "dependency_mode": "registry-or-tool-cache",
+    "dependency_source": "",
+    "source_manifest_sha256": "7CBE86328F0E25960243BA519703ABEE5F7B5E45F145CCE3D52E348465E67B4D",
+    "executable_sha256": "C8F1E58B7E2DFD2202FF0D8106B5CF4773E2D31C1BD4970A13AF8B1AB60F9F3F",
+    "unit_tests": 5,
+    "pure_oracle_traces": 768,
+    "repair_subsets": 128,
+    "native_unit_walks": 32,
+    "correct_contract_cases": 8,
+    "correct_walk_cases": 32,
+    "original_steps": 32,
+    "reduced_steps": 2,
+    "fingerprint": "property:counter-value:s30",
+    "executions": 27,
+    "deletion_minimal": true,
+    "proper_subsets_checked": 3,
+    "corrected_replay": "Pass",
+    "budget_stop_reason": "execution_budget",
+    "preflight_rejection": true,
+    "output_reuse_rejected": true,
+    "separate_process_determinism": true,
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "independent_environment": false,
+    "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+  },
+  "benchmark": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 21,
+    "cases": 21,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 3,
+    "measurements": 189,
+    "complete_searches": 189,
+    "repeatable_case_strategies": 63,
+    "case_strategy_groups": 63,
+    "actual_proper_subsets_checked": 214.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-17T18:44:22.8996264+08:00",
+    "executable_sha256": "91228B95EF796725B074F9009476A5D5ED200AEC2D2FA8814083D799A80E78BE",
+    "protocol_sha256": "22F1F366F5A2744A8FC8D056348FF27901B71373746928529725ABB4048F2B31"
+  },
+  "local_comparison": "All 189 hosted input/reduced hashes and measured structural counts match the corresponding one of 63 local measurements. Subset-cache reuse is checked separately for later repetitions. No timing equality or speedup claim.",
+  "previous_engine_comparison": {
+    "run": "39013008257",
+    "local_rows": 63,
+    "unchanged_input_hashes": 63,
+    "changed_reduced_hashes": 21,
+    "changed_step_counts": 0,
+    "extra_worker_executions": 21,
+    "example": "RejectWrite argument 99 -> -1, same encoded width"
+  },
+  "raw_evidence_directory": "results/github-ci-39025741306",
+  "scope": "Fresh content-locked Windows/MSVC hosted checks of the exported commit. No argument/global minimality, immutable rolling URL availability, hermetic host, or full-program ASan claim. Full bootstrap/source/canary inspection is retained in the raw inspection.json."
+}

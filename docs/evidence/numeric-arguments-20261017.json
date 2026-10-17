@@ -90,7 +90,7 @@
     "AMPL": 330
   },
   "languages_configuration_changed": false,
-  "hosted_validation": "pending follow-up precision correction commit; first implementation b45de33 has separate run 39025293367",
+  "hosted_validation": "passed: https://github.com/serikaonoe123/moonffi-lab/actions/runs/39025741306; tested commit 66dcf8f471ca63005412bd9514845a94e59ff82f; five artifacts downloaded and inspected",
   "benchmark": {
     "schema": 2,
     "state": "passed",
@@ -114,7 +114,7 @@
     "protocol_sha256": "199C98CFE99FE433E01A7B7D6A3695868872D40FA1BEE775AF02325A1A1DEB3D"
   },
   "github_languages_after": {
-    "MoonBit": 125760,
+    "MoonBit": 127844,
     "PowerShell": 107645,
     "C": 3907,
     "AMPL": 330

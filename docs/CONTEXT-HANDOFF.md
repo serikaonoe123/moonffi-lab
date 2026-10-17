@@ -10,6 +10,8 @@
 
 进一步修复 `Step` 相等判断继承 Json 的 Double 舍入问题，避免只删除修整错误接受相邻大整数改写；对象键顺序仍不影响相等。最终本地 51/51 根模块单测及完整 behavior 通过，5/5 SDK 单测及完整外部接入通过；SDK 缩减仍为两步，因新增一次不保持失败的参数尝试，执行数从 26 变为 27。最终日志在 `results/verify-exact-arguments-final-20261017`、`results/sdk-exact-arguments-20261017`。63 次单轮缩减、214 个真子集通过，其中 21 项进一步简化等长参数，步骤数不变，各增加一次执行。见 VALIDATION 和 `docs/evidence/numeric-arguments-20261017.json`。本轮 CI 状态须按实际提交核对，不能沿用下面旧工具链提交的成功。
 
+最终核心提交 `66dcf8f471ca63005412bd9514845a94e59ff82f` 已推送，Actions `39025741306` 五项全部通过并下载核对：51+5 单测、四组数值探针、704 场景、189 次缩减、63 组重复一致、214 个真子集与全部正确实现重放通过。189 个输入/缩减哈希及结构计数与本地 63 项对应结果一致，后续轮次子集缓存另行核验；13 个关键导出源文件（含新 MoonBit 核心与测试）逐任务核对。原始证据在 `results/github-ci-39025741306`，持久摘要为 `docs/evidence/github-ci-39025741306.json`。GitHub 当前语言 API 为 MoonBit 127,844、PowerShell 107,645、C 3,907、AMPL 330 字节，MoonBit 约 53.3%；本轮 MoonBit 净增约 300 行，PowerShell 仅新增一条调用。
+
 ## 最新阶段：工具链内容锁定
 
 新增 `scripts/install-toolchain.ps1`、`toolchain-common.ps1`、`verify-toolchain.ps1`，增强 assert-toolchain；toolchain.json 固定两个官方归档的大小/SHA、三个工具二进制 SHA 与 core 1,201 源码文件的整体 SHA。全部归档匹配后才解包和执行工具，目标/证据必须为新目录，进程环境在 finally 恢复。CI 五项使用新流程，behavior 另跑 11 项拒绝边界；bootstrap 产物仅保留报告/日志，不上传工具包。
