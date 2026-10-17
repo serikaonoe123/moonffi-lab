@@ -20,7 +20,7 @@ moon build --target native
 
 `verify.ps1` 创建新的 `results/verify-<随机ID>`，检查源码快照完整性，运行单测、两个适配器的正常场景、三类缺陷的缩减和修复后重放、独立子集校验、崩溃/超时及缩减器边界测试。失败时保留已有日志，不自动删除任何输出。若执行被权限或安全策略拦截，停止对应操作并检查原始报错。
 
-Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[2026-10-17 云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38997018833)的 behavior、ASan、benchmark、generation 四个任务已通过，测试提交为 `ee6bb3a`。
+Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[2026-10-17 云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38998166053)的 behavior、ASan、benchmark、generation 四个任务已通过，测试提交为 `166d86d`（新增 Eigen 探索之前）。
 
 Buffer 新增 `--generator stateful`，按当前句柄、共享引用和长度选择合法的随机操作，覆盖扩缩容与边界数据；原默认生成器保留固定契约回归。运行 `scripts/verify-generation.ps1` 可复现两种生成器的操作覆盖与人工缺陷观测，方法、结果及限制见 [生成实验](docs/GENERATION-STUDY.md)。
 
@@ -44,6 +44,8 @@ $buffer = '.\_build\native\debug\build\cmd\buffer-lab\buffer-lab.exe'
 ```
 
 Eigen 场景检查读写、转置结果与源矩阵的独立性，以及不兼容加法返回错误后两个操作数仍保持原值。数值检查先拒绝 NaN/Infinity。当前未测试求解器的完整数值稳定性。
+
+Eigen 也支持 `--generator stateful`，按存活矩阵形状探索六种操作；构造、写入、转置和加法错误后核对全部存活矩阵。运行 `scripts/verify-eigen-generation.ps1` 可复现 128 个场景，完整 `verify-generation.ps1` 同时验收两种绑定。方法、独立数值 oracle 及限制见 [Eigen 探索实验](docs/EIGEN-GENERATION.md)，可直接重放[保存示例](examples/eigen-stateful/README.md)。
 
 ## 结果和诊断
 

@@ -1,0 +1,1063 @@
+{
+  "schema": 1,
+  "adapter": "eigen",
+  "adapter_version": "1",
+  "generator_version": "eigen-stateful-1",
+  "seed": "17",
+  "environment": {
+    "fixture_mode": "correct",
+    "profile": "behavior",
+    "binding_revision": "f7037a92cae92ac1c0e54e3bfa03b2e2e0e9f8ae",
+    "eigen_revision": "1f05f51517ec4fd91eed711e0f89e97a7c028c0e"
+  },
+  "steps": [
+    {
+      "id": "s0",
+      "op": "new",
+      "args": [
+        "New",
+        "m0",
+        1,
+        1,
+        [
+          23
+        ]
+      ],
+      "defines": [
+        "m0"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s1",
+      "op": "check",
+      "args": [
+        "Check",
+        "m0"
+      ],
+      "defines": [],
+      "uses": [
+        "m0"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s2",
+      "op": "transpose",
+      "args": [
+        "Transpose",
+        "m0",
+        "m1"
+      ],
+      "defines": [
+        "m1"
+      ],
+      "uses": [
+        "m0"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s3",
+      "op": "new",
+      "args": [
+        "New",
+        "m2",
+        3,
+        3,
+        [
+          -84,
+          100,
+          -3,
+          28,
+          100,
+          14,
+          66,
+          60,
+          0
+        ]
+      ],
+      "defines": [
+        "m2"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s4",
+      "op": "reject_add",
+      "args": [
+        "RejectAdd",
+        "m1",
+        "m2"
+      ],
+      "defines": [],
+      "uses": [
+        "m1",
+        "m2"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s5",
+      "op": "set",
+      "args": [
+        "Set",
+        "m0",
+        0,
+        0,
+        100
+      ],
+      "defines": [],
+      "uses": [
+        "m0"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s6",
+      "op": "transpose",
+      "args": [
+        "Transpose",
+        "m2",
+        "m3"
+      ],
+      "defines": [
+        "m3"
+      ],
+      "uses": [
+        "m2"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s7",
+      "op": "reject_add",
+      "args": [
+        "RejectAdd",
+        "m0",
+        "m2"
+      ],
+      "defines": [],
+      "uses": [
+        "m0",
+        "m2"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s8",
+      "op": "check",
+      "args": [
+        "Check",
+        "m3"
+      ],
+      "defines": [],
+      "uses": [
+        "m3"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s9",
+      "op": "check",
+      "args": [
+        "Check",
+        "m1"
+      ],
+      "defines": [],
+      "uses": [
+        "m1"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s10",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "m1"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "m1"
+      ]
+    },
+    {
+      "id": "s11",
+      "op": "check",
+      "args": [
+        "Check",
+        "m0"
+      ],
+      "defines": [],
+      "uses": [
+        "m0"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s12",
+      "op": "check",
+      "args": [
+        "Check",
+        "m0"
+      ],
+      "defines": [],
+      "uses": [
+        "m0"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s13",
+      "op": "set",
+      "args": [
+        "Set",
+        "m3",
+        2,
+        1,
+        -37
+      ],
+      "defines": [],
+      "uses": [
+        "m3"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s14",
+      "op": "set",
+      "args": [
+        "Set",
+        "m2",
+        1,
+        1,
+        0
+      ],
+      "defines": [],
+      "uses": [
+        "m2"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s15",
+      "op": "transpose",
+      "args": [
+        "Transpose",
+        "m2",
+        "m4"
+      ],
+      "defines": [
+        "m4"
+      ],
+      "uses": [
+        "m2"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s16",
+      "op": "reject_add",
+      "args": [
+        "RejectAdd",
+        "m0",
+        "m3"
+      ],
+      "defines": [],
+      "uses": [
+        "m0",
+        "m3"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s17",
+      "op": "new",
+      "args": [
+        "New",
+        "m5",
+        4,
+        1,
+        [
+          100,
+          -43,
+          1,
+          -66
+        ]
+      ],
+      "defines": [
+        "m5"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s18",
+      "op": "set",
+      "args": [
+        "Set",
+        "m3",
+        2,
+        2,
+        -4
+      ],
+      "defines": [],
+      "uses": [
+        "m3"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s19",
+      "op": "reject_add",
+      "args": [
+        "RejectAdd",
+        "m3",
+        "m5"
+      ],
+      "defines": [],
+      "uses": [
+        "m3",
+        "m5"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s20",
+      "op": "transpose",
+      "args": [
+        "Transpose",
+        "m3",
+        "m6"
+      ],
+      "defines": [
+        "m6"
+      ],
+      "uses": [
+        "m3"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s21",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "m3"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "m3"
+      ]
+    },
+    {
+      "id": "s22",
+      "op": "new",
+      "args": [
+        "New",
+        "m7",
+        3,
+        4,
+        [
+          9,
+          74,
+          -100,
+          -100,
+          -89,
+          -27,
+          0,
+          -31,
+          1,
+          -1,
+          0,
+          10
+        ]
+      ],
+      "defines": [
+        "m7"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s23",
+      "op": "new",
+      "args": [
+        "New",
+        "m8",
+        4,
+        1,
+        [
+          89,
+          0,
+          100,
+          -44
+        ]
+      ],
+      "defines": [
+        "m8"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s24",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "m2"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "m2"
+      ]
+    },
+    {
+      "id": "s25",
+      "op": "new",
+      "args": [
+        "New",
+        "m9",
+        3,
+        3,
+        [
+          96,
+          36,
+          -100,
+          39,
+          -1,
+          5,
+          63,
+          1,
+          1
+        ]
+      ],
+      "defines": [
+        "m9"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s26",
+      "op": "set",
+      "args": [
+        "Set",
+        "m0",
+        0,
+        0,
+        -100
+      ],
+      "defines": [],
+      "uses": [
+        "m0"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s27",
+      "op": "new",
+      "args": [
+        "New",
+        "m10",
+        3,
+        3,
+        [
+          0,
+          7,
+          -100,
+          1,
+          68,
+          -35,
+          92,
+          0,
+          85
+        ]
+      ],
+      "defines": [
+        "m10"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s28",
+      "op": "reject_add",
+      "args": [
+        "RejectAdd",
+        "m7",
+        "m9"
+      ],
+      "defines": [],
+      "uses": [
+        "m7",
+        "m9"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s29",
+      "op": "reject_add",
+      "args": [
+        "RejectAdd",
+        "m8",
+        "m9"
+      ],
+      "defines": [],
+      "uses": [
+        "m8",
+        "m9"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s30",
+      "op": "check",
+      "args": [
+        "Check",
+        "m10"
+      ],
+      "defines": [],
+      "uses": [
+        "m10"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s31",
+      "op": "check",
+      "args": [
+        "Check",
+        "m10"
+      ],
+      "defines": [],
+      "uses": [
+        "m10"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s32",
+      "op": "set",
+      "args": [
+        "Set",
+        "m4",
+        0,
+        1,
+        -1
+      ],
+      "defines": [],
+      "uses": [
+        "m4"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s33",
+      "op": "reject_add",
+      "args": [
+        "RejectAdd",
+        "m8",
+        "m0"
+      ],
+      "defines": [],
+      "uses": [
+        "m8",
+        "m0"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s34",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "m5"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "m5"
+      ]
+    },
+    {
+      "id": "s35",
+      "op": "check",
+      "args": [
+        "Check",
+        "m10"
+      ],
+      "defines": [],
+      "uses": [
+        "m10"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s36",
+      "op": "new",
+      "args": [
+        "New",
+        "m11",
+        3,
+        4,
+        [
+          1,
+          39,
+          -24,
+          3,
+          -91,
+          18,
+          1,
+          100,
+          0,
+          -100,
+          100,
+          -1
+        ]
+      ],
+      "defines": [
+        "m11"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s37",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "m0"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "m0"
+      ]
+    },
+    {
+      "id": "s38",
+      "op": "set",
+      "args": [
+        "Set",
+        "m8",
+        3,
+        0,
+        7
+      ],
+      "defines": [],
+      "uses": [
+        "m8"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s39",
+      "op": "reject_add",
+      "args": [
+        "RejectAdd",
+        "m4",
+        "m8"
+      ],
+      "defines": [],
+      "uses": [
+        "m4",
+        "m8"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s40",
+      "op": "check",
+      "args": [
+        "Check",
+        "m9"
+      ],
+      "defines": [],
+      "uses": [
+        "m9"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s41",
+      "op": "transpose",
+      "args": [
+        "Transpose",
+        "m4",
+        "m12"
+      ],
+      "defines": [
+        "m12"
+      ],
+      "uses": [
+        "m4"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s42",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "m12"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "m12"
+      ]
+    },
+    {
+      "id": "s43",
+      "op": "set",
+      "args": [
+        "Set",
+        "m10",
+        0,
+        2,
+        1
+      ],
+      "defines": [],
+      "uses": [
+        "m10"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s44",
+      "op": "check",
+      "args": [
+        "Check",
+        "m9"
+      ],
+      "defines": [],
+      "uses": [
+        "m9"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s45",
+      "op": "check",
+      "args": [
+        "Check",
+        "m4"
+      ],
+      "defines": [],
+      "uses": [
+        "m4"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s46",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "m9"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "m9"
+      ]
+    },
+    {
+      "id": "s47",
+      "op": "transpose",
+      "args": [
+        "Transpose",
+        "m8",
+        "m13"
+      ],
+      "defines": [
+        "m13"
+      ],
+      "uses": [
+        "m8"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s48",
+      "op": "check",
+      "args": [
+        "Check",
+        "m10"
+      ],
+      "defines": [],
+      "uses": [
+        "m10"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s49",
+      "op": "new",
+      "args": [
+        "New",
+        "m14",
+        1,
+        3,
+        [
+          -66,
+          0,
+          64
+        ]
+      ],
+      "defines": [
+        "m14"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s50",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "m13"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "m13"
+      ]
+    },
+    {
+      "id": "s51",
+      "op": "set",
+      "args": [
+        "Set",
+        "m7",
+        1,
+        1,
+        100
+      ],
+      "defines": [],
+      "uses": [
+        "m7"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s52",
+      "op": "new",
+      "args": [
+        "New",
+        "m15",
+        3,
+        4,
+        [
+          -100,
+          -100,
+          -79,
+          -1,
+          100,
+          -100,
+          -60,
+          -1,
+          7,
+          -49,
+          0,
+          -97
+        ]
+      ],
+      "defines": [
+        "m15"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s53",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "m15"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "m15"
+      ]
+    },
+    {
+      "id": "s54",
+      "op": "check",
+      "args": [
+        "Check",
+        "m7"
+      ],
+      "defines": [],
+      "uses": [
+        "m7"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s55",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "m14"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "m14"
+      ]
+    },
+    {
+      "id": "s56",
+      "op": "new",
+      "args": [
+        "New",
+        "m16",
+        2,
+        4,
+        [
+          88,
+          -1,
+          100,
+          1,
+          1,
+          52,
+          0,
+          39
+        ]
+      ],
+      "defines": [
+        "m16"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s57",
+      "op": "new",
+      "args": [
+        "New",
+        "m17",
+        4,
+        1,
+        [
+          -9,
+          -100,
+          17,
+          1
+        ]
+      ],
+      "defines": [
+        "m17"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s58",
+      "op": "reject_add",
+      "args": [
+        "RejectAdd",
+        "m8",
+        "m6"
+      ],
+      "defines": [],
+      "uses": [
+        "m8",
+        "m6"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s59",
+      "op": "set",
+      "args": [
+        "Set",
+        "m8",
+        2,
+        0,
+        0
+      ],
+      "defines": [],
+      "uses": [
+        "m8"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s60",
+      "op": "set",
+      "args": [
+        "Set",
+        "m6",
+        1,
+        0,
+        59
+      ],
+      "defines": [],
+      "uses": [
+        "m6"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s61",
+      "op": "reject_add",
+      "args": [
+        "RejectAdd",
+        "m17",
+        "m7"
+      ],
+      "defines": [],
+      "uses": [
+        "m17",
+        "m7"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s62",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "m10"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "m10"
+      ]
+    },
+    {
+      "id": "s63",
+      "op": "new",
+      "args": [
+        "New",
+        "m18",
+        3,
+        2,
+        [
+          -16,
+          1,
+          32,
+          20,
+          100,
+          -53
+        ]
+      ],
+      "defines": [
+        "m18"
+      ],
+      "uses": [],
+      "releases": []
+    }
+  ]
+}

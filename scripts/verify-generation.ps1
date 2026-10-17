@@ -148,13 +148,18 @@ try {
     Invoke-Buffer @('generate','--generator','stateful','--seed',"$Seed",'--steps',"$Steps",'--out',(Join-Path $Out "determinism-$copy")) @(0) (Join-Path $Out "determinism-$copy.log")
   }
   Require ((Get-Content (Join-Path $Out 'determinism-a/case.json') -Raw) -ceq (Get-Content (Join-Path $Out 'determinism-b/case.json') -Raw)) 'Separate generation processes differ for the same seed'
+  $stage = 'eigen-generation'
+  $eigenOutput = Join-Path $Out 'eigen'
+  & (Join-Path $PSScriptRoot 'verify-eigen-generation.ps1') -Out $eigenOutput -Cases $Cases -Steps $Steps -Seed $Seed
+  $eigenVerification = Read-Json (Join-Path $eigenOutput 'verification.json')
+  Require ($eigenVerification.state -eq 'passed') 'Eigen generation evidence missing'
   [ordered]@{
     state='passed'; completed_at=[DateTimeOffset]::UtcNow.ToString('o'); seed=$Seed.ToString(); cases_per_mode=$Cases; step_budget=$Steps
-    fixed_examples_replayed=$exampleEntries.Count
+    fixed_examples_replayed=$exampleEntries.Count; eigen=$eigenVerification
     modes=@('correct','nul','share','error'); generators=@('default','stateful'); measurements=$rows.ToArray(); coverage=$coverage
     toolchain=@(& moon version --all); executable_sha256=(Get-FileHash -LiteralPath $buffer).Hash
     scope='Operation/state-feature observations on labelled local fixtures, not native code coverage or external defect-finding rates. Default has fixed contract triggers; stateful has an eight-live-handle bound and no fixed suffix.'
-  } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $Out 'verification.json') -Encoding utf8
+  } | ConvertTo-Json -Depth 16 | Set-Content -LiteralPath (Join-Path $Out 'verification.json') -Encoding utf8
   Write-Host "Generation verification passed. Evidence: $Out"
 } catch {
   [ordered]@{ state='failed'; stage=$stage; error=$_.Exception.Message } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $Out 'failure.json') -Encoding utf8

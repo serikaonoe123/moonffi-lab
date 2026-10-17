@@ -109,7 +109,7 @@ fn EigenAdapter::check(self : EigenAdapter, step : @lab.Step, id : String) -> @l
   let matrix = self.handles.get(id).unwrap()
   let model = self.models.get(id).unwrap()
   if matrix.rows() != model.rows || matrix.cols() != model.cols {
-    return failure(step, "matrix-shape", "observed shape differs from model")
+    return failure(step, "matrix-shape", "matrix \{id}: observed shape differs from model")
   }
   match matrix.to_array() {
     Err(message) => failure(step, "matrix-values", message)
@@ -117,12 +117,23 @@ fn EigenAdapter::check(self : EigenAdapter, step : @lab.Step, id : String) -> @l
       if values.length() != model.data.length() { return failure(step, "matrix-values", "wrong array length") }
       for i, value in values {
         if value.is_nan() || value.is_inf() || (value - model.data[i].to_double()).abs() > 0.000000001 {
-          return failure(step, "matrix-values", "element differs from pure model")
+          return failure(step, "matrix-values", "matrix \{id}: element differs from pure model")
         }
       }
       None
     }
   }
+}
+
+///| Check every live matrix after mutations, so an aliased transpose cannot
+/// hide until a later random Check. Logical steps still bound all native work.
+fn EigenAdapter::check_all(self : EigenAdapter, step : @lab.Step) -> @lab.Failure? {
+  let ids = self.models.keys().to_array()
+  ids.sort()
+  for id in ids {
+    if self.check(step, id) is Some(found) { return Some(found) }
+  }
+  None
 }
 
 ///|
@@ -135,7 +146,7 @@ pub impl @lab.Adapter for EigenAdapter with fn execute(self, step) {
         Ok(matrix) => self.handles[id] = matrix
       }
       self.models[id] = { rows, cols, data: data.copy() }
-      self.check(step, id)
+      self.check_all(step)
     }
     Set(id, row, col, value) => {
       match self.handles.get(id).unwrap().set(row, col, value.to_double()) {
@@ -144,7 +155,7 @@ pub impl @lab.Adapter for EigenAdapter with fn execute(self, step) {
       }
       let model = self.models.get(id).unwrap()
       model.data[row * model.cols + col] = value
-      self.check(step, id)
+      self.check_all(step)
     }
     Check(id) => self.check(step, id)
     Transpose(id, other) => {
@@ -153,15 +164,14 @@ pub impl @lab.Adapter for EigenAdapter with fn execute(self, step) {
         Ok(matrix) => self.handles[other] = matrix
       }
       self.models[other] = transpose(self.models.get(id).unwrap())
-      self.check(step, other)
+      self.check_all(step)
     }
     RejectAdd(a, b) => {
       match self.handles.get(a).unwrap().add(self.handles.get(b).unwrap()) {
         Ok(_) => return failure(step, "shape-error-rejected", "incompatible addition succeeded")
         Err(_) => ()
       }
-      if self.check(step, a) is Some(found) { return Some(found) }
-      self.check(step, b)
+      self.check_all(step)
     }
     Drop(id) => { self.handles.remove(id); self.models.remove(id); None }
   }

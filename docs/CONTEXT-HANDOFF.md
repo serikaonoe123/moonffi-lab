@@ -12,6 +12,8 @@
 
 ## 已有实现
 
+- `fixtures/eigen/generator.mbt`：`eigen-stateful-1`，六操作、最多八个存活矩阵、1–4 行列，按当前形状选合法操作；Eigen CLI 注册 `stateful`，默认保留 `eigen-1`。
+- `fixtures/eigen/adapter.mbt`：构造、写入、转置及不兼容 Add 的错误后按 ID 排序核对全部存活矩阵；独立二维数组 oracle 及故意别名探针验证观察能力。
 - `core/repair.mbt`：StateModel、纯删除修整、删除原因与子序列完整性检查。
 - `fixtures/buffer/adapter.mbt`：别名共享状态、Resize、索引语义校验及修整。原生 fixture 与 FFI 同步支持 Resize。
 - `runner/shrink.mbt`：plain/dependency/state 策略，统一调度与预算，最终单步删除审计，confirmed 与 deletion_minimal 分别报告。
@@ -36,7 +38,7 @@
 
 ## 后续工作
 
-新增阶段已完成 Buffer 状态探索生成器 `buffer-stateful-1`：通过 `--generator stateful` 选择，按当前资源状态选操作，最多 8 个活句柄、256 字节、256 步，不附加固定触发后缀。default 继续使用 `buffer-1`，Eigen 暂保留默认生成方式。`runner.cli` 通过可选 generators 映射注册额外纯生成器；replay/shrink 拒绝重新指定生成器。
+新增阶段已完成 Buffer 状态探索生成器 `buffer-stateful-1`：通过 `--generator stateful` 选择，按当前资源状态选操作，最多 8 个活句柄、256 字节、256 步，不附加固定触发后缀。default 继续使用 `buffer-1`。`runner.cli` 通过可选 generators 映射注册额外纯生成器；replay/shrink 拒绝重新指定生成器。随后 Eigen 也接入相同生成器选择机制，见下文最新阶段。
 
 本地 32/32 单测、完整集成、ASan 及 16 条额外 ASan 随机正确轨迹已通过。`results/generation-stateful-20261017` 记录 512 场景的生成实验：操作组合（含起点）14→50，stateful 正确场景 64/64 通过，人工 nul/share/error 失败 59/63/58；三个首次失败均稳定缩减并修复后通过。768 条轨迹经独立状态 oracle 验证。详情见 GENERATION-STUDY；CI 新增 generation 任务，最新云端结果须按实际提交查询。这里的覆盖是操作与状态特征观测，不是原生代码覆盖或真实缺陷发现率。
 
@@ -45,6 +47,12 @@
 新增重复实验：原九例 + seed 17–20 × nul/share/error 的十二条 64 步 stateful 轨迹，三轮共 189 次缩减，全部完成，63 组结构结果三轮一致。所有正确实现重放通过；实际真子集核验 214 次，缓存覆盖首轮 259 个逻辑子集位置。每轮 plain/dependency/state 的无效候选为 333/14/0，工作进程次数为 555/587/600。share-20 从 plain 六步到 dependency/state 四步；state 没有优于 dependency 的最终步数，没有全面加速结论。见 `results/benchmark-repeated-final-20261017`、REDUCTION-STUDY 及 `docs/evidence/reduction-repeated-20261017.json`。6 次预算边界、seed 26 的 Pass 输入保留边界均已通过。
 
 本次接续已完成持久摘要、实验快照、完整实验文档、语义修整分支覆盖、开发机之外 CI 复现，以及固定本地语料的重复缩减测量。后续可推进真实绑定的探索生成、更多真实库语料、不可变安装包锁定及 SDK/示例整理。参数简化仍受 JSON 编码长度下降限制，不能声称全局最小、任意参数最小或同一原生根因。
+
+上述重复缩减版本已提交并推送为 `166d86d`。[Actions run 38998166053](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38998166053) 四项通过；全部产物已下载，189 条结构结果与本地逐条一致，214 个真子集及 189 个正确实现重放通过。完整下载在 `results/github-ci-38998166053/`，持久快照为 `docs/evidence/github-ci-38998166053.json`。
+
+最新阶段完成 Eigen 状态探索与全对象数值检查：37/37 单测、768 条独立纯 oracle 轨迹、32 条独立 native 数值 oracle 轨迹、完整 behavior 验收、Buffer 512 + Eigen 128 场景生成验收、ASan（含额外 16 条 Eigen stateful）通过。生成验收已集成进既有 CI generation suite；未知生成器/模式、replay 生成器选项、跨进程确定性及固定案例哈希和重放均验证。当前本地证据为 `results/verify-eigen-stateful-20261017`、`results/generation-eigen-stateful-20261017`、`results/asan-eigen-stateful-20261017`。报告与快照见 EIGEN-GENERATION 及 `docs/evidence/generation-eigen-20261017.json`，示例见 `examples/eigen-stateful/README.md`。对应提交的云端状态须查询实际 Actions，不能沿用前一提交的成功。
+
+后续优先项可推进 SDK/接入示例，或扩展真实绑定的合法算术操作与更多外部语料。当前 Eigen 只覆盖受限整数域的六操作，不包含合法加法结果、乘法或求解器稳定性；Drop 只移除引用，不证明 finalizer 时刻和原生分配平衡。导入的绑定和 Eigen 源码未改动。
 
 Git 直连 GitHub 的 HTTPS 曾连接失败；本机已有启用的系统代理 `127.0.0.1:7892`。使用单条命令 `git -c http.proxy=http://127.0.0.1:7892 push origin main` 可以正常推送，没有改全局代理或安全设置。普通传输错误与权限/安全拒绝须区分。
 

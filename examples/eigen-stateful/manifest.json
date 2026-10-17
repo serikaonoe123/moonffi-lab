@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "adapter": "eigen",
+  "generator_version": "eigen-stateful-1",
+  "seed": "17",
+  "expected_outcome": "Pass",
+  "case": "case.json",
+  "sha256": "24709335567FA382AB89A555AC3756831064632A71D099296DAE8DDDFF958205",
+  "scope": "Saved legal random walk against the real vendored Eigen binding; no injected or discovered defect."
+}

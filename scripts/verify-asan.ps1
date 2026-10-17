@@ -104,6 +104,11 @@ try {
   Invoke-Checked $buffer @('run','--generator','stateful','--cases','16','--steps','64','--timeout-ms','10000','--out',$statefulDir) 0 (Join-Path $Out 'buffer-stateful-correct.log')
   $statefulReports = @(Read-Json (Join-Path $statefulDir 'summary.json'))
   Require ($statefulReports.Count -eq 16 -and @($statefulReports | Where-Object outcome -ne 'Pass').Count -eq 0) 'Stateful correct fixture failed under ASan'
+  $stage = 'eigen-stateful-generation-control'
+  $eigenStatefulDir = Join-Path $Out 'eigen-stateful-correct'
+  Invoke-Checked $eigen @('run','--generator','stateful','--cases','16','--steps','64','--timeout-ms','10000','--out',$eigenStatefulDir) 0 (Join-Path $Out 'eigen-stateful-correct.log')
+  $eigenStatefulReports = @(Read-Json (Join-Path $eigenStatefulDir 'summary.json'))
+  Require ($eigenStatefulReports.Count -eq 16 -and @($eigenStatefulReports | Where-Object outcome -ne 'Pass').Count -eq 0) 'Eigen stateful correct binding failed under ASan'
   $stage = 'resize-alias-control'
   $resizeTrace = Read-Json (Join-Path $Out 'buffer-correct/case-1/case.json')
   $resizeTrace.generator_version = 'asan-resize-control-1'
@@ -138,6 +143,7 @@ try {
     canary_runs = 3; canary_outcome = 'MemoryError'; category = 'heap-buffer-overflow'
     correct_buffer_runs = 10; correct_eigen_runs = 10
     correct_stateful_buffer_runs = 16
+    correct_stateful_eigen_runs = 16
     resize_alias_control = 'Pass'
     instrumented_translation_units = @('fixtures/buffer/buffer.c','vendor/eigen-binding/eigen_shim.cpp (including instantiated Eigen headers)')
     not_instrumented = @('MoonBit-generated C','MoonBit runtime','async dependency C stubs','other prebuilt/system libraries')

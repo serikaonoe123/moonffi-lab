@@ -21,7 +21,7 @@
 
 生成器是 `(UInt64, String, Int) -> Trace`；CLI 的三个参数对应 seed、fixture 模式和最大步数。使用确定性随机状态并限制对象、步数和数据大小；原始具体数据必须能无损序列化。当前两个生成器的长度上限都不会超过 CLI 的 `--steps`。
 
-`runner.cli` 还接受可选 `generators` 映射，将名称关联到同类型的纯生成器；`--generator NAME` 在 run/generate 时选择，默认名称 `default` 使用原回调。Buffer 注册了 `stateful`，标记 `generator_version=buffer-stateful-1`；Eigen 暂不注册额外生成器。新增该映射不要求修改 Adapter 或核心类型；名称不可替代保存在轨迹中的具体步骤。replay/shrink 拒绝 `--generator`，防止把保存输入重新解释成另一套生成结果。
+`runner.cli` 还接受可选 `generators` 映射，将名称关联到同类型的纯生成器；`--generator NAME` 在 run/generate 时选择，默认名称 `default` 使用原回调。Buffer 和 Eigen 均注册了 `stateful`，分别标记 `generator_version=buffer-stateful-1`、`eigen-stateful-1`；后者依当前矩阵形状选择合法索引及不兼容加法。新增该映射不要求修改 Adapter 或核心类型；名称不可替代保存在轨迹中的具体步骤。replay/shrink 拒绝 `--generator`，防止把保存输入重新解释成另一套生成结果。
 
 运行入口调用 `runner.cli(args, make_adapter, generate)`，捕获顶层错误后用退出码 2 结束。不要在工厂函数或父进程读取/修改目标原生资源。`--worker` 是内部调用入口，用户通常使用 run/generate/replay/shrink。
 

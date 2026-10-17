@@ -1,5 +1,17 @@
 # 缩减器验证记录
 
+## Eigen 真实绑定的状态探索：2026-10-17
+
+新增 `eigen-stateful-1`，按存活矩阵形状选择合法操作；构造、写入、转置及不兼容加法返回错误后检查全部存活矩阵。默认 `eigen-1` 与 vendored 源码保持原样。
+
+37/37 单测和完整 behavior 集成验收通过。新增独立二维数组 oracle 验证 768 条纯轨迹及 32 条 64 步真实 native 轨迹；故意替换适配器句柄的单测确认全对象检查能发现意外共享。完整生成验收通过 Buffer 512 个场景及 Eigen 128 个场景，并验证保存案例哈希/重放、跨生成进程确定性及 CLI 拒绝边界。Eigen 的操作组合（含起点）由 14 扩至 37，矩阵形状由 10 扩至 16；这不是原生代码覆盖率或真实缺陷发现率。
+
+ASan canary、原有正确场景及新增 16 条 Eigen stateful 正确轨迹通过；实际 ASan 源码清单与本阶段实现哈希一致。证据位于 `results/verify-eigen-stateful-20261017`、`results/generation-eigen-stateful-20261017`、`results/asan-eigen-stateful-20261017`，见 [实验报告](EIGEN-GENERATION.md) 与 [快照](evidence/generation-eigen-20261017.json)。原生内存检测范围、数值算法和 finalizer 限制仍保留。
+
+## 重复缩减版本的云端验收：2026-10-17
+
+[Actions run 38998166053](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38998166053) 的四项任务均通过，测试提交为 `166d86df8bbf9468c70e70d526b05183f43d5e4e`。已下载全部产物并核对 benchmark：189 次全部完成，63 组结果三轮一致，214 个真子集核验通过，189 个正确实现重放通过；具体缩减输入、候选数、指纹及停止状态与本地逐条一致。见 [云端快照](evidence/github-ci-38998166053.json)。这是新增 Eigen 生成器之前的提交，不能作为后续改动的云端验收。
+
 ## 扩展语料与三轮缩减：2026-10-17
 
 `scripts/benchmark-reduction.ps1` 默认扩展为原九例加十二个 stateful 场景，先冻结/筛选全部输入，再进行三轮轮换顺序的测量。21 个输入均出现性质失败；189 次缩减全部完成搜索和确认，63 个“案例 × 策略”组合的具体结果与结构计数在三轮一致。189 个结果的正确实现重放通过，实际独立核验 214 个真子集，相同输入/指纹的核验复用有来源记录。

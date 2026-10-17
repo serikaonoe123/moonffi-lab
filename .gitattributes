@@ -3,5 +3,6 @@
 *.c text eol=lf
 *.md text eol=lf
 examples/stateful/*.json text eol=lf
+examples/eigen-stateful/*.json text eol=lf
 # Imported files are hashed byte-for-byte; preserve their original line endings.
 vendor/eigen-binding/** -text
