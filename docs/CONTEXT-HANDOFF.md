@@ -6,7 +6,9 @@
 
 新增公开纯函数 `core.shrink_int(Int) -> Array[Int]`，先零、再逐步靠近原值、含向零邻值；至多 32 个唯一且严格减小绝对值的候选，支持完整 Int 边界。独立 SDK 的 New/Add/RejectAdd 使用该函数，保留原步骤身份与依赖。没有修改 JSON 参数排序门槛；模型和进程仍判断合法性与失败指纹。
 
-本地 61 主模块/6 SDK 单测、完整 behavior/SDK 验收通过，16,769 个阈值组合和完整宽度边界通过，新增 18 个 MoonBit 进程探针通过。SDK 两步结果的初值仍是 1，拒绝加法量从 200 降到 100，执行数 27→29；三子集及正确实现重放通过。原始 `results/verify-integer-candidates-20261017`、`results/sdk-integer-candidates-20261017`，快照 `docs/evidence/integer-candidates-20261017.json`。本轮云端 CI 尚待推送和实际检查；下方 CI 成功记录属于旧提交。继续优先 MoonBit 核心，不通过隐藏脚本改语言统计。
+本地 61 主模块/6 SDK 单测、完整 behavior/SDK 验收通过，16,769 个阈值组合和完整宽度边界通过，新增 18 个 MoonBit 进程探针通过。SDK 两步结果的初值仍是 1，拒绝加法量从 200 降到 100，执行数 27→29；三子集及正确实现重放通过。原始 `results/verify-integer-candidates-20261017`、`results/sdk-integer-candidates-20261017`，快照 `docs/evidence/integer-candidates-20261017.json`。本地 63 次固定语料、214 真子集和正确实现重放通过，输入/结果字节、结构计数及参数进度与上一版一致，1,937 个工作进程；记录在 `results/benchmark-integer-candidates-20261017`。
+
+实现提交 `70fcdca61b35d7f67f12be9c0dedb8304e46eb64` 已推送，Actions `39040088228` 五项通过并下载全部产物。61+6 单测、新 18 探针及既有检查、704 场景、ASan 控制通过；26 个源码文件逐任务核对。189 次结果字节和参数进度与本地一致，214 真子集、189 正确重放通过。但结构计数重复一致是 62/63：`resize-alias-2/state` 第三次 case-9 的 delete_block 候选在任何记录步骤前 Timeout（3901 ms），被拒绝，workers 28→29、proposals 22→23、repair_removals 18→23、semantic_write_removals 0→2；其余 188 行结构计数一致。最终反例仍相同，63/63 组具体结果哈希一致，最终确认/删除检查通过。超时原因未知，原始记录没有被重跑覆盖；该保存候选本地三次重放保持性质失败。初次严格审计失败日志、修正为显式差异的核查、全部原始日志在 `results/github-ci-39040088228`，摘要 `docs/evidence/github-ci-39040088228.json`。继续优先 MoonBit 核心，不把此次云端计数写成 63/63 重复一致，也不通过隐藏脚本改语言统计。
 
 ## 最新阶段：MoonBit 增量依赖修整
 
