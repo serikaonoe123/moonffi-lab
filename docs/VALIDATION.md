@@ -6,7 +6,9 @@
 
 43/43 根模块单测通过，新增 768 条独立二维算术 oracle、32 条 native 算术 walk、128 个修整子集、有符号非方阵字面期望、越界拒绝/状态不变及 10^12 量级乘积抵消测试。完整 behavior、Buffer 512 + Eigen 192 场景生成验收通过；旧 default/stateful 的 128 个输入哈希保持一致。ASan 新增 16 条算术 walk 和固定算术对照通过，原 canary 和控制继续通过。
 
-运行与范围见 [算术实验](EIGEN-ARITHMETIC.md) 和 [本地快照](evidence/eigen-arithmetic-20261017.json)。这不验证任意浮点稳定性、完整程序 ASan 覆盖或精确资源释放时刻；对应提交的云端结果须另行核对。
+运行与范围见 [算术实验](EIGEN-ARITHMETIC.md) 和 [本地快照](evidence/eigen-arithmetic-20261017.json)。这不验证任意浮点稳定性、完整程序 ASan 覆盖或精确资源释放时刻。
+
+提交 `262d6ec5914bd62d4eeed7245ebd6fb043a57703` 的 [Actions run 39013008257](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39013008257) 五项均通过，已下载全部产物。43 根模块单测、5 SDK 单测、704 场景、192 个 Eigen 输入/覆盖与本地一致、128 次旧输入哈希检查、算术 ASan 控制通过。189 次缩减全部完成，63 组重复一致，214 个真子集与全部正确实现重放通过；189 行结构结果与前一提交一致。五个源码归档哈希一致，目标源码与固定输入哈希已核对。见 [云端快照](evidence/github-ci-39013008257.json)。
 
 ## SDK 版本五项云端验收：2026-10-17
 

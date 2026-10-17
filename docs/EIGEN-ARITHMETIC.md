@@ -44,6 +44,8 @@ arithmetic 观察到全部八种操作的 64 种有序相邻组合，另含 star
 
 原始证据为 `results/verify-eigen-arithmetic-20261017`、`results/generation-eigen-arithmetic-20261017`、`results/asan-eigen-arithmetic-20261017`；摘要见 [本地快照](evidence/eigen-arithmetic-20261017.json)。先前六操作阶段的数据保留在 [原实验](EIGEN-GENERATION.md)。Drop 和 teardown 只移除引用，不证明 finalizer 时刻或原生分配平衡；未覆盖求解器、任意浮点值或完整数值稳定性。
 
+[Actions run 39013008257](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39013008257) 在提交 `262d6ec5914bd62d4eeed7245ebd6fb043a57703` 上通过 behavior、ASan、benchmark、generation、sdk 五项。五份产物均已下载核对：43 根模块单测、5 SDK 单测、704 场景及算术 ASan 对照通过；192 个 Eigen 输入与覆盖观测和本地一致，旧输入哈希检查 128 次。189 次缩减全部完成、63 组重复一致、214 个真子集及全部正确实现重放通过；189 行结构指标与前一提交一致。源码归档哈希在五项间一致，日志确认重新下载 async 0.22.5。见 [云端快照](evidence/github-ci-39013008257.json)，原始下载为 `results/github-ci-39013008257`。
+
 ## 复现
 
 ```powershell

@@ -1,0 +1,471 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-17",
+  "tested_commit": "262d6ec5914bd62d4eeed7245ebd6fb043a57703",
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39013008257",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "native (sdk)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39013008257/job/117339324771",
+      "startedAt": "2026-10-17T07:16:19Z",
+      "completedAt": "2026-10-17T07:17:34Z"
+    },
+    {
+      "name": "native (generation)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39013008257/job/117339324878",
+      "startedAt": "2026-10-17T07:16:18Z",
+      "completedAt": "2026-10-17T07:18:21Z"
+    },
+    {
+      "name": "native (asan)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39013008257/job/117339324903",
+      "startedAt": "2026-10-17T07:16:18Z",
+      "completedAt": "2026-10-17T07:17:22Z"
+    },
+    {
+      "name": "native (benchmark)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39013008257/job/117339324933",
+      "startedAt": "2026-10-17T07:16:20Z",
+      "completedAt": "2026-10-17T07:21:48Z"
+    },
+    {
+      "name": "native (behavior)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39013008257/job/117339324971",
+      "startedAt": "2026-10-17T07:16:18Z",
+      "completedAt": "2026-10-17T07:17:42Z"
+    }
+  ],
+  "source_verifications": [
+    {
+      "suite": "behavior",
+      "source": {
+        "state": "passed",
+        "completed_at": "2026-10-17T15:17:37.3172873+08:00",
+        "source_commit": "262d6ec5914bd62d4eeed7245ebd6fb043a57703",
+        "archive_sha256": "543633ADAB79B8B06ED078E632B36FEF4D6DBD77C93F22A5A7684F9890632465",
+        "driver_sha256": "127C8695A936A6BB3D78D13FF5EA585D6A06450879449AB5F5975FA7245CB6B5",
+        "source_files": 419,
+        "suites": [
+          "behavior"
+        ],
+        "dependency_mode": "registry",
+        "dependency_source": "",
+        "fresh_project_build": true,
+        "host_environment": {
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "powershell": "7.6.6",
+          "github_actions": "true",
+          "runner_os": "Windows",
+          "runner_arch": "X64",
+          "image_os": "win25-vs2026",
+          "image_version": "20261007.264.1"
+        },
+        "independent_environment": false,
+        "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+      }
+    },
+    {
+      "suite": "asan",
+      "source": {
+        "state": "passed",
+        "completed_at": "2026-10-17T15:17:16.5592346+08:00",
+        "source_commit": "262d6ec5914bd62d4eeed7245ebd6fb043a57703",
+        "archive_sha256": "543633ADAB79B8B06ED078E632B36FEF4D6DBD77C93F22A5A7684F9890632465",
+        "driver_sha256": "127C8695A936A6BB3D78D13FF5EA585D6A06450879449AB5F5975FA7245CB6B5",
+        "source_files": 419,
+        "suites": [
+          "asan"
+        ],
+        "dependency_mode": "registry",
+        "dependency_source": "",
+        "fresh_project_build": true,
+        "host_environment": {
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "powershell": "7.6.6",
+          "github_actions": "true",
+          "runner_os": "Windows",
+          "runner_arch": "X64",
+          "image_os": "win25-vs2026",
+          "image_version": "20261007.264.1"
+        },
+        "independent_environment": false,
+        "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+      }
+    },
+    {
+      "suite": "sdk",
+      "source": {
+        "state": "passed",
+        "completed_at": "2026-10-17T15:17:27.06452+08:00",
+        "source_commit": "262d6ec5914bd62d4eeed7245ebd6fb043a57703",
+        "archive_sha256": "543633ADAB79B8B06ED078E632B36FEF4D6DBD77C93F22A5A7684F9890632465",
+        "driver_sha256": "127C8695A936A6BB3D78D13FF5EA585D6A06450879449AB5F5975FA7245CB6B5",
+        "source_files": 419,
+        "suites": [
+          "sdk"
+        ],
+        "dependency_mode": "registry",
+        "dependency_source": "",
+        "fresh_project_build": true,
+        "host_environment": {
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "powershell": "7.6.6",
+          "github_actions": "true",
+          "runner_os": "Windows",
+          "runner_arch": "X64",
+          "image_os": "win25-vs2026",
+          "image_version": "20261007.264.1"
+        },
+        "independent_environment": false,
+        "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+      }
+    },
+    {
+      "suite": "generation",
+      "source": {
+        "state": "passed",
+        "completed_at": "2026-10-17T15:18:09.1082162+08:00",
+        "source_commit": "262d6ec5914bd62d4eeed7245ebd6fb043a57703",
+        "archive_sha256": "543633ADAB79B8B06ED078E632B36FEF4D6DBD77C93F22A5A7684F9890632465",
+        "driver_sha256": "127C8695A936A6BB3D78D13FF5EA585D6A06450879449AB5F5975FA7245CB6B5",
+        "source_files": 419,
+        "suites": [
+          "generation"
+        ],
+        "dependency_mode": "registry",
+        "dependency_source": "",
+        "fresh_project_build": true,
+        "host_environment": {
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "powershell": "7.6.6",
+          "github_actions": "true",
+          "runner_os": "Windows",
+          "runner_arch": "X64",
+          "image_os": "win25-vs2026",
+          "image_version": "20261007.264.1"
+        },
+        "independent_environment": false,
+        "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+      }
+    },
+    {
+      "suite": "benchmark",
+      "source": {
+        "state": "passed",
+        "completed_at": "2026-10-17T15:20:58.6313554+08:00",
+        "source_commit": "262d6ec5914bd62d4eeed7245ebd6fb043a57703",
+        "archive_sha256": "543633ADAB79B8B06ED078E632B36FEF4D6DBD77C93F22A5A7684F9890632465",
+        "driver_sha256": "127C8695A936A6BB3D78D13FF5EA585D6A06450879449AB5F5975FA7245CB6B5",
+        "source_files": 419,
+        "suites": [
+          "benchmark"
+        ],
+        "dependency_mode": "registry",
+        "dependency_source": "",
+        "fresh_project_build": true,
+        "host_environment": {
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "powershell": "7.6.6",
+          "github_actions": "true",
+          "runner_os": "Windows",
+          "runner_arch": "X64",
+          "image_os": "win25-vs2026",
+          "image_version": "20261007.264.1"
+        },
+        "independent_environment": false,
+        "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+      }
+    }
+  ],
+  "checks": {
+    "source_archive_equal": true,
+    "root_unit_tests": 43,
+    "sdk_unit_tests": 5,
+    "buffer_generation_cases": 512,
+    "eigen_generation_cases": 192,
+    "eigen_inputs_and_coverage_match_local": 192,
+    "legacy_input_hashes_checked": 128,
+    "benchmark_measurements_verified": 189,
+    "benchmark_structural_rows_match_previous": 189,
+    "proper_subsets_checked": 214,
+    "all_corrected_replays": true,
+    "selected_source_hashes_match": true,
+    "source_files_checked_per_suite": 5
+  },
+  "asan": {
+    "state": "passed",
+    "completed_at": "2026-10-17T15:17:16.3424849+08:00",
+    "profile": "windows-msvc-asan-stubs",
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "runtime": "C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\clang_rt.asan_dynamic-x86_64.dll",
+    "runtime_sha256": "7F901A239979C49B36A3B18ECD1843F551F94B5879585BDED41A650C5B71F35F",
+    "canary_runs": 3,
+    "canary_outcome": "MemoryError",
+    "category": "heap-buffer-overflow",
+    "correct_buffer_runs": 10,
+    "correct_eigen_runs": 10,
+    "correct_stateful_buffer_runs": 16,
+    "correct_stateful_eigen_runs": 16,
+    "correct_arithmetic_eigen_runs": 16,
+    "arithmetic_control": "Pass",
+    "resize_alias_control": "Pass",
+    "instrumented_translation_units": [
+      "fixtures/buffer/buffer.c",
+      "vendor/eigen-binding/eigen_shim.cpp (including instantiated Eigen headers)"
+    ],
+    "not_instrumented": [
+      "MoonBit-generated C",
+      "MoonBit runtime",
+      "async dependency C stubs",
+      "other prebuilt/system libraries"
+    ],
+    "dependency_source": "local pinned .mooncakes source cache; no build outputs copied",
+    "buffer_sha256": "7CDACED64FED055872C6FBBC4E9BEA60DE9C74929B0B704AA6D4529640953E51",
+    "eigen_sha256": "7E6E170F33ED25BE4211BC4A1C43B28108995EBCBBE9086D4379AE5F8EC6814C"
+  },
+  "sdk": {
+    "state": "passed",
+    "completed_at": "2026-10-17T15:17:27.0091159+08:00",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "consumer_module": "moonffi-example/counter-lab",
+    "dependency_mode": "registry-or-tool-cache",
+    "dependency_source": "",
+    "source_manifest_sha256": "4693007CD78403445C2A8E298A1A45593AC8BB689B9B878C5922F070F08D525F",
+    "executable_sha256": "D366E9D514A93D7A39D059A19A847F1CC7629B7E9298E84090B19D8AB3C881A3",
+    "unit_tests": 5,
+    "pure_oracle_traces": 768,
+    "repair_subsets": 128,
+    "native_unit_walks": 32,
+    "correct_contract_cases": 8,
+    "correct_walk_cases": 32,
+    "original_steps": 32,
+    "reduced_steps": 2,
+    "fingerprint": "property:counter-value:s30",
+    "executions": 26,
+    "deletion_minimal": true,
+    "proper_subsets_checked": 3,
+    "corrected_replay": "Pass",
+    "budget_stop_reason": "execution_budget",
+    "preflight_rejection": true,
+    "output_reuse_rejected": true,
+    "separate_process_determinism": true,
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "independent_environment": false,
+    "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+  },
+  "benchmark": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 21,
+    "cases": 21,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 3,
+    "measurements": 189,
+    "complete_searches": 189,
+    "repeatable_case_strategies": 63,
+    "case_strategy_groups": 63,
+    "actual_proper_subsets_checked": 214.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-17T15:20:58.6265829+08:00",
+    "executable_sha256": "04AF868683B9369492AE5A576B13FFE95850BD71E6E5423280AF89BF92584A36",
+    "protocol_sha256": "23D7204EDB9312A05771E7E2AC8C88935DEB6E94E9EE5E74B40344D00469CEA1"
+  },
+  "eigen_generation": {
+    "state": "passed",
+    "seed": "17",
+    "steps": 64,
+    "fixed_examples": [
+      "eigen-stateful",
+      "eigen-arithmetic"
+    ],
+    "fixed_example_replay": "Pass",
+    "separate_process_determinism": true,
+    "legacy_input_hashes_checked": 128,
+    "measurements": [
+      {
+        "generator": "default",
+        "version": "eigen-1",
+        "cases": 64,
+        "passed": 64,
+        "schedules": 64,
+        "operation_pairs": 14,
+        "shapes": [
+          "1x1",
+          "1x2",
+          "1x3",
+          "2x1",
+          "2x2",
+          "2x3",
+          "3x1",
+          "3x2",
+          "3x3",
+          "4x4"
+        ],
+        "features": [
+          "check-after-source-drop",
+          "new-maximum-dimension",
+          "new-minimum-dimension",
+          "rectangular-transpose",
+          "reject-both-dimensions",
+          "set-last-index",
+          "set-source-with-transpose-live"
+        ],
+        "maximum_live_handles": 3,
+        "operations": {
+          "drop": 64,
+          "reject_add": 64,
+          "check": 1955,
+          "set": 1821,
+          "new": 128,
+          "transpose": 64
+        }
+      },
+      {
+        "generator": "stateful",
+        "version": "eigen-stateful-1",
+        "cases": 64,
+        "passed": 64,
+        "schedules": 64,
+        "operation_pairs": 37,
+        "shapes": [
+          "1x1",
+          "1x2",
+          "1x3",
+          "1x4",
+          "2x1",
+          "2x2",
+          "2x3",
+          "2x4",
+          "3x1",
+          "3x2",
+          "3x3",
+          "3x4",
+          "4x1",
+          "4x2",
+          "4x3",
+          "4x4"
+        ],
+        "features": [
+          "check-after-source-drop",
+          "maximum-value",
+          "minimum-value",
+          "new-maximum-dimension",
+          "new-minimum-dimension",
+          "rectangular-transpose",
+          "reject-both-dimensions",
+          "reject-same-cols",
+          "reject-same-rows",
+          "restart-after-drop",
+          "set-last-index",
+          "set-source-with-transpose-live",
+          "set-transpose",
+          "set-transpose-with-source-live",
+          "transpose-chain"
+        ],
+        "maximum_live_handles": 8,
+        "operations": {
+          "drop": 758,
+          "reject_add": 666,
+          "check": 739,
+          "set": 737,
+          "new": 670,
+          "transpose": 526
+        }
+      },
+      {
+        "generator": "arithmetic",
+        "version": "eigen-arithmetic-1",
+        "cases": 64,
+        "passed": 64,
+        "schedules": 64,
+        "operation_pairs": 65,
+        "shapes": [
+          "1x1",
+          "1x2",
+          "1x3",
+          "1x4",
+          "2x1",
+          "2x2",
+          "2x3",
+          "2x4",
+          "3x1",
+          "3x2",
+          "3x3",
+          "3x4",
+          "4x1",
+          "4x2",
+          "4x3",
+          "4x4"
+        ],
+        "features": [
+          "arithmetic-chain",
+          "check-after-source-drop",
+          "check-result-after-operand-drop",
+          "maximum-value",
+          "minimum-value",
+          "new-maximum-dimension",
+          "new-minimum-dimension",
+          "rectangular-mul",
+          "rectangular-transpose",
+          "reject-both-dimensions",
+          "reject-same-cols",
+          "reject-same-rows",
+          "restart-after-drop",
+          "self-add",
+          "self-mul",
+          "set-arithmetic-result",
+          "set-last-index",
+          "set-operand-with-result-live",
+          "set-source-with-transpose-live",
+          "set-transpose",
+          "set-transpose-with-source-live",
+          "transpose-chain"
+        ],
+        "maximum_live_handles": 8,
+        "operations": {
+          "drop": 775,
+          "reject_add": 687,
+          "check": 671,
+          "set": 718,
+          "new": 394,
+          "add": 325,
+          "mul": 241,
+          "transpose": 285
+        }
+      }
+    ]
+  },
+  "raw_evidence_directory": "results/github-ci-39013008257",
+  "scope": "All five hosted artifacts inspected on the tested code commit. Exact local input/coverage agreement and unchanged Buffer reduction structure; no arbitrary floating-point stability, whole-program ASan coverage, finalizer timing or native allocation-balance claim. Source verifier independent_environment=false retains its local meaning; hosted provenance is separately checked."
+}

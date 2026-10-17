@@ -2,6 +2,8 @@
 
 仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发会分别运行 behavior、ASan、benchmark、generation、sdk 五个任务。generation 验证 Buffer 的 512 个人工 fixture 场景，以及真实 Eigen 绑定的 192 个正确场景、保存输入重放、旧输入哈希和 CLI 边界；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减，保存通过输入及预算终止结果，并在全部计时结束后核验。sdk 在另一个工作区中用公开 core/runner 编译独立消费者，验证完整失败与缩减流程。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单。归档不含工作目录或二进制。
 
+本轮算术代码提交 `262d6ec` 的 [Actions run 39013008257](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39013008257) 已通过五项，下载产物核对 43 根模块/5 SDK 单测、704 场景、189 次完整缩减与 214 个真子集。192 个 Eigen 输入哈希与本地一致，五项源码归档哈希一致；详见 [云端快照](evidence/github-ci-39013008257.json)。
+
 ## 版本与安装
 
 `toolchain.json` 记录当前实际验证过的 moon、moonc、moonrun 版本及 async 版本。`scripts/assert-toolchain.ps1` 要求三个工具的版本字符串完全匹配，并记录可执行文件 SHA-256；不匹配时写出诊断并失败。

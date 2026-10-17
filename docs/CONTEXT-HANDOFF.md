@@ -6,7 +6,9 @@
 
 新增 Add/Mul、`--generator arithmetic`（`eigen-arithmetic-1`），旧 default/stateful 的 128 个已记录输入哈希不变。Int64 模型把存储元素限制在 ±10^6，点积中间量不超过 4×10^12，因此对 binary64 结果精确比较。Eigen 改用纯数值状态修整，覆盖删除 Set 后算术越界；所有变更核对全部存活矩阵。真实绑定、core/runner 未改动。
 
-本地 43/43 根模块单测、完整 behavior、704 个生成场景、ASan（新增 16 算术 walk 与手写固定对照）通过。新增 768 条纯 oracle、32 条 native walk、128 个独立修整子集，另有非方阵手算和大整数抵消/别名探针。证据、复现与限制见 [算术报告](EIGEN-ARITHMETIC.md)、`docs/evidence/eigen-arithmetic-20261017.json` 及 `examples/eigen-arithmetic/README.md`。当前版本的 Actions 应按实际提交核对。
+本地 43/43 根模块单测、完整 behavior、704 个生成场景、ASan（新增 16 算术 walk 与手写固定对照）通过。新增 768 条纯 oracle、32 条 native walk、128 个独立修整子集，另有非方阵手算和大整数抵消/别名探针。证据、复现与限制见 [算术报告](EIGEN-ARITHMETIC.md)、`docs/evidence/eigen-arithmetic-20261017.json` 及 `examples/eigen-arithmetic/README.md`。
+
+代码提交 `262d6ec5914bd62d4eeed7245ebd6fb043a57703` 已推送，Actions `39013008257` 五项通过。全部产物在 `results/github-ci-39013008257`，核对摘要见 `docs/evidence/github-ci-39013008257.json`：43 根模块 + 5 SDK 单测、704 场景、192 个 Eigen 输入和覆盖与本地一致、128 次旧输入回归、算术 ASan 对照、189 次完整缩减、63 组重复一致及 214 个真子集通过。189 行缩减结构与前一 SDK 提交一致。后续仅记录该 CI 的文档提交不改变已测试代码。
 
 前一 SDK 提交 `0768240` 的 Actions `39004016095` 五项全部通过，已核对全部产物；SDK 与本地一致，189 次缩减全部完成。持久快照为 `docs/evidence/github-ci-39004016095.json`，原始下载在 `results/github-ci-39004016095`。下面各阶段的较小测试数和六操作范围为历史记录。
 
