@@ -1,0 +1,273 @@
+{
+  "schema": 1,
+  "adapter": "eigen",
+  "adapter_version": "1",
+  "generator_version": "eigen-arithmetic-control-1",
+  "seed": "0",
+  "environment": {
+    "fixture_mode": "correct",
+    "profile": "behavior",
+    "binding_revision": "f7037a92cae92ac1c0e54e3bfa03b2e2e0e9f8ae",
+    "eigen_revision": "1f05f51517ec4fd91eed711e0f89e97a7c028c0e"
+  },
+  "steps": [
+    {
+      "id": "a",
+      "op": "new",
+      "args": [
+        "New",
+        "a",
+        2,
+        3,
+        [
+          1,
+          -2,
+          3,
+          4,
+          5,
+          -6
+        ]
+      ],
+      "defines": [
+        "a"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "b",
+      "op": "new",
+      "args": [
+        "New",
+        "b",
+        3,
+        2,
+        [
+          7,
+          8,
+          -9,
+          10,
+          11,
+          -12
+        ]
+      ],
+      "defines": [
+        "b"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "ab",
+      "op": "mul",
+      "args": [
+        "Mul",
+        "a",
+        "b",
+        "ab"
+      ],
+      "defines": [
+        "ab"
+      ],
+      "uses": [
+        "a",
+        "b"
+      ],
+      "releases": []
+    },
+    {
+      "id": "ba",
+      "op": "mul",
+      "args": [
+        "Mul",
+        "b",
+        "a",
+        "ba"
+      ],
+      "defines": [
+        "ba"
+      ],
+      "uses": [
+        "b",
+        "a"
+      ],
+      "releases": []
+    },
+    {
+      "id": "sum",
+      "op": "add",
+      "args": [
+        "Add",
+        "ab",
+        "ab",
+        "sum"
+      ],
+      "defines": [
+        "sum"
+      ],
+      "uses": [
+        "ab",
+        "ab"
+      ],
+      "releases": []
+    },
+    {
+      "id": "transpose",
+      "op": "transpose",
+      "args": [
+        "Transpose",
+        "ab",
+        "t"
+      ],
+      "defines": [
+        "t"
+      ],
+      "uses": [
+        "ab"
+      ],
+      "releases": []
+    },
+    {
+      "id": "write-product",
+      "op": "set",
+      "args": [
+        "Set",
+        "ab",
+        0,
+        0,
+        99
+      ],
+      "defines": [],
+      "uses": [
+        "ab"
+      ],
+      "releases": []
+    },
+    {
+      "id": "write-sum",
+      "op": "set",
+      "args": [
+        "Set",
+        "sum",
+        1,
+        1,
+        -99
+      ],
+      "defines": [],
+      "uses": [
+        "sum"
+      ],
+      "releases": []
+    },
+    {
+      "id": "write-left",
+      "op": "set",
+      "args": [
+        "Set",
+        "a",
+        1,
+        2,
+        100
+      ],
+      "defines": [],
+      "uses": [
+        "a"
+      ],
+      "releases": []
+    },
+    {
+      "id": "write-right",
+      "op": "set",
+      "args": [
+        "Set",
+        "b",
+        2,
+        1,
+        -100
+      ],
+      "defines": [],
+      "uses": [
+        "b"
+      ],
+      "releases": []
+    },
+    {
+      "id": "drop-a",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "a"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "a"
+      ]
+    },
+    {
+      "id": "drop-b",
+      "op": "drop",
+      "args": [
+        "Drop",
+        "b"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "b"
+      ]
+    },
+    {
+      "id": "check-ab",
+      "op": "check",
+      "args": [
+        "Check",
+        "ab"
+      ],
+      "defines": [],
+      "uses": [
+        "ab"
+      ],
+      "releases": []
+    },
+    {
+      "id": "check-ba",
+      "op": "check",
+      "args": [
+        "Check",
+        "ba"
+      ],
+      "defines": [],
+      "uses": [
+        "ba"
+      ],
+      "releases": []
+    },
+    {
+      "id": "check-sum",
+      "op": "check",
+      "args": [
+        "Check",
+        "sum"
+      ],
+      "defines": [],
+      "uses": [
+        "sum"
+      ],
+      "releases": []
+    },
+    {
+      "id": "check-transpose",
+      "op": "check",
+      "args": [
+        "Check",
+        "t"
+      ],
+      "defines": [],
+      "uses": [
+        "t"
+      ],
+      "releases": []
+    }
+  ]
+}

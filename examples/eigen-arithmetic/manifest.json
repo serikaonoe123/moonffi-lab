@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "adapter": "eigen",
+  "generator_version": "eigen-arithmetic-control-1",
+  "seed": "0",
+  "expected_outcome": "Pass",
+  "case": "case.json",
+  "sha256": "76AA625836A8BA110C367E7549014FE017ACBA95C2588054200AC9700E68D485",
+  "scope": "Hand-written signed rectangular arithmetic and storage-independence control against the real vendored binding; no injected or discovered defect."
+}

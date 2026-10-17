@@ -1,5 +1,17 @@
 # 缩减器验证记录
 
+## Eigen 合法算术：2026-10-17
+
+新增 `Add` / `Mul` 及 `eigen-arithmetic-1`，使用元素限制为 ±10^6 的 Int64 模型，核对精确 binary64 整数结果与全部存活矩阵的独立性；纯验证及状态修整检查形状和实际数值。绑定、core/runner 源码未修改。
+
+43/43 根模块单测通过，新增 768 条独立二维算术 oracle、32 条 native 算术 walk、128 个修整子集、有符号非方阵字面期望、越界拒绝/状态不变及 10^12 量级乘积抵消测试。完整 behavior、Buffer 512 + Eigen 192 场景生成验收通过；旧 default/stateful 的 128 个输入哈希保持一致。ASan 新增 16 条算术 walk 和固定算术对照通过，原 canary 和控制继续通过。
+
+运行与范围见 [算术实验](EIGEN-ARITHMETIC.md) 和 [本地快照](evidence/eigen-arithmetic-20261017.json)。这不验证任意浮点稳定性、完整程序 ASan 覆盖或精确资源释放时刻；对应提交的云端结果须另行核对。
+
+## SDK 版本五项云端验收：2026-10-17
+
+[Actions run 39004016095](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39004016095) 对提交 `0768240f07807522fc21534297561748a3e2ee0d` 的 behavior、ASan、benchmark、generation、sdk 全部成功。已下载并核对五份产物：37 项根模块单测、5 项 SDK 单测、Buffer 512 + Eigen 128 场景、189 次完整缩减、63 组重复一致结果和 214 个真子集核验通过。SDK 8+32 个正确进程及人工失败 32→2 步/26 次执行与本地一致。见 [云端快照](evidence/github-ci-39004016095.json)。这是合法算术扩展前的提交。
+
 ## 外部 SDK 消费者：2026-10-17
 
 新增独立模块 `moonffi-example/counter-lab`，仅依赖公开 core/runner 和 async。`verify-sdk.ps1` 在新目录中只复制这两个引擎包、模块清单与消费者，包图确认没有 fixtures/vendor/引擎命令，然后重新构建。显式离线依赖源码与默认工具缓存恢复两个路径均通过，证据为 `results/sdk-external-offline-20261017` 和 `results/sdk-external-cache-20261017`。

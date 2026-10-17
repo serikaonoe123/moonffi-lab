@@ -109,6 +109,12 @@ try {
   Invoke-Checked $eigen @('run','--generator','stateful','--cases','16','--steps','64','--timeout-ms','10000','--out',$eigenStatefulDir) 0 (Join-Path $Out 'eigen-stateful-correct.log')
   $eigenStatefulReports = @(Read-Json (Join-Path $eigenStatefulDir 'summary.json'))
   Require ($eigenStatefulReports.Count -eq 16 -and @($eigenStatefulReports | Where-Object outcome -ne 'Pass').Count -eq 0) 'Eigen stateful correct binding failed under ASan'
+  $stage = 'eigen-arithmetic-generation-control'
+  $eigenArithmeticDir = Join-Path $Out 'eigen-arithmetic-correct'
+  Invoke-Checked $eigen @('run','--generator','arithmetic','--cases','16','--steps','64','--timeout-ms','10000','--out',$eigenArithmeticDir) 0 (Join-Path $Out 'eigen-arithmetic-correct.log')
+  $eigenArithmeticReports = @(Read-Json (Join-Path $eigenArithmeticDir 'summary.json'))
+  Require ($eigenArithmeticReports.Count -eq 16 -and @($eigenArithmeticReports | Where-Object outcome -ne 'Pass').Count -eq 0) 'Eigen arithmetic correct binding failed under ASan'
+  Invoke-Checked $eigen @('replay',(Join-Path $projectRoot 'examples/eigen-arithmetic/case.json'),'--timeout-ms','10000','--out',(Join-Path $Out 'eigen-arithmetic-control')) 0 (Join-Path $Out 'eigen-arithmetic-control.log')
   $stage = 'resize-alias-control'
   $resizeTrace = Read-Json (Join-Path $Out 'buffer-correct/case-1/case.json')
   $resizeTrace.generator_version = 'asan-resize-control-1'
@@ -144,6 +150,8 @@ try {
     correct_buffer_runs = 10; correct_eigen_runs = 10
     correct_stateful_buffer_runs = 16
     correct_stateful_eigen_runs = 16
+    correct_arithmetic_eigen_runs = 16
+    arithmetic_control = 'Pass'
     resize_alias_control = 'Pass'
     instrumented_translation_units = @('fixtures/buffer/buffer.c','vendor/eigen-binding/eigen_shim.cpp (including instantiated Eigen headers)')
     not_instrumented = @('MoonBit-generated C','MoonBit runtime','async dependency C stubs','other prebuilt/system libraries')

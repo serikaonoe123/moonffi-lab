@@ -1,9 +1,10 @@
 ///| Independent oracle uses nested row arrays, unlike the adapter's flat
 /// Model and transpose helper. It never calls repair or generation state.
 fn check_eigen_generation(trace : @lab.Trace, coverage : Map[String, Bool], native~ : Bool = false) -> Unit raise {
-  let grids : Map[String, Array[Array[Int]]] = Map([])
+  let grids : Map[String, Array[Array[Double]]] = Map([])
   let defined : Map[String, Bool] = Map([])
   let parents : Map[String, String] = Map([])
+  let operands : Map[String, Array[String]] = Map([])
   let adapter = EigenAdapter::new()
   for step in trace.steps {
     coverage["op:\{step.op}"] = true
@@ -17,7 +18,7 @@ fn check_eigen_generation(trace : @lab.Trace, coverage : Map[String, Bool], nati
         coverage["shape:\{rows}:\{cols}"] = true
         if data.contains(-100) { coverage["minimum-value"] = true }
         if data.contains(100) { coverage["maximum-value"] = true }
-        grids[id] = Array::makei(rows, r => Array::makei(cols, c => data[r * cols + c]))
+        grids[id] = Array::makei(rows, r => Array::makei(cols, c => data[r * cols + c].to_double()))
         defined[id] = true
       }
       Set(id, row, col, value) => {
@@ -26,18 +27,25 @@ fn check_eigen_generation(trace : @lab.Trace, coverage : Map[String, Bool], nati
         assert_true(row >= 0 && row < grid.length() && col >= 0 && col < grid[0].length() && value >= -100 && value <= 100)
         assert_true(step.op == "set" && step.defines == [] && step.uses == [id] && step.releases == [])
         let copy = grid.map(line => line.copy())
-        copy[row][col] = value
+        copy[row][col] = value.to_double()
         grids[id] = copy
         if row == grid.length() - 1 && col == grid[0].length() - 1 { coverage["set-last-index"] = true }
         if parents.contains(id) { coverage["set-transpose"] = true }
         if parents.keys().any(child => grids.contains(child) && parents.get(child) == Some(id)) {
           coverage["set-source-after-transpose"] = true
         }
+        if operands.contains(id) { coverage["set-arithmetic-result"] = true }
+        if operands.keys().any(child => grids.contains(child) && operands.get(child).unwrap().contains(id)) {
+          coverage["set-operand-with-result-live"] = true
+        }
       }
       Check(id) => {
         assert_true(grids.contains(id))
         assert_true(step.op == "check" && step.defines == [] && step.uses == [id] && step.releases == [])
         if parents.get(id) is Some(parent) && !grids.contains(parent) { coverage["check-after-source-drop"] = true }
+        if operands.get(id) is Some(inputs) && inputs.any(input => !grids.contains(input)) {
+          coverage["check-result-after-operand-drop"] = true
+        }
       }
       Transpose(id, other) => {
         assert_true(grids.contains(id) && !defined.contains(other))
@@ -50,6 +58,30 @@ fn check_eigen_generation(trace : @lab.Trace, coverage : Map[String, Bool], nati
         parents[other] = id
         if rows != cols { coverage["rectangular-transpose"] = true }
         if parents.contains(id) { coverage["transpose-chain"] = true }
+      }
+      Add(a, b, other) | Mul(a, b, other) => {
+        assert_true(grids.contains(a) && grids.contains(b) && !defined.contains(other))
+        let left = grids.get(a).unwrap()
+        let right = grids.get(b).unwrap()
+        let multiply = match operation { Mul(_, _, _) => true; _ => false }
+        let rows = left.length()
+        let cols = if multiply { right[0].length() } else { left[0].length() }
+        assert_true(if multiply { left[0].length() == right.length() } else { left.length() == right.length() && left[0].length() == right[0].length() })
+        assert_true(step.op == (if multiply { "mul" } else { "add" }) && step.defines == [other] && step.uses == [a, b] && step.releases == [])
+        let result = Array::makei(rows, r => Array::makei(cols, c => {
+          if !multiply { left[r][c] + right[r][c] } else {
+            let mut sum = 0.0
+            for k = 0; k < right.length(); k = k + 1 { sum += left[r][k] * right[k][c] }
+            sum
+          }
+        }))
+        assert_true(result.all(line => line.all(value => value.abs() <= 1000000.0)))
+        grids[other] = result
+        defined[other] = true
+        operands[other] = [a, b]
+        if operands.contains(a) || operands.contains(b) { coverage["arithmetic-chain"] = true }
+        if a == b { coverage[if multiply { "self-mul" } else { "self-add" }] = true }
+        if multiply && (left.length() != left[0].length() || right.length() != right[0].length()) { coverage["rectangular-mul"] = true }
       }
       RejectAdd(a, b) => {
         assert_true(grids.contains(a) && grids.contains(b))
@@ -77,7 +109,7 @@ fn check_eigen_generation(trace : @lab.Trace, coverage : Map[String, Bool], nati
         guard matrix.to_array() is Ok(values) else { fail("native array export failed") }
         assert_true(values.length() == expected.length() * expected[0].length())
         for r, line in expected {
-          for c, value in line { assert_true(values[r * line.length() + c] == value.to_double()) }
+          for c, value in line { assert_true(values[r * line.length() + c] == value) }
         }
       }
     }

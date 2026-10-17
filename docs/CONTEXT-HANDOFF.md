@@ -2,6 +2,16 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-17（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
+## 最新阶段：Eigen 合法算术
+
+新增 Add/Mul、`--generator arithmetic`（`eigen-arithmetic-1`），旧 default/stateful 的 128 个已记录输入哈希不变。Int64 模型把存储元素限制在 ±10^6，点积中间量不超过 4×10^12，因此对 binary64 结果精确比较。Eigen 改用纯数值状态修整，覆盖删除 Set 后算术越界；所有变更核对全部存活矩阵。真实绑定、core/runner 未改动。
+
+本地 43/43 根模块单测、完整 behavior、704 个生成场景、ASan（新增 16 算术 walk 与手写固定对照）通过。新增 768 条纯 oracle、32 条 native walk、128 个独立修整子集，另有非方阵手算和大整数抵消/别名探针。证据、复现与限制见 [算术报告](EIGEN-ARITHMETIC.md)、`docs/evidence/eigen-arithmetic-20261017.json` 及 `examples/eigen-arithmetic/README.md`。当前版本的 Actions 应按实际提交核对。
+
+前一 SDK 提交 `0768240` 的 Actions `39004016095` 五项全部通过，已核对全部产物；SDK 与本地一致，189 次缩减全部完成。持久快照为 `docs/evidence/github-ci-39004016095.json`，原始下载在 `results/github-ci-39004016095`。下面各阶段的较小测试数和六操作范围为历史记录。
+
+下一阶段可优先锁定不可变工具链安装包，或增加外部真实库语料。仍不宣称任意浮点稳定性、全局/参数最小性、相同原生根因或原生分配平衡。不要将此前的 CI 成功替代后续提交的验证。
+
 ## 目标与约束
 
 项目路径 `D:\moonbit\moonffi-lab`。MoonBit 原生 FFI 测试引擎，支持进程隔离、具体输入保存、重放及缩减；Buffer 为人工 fixture，Eigen 为有来源记录的真实绑定快照。

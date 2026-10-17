@@ -1,6 +1,6 @@
 # Windows 自动验收与源码复现
 
-仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发会分别运行 behavior、ASan、benchmark、generation、sdk 五个任务。generation 验证 Buffer 的 512 个人工 fixture 场景，以及真实 Eigen 绑定的 128 个正确场景、保存输入重放和 CLI 边界；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减，保存通过输入及预算终止结果，并在全部计时结束后核验。sdk 在另一个工作区中用公开 core/runner 编译独立消费者，验证完整失败与缩减流程。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单。归档不含工作目录或二进制。
+仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发会分别运行 behavior、ASan、benchmark、generation、sdk 五个任务。generation 验证 Buffer 的 512 个人工 fixture 场景，以及真实 Eigen 绑定的 192 个正确场景、保存输入重放、旧输入哈希和 CLI 边界；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减，保存通过输入及预算终止结果，并在全部计时结束后核验。sdk 在另一个工作区中用公开 core/runner 编译独立消费者，验证完整失败与缩减流程。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单。归档不含工作目录或二进制。
 
 ## 版本与安装
 

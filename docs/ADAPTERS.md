@@ -21,9 +21,11 @@
 
 失败包含稳定 property ID、当前 step ID 和可读说明。缩减匹配 `property:<property ID>:<step ID>`，消息文本不参加指纹。指纹表示同一已声明性质在同一步骤失败，不是同一底层根因的证明。teardown 失败使用保留名称 `teardown`。
 
-生成器是 `(UInt64, String, Int) -> Trace`；CLI 的三个参数对应 seed、fixture 模式和最大步数。使用确定性随机状态并限制对象、步数和数据大小；原始具体数据必须能无损序列化。当前两个生成器的长度上限都不会超过 CLI 的 `--steps`。
+生成器是 `(UInt64, String, Int) -> Trace`；CLI 的三个参数对应 seed、fixture 模式和最大步数。使用确定性随机状态并限制对象、步数和数据大小；原始具体数据必须能无损序列化。各生成器的长度上限都不会超过 CLI 的 `--steps`。
 
 `runner.cli` 还接受可选 `generators` 映射，将名称关联到同类型的纯生成器；`--generator NAME` 在 run/generate 时选择，默认名称 `default` 使用原回调。Buffer 和 Eigen 均注册了 `stateful`，分别标记 `generator_version=buffer-stateful-1`、`eigen-stateful-1`；后者依当前矩阵形状选择合法索引及不兼容加法。新增该映射不要求修改 Adapter 或核心类型；名称不可替代保存在轨迹中的具体步骤。replay/shrink 拒绝 `--generator`，防止把保存输入重新解释成另一套生成结果。
+
+Eigen 另注册 `arithmetic`（`eigen-arithmetic-1`），依形状及保守数值上界生成合法 Add/Mul。适配器使用 Int64 精确整数模型，并在每次变更后核对所有存活矩阵。数值域、独立 oracle 与限制见 [算术实验](EIGEN-ARITHMETIC.md)。
 
 运行入口调用 `runner.cli(args, make_adapter, generate)`，捕获顶层错误后用退出码 2 结束。不要在工厂函数或父进程读取/修改目标原生资源。`--worker` 是内部调用入口，用户通常使用 run/generate/replay/shrink。
 
@@ -33,7 +35,7 @@
 
 ## 状态修整约定
 
-2026-10-17 的开发版本新增必需的 repair 方法。简单适配器可直接调用 `core.repair_dependencies(trace)`，只处理对象可用性。Eigen 及合成边界探针使用该实现，并继续通过自己的 validate 校验语义。
+2026-10-17 的开发版本新增必需的 repair 方法。简单适配器可直接调用 `core.repair_dependencies(trace)`，只处理对象可用性。合成边界探针使用该实现，并继续通过自己的 validate 校验语义。Eigen 已改用状态模型：删除写入后可能使后续算术超出精确整数域，不能只检查依赖。
 
 需要语义修整时，实现 `core.StateModel.apply(step) -> String?`，再调用 `core.repair_with_model(fresh_model, trace)`。apply 接受一步时更新纯状态；拒绝时返回原因，必须保持状态不变。每次调用 repair 都使用全新模型，不能复用工作进程模型。
 

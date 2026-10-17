@@ -4,6 +4,8 @@ enum Operation {
   Set(String, Int, Int, Int)
   Check(String)
   Transpose(String, String)
+  Add(String, String, String)
+  Mul(String, String, String)
   RejectAdd(String, String)
   Drop(String)
 } derive(ToJson, @json.FromJson)
@@ -12,7 +14,7 @@ enum Operation {
 struct Model {
   rows : Int
   cols : Int
-  data : Array[Int]
+  data : Array[Int64]
 }
 
 ///| All native resources are allocated only by execute in the worker.
@@ -33,6 +35,8 @@ fn operation_step(id : String, operation : Operation) -> @lab.Step {
     Set(id, _, _, _) => ("set", [], [id], [])
     Check(id) => ("check", [], [id], [])
     Transpose(id, other) => ("transpose", [other], [id], [])
+    Add(a, b, other) => ("add", [other], [a, b], [])
+    Mul(a, b, other) => ("mul", [other], [a, b], [])
     RejectAdd(a, b) => ("reject_add", [], [a, b], [])
     Drop(id) => ("drop", [], [], [id])
   }
@@ -45,6 +49,78 @@ fn transpose(model : Model) -> Model {
     data: Array::makei(model.data.length(), i => model.data[(i % model.rows) * model.cols + i / model.rows]) }
 }
 
+///| Stored elements are bounded by 10^6. At most four products contribute
+/// to an entry, so all Int64 and binary64 intermediates are exact integers
+/// with magnitude at most 4*10^12, below both Int64 and binary64 limits.
+fn arithmetic(left : Model, right : Model, multiply : Bool) -> Model? {
+  if multiply {
+    if left.cols != right.rows { return None }
+  } else if left.rows != right.rows || left.cols != right.cols { return None }
+  let rows = left.rows
+  let cols = if multiply { right.cols } else { left.cols }
+  let data = Array::makei(rows * cols, index => {
+    if !multiply { left.data[index] + right.data[index] } else {
+      let row = index / cols
+      let col = index % cols
+      let mut sum = 0L
+      for k = 0; k < left.cols; k = k + 1 {
+        sum += left.data[row * left.cols + k] * right.data[k * right.cols + col]
+      }
+      sum
+    }
+  })
+  if data.any(value => value < -1000000L || value > 1000000L) { return None }
+  Some({ rows, cols, data })
+}
+
+///| Validation and repair advance fresh exact-integer state. Every rejection
+/// occurs before changing any retained model, including rejected arithmetic.
+struct EigenState { models : Map[String, Model] }
+///|
+fn EigenState::new() -> EigenState { { models: Map([]) } }
+///|
+impl @lab.StateModel for EigenState with fn apply(self, step) {
+  let operation : Operation = try { @json.from_json(step.args) } catch {
+    _ => return Some("invalid Eigen operation payload")
+  }
+  if operation_step(step.id, operation) != step { return Some("operation/dependency declarations mismatch") }
+  match operation {
+    New(id, rows, cols, data) => {
+      if rows < 1 || rows > 4 || cols < 1 || cols > 4 || data.length() != rows * cols ||
+        data.any(v => v < -100 || v > 100) { return Some("matrix construction bounds violated") }
+      self.models[id] = { rows, cols, data: data.map(v => v.to_int64()) }
+    }
+    Set(id, row, col, value) => {
+      guard self.models.get(id) is Some(model) else { return Some("set unavailable matrix") }
+      if row < 0 || row >= model.rows || col < 0 || col >= model.cols || value < -100 || value > 100 {
+        return Some("set bounds violated")
+      }
+      model.data[row * model.cols + col] = value.to_int64()
+    }
+    Check(id) => if !self.models.contains(id) { return Some("check unavailable matrix") }
+    Transpose(id, other) => {
+      guard self.models.get(id) is Some(model) else { return Some("transpose unavailable matrix") }
+      self.models[other] = transpose(model)
+    }
+    Add(a, b, other) | Mul(a, b, other) => {
+      guard self.models.get(a) is Some(left) && self.models.get(b) is Some(right) else {
+        return Some("arithmetic operand unavailable")
+      }
+      let multiply = match operation { Mul(_, _, _) => true; _ => false }
+      guard arithmetic(left, right, multiply) is Some(result) else {
+        return Some("arithmetic shape or exact-integer bound violated")
+      }
+      self.models[other] = result
+    }
+    RejectAdd(a, b) => {
+      guard self.models.get(a) is Some(left) && self.models.get(b) is Some(right) else { return Some("add unavailable matrix") }
+      if left.rows == right.rows && left.cols == right.cols { return Some("reject_add requires different shapes") }
+    }
+    Drop(id) => self.models.remove(id)
+  }
+  None
+}
+
 ///|
 pub impl @lab.Adapter for EigenAdapter with fn identity(_) { "eigen" }
 ///|
@@ -52,7 +128,7 @@ pub impl @lab.Adapter for EigenAdapter with fn version(_) { "1" }
 
 ///|
 pub impl @lab.Adapter for EigenAdapter with fn repair(_, trace) {
-  @lab.repair_dependencies(trace)
+  @lab.repair_with_model(EigenState::new(), trace)
 }
 
 ///| Bounded integers keep the trace lossless and expectations independent of
@@ -64,36 +140,10 @@ pub impl @lab.Adapter for EigenAdapter with fn validate(_, trace) {
   if trace.environment.get("profile").unwrap_or("behavior") != "behavior" {
     return Some("Eigen adapter requires behavior profile")
   }
-  let models : Map[String, Model] = Map([])
+  if @lab.validate_dependencies(trace) is Some(message) { return Some(message) }
+  let state = EigenState::new()
   for step in trace.steps {
-    let operation : Operation = try { @json.from_json(step.args) } catch {
-      _ => return Some("invalid Eigen operation payload")
-    }
-    let expected = operation_step(step.id, operation)
-    if expected != step { return Some("operation/dependency declarations mismatch") }
-    match operation {
-      New(id, rows, cols, data) => {
-        if rows < 1 || rows > 4 || cols < 1 || cols > 4 || data.length() != rows * cols ||
-          data.any(v => v < -100 || v > 100) { return Some("matrix construction bounds violated") }
-        models[id] = { rows, cols, data }
-      }
-      Set(id, row, col, value) => {
-        guard models.get(id) is Some(model) else { return Some("set unavailable matrix") }
-        if row < 0 || row >= model.rows || col < 0 || col >= model.cols || value < -100 || value > 100 {
-          return Some("set bounds violated")
-        }
-      }
-      Check(id) => if !models.contains(id) { return Some("check unavailable matrix") }
-      Transpose(id, other) => {
-        guard models.get(id) is Some(model) else { return Some("transpose unavailable matrix") }
-        models[other] = transpose(model)
-      }
-      RejectAdd(a, b) => {
-        guard models.get(a) is Some(left) && models.get(b) is Some(right) else { return Some("add unavailable matrix") }
-        if left.rows == right.rows && left.cols == right.cols { return Some("reject_add requires different shapes") }
-      }
-      Drop(id) => models.remove(id)
-    }
+    if state.apply(step) is Some(message) { return Some(message) }
   }
   None
 }
@@ -116,7 +166,7 @@ fn EigenAdapter::check(self : EigenAdapter, step : @lab.Step, id : String) -> @l
     Ok(values) => {
       if values.length() != model.data.length() { return failure(step, "matrix-values", "wrong array length") }
       for i, value in values {
-        if value.is_nan() || value.is_inf() || (value - model.data[i].to_double()).abs() > 0.000000001 {
+        if value.is_nan() || value.is_inf() || value != model.data[i].to_double() {
           return failure(step, "matrix-values", "matrix \{id}: element differs from pure model")
         }
       }
@@ -145,7 +195,7 @@ pub impl @lab.Adapter for EigenAdapter with fn execute(self, step) {
         Err(message) => return failure(step, "matrix-create", message)
         Ok(matrix) => self.handles[id] = matrix
       }
-      self.models[id] = { rows, cols, data: data.copy() }
+      self.models[id] = { rows, cols, data: data.map(v => v.to_int64()) }
       self.check_all(step)
     }
     Set(id, row, col, value) => {
@@ -154,7 +204,7 @@ pub impl @lab.Adapter for EigenAdapter with fn execute(self, step) {
         Ok(_) => ()
       }
       let model = self.models.get(id).unwrap()
-      model.data[row * model.cols + col] = value
+      model.data[row * model.cols + col] = value.to_int64()
       self.check_all(step)
     }
     Check(id) => self.check(step, id)
@@ -164,6 +214,18 @@ pub impl @lab.Adapter for EigenAdapter with fn execute(self, step) {
         Ok(matrix) => self.handles[other] = matrix
       }
       self.models[other] = transpose(self.models.get(id).unwrap())
+      self.check_all(step)
+    }
+    Add(a, b, other) | Mul(a, b, other) => {
+      let left = self.handles.get(a).unwrap()
+      let right = self.handles.get(b).unwrap()
+      let multiply = match operation { Mul(_, _, _) => true; _ => false }
+      let result = if multiply { left.mul(right) } else { left.add(right) }
+      match result {
+        Err(message) => return failure(step, "matrix-arithmetic", message)
+        Ok(matrix) => self.handles[other] = matrix
+      }
+      self.models[other] = arithmetic(self.models.get(a).unwrap(), self.models.get(b).unwrap(), multiply).unwrap()
       self.check_all(step)
     }
     RejectAdd(a, b) => {
@@ -224,6 +286,8 @@ pub fn generate(seed : UInt64, mode~ : String = "correct", steps~ : Int = 32) ->
 
 ///|
 pub extend EigenAdapter with @lab.Adapter::{identity, version, validate, execute, teardown, shrink_arguments, repair}
+///|
+pub extend EigenState with @lab.StateModel::{apply}
 
 ///|
 pub extend Operation with ToJson::{to_json}
