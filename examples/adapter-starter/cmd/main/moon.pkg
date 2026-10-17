@@ -1,0 +1,7 @@
+import {
+  "moonffi-example/counter-lab/counter",
+  "serikaonoe123/moonffi-lab/runner",
+  "moonbitlang/async",
+  "moonbitlang/core/env",
+}
+options("is-main": true)

@@ -1,6 +1,11 @@
 /_build/
 /.mooncakes/
 /results/
+/examples/_build/
+/examples/.mooncakes/
+/examples/adapter-starter/_build/
+/examples/adapter-starter/.mooncakes/
+/examples/adapter-starter/results/
 *.obj
 *.pdb
 *.ilk

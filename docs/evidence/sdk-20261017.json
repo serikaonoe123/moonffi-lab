@@ -1,0 +1,291 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-17",
+  "timezone": "Asia/Shanghai",
+  "source_parent_commit": "46011be5ac260284acf78066756457089e742b25",
+  "runs": [
+    {
+      "evidence_directory": "results/sdk-external-offline-20261017",
+      "verification": {
+        "state": "passed",
+        "completed_at": "2026-10-17T12:44:38.0631115+08:00",
+        "engine_packages": [
+          "core",
+          "runner"
+        ],
+        "consumer_module": "moonffi-example/counter-lab",
+        "dependency_mode": "explicit-local-source-cache",
+        "dependency_source": "D:\\moonbit\\moonffi-lab\\.mooncakes",
+        "source_manifest_sha256": "961E4A545FECD3187997F10229BF7FF40465CE693B6DDAE56117FCF9C68BB185",
+        "executable_sha256": "AAC1628531EA47CF9A2899658443B172D17EA9DEB00426670C3E27A1F12AEDC3",
+        "unit_tests": 5,
+        "pure_oracle_traces": 768,
+        "repair_subsets": 128,
+        "native_unit_walks": 32,
+        "correct_contract_cases": 8,
+        "correct_walk_cases": 32,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "fingerprint": "property:counter-value:s30",
+        "executions": 26,
+        "deletion_minimal": true,
+        "proper_subsets_checked": 3,
+        "corrected_replay": "Pass",
+        "budget_stop_reason": "execution_budget",
+        "preflight_rejection": true,
+        "output_reuse_rejected": true,
+        "separate_process_determinism": true,
+        "toolchain": [
+          "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+          "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+          "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+          "",
+          "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+        ],
+        "independent_environment": false,
+        "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+      },
+      "source_manifest_sha256": "961E4A545FECD3187997F10229BF7FF40465CE693B6DDAE56117FCF9C68BB185",
+      "module_tree": {
+        "version": 1,
+        "status": "success",
+        "error": null,
+        "root": 1,
+        "modules": [
+          {
+            "name": "moonbitlang/async",
+            "version": "0.22.5",
+            "source": {
+              "kind": "local",
+              "path": "D:\\moonbit\\moonffi-lab\\results\\sdk-external-offline-20261017\\workspace\\async"
+            },
+            "workspace_member": true
+          },
+          {
+            "name": "moonffi-example/counter-lab",
+            "version": "0.1.0",
+            "source": {
+              "kind": "local",
+              "path": "D:\\moonbit\\moonffi-lab\\results\\sdk-external-offline-20261017\\workspace\\consumer"
+            },
+            "workspace_member": true
+          },
+          {
+            "name": "serikaonoe123/moonffi-lab",
+            "version": "0.1.0",
+            "source": {
+              "kind": "local",
+              "path": "D:\\moonbit\\moonffi-lab\\results\\sdk-external-offline-20261017\\workspace\\engine"
+            },
+            "workspace_member": true
+          }
+        ],
+        "edges": [
+          {
+            "from": 1,
+            "to": 0,
+            "name": "moonbitlang/async",
+            "kind": "regular"
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "name": "serikaonoe123/moonffi-lab",
+            "kind": "regular"
+          },
+          {
+            "from": 2,
+            "to": 0,
+            "name": "moonbitlang/async",
+            "kind": "regular"
+          }
+        ],
+        "logs": []
+      },
+      "sdk_sources_verified": true,
+      "reduced_input": {
+        "schema": 1,
+        "adapter": "starter-counter",
+        "adapter_version": "1",
+        "generator_version": "counter-contract-1",
+        "seed": "17",
+        "environment": {
+          "fixture_mode": "error",
+          "profile": "behavior"
+        },
+        "steps": [
+          {
+            "id": "s0",
+            "op": "new",
+            "args": [
+              "New",
+              "a",
+              1
+            ],
+            "defines": [
+              "a"
+            ],
+            "uses": [],
+            "releases": []
+          },
+          {
+            "id": "s30",
+            "op": "reject_add",
+            "args": [
+              "RejectAdd",
+              "a",
+              200
+            ],
+            "defines": [],
+            "uses": [
+              "a"
+            ],
+            "releases": []
+          }
+        ]
+      }
+    },
+    {
+      "evidence_directory": "results/sdk-external-cache-20261017",
+      "verification": {
+        "state": "passed",
+        "completed_at": "2026-10-17T12:46:14.8437719+08:00",
+        "engine_packages": [
+          "core",
+          "runner"
+        ],
+        "consumer_module": "moonffi-example/counter-lab",
+        "dependency_mode": "registry-or-tool-cache",
+        "dependency_source": "",
+        "source_manifest_sha256": "35A61BB866CA7E1690BD32FA4A7CCFF122BF97D9CF327F004484405390B933C9",
+        "executable_sha256": "83E655F402A8AF8766F043D8C17BAFA095AE191D5227050EF0AAE88AA4861F22",
+        "unit_tests": 5,
+        "pure_oracle_traces": 768,
+        "repair_subsets": 128,
+        "native_unit_walks": 32,
+        "correct_contract_cases": 8,
+        "correct_walk_cases": 32,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "fingerprint": "property:counter-value:s30",
+        "executions": 26,
+        "deletion_minimal": true,
+        "proper_subsets_checked": 3,
+        "corrected_replay": "Pass",
+        "budget_stop_reason": "execution_budget",
+        "preflight_rejection": true,
+        "output_reuse_rejected": true,
+        "separate_process_determinism": true,
+        "toolchain": [
+          "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+          "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+          "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+          "",
+          "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+        ],
+        "independent_environment": false,
+        "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+      },
+      "source_manifest_sha256": "35A61BB866CA7E1690BD32FA4A7CCFF122BF97D9CF327F004484405390B933C9",
+      "module_tree": {
+        "version": 1,
+        "status": "success",
+        "error": null,
+        "root": 1,
+        "modules": [
+          {
+            "name": "moonbitlang/async",
+            "version": "0.22.5",
+            "source": {
+              "kind": "registry"
+            },
+            "workspace_member": false
+          },
+          {
+            "name": "moonffi-example/counter-lab",
+            "version": "0.1.0",
+            "source": {
+              "kind": "local",
+              "path": "D:\\moonbit\\moonffi-lab\\results\\sdk-external-cache-20261017\\workspace\\consumer"
+            },
+            "workspace_member": true
+          },
+          {
+            "name": "serikaonoe123/moonffi-lab",
+            "version": "0.1.0",
+            "source": {
+              "kind": "local",
+              "path": "D:\\moonbit\\moonffi-lab\\results\\sdk-external-cache-20261017\\workspace\\engine"
+            },
+            "workspace_member": true
+          }
+        ],
+        "edges": [
+          {
+            "from": 1,
+            "to": 0,
+            "name": "moonbitlang/async",
+            "kind": "regular"
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "name": "serikaonoe123/moonffi-lab",
+            "kind": "regular"
+          },
+          {
+            "from": 2,
+            "to": 0,
+            "name": "moonbitlang/async",
+            "kind": "regular"
+          }
+        ],
+        "logs": []
+      },
+      "sdk_sources_verified": true,
+      "reduced_input": {
+        "schema": 1,
+        "adapter": "starter-counter",
+        "adapter_version": "1",
+        "generator_version": "counter-contract-1",
+        "seed": "17",
+        "environment": {
+          "fixture_mode": "error",
+          "profile": "behavior"
+        },
+        "steps": [
+          {
+            "id": "s0",
+            "op": "new",
+            "args": [
+              "New",
+              "a",
+              1
+            ],
+            "defines": [
+              "a"
+            ],
+            "uses": [],
+            "releases": []
+          },
+          {
+            "id": "s30",
+            "op": "reject_add",
+            "args": [
+              "RejectAdd",
+              "a",
+              200
+            ],
+            "defines": [],
+            "uses": [
+              "a"
+            ],
+            "releases": []
+          }
+        ]
+      }
+    }
+  ],
+  "driver_sha256": "870521949A02CEAEF09F6943D821EC0C5BF0F735E55A9C4C33B6CC703CE1EE8D",
+  "scope": "A separately named consumer module compiled through public core/runner only, in two fresh local workspaces. One run explicitly reuses dependency source and one logs a tool-cache hit. This is source-workspace consumption, not a published registry SDK, independent host, real defect discovery, or counter ASan coverage."
+}

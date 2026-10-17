@@ -1,5 +1,17 @@
 # 缩减器验证记录
 
+## 外部 SDK 消费者：2026-10-17
+
+新增独立模块 `moonffi-example/counter-lab`，仅依赖公开 core/runner 和 async。`verify-sdk.ps1` 在新目录中只复制这两个引擎包、模块清单与消费者，包图确认没有 fixtures/vendor/引擎命令，然后重新构建。显式离线依赖源码与默认工具缓存恢复两个路径均通过，证据为 `results/sdk-external-offline-20261017` 和 `results/sdk-external-cache-20261017`。
+
+5/5 示例单测通过，覆盖 768 条独立标量 oracle 轨迹、七步轨迹全部 128 个子集的独立修整 oracle，以及 32 条 native walk。另有 8 条正确契约与 32 条正确 walk 的独立进程验收。人工 error 失败 32 → 2 步、26 次执行，稳定指纹保持，三个真子集核验及正确实现重放通过。纯阶段 C 调用审计、6 次预算、非法依赖预检、未知生成器、跨进程确定性及输出目录复用检查通过。
+
+工作区、源码哈希和包图已保存；没有改动 core/runner 实现，也没有将主项目 ASan 范围扩展到计数器 C 文件。指南、范围与证据见 [SDK 接入](SDK.md) 和 [快照](evidence/sdk-20261017.json)。CI 增加 sdk suite，须按对应提交的实际运行确认云端结果。
+
+## Eigen 探索版本的云端复现：2026-10-17
+
+[Actions run 39002767161](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39002767161) 的四项任务全部通过，测试提交为 `46011be5ac260284acf78066756457089e742b25`。已核对四份产物：37/37 单测、Buffer 512 + Eigen 128 场景、16 条 Eigen ASan 轨迹、189 次缩减和 214 个真子集核验通过。128 个 Eigen 具体输入哈希及覆盖观测与本地逐项一致，固定示例重放通过。摘要见 [云端快照](evidence/github-ci-39002767161.json)；这是 SDK 接入示例之前的提交。
+
 ## Eigen 真实绑定的状态探索：2026-10-17
 
 新增 `eigen-stateful-1`，按存活矩阵形状选择合法操作；构造、写入、转置及不兼容加法返回错误后检查全部存活矩阵。默认 `eigen-1` 与 vendored 源码保持原样。

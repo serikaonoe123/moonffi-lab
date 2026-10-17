@@ -1,7 +1,7 @@
 param(
   [string]$Out = '',
   [string]$Ref = 'HEAD',
-  [ValidateSet('behavior','asan','benchmark','generation')][string[]]$Suite = @('behavior'),
+  [ValidateSet('behavior','asan','benchmark','generation','sdk')][string[]]$Suite = @('behavior'),
   [string]$OfflineDependencySource = ''
 )
 $ErrorActionPreference = 'Stop'
@@ -84,6 +84,11 @@ try {
       'generation' {
         Invoke-Logged 'moon' @('build','--target','native','--frozen') (Join-Path $Out 'generation-build.log')
         & (Join-Path $workspace 'scripts/verify-generation.ps1') -Out $suiteOutput
+      }
+      'sdk' {
+        if ($OfflineDependencySource) {
+          & (Join-Path $workspace 'scripts/verify-sdk.ps1') -Out $suiteOutput -OfflineDependencySource (Join-Path $workspace '.mooncakes')
+        } else { & (Join-Path $workspace 'scripts/verify-sdk.ps1') -Out $suiteOutput }
       }
     }
     if (-not (Test-Path -LiteralPath (Join-Path $suiteOutput 'verification.json'))) { throw "Suite produced no success evidence: $selectedSuite" }

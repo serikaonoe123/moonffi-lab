@@ -12,6 +12,8 @@
 
 ## 已有实现
 
+- `examples/adapter-starter`：独立 `moonffi-example/counter-lab` 模块，通过 `examples/moon.work` 只导入公开 core/runner 与 async；C 计数器、纯状态修整、默认契约/walk 生成器和 CLI 完整接入。
+- `scripts/verify-sdk.ps1`：新工作区只保留 core/runner 与消费者，用包图确认接入范围，5 项单测和完整运行/缩减/重放/边界验收。CI 与 verify-clean 新增 sdk suite。
 - `fixtures/eigen/generator.mbt`：`eigen-stateful-1`，六操作、最多八个存活矩阵、1–4 行列，按当前形状选合法操作；Eigen CLI 注册 `stateful`，默认保留 `eigen-1`。
 - `fixtures/eigen/adapter.mbt`：构造、写入、转置及不兼容 Add 的错误后按 ID 排序核对全部存活矩阵；独立二维数组 oracle 及故意别名探针验证观察能力。
 - `core/repair.mbt`：StateModel、纯删除修整、删除原因与子序列完整性检查。
@@ -53,6 +55,12 @@
 最新阶段完成 Eigen 状态探索与全对象数值检查：37/37 单测、768 条独立纯 oracle 轨迹、32 条独立 native 数值 oracle 轨迹、完整 behavior 验收、Buffer 512 + Eigen 128 场景生成验收、ASan（含额外 16 条 Eigen stateful）通过。生成验收已集成进既有 CI generation suite；未知生成器/模式、replay 生成器选项、跨进程确定性及固定案例哈希和重放均验证。当前本地证据为 `results/verify-eigen-stateful-20261017`、`results/generation-eigen-stateful-20261017`、`results/asan-eigen-stateful-20261017`。报告与快照见 EIGEN-GENERATION 及 `docs/evidence/generation-eigen-20261017.json`，示例见 `examples/eigen-stateful/README.md`。对应提交的云端状态须查询实际 Actions，不能沿用前一提交的成功。
 
 后续优先项可推进 SDK/接入示例，或扩展真实绑定的合法算术操作与更多外部语料。当前 Eigen 只覆盖受限整数域的六操作，不包含合法加法结果、乘法或求解器稳定性；Drop 只移除引用，不证明 finalizer 时刻和原生分配平衡。导入的绑定和 Eigen 源码未改动。
+
+Eigen 阶段已提交为 `46011be`，Actions `39002767161` 四项通过，下载的 128 个 Eigen 输入哈希和覆盖观测与本地一致，37 单测、额外 16 条 Eigen ASan、189 次缩减及 214 个真子集通过。持久摘要见 `docs/evidence/github-ci-39002767161.json`。
+
+最新阶段完成 SDK 起步模块与指南。`results/sdk-external-offline-20261017` 和 `results/sdk-external-cache-20261017` 两条路径均通过：5 单测，768 条独立标量 oracle，128 个修整子集，32 条 native 单测 walk，8 + 32 个正确独立进程；人工失败 32→2 步/26 次执行，原缺陷重放与正确实现重放按预期，三个真子集及预算/预检/输出复用边界通过。源码哈希与当前例子一致，core/runner 未修改。见 SDK.md、示例 README 及 `docs/evidence/sdk-20261017.json`。新增提交的云端结果仍须按自身 run 核对。
+
+示例使用 MoonBit `moon.work` 做源码接入，没有发布 registry SDK 包；async fn main 需要显式导入 async。工作区下直接不带路径执行 moon test 会测试所有成员，示例单测使用 `moon test ... counter` 限定包。SDK C 计数器仅 behavior 验收，不在旧 ASan profile 范围内。后续可扩展真实绑定的合法算术操作、更多外部语料或锁定不可变安装包。
 
 Git 直连 GitHub 的 HTTPS 曾连接失败；本机已有启用的系统代理 `127.0.0.1:7892`。使用单条命令 `git -c http.proxy=http://127.0.0.1:7892 push origin main` 可以正常推送，没有改全局代理或安全设置。普通传输错误与权限/安全拒绝须区分。
 

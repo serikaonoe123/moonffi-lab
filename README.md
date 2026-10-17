@@ -20,7 +20,7 @@ moon build --target native
 
 `verify.ps1` 创建新的 `results/verify-<随机ID>`，检查源码快照完整性，运行单测、两个适配器的正常场景、三类缺陷的缩减和修复后重放、独立子集校验、崩溃/超时及缩减器边界测试。失败时保留已有日志，不自动删除任何输出。若执行被权限或安全策略拦截，停止对应操作并检查原始报错。
 
-Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[2026-10-17 云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38998166053)的 behavior、ASan、benchmark、generation 四个任务已通过，测试提交为 `166d86d`（新增 Eigen 探索之前）。
+Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[2026-10-17 云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39002767161)的 behavior、ASan、benchmark、generation 四个任务已通过，测试提交为 `46011be`（新增 SDK 示例之前）；当前 CI 另有独立 sdk 任务。
 
 Buffer 新增 `--generator stateful`，按当前句柄、共享引用和长度选择合法的随机操作，覆盖扩缩容与边界数据；原默认生成器保留固定契约回归。运行 `scripts/verify-generation.ps1` 可复现两种生成器的操作覆盖与人工缺陷观测，方法、结果及限制见 [生成实验](docs/GENERATION-STUDY.md)。
 
@@ -79,6 +79,8 @@ Eigen 也支持 `--generator stateful`，按存活矩阵形状探索六种操作
 ## 接入和边界
 
 见 [适配器指南](docs/ADAPTERS.md) 和 [缩减器验证记录](docs/VALIDATION.md)。`core` 和 `runner` 不包含矩阵专用规则。适配器通过编译期接入；每条完整轨迹在同一个新工作进程中保留状态，每个缩减候选使用另一个新进程。
+
+[SDK 接入指南](docs/SDK.md) 和[独立计数器模块](examples/adapter-starter/README.md)提供可运行的接入起点，覆盖纯模型、C FFI、额外生成器、失败保存、缩减及正确实现重放。`scripts/verify-sdk.ps1` 会在新工作区中只用 core/runner 公开包编译消费者并验收；当前使用本地源码工作区，没有发布 registry SDK 包。
 
 执行 `& .\scripts\verify-asan.ps1` 会在新的结果目录创建源码副本，仅在副本中启用 MSVC ASan：先要求三次明确标注的越界 canary 产生真实检测报告，再运行 Buffer/Eigen 各十个正常场景。主源码和普通构建配置保持原样，脚本保留构建日志、运行时和二进制哈希、源码清单及插桩范围。匹配的 ASan 诊断头与摘要被分类为 `MemoryError`；没有足够根因指纹时不自动缩减。普通构建拒绝 ASan profile/canary。
 

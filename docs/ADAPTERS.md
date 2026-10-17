@@ -2,6 +2,8 @@
 
 一个运行器由 `core`、`runner` 和适配器编译而成。两个实际入口分别见 `cmd/buffer-lab` 与 `cmd/eigen-lab`；`cmd/reducer-probe` 是用于验证缩减边界的合成测试程序。
 
+需要从外部项目接入时，从 [SDK 指南](SDK.md) 和[独立起步模块](../examples/adapter-starter/README.md)开始。该模块只消费公开的 core/runner；验收在没有 Buffer/Eigen/引擎命令的新工作区中构建，不依赖 whitebox 访问引擎。
+
 实现 `core.Adapter` 的以下职责：
 
 | 方法 | 约定 |
