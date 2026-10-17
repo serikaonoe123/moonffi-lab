@@ -45,7 +45,7 @@ async fn check_argument_reduction(executable : String, output : String) -> Unit 
   let checks : Array[Json] = []
   for strategy in ["plain", "dependency", "state"] {
     let destination = output + "/" + strategy
-    let adapter : Oracle = { mode: "numeric", ordinal: 0, armed: false }
+    let adapter : Oracle = { mode: "numeric", ordinal: 0, armed: false, arm_value: 0, blocker: false }
     let controller = @runner.Controller::new(executable, destination)
     let reduction = controller.shrink(adapter, trace, strategy~, budget=100)
     assert_true(reduction.confirmed && reduction.deletion_minimal)
@@ -94,7 +94,7 @@ async fn check_argument_reduction(executable : String, output : String) -> Unit 
     })
   }
   let controller = @runner.Controller::new(executable, output + "/budget-six")
-  let adapter : Oracle = { mode: "numeric", ordinal: 0, armed: false }
+  let adapter : Oracle = { mode: "numeric", ordinal: 0, armed: false, arm_value: 0, blocker: false }
   let bounded = controller.shrink(adapter, trace, budget=6)
   assert_true(bounded.executions == 6 && bounded.confirmed)
   assert_true(bounded.stop_reason == "execution_budget" && !bounded.deletion_minimal)
@@ -102,4 +102,5 @@ async fn check_argument_reduction(executable : String, output : String) -> Unit 
   checks.push({ "budget": Json(6), "executions": Json(bounded.executions), "stop_reason": Json(bounded.stop_reason) })
   @fs.write_file(output + "/checks.json", Json(checks).stringify(indent=2))
   println("MoonBit argument reduction checks passed: " + output)
+  check_iterative_reduction(executable, output + "/iterative")
 }

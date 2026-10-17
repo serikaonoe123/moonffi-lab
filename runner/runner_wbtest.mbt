@@ -67,3 +67,23 @@ test "sanitizer classification requires matching header and summary" {
   let report = make_report(MemoryError, "canary", Some(1), None, 0, 1L, None)
   assert_true(report.exit_code() == 1)
 }
+
+///|
+test "historical reductions decode without optional argument progress" {
+  let legacy =
+    #|{"original_steps":0,"reduced_steps":0,"executions":1,"reason":"unsupported",
+    #|"confirmed":false,"stop_reason":"unsupported_outcome","baseline_checks":1,
+    #|"final_checks":0,"accepted_candidates":0,"rejected_candidates":0,
+    #|"invalid_candidates":0,"elapsed_ms":"0","baseline":{"outcome":"Pass",
+    #|"executed":0,"elapsed_ms":"0","message":"example"},"strategy":"state",
+    #|"neighborhood_checked":0,"neighborhood_complete":false,"inconclusive_neighbors":0,
+    #|"deletion_minimal":false,"trace":{"schema":1,"adapter":"test","adapter_version":"1",
+    #|"generator_version":"1","seed":"0","environment":{},"steps":[]}}
+  let old : Reduction = @json.from_json(@json.parse(legacy))
+  assert_true(old.argument_search is None)
+  let current = { ..old, argument_search: Some({ passes: 2, candidates_checked: 3,
+    complete: true, inconclusive_candidates: 1 }) }
+  let decoded : Reduction = @json.from_json(current.to_json())
+  let progress = decoded.argument_search.unwrap()
+  assert_true(progress.passes == 2 && progress.complete && progress.inconclusive_candidates == 1)
+}

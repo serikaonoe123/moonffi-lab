@@ -1,3 +1,13 @@
+///| Enumeration progress for the adapter's finite argument candidates on the
+/// final trace. Completion is not an argument-minimality claim: adapters need
+/// not enumerate every simpler value, and worker errors may be inconclusive.
+pub(all) struct ArgumentSearch {
+  passes : Int
+  candidates_checked : Int
+  complete : Bool
+  inconclusive_candidates : Int
+} derive(ToJson, @json.FromJson)
+
 ///|
 pub(all) struct Reduction {
   original_steps : Int
@@ -18,6 +28,7 @@ pub(all) struct Reduction {
   neighborhood_complete : Bool
   inconclusive_neighbors : Int
   deletion_minimal : Bool
+  argument_search : ArgumentSearch?
   trace : @lab.Trace
 } derive(ToJson, @json.FromJson)
 
@@ -61,6 +72,10 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
   let mut neighborhood_checked = 0
   let mut neighborhood_complete = false
   let mut inconclusive_neighbors = 0
+  let mut argument_passes = 0
+  let mut argument_candidates_checked = 0
+  let mut argument_complete = false
+  let mut argument_inconclusive = 0
   let mut stop_reason = "unsupported_outcome"
   let reason = if baseline.outcome != PropertyFailure || baseline.fingerprint is None {
     if @async.now() >= deadline { stop_reason = "wall_budget" }
@@ -110,74 +125,108 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
         if width == 1 { break }
         width = (width + 1) / 2
       }
-      // Adapter candidates must be strictly simpler, finite, and preserve IDs.
-      for index = 0; index < best.steps.length(); index = index + 1 {
-        let step = best.steps[index]
-        for candidate_step in adapter.shrink_arguments(step) {
-          if self.executions() - initial_count >= budget - 3 || @async.now() - started >= wall_ms.to_int64() { break }
-          if !same_operation(step, candidate_step) {
-            invalid_candidates += 1
+      // Re-enumerate from the current concrete trace after every accepted
+      // parameter or single deletion. This also discards stale indexes when
+      // parameter repair deletes earlier steps. Each change strictly descends;
+      // the execution/wall budgets still reserve three final confirmations.
+      while self.executions() - initial_count < budget - 3 && @async.now() < deadline {
+        argument_passes += 1
+        argument_candidates_checked = 0
+        argument_inconclusive = 0
+        let mut changed = false
+        let mut index = 0
+        while index < best.steps.length() && self.executions() - initial_count < budget - 3 && @async.now() < deadline {
+          let step = best.steps[index]
+          let mut proposals_complete = true
+          for candidate_step in adapter.shrink_arguments(step) {
+            if self.executions() - initial_count >= budget - 3 || @async.now() >= deadline {
+              proposals_complete = false
+              break
+            }
+            argument_candidates_checked += 1
+            if !same_operation(step, candidate_step) {
+              invalid_candidates += 1
+              let steps = best.steps.copy()
+              steps[index] = candidate_step
+              self.record_reduction("arguments", "invalid", best.with_steps(steps), None, "parameter candidate changed operation identity or dependencies")
+              continue
+            }
+            if !@lab.arguments_simpler(candidate_step.args, step.args) { continue }
             let steps = best.steps.copy()
             steps[index] = candidate_step
-            self.record_reduction("arguments", "invalid", best.with_steps(steps), None, "parameter candidate changed operation identity or dependencies")
-            continue
+            let prepared = prepare_candidate(adapter, best.with_steps(steps), strategy)
+            let candidate = prepared.candidate
+            if prepared.error is None && candidate.steps.contains(candidate_step) {
+              let check = self.run(adapter, candidate, timeout_ms=self.remaining_timeout(deadline))
+              if check.outcome == PropertyFailure && check.fingerprint == fingerprint {
+                accepted_candidates += 1
+                self.record_reduction("arguments", "accepted", candidate, Some(check), "same failure fingerprint", removed=prepared.removed)
+                best = candidate
+                changed = true
+                break
+              } else {
+                rejected_candidates += 1
+                if check.outcome != Pass && check.outcome != PropertyFailure { argument_inconclusive += 1 }
+                self.record_reduction("arguments", "rejected", candidate, Some(check), "failure fingerprint not preserved", removed=prepared.removed)
+              }
+            } else {
+              invalid_candidates += 1
+              if !prepared.conclusive { argument_inconclusive += 1 }
+              self.record_reduction("arguments", "invalid", candidate, None, prepared.error.unwrap_or("parameter repair removed the changed operation"), removed=prepared.removed)
+            }
           }
-          // A repair may delete earlier unrelated steps. Locate the stable ID
-          // again rather than indexing into a possibly shorter accepted trace.
-          let mut argument_index = 0
-          while argument_index < best.steps.length() && best.steps[argument_index].id != step.id { argument_index += 1 }
-          if argument_index == best.steps.length() { break }
-          if !@lab.arguments_simpler(candidate_step.args, best.steps[argument_index].args) { continue }
-          let steps = best.steps.copy()
-          steps[argument_index] = candidate_step
-          let prepared = prepare_candidate(adapter, best.with_steps(steps), strategy)
+          if changed || !proposals_complete { break }
+          index += 1
+        }
+        argument_complete = !changed && index == best.steps.length()
+        neighborhood_checked = 0
+        neighborhood_complete = false
+        inconclusive_neighbors = 0
+        if changed {
+          argument_candidates_checked = 0
+          argument_inconclusive = 0
+          continue
+        }
+        if !argument_complete { break }
+        // Deletion may unlock an earlier parameter that previously lost the
+        // fingerprint. Any accepted deletion restarts argument enumeration.
+        let mut cursor = 0
+        while cursor < best.steps.length() && self.executions() - initial_count < budget - 3 && @async.now() < deadline {
+          let prepared = prepare_candidate(adapter, delete_candidate(best, cursor, 1, strategy), strategy)
           let candidate = prepared.candidate
-          if prepared.error is None && candidate.steps.contains(candidate_step) {
+          neighborhood_checked += 1
+          if prepared.error is None {
             let check = self.run(adapter, candidate, timeout_ms=self.remaining_timeout(deadline))
             if check.outcome == PropertyFailure && check.fingerprint == fingerprint {
               accepted_candidates += 1
-              self.record_reduction("arguments", "accepted", candidate, Some(check), "same failure fingerprint", removed=prepared.removed)
+              self.record_reduction("delete_single", "accepted", candidate, Some(check), "same failure fingerprint", removed=prepared.removed)
               best = candidate
+              changed = true
+              break
             } else {
               rejected_candidates += 1
-              self.record_reduction("arguments", "rejected", candidate, Some(check), "failure fingerprint not preserved", removed=prepared.removed)
+              if check.outcome != Pass && check.outcome != PropertyFailure { inconclusive_neighbors += 1 }
+              self.record_reduction("delete_single", "rejected", candidate, Some(check), "failure fingerprint not preserved", removed=prepared.removed)
             }
           } else {
             invalid_candidates += 1
-            self.record_reduction("arguments", "invalid", candidate, None, prepared.error.unwrap_or("parameter repair removed the changed operation"), removed=prepared.removed)
+            if !prepared.conclusive { inconclusive_neighbors += 1 }
+            self.record_reduction("delete_single", "invalid", candidate, None, prepared.error.unwrap_or("invalid candidate"), removed=prepared.removed)
           }
+          cursor += 1
         }
-      }
-      // Parameter changes can make previously indispensable steps removable.
-      let mut cursor = 0
-      while cursor < best.steps.length() && self.executions() - initial_count < budget - 3 && @async.now() - started < wall_ms.to_int64() {
-        let prepared = prepare_candidate(adapter, delete_candidate(best, cursor, 1, strategy), strategy)
-        let candidate = prepared.candidate
-        neighborhood_checked += 1
-        if prepared.error is None {
-          let check = self.run(adapter, candidate, timeout_ms=self.remaining_timeout(deadline))
-          if check.outcome == PropertyFailure && check.fingerprint == fingerprint {
-            accepted_candidates += 1
-            self.record_reduction("delete_single", "accepted", candidate, Some(check), "same failure fingerprint", removed=prepared.removed)
-            best = candidate
-            cursor = 0
-            neighborhood_checked = 0
-            inconclusive_neighbors = 0
-            continue
-          } else {
-            rejected_candidates += 1
-            if check.outcome != Pass && check.outcome != PropertyFailure { inconclusive_neighbors += 1 }
-            self.record_reduction("delete_single", "rejected", candidate, Some(check), "failure fingerprint not preserved", removed=prepared.removed)
-          }
-        } else {
-          invalid_candidates += 1
-          if !prepared.conclusive { inconclusive_neighbors += 1 }
-          self.record_reduction("delete_single", "invalid", candidate, None, prepared.error.unwrap_or("invalid candidate"), removed=prepared.removed)
+        if changed {
+          argument_complete = false
+          argument_candidates_checked = 0
+          argument_inconclusive = 0
+          neighborhood_checked = 0
+          inconclusive_neighbors = 0
+          continue
         }
-        cursor += 1
+        neighborhood_complete = cursor == best.steps.length()
+        break
       }
-      neighborhood_complete = cursor == best.steps.length()
-      let search_stop = if neighborhood_complete { "search_complete" }
+      let search_stop = if argument_complete && neighborhood_complete { "search_complete" }
         else if @async.now() >= deadline { "wall_budget" }
         else if self.executions() - initial_count >= budget - 3 { "execution_budget" }
         else { "search_complete" }
@@ -203,6 +252,8 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
     rejected_candidates, invalid_candidates, elapsed_ms: @async.now() - started, baseline,
     strategy, neighborhood_checked, neighborhood_complete, inconclusive_neighbors,
     deletion_minimal: confirmed && neighborhood_complete && inconclusive_neighbors == 0,
+    argument_search: Some({ passes: argument_passes, candidates_checked: argument_candidates_checked,
+      complete: argument_complete, inconclusive_candidates: argument_inconclusive }),
   }
   @fs.mkdir(self.output, recursive=true, allow_exist=true)
   @fs.write_file(self.output + "/reduced.json", best.encode())

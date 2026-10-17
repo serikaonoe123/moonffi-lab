@@ -4,6 +4,8 @@ struct Oracle {
   mode : String
   ordinal : Int
   mut armed : Bool
+  mut arm_value : Int
+  mut blocker : Bool
 }
 
 ///|
@@ -14,13 +16,19 @@ impl @lab.Adapter for Oracle with fn version(_) { "1" }
 impl @lab.Adapter for Oracle with fn repair(self, trace) {
   if self.mode == "bad-repair" {
     { trace: { ..trace, seed: "silently-rewritten" }, removed: [] }
+  } else if self.mode == "repair-shift" && trace.steps.any(step =>
+    step.op == "fail" && numeric_args(step) is Some(args) && args.value != 9) {
+    let kept = trace.steps.filter(step => step.op != "noise")
+    { trace: trace.with_steps(kept), removed: trace.steps.filter(step => step.op == "noise").map(step =>
+      { step_id: step.id, reason: "parameter no longer requires blocker" }) }
   } else { @lab.repair_dependencies(trace) }
 }
 ///|
 impl @lab.Adapter for Oracle with fn validate(self, trace) {
   for step in trace.steps {
     if !["arm", "noise", "fail"].contains(step.op) { return Some("unknown oracle operation") }
-    if self.mode == "numeric" && step.op == "fail" {
+    if (["numeric", "chain", "repair-shift", "argument-error", "coupled"].contains(self.mode) && step.op == "fail") ||
+      (self.mode == "coupled" && step.op == "arm") {
       if numeric_args(step) is None { return Some("oracle requires numeric payload") }
       continue
     }
@@ -33,9 +41,20 @@ impl @lab.Adapter for Oracle with fn validate(self, trace) {
 }
 ///|
 impl @lab.Adapter for Oracle with fn execute(self, step) {
-  if step.op == "arm" { self.armed = true }
+  if step.op == "arm" {
+    self.armed = true
+    if self.mode == "coupled" { self.arm_value = numeric_args(step).unwrap().value }
+  }
+  if step.op == "noise" { self.blocker = true }
   if step.op != "fail" || !self.armed { return None }
   if self.mode == "numeric" && numeric_args(step) is Some(args) && args.value == 1 { return None }
+  if self.mode == "coupled" {
+    let value = numeric_args(step).unwrap().value
+    if (value != 0 && (!self.blocker || self.arm_value == 0)) ||
+      (value == 0 && self.blocker && self.arm_value == 0) { return None }
+  }
+  if self.mode == "repair-shift" && numeric_args(step).unwrap().value == 9 && !self.blocker { return None }
+  if self.mode == "argument-error" && numeric_args(step).unwrap().value == 4 { exit_process(0) }
   if self.mode == "pass" || (self.mode == "flaky-baseline" && self.ordinal == 2) ||
     (self.mode == "flaky-final" && self.ordinal > 3) { return None }
   let property = if self.mode == "changing-fingerprint" && self.ordinal == 2 { "different" } else { "oracle" }
@@ -45,7 +64,13 @@ impl @lab.Adapter for Oracle with fn execute(self, step) {
 impl @lab.Adapter for Oracle with fn teardown(_) { None }
 ///|
 impl @lab.Adapter for Oracle with fn shrink_arguments(self, step) {
+  if self.mode == "coupled" && (step.op == "arm" || step.op == "fail") {
+    let args = numeric_args(step).unwrap()
+    if args.value == 0 { return [] }
+    return [{ ..step, args: { ..args, value: 0 }.to_json() }]
+  }
   if step.op != "fail" { return [] }
+  if ["chain", "repair-shift", "argument-error"].contains(self.mode) { return chain_candidates(step) }
   if self.mode == "numeric" { return numeric_candidates(step) }
   [
     { ..step, op: "noise", args: Json("") },
@@ -83,6 +108,7 @@ async fn main {
     @runner.cli(arguments, trace => {
       let adapter : Oracle = {
         mode: trace.environment.get("fixture_mode").unwrap_or("stable"), ordinal, armed: false,
+        arm_value: 0, blocker: false,
       }
       adapter
     }, generate)

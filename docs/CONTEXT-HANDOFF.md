@@ -2,6 +2,14 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-17（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
+## 最新阶段：MoonBit 交替缩减
+
+用户要求继续优先 MoonBit 核心开发。本轮 runner 从一次参数遍历改为参数/单步删除交替：接受任何变化后重新生成候选，丢弃可能失效的步骤索引及旧候选；共用原预算，预留最后三次确认。报告增加 `argument_search: ArgumentSearch?`，记录扫描轮数、当前候选检查数、完成状态及未决数；旧 JSON 可缺失该字段，不表示已完成。只在参数枚举和最终删除检查都完成时返回 search_complete，仍不保证参数最小。
+
+52/52 根模块单测及完整 behavior、5/5 SDK 单测和完整接入通过。新增 `cmd/reducer-probe/iterative_checks.mbt`，由既有 `--check-arguments` 入口调用，没有增加 PowerShell。11 个纯 MoonBit 进程探针覆盖三策略多级缩减、参数/删除相互解锁、10 次预算稳定中间值、修整删除前序步骤及异常候选的未决记录。日志位于 `results/verify-iterative-arguments-20261017`、`results/sdk-iterative-arguments-20261017`。本轮基准与 CI 状态须核对实际新结果，下面的成功记录属于历史提交。
+
+单轮 63 次固定语料缩减、214 个真子集及全部正确实现重放通过，33 项参数编码更短、0 项更长，步骤数和输入哈希不变，合计减少 1,236 参数编码字节；工作进程总数 1,763→1,937，未声称加速。原始记录为 `results/benchmark-iterative-arguments-20261017`，持久快照为 `docs/evidence/iterative-arguments-20261017.json`。必须针对本轮实际提交检查新的五项 CI；前一版 189 条结构计数不能直接沿用。
+
 ## 当前优先方向与 MoonBit 参数缩减
 
 用户指出 MoonBit 占比偏少，后续优先增加 MoonBit 核心能力和原生 MoonBit 验证，控制 PowerShell 编排规模。接续前 GitHub 语言 API 返回 MoonBit 114,012 字节、PowerShell 107,522、C 3,907、AMPL 330，MoonBit 约 50.5%；Eigen vendor 已被排除，不应通过隐藏自有脚本调整占比。

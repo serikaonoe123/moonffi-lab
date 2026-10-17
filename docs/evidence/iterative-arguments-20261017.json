@@ -1,0 +1,253 @@
+{
+  "schema": 1,
+  "date": "2026-10-17",
+  "baseline_commit": "9fa4b60d95829079c6e298e2bbaa23b288c296ce",
+  "scope": "MoonBit alternating argument and single-deletion search with candidate regeneration; finite adapter neighborhood only, no parameter/global minimality claim.",
+  "root_tests": 52,
+  "legacy_reduction_json_compatible": true,
+  "behavior_verification": "results/verify-iterative-arguments-20261017/verification.json",
+  "numeric_checks": [
+    {
+      "strategy": "plain",
+      "confirmed": true,
+      "deletion_minimal": true,
+      "argument_executions": 2,
+      "accepted_value": 0,
+      "executions": 12
+    },
+    {
+      "strategy": "dependency",
+      "confirmed": true,
+      "deletion_minimal": true,
+      "argument_executions": 2,
+      "accepted_value": 0,
+      "executions": 12
+    },
+    {
+      "strategy": "state",
+      "confirmed": true,
+      "deletion_minimal": true,
+      "argument_executions": 2,
+      "accepted_value": 0,
+      "executions": 12
+    },
+    {
+      "budget": 6,
+      "executions": 6,
+      "stop_reason": "execution_budget"
+    }
+  ],
+  "iterative_checks": [
+    {
+      "mode": "chain",
+      "strategy": "plain",
+      "passes": 5,
+      "executions": 12,
+      "complete": true,
+      "accepted_values": [
+        4,
+        2,
+        1,
+        0
+      ],
+      "accepted_ids": [
+        "fail",
+        "fail",
+        "fail",
+        "fail"
+      ]
+    },
+    {
+      "mode": "coupled",
+      "strategy": "plain",
+      "passes": 4,
+      "executions": 14,
+      "complete": true,
+      "accepted_values": [],
+      "accepted_ids": [
+        "fail",
+        "arm"
+      ]
+    },
+    {
+      "mode": "bounded-chain",
+      "strategy": "plain",
+      "executions": 10,
+      "value": 1,
+      "stop_reason": "execution_budget"
+    },
+    {
+      "mode": "chain",
+      "strategy": "dependency",
+      "passes": 5,
+      "executions": 14,
+      "complete": true,
+      "accepted_values": [
+        4,
+        2,
+        1,
+        0
+      ],
+      "accepted_ids": [
+        "fail",
+        "fail",
+        "fail",
+        "fail"
+      ]
+    },
+    {
+      "mode": "coupled",
+      "strategy": "dependency",
+      "passes": 4,
+      "executions": 17,
+      "complete": true,
+      "accepted_values": [],
+      "accepted_ids": [
+        "fail",
+        "arm"
+      ]
+    },
+    {
+      "mode": "bounded-chain",
+      "strategy": "dependency",
+      "executions": 10,
+      "value": 2,
+      "stop_reason": "execution_budget"
+    },
+    {
+      "mode": "chain",
+      "strategy": "state",
+      "passes": 5,
+      "executions": 14,
+      "complete": true,
+      "accepted_values": [
+        4,
+        2,
+        1,
+        0
+      ],
+      "accepted_ids": [
+        "fail",
+        "fail",
+        "fail",
+        "fail"
+      ]
+    },
+    {
+      "mode": "coupled",
+      "strategy": "state",
+      "passes": 4,
+      "executions": 17,
+      "complete": true,
+      "accepted_values": [],
+      "accepted_ids": [
+        "fail",
+        "arm"
+      ]
+    },
+    {
+      "mode": "bounded-chain",
+      "strategy": "state",
+      "executions": 10,
+      "value": 2,
+      "stop_reason": "execution_budget"
+    },
+    {
+      "mode": "repair-shift",
+      "complete": true,
+      "inconclusive_candidates": 0,
+      "executions": 14
+    },
+    {
+      "mode": "argument-error",
+      "complete": true,
+      "inconclusive_candidates": 1,
+      "executions": 11
+    }
+  ],
+  "sdk": {
+    "state": "passed",
+    "completed_at": "2026-10-17T21:17:34.0441263+08:00",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "consumer_module": "moonffi-example/counter-lab",
+    "dependency_mode": "explicit-local-source-cache",
+    "dependency_source": "D:\\moonbit\\moonffi-lab\\.mooncakes",
+    "source_manifest_sha256": "B9A2CDBFCF5049DAA4C7DA0E2A18C4601E9763645C4F09A70EE540CEA7E3A394",
+    "executable_sha256": "2538C8A4FA1A39D79FA2D559CDEE713E4B55B708A0AE2278BEDF3088E9264CCE",
+    "unit_tests": 5,
+    "pure_oracle_traces": 768,
+    "repair_subsets": 128,
+    "native_unit_walks": 32,
+    "correct_contract_cases": 8,
+    "correct_walk_cases": 32,
+    "original_steps": 32,
+    "reduced_steps": 2,
+    "fingerprint": "property:counter-value:s30",
+    "executions": 27,
+    "deletion_minimal": true,
+    "proper_subsets_checked": 3,
+    "corrected_replay": "Pass",
+    "budget_stop_reason": "execution_budget",
+    "preflight_rejection": true,
+    "output_reuse_rejected": true,
+    "separate_process_determinism": true,
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "independent_environment": false,
+    "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+  },
+  "source_sha256": {
+    "runner/shrink.mbt": "803AC080DE302CA37A9F8164FFEB3EBF71B0F0F8E75783677E5D4C1062BC1874",
+    "runner/extends.mbt": "D666FDC77A262FE7DB0D51C4C4927653E70AD926A2B75338D7DC8CB39ED2B5BF",
+    "runner/runner_wbtest.mbt": "DC1123C6FCFC25CB5B6F23B17C4F6DF8E6B7E6868F9D658718E7ACF3A293439A",
+    "cmd/reducer-probe/main.mbt": "56CCF66C3FBEEC5367834305EAC99FAEA0531CBB71BDC9949C8A02D8DD8F62B0",
+    "cmd/reducer-probe/argument_checks.mbt": "A8CE8B3EC9A6B46D3581202E0BA9C6E12A36E18EFE2D8B0FFE07F30694110C0E",
+    "cmd/reducer-probe/iterative_checks.mbt": "B4829640DB61C25F8447F204AA5196DAC353F29C63EF7BCA45CD5FE29462249B"
+  },
+  "powershell_source_changed": false,
+  "hosted_validation": "pending implementation commit",
+  "benchmark": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 21,
+    "cases": 21,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 1,
+    "measurements": 63,
+    "complete_searches": 63,
+    "repeatable_case_strategies": 63,
+    "case_strategy_groups": 63,
+    "actual_proper_subsets_checked": 214.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-17T21:19:17.0105381+08:00",
+    "executable_sha256": "BA7D42F75A2715958AD57C14E18E139AEB97640241ED8050B8695213873A4F11",
+    "protocol_sha256": "43E5F343E19696497ABF09A7836E9A3109B4C183D9EFB2CF88910FB72A237A8C"
+  },
+  "comparison_with_previous": {
+    "rows": 63,
+    "input_hash_differences": 0,
+    "reduced_hash_differences": 33,
+    "step_count_differences": 0,
+    "worker_count_different_rows": 36,
+    "extra_worker_executions": 174,
+    "previous_worker_executions": 1763.0,
+    "current_worker_executions": 1937.0,
+    "note": "Single local repetition; final step counts unchanged. More accepted parameter simplifications, with extra executions; no speed improvement claim.",
+    "smaller_argument_rows": 33,
+    "larger_argument_rows": 0,
+    "saved_argument_bytes_across_rows": 1236
+  }
+}

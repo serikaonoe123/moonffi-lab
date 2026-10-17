@@ -88,6 +88,8 @@ Eigen 支持 `--generator stateful` 的六操作探索，以及 `--generator ari
 
 参数简化由 MoonBit `core.arguments_simpler` 控制：保留原有 JSON 编码长度下降规则，并支持等长十进制整数的绝对值下降，包括嵌套数组和对象；大整数按原始数字比较。候选仍须通过纯模型校验及相同失败指纹重放，规则见 [适配器指南](docs/ADAPTERS.md)。
 
+参数候选现在会在每次接受变化后重新生成，并与单步删除交替，直到本轮没有可接受变化或预算终止。`reduction.json` 的 `argument_search` 保存参数扫描轮次、当前候选检查数、完成状态及未决结果；历史报告没有此字段时仍可读取。最终确认仍预留三次独立重放，搜索完成不代表参数最小。
+
 当前限制：只有 Windows native 完整验证；ASan 仅插桩 Buffer C fixture 和 Eigen C++ shim（含其模板实例），MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
 
 旧 Eigen 绑定属于既有成果，新增引擎、适配器和验收脚本属于本项目工作。来源和许可见 [快照记录](vendor/eigen-binding/SNAPSHOT.md)。本项目 MIT；导入源码保留原有许可。
