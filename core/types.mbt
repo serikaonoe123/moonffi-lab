@@ -6,7 +6,15 @@ pub(all) struct Step {
   defines : Array[String]
   uses : Array[String]
   releases : Array[String]
-} derive(Eq, ToJson, @json.FromJson)
+} derive(ToJson, @json.FromJson)
+
+///| Concrete arguments must not inherit Json's rounded Double equality. This
+/// also makes deletion-only repair guards distinguish adjacent large integers.
+pub impl Eq for Step with fn equal(a, b) {
+  a.id == b.id && a.op == b.op && a.defines == b.defines &&
+    a.uses == b.uses && a.releases == b.releases &&
+    integer_descent(a.args, b.args) == Some(false)
+}
 
 ///| Concrete inputs are authoritative; a seed is provenance, not a replay format.
 pub(all) struct Trace {

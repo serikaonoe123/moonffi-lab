@@ -77,3 +77,42 @@ test "integer gate agrees with exhaustive signed decimal oracle" {
     }
   }
 }
+
+///|
+test "step equality distinguishes rounded large integers in nested inputs" {
+  let a = @json.parse("[0,9007199254740992]")
+  let b = @json.parse("[0,9007199254740993]")
+  // Demonstrate the underlying representation hazard independently of Step.
+  assert_true(a == b)
+  let original = { ..sample_step("number"), args: a }
+  let rewritten = { ..original, args: b }
+  assert_true(original != rewritten)
+  assert_true(rewritten != original)
+  assert_true(original == original)
+  assert_true(sample_trace([original]) != sample_trace([rewritten]))
+}
+
+///|
+test "deletion-only repair rejects numerically rounded concrete rewrites" {
+  let step = { ..sample_step("number"), args: @json.parse("{\"values\":[9007199254740992]}") }
+  let trace = sample_trace([sample_step("noise"), step])
+  let changed = { ..step, args: @json.parse("{\"values\":[9007199254740993]}") }
+  let repaired = trace.with_steps([changed])
+  assert_true(!deletion_only(trace, repaired))
+  assert_true(check_repair(trace, {
+    trace: repaired, removed: [{ step_id: "noise", reason: "irrelevant" }],
+  }) is Some(_))
+}
+
+///|
+test "exact step equality ignores object key order and survives trace replay" {
+  let original = { ..sample_step("exact"), args: @json.parse("{\"large\":18446744073709551615,\"tag\":\"x\"}") }
+  let reordered = { ..original, args: @json.parse("{\"tag\":\"x\",\"large\":18446744073709551615}") }
+  assert_true(original == reordered)
+  let trace = sample_trace([sample_step("noise"), original])
+  let repair : Repair = {
+    trace: trace.with_steps([reordered]), removed: [{ step_id: "noise", reason: "irrelevant" }],
+  }
+  assert_true(check_repair(trace, repair) is None)
+  assert_true(decode_trace(trace.encode()) == trace)
+}

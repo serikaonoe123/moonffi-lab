@@ -1,10 +1,10 @@
 {
   "date": "2026-10-17",
   "baseline_commit": "f3ddfdc8fded96336c5654858a1e8235dd43d00e",
-  "scope": "MoonBit argument descent; unchanged shorter-encoding rule plus componentwise exact integer descent at equal encoding length; no argument/global minimality claim",
-  "root_tests": 48,
+  "scope": "MoonBit equal-width integer argument descent and exact concrete Step equality; rounded JSON equality cannot hide a large-integer repair rewrite. No argument/global minimality claim.",
+  "root_tests": 51,
   "signed_integer_oracle_pairs": 6561,
-  "behavior_verification": "results/verify-numeric-arguments-final-20261017/verification.json",
+  "behavior_verification": "results/verify-exact-arguments-final-20261017/verification.json",
   "numeric_checks": [
     {
       "strategy": "plain",
@@ -38,7 +38,7 @@
   ],
   "sdk": {
     "state": "passed",
-    "completed_at": "2026-10-17T18:30:13.5481121+08:00",
+    "completed_at": "2026-10-17T18:37:38.4207482+08:00",
     "engine_packages": [
       "core",
       "runner"
@@ -46,8 +46,8 @@
     "consumer_module": "moonffi-example/counter-lab",
     "dependency_mode": "explicit-local-source-cache",
     "dependency_source": "D:\\moonbit\\moonffi-lab\\.mooncakes",
-    "source_manifest_sha256": "2565E829D759BDADDB1A7CE6CBD8190163A9740F82E3313C508F920984C33F7A",
-    "executable_sha256": "DC44F65ECEBCD22FE7A4387DBEC298D7353FE759F9171BCF8CD49F979A464AA8",
+    "source_manifest_sha256": "6FE12107B0C1E3D03FDDAA1FF204D7640E683D88A64BC8F20384FDC09C6B9A5D",
+    "executable_sha256": "813FFEB982075BAB0F65B5958D2298378047B736DEEA634A5A985F7DA32D0B8F",
     "unit_tests": 5,
     "pure_oracle_traces": 768,
     "repair_subsets": 128,
@@ -80,7 +80,8 @@
     "runner/shrink.mbt": "2FB2766B993BB85552E6E0D0A46E711E685963E4223ECA0BA215B95935F2CCC7",
     "cmd/reducer-probe/main.mbt": "D9BA8355BD99140FF34FFA316E7C5D1810B44037F8B46220C58D18CF9A47D14E",
     "core/arguments.mbt": "99A9FB00446C9C083CEC796FA12A6978BCE30AEEE7F54AE75BB8D24A022B9A2C",
-    "core/arguments_wbtest.mbt": "B62E0812824A26914D4B4A7C5FFAACBFF40A9BBD3E896CEA9B734388E3787470"
+    "core/types.mbt": "58504CCE0EECD6677DE4AF9DA168D3574AB08058E9C33D312C89214E63B62E6D",
+    "core/arguments_wbtest.mbt": "E74130F0924684AF9AB5F65063E5A08364030A4F0EDDE6C192AAA43DBECAEB60"
   },
   "github_languages_before": {
     "MoonBit": 114012,
@@ -89,5 +90,55 @@
     "AMPL": 330
   },
   "languages_configuration_changed": false,
-  "hosted_validation": "pending this implementation commit"
+  "hosted_validation": "pending follow-up precision correction commit; first implementation b45de33 has separate run 39025293367",
+  "benchmark": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 21,
+    "cases": 21,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 1,
+    "measurements": 63,
+    "complete_searches": 63,
+    "repeatable_case_strategies": 63,
+    "case_strategy_groups": 63,
+    "actual_proper_subsets_checked": 214.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-17T18:32:28.7887592+08:00",
+    "executable_sha256": "B3F662B5315F0DC013639DB6102D894517C89C6662E0692E2A947BBDCE687CB6",
+    "protocol_sha256": "199C98CFE99FE433E01A7B7D6A3695868872D40FA1BEE775AF02325A1A1DEB3D"
+  },
+  "github_languages_after": {
+    "MoonBit": 125760,
+    "PowerShell": 107645,
+    "C": 3907,
+    "AMPL": 330
+  },
+  "benchmark_vs_old_first_repetition": {
+    "baseline_run": "39013008257",
+    "rows": 63,
+    "input_hashes_unchanged": 63,
+    "reduced_trace_hashes_changed": 21,
+    "step_count_changes": 0,
+    "extra_worker_executions": 21,
+    "example": {
+      "before": [
+        "RejectWrite",
+        "b",
+        99
+      ],
+      "after": [
+        "RejectWrite",
+        "b",
+        -1
+      ],
+      "step_id": "rejected-write"
+    },
+    "note": "One local repetition only; does not establish repeated timing or speed improvement."
+  }
 }

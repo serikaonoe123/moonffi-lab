@@ -8,7 +8,7 @@
 
 新增 `core/arguments.mbt` 的公开纯函数 `arguments_simpler`：保留编码更短规则，等长时允许同形 JSON 中十进制整数绝对值逐项下降，禁止其他分量增长，避免 Double 舍入和 Int64 溢出。runner 使用该函数相对于最新参数检查候选。MoonBit 单测覆盖 6,561 对有符号整数与精度边界；合成探针以 `--check-arguments DIR` 驱动三种策略及预算，并在 MoonBit 内检查日志。PowerShell 仅多一条调用，没有修改语言统计配置。
 
-本地 48/48 根模块单测及完整 behavior 通过，5/5 SDK 单测及完整外部接入通过；SDK 缩减仍为两步，因新增一次不保持失败的参数尝试，执行数从 26 变为 27。原始日志在 `results/verify-numeric-arguments-final-20261017`、`results/sdk-numeric-arguments-20261017`；见 VALIDATION 和 `docs/evidence/numeric-arguments-20261017.json`。本轮 CI 状态须按实际提交核对，不能沿用下面旧工具链提交的成功。
+进一步修复 `Step` 相等判断继承 Json 的 Double 舍入问题，避免只删除修整错误接受相邻大整数改写；对象键顺序仍不影响相等。最终本地 51/51 根模块单测及完整 behavior 通过，5/5 SDK 单测及完整外部接入通过；SDK 缩减仍为两步，因新增一次不保持失败的参数尝试，执行数从 26 变为 27。最终日志在 `results/verify-exact-arguments-final-20261017`、`results/sdk-exact-arguments-20261017`。63 次单轮缩减、214 个真子集通过，其中 21 项进一步简化等长参数，步骤数不变，各增加一次执行。见 VALIDATION 和 `docs/evidence/numeric-arguments-20261017.json`。本轮 CI 状态须按实际提交核对，不能沿用下面旧工具链提交的成功。
 
 ## 最新阶段：工具链内容锁定
 
