@@ -15,9 +15,10 @@ pub async fn[A : @lab.Adapter] cli(
   arguments : Array[String],
   make_adapter : (@lab.Trace) -> A,
   generate : (UInt64, String, Int) -> @lab.Trace,
+  generators~ : Map[String, (UInt64, String, Int) -> @lab.Trace] = Map([]),
 ) -> Int {
   if arguments.length() < 2 || arguments[1] == "--help" {
-    println("MoonFFI Lab\n  run [--seed N] [--cases N] [--steps N] [--mode MODE] [--out DIR]\n  generate [same options except --cases]\n  replay CASE.json [--mode MODE] [--out DIR]\n  shrink CASE.json [--budget N] [--wall-ms N] [--strategy plain|dependency|state] [--out DIR]\n  all execution commands accept --timeout-ms N\nAn output directory must be new; it contains complete evidence.")
+    println("MoonFFI Lab\n  run [--seed N] [--cases N] [--steps N] [--mode MODE] [--generator NAME] [--out DIR]\n  generate [same options except --cases]\n  replay CASE.json [--mode MODE] [--out DIR]\n  shrink CASE.json [--budget N] [--wall-ms N] [--strategy plain|dependency|state] [--out DIR]\n  all execution commands accept --timeout-ms N\nGenerator default is the deterministic contract suite; additional names are adapter-defined.\nAn output directory must be new; it contains complete evidence.")
     return 0
   }
   if arguments[1] == "--worker" {
@@ -34,7 +35,7 @@ pub async fn[A : @lab.Adapter] cli(
   let mut index = if has_input { 3 } else { 2 }
   while index < arguments.length() {
     let key = arguments[index]
-    if !["--out", "--seed", "--cases", "--steps", "--mode", "--timeout-ms", "--budget", "--wall-ms", "--strategy"].contains(key) || index + 1 >= arguments.length() {
+    if !["--out", "--seed", "--cases", "--steps", "--mode", "--timeout-ms", "--budget", "--wall-ms", "--strategy", "--generator"].contains(key) || index + 1 >= arguments.length() {
       fail("unknown option or missing value: \{key}")
     }
     if options.contains(key) { fail("repeated option: \{key}") }
@@ -46,6 +47,7 @@ pub async fn[A : @lab.Adapter] cli(
   let timeout_ms = bounded_int(options, "--timeout-ms", "3000", 10, 60000)
   let controller = Controller::new(arguments[0], output, timeout_ms~)
   if has_input {
+    if options.contains("--generator") { fail("--generator is only for run/generate; replay uses the saved concrete steps") }
     let original = read_trace(arguments[2])
     let trace = if options.get("--mode") is Some(mode) {
       let environment = original.environment.copy()
@@ -69,8 +71,13 @@ pub async fn[A : @lab.Adapter] cli(
   let cases = bounded_int(options, "--cases", "1", 1, 1000)
   let steps = bounded_int(options, "--steps", "32", 8, 256)
   let mode = option(options, "--mode", "correct")
+  let generator_name = option(options, "--generator", "default")
+  let selected_generator = if generator_name == "default" { generate } else {
+    guard generators.get(generator_name) is Some(found) else { fail("unknown generator: \{generator_name}") }
+    found
+  }
   if command == "generate" {
-    let trace = generate(seed, mode, steps)
+    let trace = selected_generator(seed, mode, steps)
     if validate(make_adapter(trace), trace) is Some(message) { fail(message) }
     @fs.mkdir(output, recursive=true, allow_exist=false)
     @fs.write_file(output + "/case.json", trace.encode())
@@ -80,7 +87,7 @@ pub async fn[A : @lab.Adapter] cli(
   let reports : Array[@lab.Report] = []
   let mut exit_code = 0
   for i = 0; i < cases; i = i + 1 {
-    let trace = generate(seed + i.to_uint64(), mode, steps)
+    let trace = selected_generator(seed + i.to_uint64(), mode, steps)
     let report = controller.run(make_adapter(trace), trace)
     reports.push(report)
     println("case \{i + 1}: " + report.outcome.to_json().stringify())

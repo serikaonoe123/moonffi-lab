@@ -22,6 +22,8 @@ moon build --target native
 
 Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[2026-10-17 云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38994542498)的 behavior、ASan、benchmark 三个任务已通过，测试提交为 `4f46b01`。
 
+Buffer 新增 `--generator stateful`，按当前句柄、共享引用和长度选择合法的随机操作，覆盖扩缩容与边界数据；原默认生成器保留固定契约回归。运行 `scripts/verify-generation.ps1` 可复现两种生成器的操作覆盖与人工缺陷观测，方法、结果及限制见 [生成实验](docs/GENERATION-STUDY.md)。
+
 ## 一次完整演示
 
 以下目录必须尚不存在；重复演示请更换目录名。

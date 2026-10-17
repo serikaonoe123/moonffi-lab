@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "adapter": "buffer",
+  "adapter_version": "1",
+  "generator_version": "buffer-stateful-1",
+  "seed": "17",
+  "environment": {
+    "fixture_mode": "nul",
+    "profile": "behavior"
+  },
+  "steps": [
+    {
+      "id": "s0",
+      "op": "new",
+      "args": [
+        "New",
+        "h0",
+        "00"
+      ],
+      "defines": [
+        "h0"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s5",
+      "op": "read",
+      "args": [
+        "Read",
+        "h0"
+      ],
+      "defines": [],
+      "uses": [
+        "h0"
+      ],
+      "releases": []
+    }
+  ]
+}

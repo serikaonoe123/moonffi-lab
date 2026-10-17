@@ -12,6 +12,7 @@ async fn main {
         adapter
       },
       (seed, mode, steps) => @buffer.generate(seed, mode~, noise=(steps - 8) / 4),
+      generators={ "stateful": (seed, mode, steps) => @buffer.generate_stateful(seed, mode~, steps~) },
     )
   } catch {
     error => { println("MoonFFI Lab error: " + error.to_string()); 2 }

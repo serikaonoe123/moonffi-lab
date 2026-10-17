@@ -1,0 +1,259 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-17",
+  "timezone": "Asia/Shanghai",
+  "generation": {
+    "state": "passed",
+    "completed_at": "2026-10-17T10:53:57.6470257+08:00",
+    "seed": "17",
+    "cases_per_mode": 64,
+    "step_budget": 64,
+    "fixed_examples_replayed": 3,
+    "modes": [
+      "correct",
+      "nul",
+      "share",
+      "error"
+    ],
+    "generators": [
+      "default",
+      "stateful"
+    ],
+    "measurements": [
+      {
+        "generator": "default",
+        "fixture_mode": "correct",
+        "cases": 64,
+        "property_failures": 0,
+        "passed": 64
+      },
+      {
+        "generator": "default",
+        "fixture_mode": "nul",
+        "cases": 64,
+        "property_failures": 64,
+        "passed": 0
+      },
+      {
+        "generator": "default",
+        "fixture_mode": "share",
+        "cases": 64,
+        "property_failures": 64,
+        "passed": 0
+      },
+      {
+        "generator": "default",
+        "fixture_mode": "error",
+        "cases": 64,
+        "property_failures": 64,
+        "passed": 0
+      },
+      {
+        "generator": "stateful",
+        "fixture_mode": "correct",
+        "cases": 64,
+        "property_failures": 0,
+        "passed": 64
+      },
+      {
+        "generator": "stateful",
+        "fixture_mode": "nul",
+        "cases": 64,
+        "property_failures": 59,
+        "passed": 5,
+        "first_failure_seed": "17",
+        "reduced_steps": 2,
+        "fingerprint": "property:bytes-roundtrip:s5",
+        "deletion_minimal": true
+      },
+      {
+        "generator": "stateful",
+        "fixture_mode": "share",
+        "cases": 64,
+        "property_failures": 63,
+        "passed": 1,
+        "first_failure_seed": "17",
+        "reduced_steps": 4,
+        "fingerprint": "property:shared-reference-alive:s29",
+        "deletion_minimal": true
+      },
+      {
+        "generator": "stateful",
+        "fixture_mode": "error",
+        "cases": 64,
+        "property_failures": 58,
+        "passed": 6,
+        "first_failure_seed": "17",
+        "reduced_steps": 3,
+        "fingerprint": "property:bytes-roundtrip:s5",
+        "deletion_minimal": true
+      }
+    ],
+    "coverage": {
+      "default": {
+        "schedules": 64,
+        "operation_pairs": 14,
+        "operations": {
+          "new": 960,
+          "share": 387,
+          "close": 1024,
+          "read": 1088,
+          "write": 276,
+          "reject_write": 361,
+          "resize": 0
+        },
+        "features": [
+          "read-after-alias-close",
+          "reject-at-end",
+          "restart-after-close"
+        ],
+        "maximum_live_handles": 11
+      },
+      "stateful": {
+        "schedules": 64,
+        "operation_pairs": 50,
+        "operations": {
+          "new": 574,
+          "share": 442,
+          "close": 598,
+          "read": 573,
+          "write": 608,
+          "reject_write": 662,
+          "resize": 639
+        },
+        "features": [
+          "grow",
+          "new-empty",
+          "new-maximum",
+          "read-after-alias-close",
+          "regrow-empty",
+          "reject-at-end",
+          "reject-negative",
+          "resize-empty",
+          "restart-after-close",
+          "shrink",
+          "write-after-other-alias-resize"
+        ],
+        "maximum_live_handles": 8
+      }
+    },
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "executable_sha256": "24390BA3903E64E259D82EE370059276EC92A7FAB83B538E598C08800785CC4E",
+    "scope": "Operation/state-feature observations on labelled local fixtures, not native code coverage or external defect-finding rates. Default has fixed contract triggers; stateful has an eight-live-handle bound and no fixed suffix."
+  },
+  "unit_tests_passed": 32,
+  "independent_oracle_traces": 768,
+  "native_unit_walks": 32,
+  "native_unit_steps_per_walk": 64,
+  "behavior_evidence": "results/verify-stateful-generator-20261017",
+  "asan_evidence": "results/asan-stateful-generator-20261017",
+  "asan": {
+    "state": "passed",
+    "completed_at": "2026-10-17T10:49:27.2158217+08:00",
+    "profile": "windows-msvc-asan-stubs",
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "runtime": "E:\\VSBuildTools\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\clang_rt.asan_dynamic-x86_64.dll",
+    "runtime_sha256": "7F901A239979C49B36A3B18ECD1843F551F94B5879585BDED41A650C5B71F35F",
+    "canary_runs": 3,
+    "canary_outcome": "MemoryError",
+    "category": "heap-buffer-overflow",
+    "correct_buffer_runs": 10,
+    "correct_eigen_runs": 10,
+    "correct_stateful_buffer_runs": 16,
+    "resize_alias_control": "Pass",
+    "instrumented_translation_units": [
+      "fixtures/buffer/buffer.c",
+      "vendor/eigen-binding/eigen_shim.cpp (including instantiated Eigen headers)"
+    ],
+    "not_instrumented": [
+      "MoonBit-generated C",
+      "MoonBit runtime",
+      "async dependency C stubs",
+      "other prebuilt/system libraries"
+    ],
+    "dependency_source": "local pinned .mooncakes source cache; no build outputs copied",
+    "buffer_sha256": "8D9AAD954C934410EE03EC7C8533D994DCC48DB54003F0432988F6DE23AAB39B",
+    "eigen_sha256": "CB06C80F31D2E5888BA3DBE2DDEEC48C4BADE2F9731D34BBF3A59A9AB701AFE3"
+  },
+  "examples": [
+    {
+      "fixture_mode": "nul",
+      "artificial_defect": true,
+      "original_seed": "17",
+      "original_steps": 64,
+      "reduced_steps": 2,
+      "confirmed": true,
+      "deletion_minimal": true,
+      "fingerprint": "property:bytes-roundtrip:s5",
+      "case_sha256": "86B8FAA47EFEA8996F7E40000D19CA046EBDFE0F815BA4147B1EE5A9EE0EEB53",
+      "report_sha256": "0451D5C420386652EB80ED4534722F1E9AEC5223EA64C25FFCC600B1CB8822D1",
+      "corrected_replay": "Pass"
+    },
+    {
+      "fixture_mode": "share",
+      "artificial_defect": true,
+      "original_seed": "17",
+      "original_steps": 64,
+      "reduced_steps": 4,
+      "confirmed": true,
+      "deletion_minimal": true,
+      "fingerprint": "property:shared-reference-alive:s29",
+      "case_sha256": "BBA46345FE1BD734FD06E7838D3E18B61222649F7CC66C964C9BBED0F4C43138",
+      "report_sha256": "409F935E451297D984245D2EA80835B4007A36AA83A264E2888C57A92E457ADB",
+      "corrected_replay": "Pass"
+    },
+    {
+      "fixture_mode": "error",
+      "artificial_defect": true,
+      "original_seed": "17",
+      "original_steps": 64,
+      "reduced_steps": 3,
+      "confirmed": true,
+      "deletion_minimal": true,
+      "fingerprint": "property:bytes-roundtrip:s5",
+      "case_sha256": "50CD79E120C599332E38918D3970037FB3EBD0B8C509288B9EA26086C3E06AEA",
+      "report_sha256": "8E7D02FBF9B30BC2DCA007EF4414ABCD799D2B340D7C8BE03493C63EEC400D2A",
+      "corrected_replay": "Pass"
+    }
+  ],
+  "sources": [
+    {
+      "path": "fixtures/buffer/generator.mbt",
+      "sha256": "10CECEB61ED990F177FD237F195EE4F32F4285B5260D1BAE4E7DFC5A5E3A364C"
+    },
+    {
+      "path": "fixtures/buffer/generator_wbtest.mbt",
+      "sha256": "4BA870B3B7606D0454510053AAA714D7AE4CF3459843195C439B57775D839151"
+    },
+    {
+      "path": "runner/cli.mbt",
+      "sha256": "DB31CB0CF86299B82FC06F2714E7DD4C611B53D45771AB18684BE47C372EF496"
+    },
+    {
+      "path": "cmd/buffer-lab/main.mbt",
+      "sha256": "1E8D6954F136FF89BC99A75C07C21AE647AE462CEA93DE947BC4F71CDE84FD10"
+    },
+    {
+      "path": "scripts/verify-generation.ps1",
+      "sha256": "538104C7993E9378C529C0732B7F81BE69578547CD34336676F8735C54D695DD"
+    }
+  ],
+  "notes": [
+    "operation_pairs includes the virtual start marker",
+    "Independent oracle is not state-space exhaustion",
+    "Defects are intentional local fixture modes; observed failure proportions are not external defect discovery rates"
+  ],
+  "generation_evidence": "results/generation-stateful-final-20261017"
+}

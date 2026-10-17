@@ -99,6 +99,11 @@ try {
     $controls = @(Read-Json (Join-Path $destination 'summary.json'))
     Require ($controls.Count -eq 10 -and @($controls | Where-Object outcome -ne 'Pass').Count -eq 0) "$kind control did not pass with ASan runtime active"
   }
+  $stage = 'stateful-generation-control'
+  $statefulDir = Join-Path $Out 'buffer-stateful-correct'
+  Invoke-Checked $buffer @('run','--generator','stateful','--cases','16','--steps','64','--timeout-ms','10000','--out',$statefulDir) 0 (Join-Path $Out 'buffer-stateful-correct.log')
+  $statefulReports = @(Read-Json (Join-Path $statefulDir 'summary.json'))
+  Require ($statefulReports.Count -eq 16 -and @($statefulReports | Where-Object outcome -ne 'Pass').Count -eq 0) 'Stateful correct fixture failed under ASan'
   $stage = 'resize-alias-control'
   $resizeTrace = Read-Json (Join-Path $Out 'buffer-correct/case-1/case.json')
   $resizeTrace.generator_version = 'asan-resize-control-1'
@@ -132,6 +137,7 @@ try {
     runtime_sha256 = (Get-FileHash -LiteralPath (Join-Path $asanDir 'clang_rt.asan_dynamic-x86_64.dll')).Hash
     canary_runs = 3; canary_outcome = 'MemoryError'; category = 'heap-buffer-overflow'
     correct_buffer_runs = 10; correct_eigen_runs = 10
+    correct_stateful_buffer_runs = 16
     resize_alias_control = 'Pass'
     instrumented_translation_units = @('fixtures/buffer/buffer.c','vendor/eigen-binding/eigen_shim.cpp (including instantiated Eigen headers)')
     not_instrumented = @('MoonBit-generated C','MoonBit runtime','async dependency C stubs','other prebuilt/system libraries')

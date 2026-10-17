@@ -1,0 +1,9 @@
+{
+  "outcome": "PropertyFailure",
+  "fingerprint": "property:shared-reference-alive:s29",
+  "raw_exit_code": 0,
+  "last_step": "s29",
+  "executed": 4,
+  "elapsed_ms": "30",
+  "message": "a valid open alias lost its native resource"
+}

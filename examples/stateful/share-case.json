@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "adapter": "buffer",
+  "adapter_version": "1",
+  "generator_version": "buffer-stateful-1",
+  "seed": "17",
+  "environment": {
+    "fixture_mode": "share",
+    "profile": "behavior"
+  },
+  "steps": [
+    {
+      "id": "s6",
+      "op": "new",
+      "args": [
+        "New",
+        "h1",
+        "00"
+      ],
+      "defines": [
+        "h1"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s9",
+      "op": "share",
+      "args": [
+        "Share",
+        "h1",
+        "h2"
+      ],
+      "defines": [
+        "h2"
+      ],
+      "uses": [
+        "h1"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s28",
+      "op": "close",
+      "args": [
+        "Close",
+        "h2"
+      ],
+      "defines": [],
+      "uses": [],
+      "releases": [
+        "h2"
+      ]
+    },
+    {
+      "id": "s29",
+      "op": "read",
+      "args": [
+        "Read",
+        "h1"
+      ],
+      "defines": [],
+      "uses": [
+        "h1"
+      ],
+      "releases": []
+    }
+  ]
+}

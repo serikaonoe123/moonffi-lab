@@ -1,7 +1,7 @@
 param(
   [string]$Out = '',
   [string]$Ref = 'HEAD',
-  [ValidateSet('behavior','asan','benchmark')][string[]]$Suite = @('behavior'),
+  [ValidateSet('behavior','asan','benchmark','generation')][string[]]$Suite = @('behavior'),
   [string]$OfflineDependencySource = ''
 )
 $ErrorActionPreference = 'Stop'
@@ -80,6 +80,10 @@ try {
       'benchmark' {
         Invoke-Logged 'moon' @('build','--target','native','--frozen') (Join-Path $Out 'benchmark-build.log')
         & (Join-Path $workspace 'scripts/benchmark-reduction.ps1') -Out $suiteOutput
+      }
+      'generation' {
+        Invoke-Logged 'moon' @('build','--target','native','--frozen') (Join-Path $Out 'generation-build.log')
+        & (Join-Path $workspace 'scripts/verify-generation.ps1') -Out $suiteOutput
       }
     }
     if (-not (Test-Path -LiteralPath (Join-Path $suiteOutput 'verification.json'))) { throw "Suite produced no success evidence: $selectedSuite" }

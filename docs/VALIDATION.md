@@ -1,5 +1,11 @@
 # 缩减器验证记录
 
+## 状态探索生成器：2026-10-17
+
+新增 Buffer `--generator stateful`，默认契约场景保持原生成版本。32/32 单测、原有完整集成验收与 ASan profile 验收通过；ASan 额外运行 16 条 64 步 stateful 正确轨迹，全部通过。
+
+独立纯模型核验 768 条轨迹；两个生成器在四种 fixture 模式下各运行 64 个独立进程，共 512 场景。stateful 的 64 个正确场景全部通过，人工 nul/share/error 分别在 59/63/58 个场景被观察到。三个首次失败样本均稳定缩减并在正确实现上重放通过。完整方法、指标定义、证据路径和限制见 [生成实验](GENERATION-STUDY.md)，固定最小化输入见 [示例](../examples/stateful/README.md)。
+
 ## 云端与用户手动验收：2026-10-17
 
 [GitHub Actions run 38994542498](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38994542498) 对提交 `4f46b0188fb2f355761e2c1389f5be5af3fca2c9` 的 behavior、ASan、benchmark 三个任务全部成功，最后一个任务于 **10:22:08（Asia/Shanghai）** 完成。下载并核对了三个任务的验收产物，而不只依据绿色状态。

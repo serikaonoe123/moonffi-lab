@@ -1,0 +1,41 @@
+[
+  {
+    "fixture_mode": "nul",
+    "artificial_defect": true,
+    "original_seed": "17",
+    "original_steps": 64,
+    "reduced_steps": 2,
+    "confirmed": true,
+    "deletion_minimal": true,
+    "fingerprint": "property:bytes-roundtrip:s5",
+    "case_sha256": "86B8FAA47EFEA8996F7E40000D19CA046EBDFE0F815BA4147B1EE5A9EE0EEB53",
+    "report_sha256": "0451D5C420386652EB80ED4534722F1E9AEC5223EA64C25FFCC600B1CB8822D1",
+    "corrected_replay": "Pass"
+  },
+  {
+    "fixture_mode": "share",
+    "artificial_defect": true,
+    "original_seed": "17",
+    "original_steps": 64,
+    "reduced_steps": 4,
+    "confirmed": true,
+    "deletion_minimal": true,
+    "fingerprint": "property:shared-reference-alive:s29",
+    "case_sha256": "BBA46345FE1BD734FD06E7838D3E18B61222649F7CC66C964C9BBED0F4C43138",
+    "report_sha256": "409F935E451297D984245D2EA80835B4007A36AA83A264E2888C57A92E457ADB",
+    "corrected_replay": "Pass"
+  },
+  {
+    "fixture_mode": "error",
+    "artificial_defect": true,
+    "original_seed": "17",
+    "original_steps": 64,
+    "reduced_steps": 3,
+    "confirmed": true,
+    "deletion_minimal": true,
+    "fingerprint": "property:bytes-roundtrip:s5",
+    "case_sha256": "50CD79E120C599332E38918D3970037FB3EBD0B8C509288B9EA26086C3E06AEA",
+    "report_sha256": "8E7D02FBF9B30BC2DCA007EF4414ABCD799D2B340D7C8BE03493C63EEC400D2A",
+    "corrected_replay": "Pass"
+  }
+]

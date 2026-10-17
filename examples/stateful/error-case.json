@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "adapter": "buffer",
+  "adapter_version": "1",
+  "generator_version": "buffer-stateful-1",
+  "seed": "17",
+  "environment": {
+    "fixture_mode": "error",
+    "profile": "behavior"
+  },
+  "steps": [
+    {
+      "id": "s0",
+      "op": "new",
+      "args": [
+        "New",
+        "h0",
+        "3da8fce3e210a601ed80f672bd805d0000808d01d59db30100fa733f0109b2ff4edbee174101fc07412eff1e415a93e56310417f9e7f1c2fe1416eff41"
+      ],
+      "defines": [
+        "h0"
+      ],
+      "uses": [],
+      "releases": []
+    },
+    {
+      "id": "s3",
+      "op": "reject_write",
+      "args": [
+        "RejectWrite",
+        "h0",
+        -1
+      ],
+      "defines": [],
+      "uses": [
+        "h0"
+      ],
+      "releases": []
+    },
+    {
+      "id": "s5",
+      "op": "read",
+      "args": [
+        "Read",
+        "h0"
+      ],
+      "defines": [],
+      "uses": [
+        "h0"
+      ],
+      "releases": []
+    }
+  ]
+}

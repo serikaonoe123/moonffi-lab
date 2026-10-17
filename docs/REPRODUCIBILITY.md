@@ -1,6 +1,6 @@
 # Windows 自动验收与源码复现
 
-仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发会分别运行 behavior、ASan、benchmark 三个任务。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单。归档不含工作目录或二进制。
+仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发会分别运行 behavior、ASan、benchmark、generation 四个任务。generation 验证新增的状态生成与标记人工缺陷实验。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单。归档不含工作目录或二进制。
 
 ## 版本与安装
 
@@ -16,7 +16,7 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 
 ```powershell
 & .\scripts\assert-toolchain.ps1
-& .\scripts\verify-clean.ps1 -Suite behavior,asan,benchmark
+& .\scripts\verify-clean.ps1 -Suite behavior,asan,benchmark,generation
 ```
 
 该脚本默认导出 HEAD，可用 `-Ref <commit>` 指定另一个包含复现工具的提交。未提交修改不进入导出的源码。脚本使用 `git archive` 导出，在新目录解包，并要求没有 `.git`、`.mooncakes`、`_build` 或旧 `results`。它记录 commit、归档哈希和逐文件源码哈希，再更新 registry、恢复声明的依赖并构建。每个 suite 的输出在源码目录外，便于保留完整诊断。
@@ -24,7 +24,7 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 已有同版本依赖源码且需要离线复验时，可明确指定来源：
 
 ```powershell
-& .\scripts\verify-clean.ps1 -Suite behavior,asan,benchmark `
+& .\scripts\verify-clean.ps1 -Suite behavior,asan,benchmark,generation `
   -OfflineDependencySource .\.mooncakes
 ```
 
@@ -36,7 +36,7 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 
 - `source.tar`、`source-manifest.json`：实际测试的提交及文件内容。
 - `toolchain.json`、`dependency-manifest.json`：实际工具版本、二进制与依赖哈希。
-- `behavior/`、`asan/`、`benchmark/`：所选 suite 的完整证据。
+- `behavior/`、`asan/`、`benchmark/`、`generation/`：所选 suite 的完整证据。
 - `verification.json`：只有全部所选任务成功才产生；出错则保存 `failure.json` 和阶段，保留已有文件。
 
 `fresh_project_build=true` 只说明没有复制项目构建产物。脚本的 `independent_environment=false` 始终表示它自身不能证明主机、标准库或 registry 全局缓存是全新的；CI runner 的独立性须由云端执行记录补充。输出目录不可复用，不自动删除任何证据。

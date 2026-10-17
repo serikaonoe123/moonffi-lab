@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: [behavior, asan, benchmark]
+        suite: [behavior, asan, benchmark, generation]
     defaults:
       run:
         shell: pwsh

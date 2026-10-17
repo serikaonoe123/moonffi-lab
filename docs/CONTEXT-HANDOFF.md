@@ -36,6 +36,10 @@
 
 ## 后续工作
 
+新增阶段已完成 Buffer 状态探索生成器 `buffer-stateful-1`：通过 `--generator stateful` 选择，按当前资源状态选操作，最多 8 个活句柄、256 字节、256 步，不附加固定触发后缀。default 继续使用 `buffer-1`，Eigen 暂保留默认生成方式。`runner.cli` 通过可选 generators 映射注册额外纯生成器；replay/shrink 拒绝重新指定生成器。
+
+本地 32/32 单测、完整集成、ASan 及 16 条额外 ASan 随机正确轨迹已通过。`results/generation-stateful-20261017` 记录 512 场景的生成实验：操作组合（含起点）14→50，stateful 正确场景 64/64 通过，人工 nul/share/error 失败 59/63/58；三个首次失败均稳定缩减并修复后通过。768 条轨迹经独立状态 oracle 验证。详情见 GENERATION-STUDY；CI 新增 generation 任务，最新云端结果须按实际提交查询。这里的覆盖是操作与状态特征观测，不是原生代码覆盖或真实缺陷发现率。
+
 本次接续已完成持久摘要、实验快照、完整实验文档、语义修整分支覆盖及开发机之外的 CI 复现。后续可推进更多真实库语料、生成器探索能力、不可变安装包锁定和重复性能测量。参数简化仍受 JSON 编码长度下降限制，不能声称全局最小、任意参数最小或同一原生根因。
 
 接续后的复验已完成：`results/verify-context-continuation-20261017` 的 28/28 单测和完整集成验收通过；`results/benchmark-context-continuation-20261017` 的 27 次对照和 111 个真子集核验通过，语义修整覆盖断言生效。候选数、步数及执行次数等结构指标与上一轮逐条一致。详见实验快照的 continuation 字段。

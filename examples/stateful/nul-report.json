@@ -1,0 +1,9 @@
+{
+  "outcome": "PropertyFailure",
+  "fingerprint": "property:bytes-roundtrip:s5",
+  "raw_exit_code": 0,
+  "last_step": "s5",
+  "executed": 2,
+  "elapsed_ms": "26",
+  "message": "native bytes differ from the model (including embedded NUL)"
+}
