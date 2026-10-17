@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-17",
+  "baseline_commit": "f3ddfdc8fded96336c5654858a1e8235dd43d00e",
+  "scope": "MoonBit argument descent; unchanged shorter-encoding rule plus componentwise exact integer descent at equal encoding length; no argument/global minimality claim",
+  "root_tests": 48,
+  "signed_integer_oracle_pairs": 6561,
+  "behavior_verification": "results/verify-numeric-arguments-final-20261017/verification.json",
+  "numeric_checks": [
+    {
+      "strategy": "plain",
+      "confirmed": true,
+      "deletion_minimal": true,
+      "argument_executions": 2,
+      "accepted_value": 0,
+      "executions": 12
+    },
+    {
+      "strategy": "dependency",
+      "confirmed": true,
+      "deletion_minimal": true,
+      "argument_executions": 2,
+      "accepted_value": 0,
+      "executions": 12
+    },
+    {
+      "strategy": "state",
+      "confirmed": true,
+      "deletion_minimal": true,
+      "argument_executions": 2,
+      "accepted_value": 0,
+      "executions": 12
+    },
+    {
+      "budget": 6,
+      "executions": 6,
+      "stop_reason": "execution_budget"
+    }
+  ],
+  "sdk": {
+    "state": "passed",
+    "completed_at": "2026-10-17T18:30:13.5481121+08:00",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "consumer_module": "moonffi-example/counter-lab",
+    "dependency_mode": "explicit-local-source-cache",
+    "dependency_source": "D:\\moonbit\\moonffi-lab\\.mooncakes",
+    "source_manifest_sha256": "2565E829D759BDADDB1A7CE6CBD8190163A9740F82E3313C508F920984C33F7A",
+    "executable_sha256": "DC44F65ECEBCD22FE7A4387DBEC298D7353FE759F9171BCF8CD49F979A464AA8",
+    "unit_tests": 5,
+    "pure_oracle_traces": 768,
+    "repair_subsets": 128,
+    "native_unit_walks": 32,
+    "correct_contract_cases": 8,
+    "correct_walk_cases": 32,
+    "original_steps": 32,
+    "reduced_steps": 2,
+    "fingerprint": "property:counter-value:s30",
+    "executions": 27,
+    "deletion_minimal": true,
+    "proper_subsets_checked": 3,
+    "corrected_replay": "Pass",
+    "budget_stop_reason": "execution_budget",
+    "preflight_rejection": true,
+    "output_reuse_rejected": true,
+    "separate_process_determinism": true,
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "independent_environment": false,
+    "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+  },
+  "source_sha256": {
+    "cmd/reducer-probe/argument_checks.mbt": "2FB4FD4568C95D864F2A4297D971473EFF32362BA8B46165912F2158C5FAC61B",
+    "runner/shrink.mbt": "2FB2766B993BB85552E6E0D0A46E711E685963E4223ECA0BA215B95935F2CCC7",
+    "cmd/reducer-probe/main.mbt": "D9BA8355BD99140FF34FFA316E7C5D1810B44037F8B46220C58D18CF9A47D14E",
+    "core/arguments.mbt": "99A9FB00446C9C083CEC796FA12A6978BCE30AEEE7F54AE75BB8D24A022B9A2C",
+    "core/arguments_wbtest.mbt": "B62E0812824A26914D4B4A7C5FFAACBFF40A9BBD3E896CEA9B734388E3787470"
+  },
+  "github_languages_before": {
+    "MoonBit": 114012,
+    "PowerShell": 107522,
+    "C": 3907,
+    "AMPL": 330
+  },
+  "languages_configuration_changed": false,
+  "hosted_validation": "pending this implementation commit"
+}

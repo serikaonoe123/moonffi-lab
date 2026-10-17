@@ -127,7 +127,7 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
           let mut argument_index = 0
           while argument_index < best.steps.length() && best.steps[argument_index].id != step.id { argument_index += 1 }
           if argument_index == best.steps.length() { break }
-          if candidate_step.args.stringify().length() >= best.steps[argument_index].args.stringify().length() { continue }
+          if !@lab.arguments_simpler(candidate_step.args, best.steps[argument_index].args) { continue }
           let steps = best.steps.copy()
           steps[argument_index] = candidate_step
           let prepared = prepare_candidate(adapter, best.with_steps(steps), strategy)

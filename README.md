@@ -86,6 +86,8 @@ Eigen 支持 `--generator stateful` 的六操作探索，以及 `--generator ari
 
 执行 `& .\scripts\verify-asan.ps1` 会在新的结果目录创建源码副本，仅在副本中启用 MSVC ASan：先要求三次明确标注的越界 canary 产生真实检测报告，再运行 Buffer/Eigen 各十个正常场景。主源码和普通构建配置保持原样，脚本保留构建日志、运行时和二进制哈希、源码清单及插桩范围。匹配的 ASan 诊断头与摘要被分类为 `MemoryError`；没有足够根因指纹时不自动缩减。普通构建拒绝 ASan profile/canary。
 
-当前限制：只有 Windows native 完整验证；ASan 仅插桩 Buffer C fixture 和 Eigen C++ shim（含其模板实例），MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。参数简化使用 JSON 编码长度下降作为保守度量，尚不覆盖等长数值简化。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
+参数简化由 MoonBit `core.arguments_simpler` 控制：保留原有 JSON 编码长度下降规则，并支持等长十进制整数的绝对值下降，包括嵌套数组和对象；大整数按原始数字比较。候选仍须通过纯模型校验及相同失败指纹重放，规则见 [适配器指南](docs/ADAPTERS.md)。
+
+当前限制：只有 Windows native 完整验证；ASan 仅插桩 Buffer C fixture 和 Eigen C++ shim（含其模板实例），MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
 
 旧 Eigen 绑定属于既有成果，新增引擎、适配器和验收脚本属于本项目工作。来源和许可见 [快照记录](vendor/eigen-binding/SNAPSHOT.md)。本项目 MIT；导入源码保留原有许可。

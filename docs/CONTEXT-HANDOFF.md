@@ -2,6 +2,14 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-17（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
+## 当前优先方向与 MoonBit 参数缩减
+
+用户指出 MoonBit 占比偏少，后续优先增加 MoonBit 核心能力和原生 MoonBit 验证，控制 PowerShell 编排规模。接续前 GitHub 语言 API 返回 MoonBit 114,012 字节、PowerShell 107,522、C 3,907、AMPL 330，MoonBit 约 50.5%；Eigen vendor 已被排除，不应通过隐藏自有脚本调整占比。
+
+新增 `core/arguments.mbt` 的公开纯函数 `arguments_simpler`：保留编码更短规则，等长时允许同形 JSON 中十进制整数绝对值逐项下降，禁止其他分量增长，避免 Double 舍入和 Int64 溢出。runner 使用该函数相对于最新参数检查候选。MoonBit 单测覆盖 6,561 对有符号整数与精度边界；合成探针以 `--check-arguments DIR` 驱动三种策略及预算，并在 MoonBit 内检查日志。PowerShell 仅多一条调用，没有修改语言统计配置。
+
+本地 48/48 根模块单测及完整 behavior 通过，5/5 SDK 单测及完整外部接入通过；SDK 缩减仍为两步，因新增一次不保持失败的参数尝试，执行数从 26 变为 27。原始日志在 `results/verify-numeric-arguments-final-20261017`、`results/sdk-numeric-arguments-20261017`；见 VALIDATION 和 `docs/evidence/numeric-arguments-20261017.json`。本轮 CI 状态须按实际提交核对，不能沿用下面旧工具链提交的成功。
+
 ## 最新阶段：工具链内容锁定
 
 新增 `scripts/install-toolchain.ps1`、`toolchain-common.ps1`、`verify-toolchain.ps1`，增强 assert-toolchain；toolchain.json 固定两个官方归档的大小/SHA、三个工具二进制 SHA 与 core 1,201 源码文件的整体 SHA。全部归档匹配后才解包和执行工具，目标/证据必须为新目录，进程环境在 finally 恢复。CI 五项使用新流程，behavior 另跑 11 项拒绝边界；bootstrap 产物仅保留报告/日志，不上传工具包。
