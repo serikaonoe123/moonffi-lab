@@ -1,0 +1,58 @@
+name: Windows native validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [behavior, asan, benchmark]
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install MoonBit and require the validated versions
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $config = Get-Content toolchain.json -Raw | ConvertFrom-Json
+          $env:MOONBIT_INSTALL_VERSION = $config.installer_version
+          $installer = Join-Path $env:RUNNER_TEMP 'moonbit-install.ps1'
+          Invoke-WebRequest https://cli.moonbitlang.com/install/powershell.ps1 -OutFile $installer
+          & $installer
+          $env:PATH = (Join-Path $env:USERPROFILE '.moon/bin') + ';' + $env:PATH
+          (Join-Path $env:USERPROFILE '.moon/bin') | Add-Content $env:GITHUB_PATH
+          New-Item -ItemType Directory -Path results/bootstrap -Force | Out-Null
+          Get-FileHash $installer | ConvertTo-Json | Set-Content results/bootstrap/installer-hash.json
+          & ./scripts/assert-toolchain.ps1 -Out results/bootstrap/toolchain.json
+      - name: Validate an exported commit with fresh dependencies
+        env:
+          LAB_SUITE: ${{ matrix.suite }}
+        run: |
+          & ./scripts/verify-clean.ps1 -Suite $env:LAB_SUITE -Out results/ci
+      - name: Retain diagnostics on success or failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-native-${{ matrix.suite }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            results/bootstrap/
+            results/ci/**/*.json
+            results/ci/**/*.jsonl
+            results/ci/**/*.log
+            results/ci/**/*.md
+            !results/ci/**/workspace/**
