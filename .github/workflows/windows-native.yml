@@ -27,16 +27,25 @@ jobs:
       - name: Install MoonBit and require the validated versions
         run: |
           $ErrorActionPreference = 'Stop'
-          $config = Get-Content toolchain.json -Raw | ConvertFrom-Json
-          $env:MOONBIT_INSTALL_VERSION = $config.installer_version
-          $installer = Join-Path $env:RUNNER_TEMP 'moonbit-install.ps1'
-          Invoke-WebRequest https://cli.moonbitlang.com/install/powershell.ps1 -OutFile $installer
-          & $installer
-          $env:PATH = (Join-Path $env:USERPROFILE '.moon/bin') + ';' + $env:PATH
-          (Join-Path $env:USERPROFILE '.moon/bin') | Add-Content $env:GITHUB_PATH
           New-Item -ItemType Directory -Path results/bootstrap -Force | Out-Null
-          Get-FileHash $installer | ConvertTo-Json | Set-Content results/bootstrap/installer-hash.json
-          & ./scripts/assert-toolchain.ps1 -Out results/bootstrap/toolchain.json
+          $stage = 'download'
+          try {
+            $config = Get-Content toolchain.json -Raw | ConvertFrom-Json
+            $env:MOONBIT_INSTALL_VERSION = $config.installer_version
+            $installer = Join-Path $env:RUNNER_TEMP 'moonbit-install.ps1'
+            Invoke-WebRequest https://cli.moonbitlang.com/install/powershell.ps1 -OutFile $installer
+            Get-FileHash $installer | ConvertTo-Json | Set-Content results/bootstrap/installer-hash.json
+            $stage = 'install'
+            & $installer *> results/bootstrap/install.log
+            if ($LASTEXITCODE) { throw "Installer exited $LASTEXITCODE" }
+            $env:PATH = (Join-Path $env:USERPROFILE '.moon/bin') + ';' + $env:PATH
+            (Join-Path $env:USERPROFILE '.moon/bin') | Add-Content $env:GITHUB_PATH
+            $stage = 'version-check'
+            & ./scripts/assert-toolchain.ps1 -Out results/bootstrap/toolchain.json
+          } catch {
+            @{ stage = $stage; error = $_.Exception.Message } | ConvertTo-Json | Set-Content results/bootstrap/failure.json
+            throw
+          }
       - name: Validate an exported commit with fresh dependencies
         env:
           LAB_SUITE: ${{ matrix.suite }}

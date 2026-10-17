@@ -41,4 +41,8 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 
 `fresh_project_build=true` 只说明没有复制项目构建产物。脚本的 `independent_environment=false` 始终表示它自身不能证明主机、标准库或 registry 全局缓存是全新的；CI runner 的独立性须由云端执行记录补充。输出目录不可复用，不自动删除任何证据。
 
+`host_environment` 保存操作系统、PowerShell、进程架构与可用的 GitHub runner 镜像信息；`driver_sha256` 标识实际执行复现脚本的版本。当脚本从一个仓库验证较早提交时，该脚本可能与导出源码中的脚本不同，不能仅凭 source_commit 推断驱动脚本内容。
+
+本地实际验收使用提交 `92dd00f` 和显式依赖源码缓存，三套 suite 全部通过；结果摘要见 [验证记录](VALIDATION.md)。该结果保留了离线来源和环境边界。
+
 本次本地下载官方安装器时被套接字权限拒绝；经批准的沙箱外诊断请求仍收到传输流 EOF，没有取得安装脚本。没有执行下载内容。联网依赖恢复和云端 workflow 尚未执行，不能声称 CI 已通过；可完成的本地验证及其证据会继续记录在 VALIDATION 文档中。

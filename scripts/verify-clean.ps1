@@ -87,8 +87,16 @@ try {
   [ordered]@{
     state = 'passed'; completed_at = [DateTimeOffset]::UtcNow.ToString('o')
     source_commit = $sourceCommit; archive_sha256 = (Get-FileHash -LiteralPath $archivePath).Hash
+    driver_sha256 = (Get-FileHash -LiteralPath $PSCommandPath).Hash
     source_files = $sourceManifest.Count; suites = $Suite; dependency_mode = $dependencyMode
     dependency_source = $OfflineDependencySource; fresh_project_build = $true
+    host_environment = [ordered]@{
+      os = [System.Runtime.InteropServices.RuntimeInformation]::OSDescription
+      architecture = [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()
+      powershell = $PSVersionTable.PSVersion.ToString()
+      github_actions = $env:GITHUB_ACTIONS; runner_os = $env:RUNNER_OS; runner_arch = $env:RUNNER_ARCH
+      image_os = $env:ImageOS; image_version = $env:ImageVersion
+    }
     independent_environment = $false
     scope = 'Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately.'
   } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $Out 'verification.json') -Encoding utf8

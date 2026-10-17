@@ -1,5 +1,15 @@
 # 缩减器验证记录
 
+## Windows CI 与源码复验：2026-10-17
+
+`92dd00f` 新增 Windows CI 三个独立 suite，以及 `verify-clean.ps1` 和工具版本闸门。使用 `git archive` 从该提交导出的源码，在 `results/clean-ci-offline-20261017` 完成全新项目构建；明确使用本地 async 0.22.5 源码缓存，没有复制项目构建产物。28/28 单测、完整 behavior 集成验收、ASan 三次 canary 与 Buffer/Eigen 正常对照及 Resize 控制、27 次策略对照和 111 个真子集核验全部通过。
+
+补齐环境元数据后，又用同一源提交运行 behavior 验收，验证驱动脚本哈希和环境记录正确。完整本地结果及边界检查摘要保存在 [源码复验快照](evidence/clean-source-20261017.json)。
+
+工具版本漂移测试会失败并保存报告；无效 commit 会保存失败阶段；复用输出目录会在启动构建前拒绝，原报告哈希不变。边界证据保存在 `results/ci-script-checks-20261017` 与 `results/clean-ci-invalid-ref-20261017`。CI 内嵌的两个 PowerShell 块已通过语法解析；完整 YAML 和云端执行仍需 GitHub 实际验证。
+
+这次证明的是“从指定提交的新源码目录重新构建”，不是独立机器或全新依赖下载。官方安装脚本的本地下载先被套接字权限拒绝，经批准的沙箱外诊断请求又遇到传输 EOF；联网安装、registry 恢复和云端 CI 尚未验证。版本安装入口当前为 latest，但实际工具必须与 toolchain.json 完全匹配。配置和操作见 [复现指南](REPRODUCIBILITY.md)。
+
 ## 最新状态：2026-10-17 10:00（Asia/Shanghai）
 
 状态感知缩减版本已完成 **28/28 单测**、完整 behavior 集成验收和 ASan stub profile 验收。证据分别保存在 `results/verify-state-final-20261017` 和 `results/asan-state-final-20261017`。后者额外检查通过别名扩容、关闭原句柄、缩到零和重新扩容，结果为 Pass。

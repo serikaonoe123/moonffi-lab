@@ -1,0 +1,230 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-17",
+  "timezone": "Asia/Shanghai",
+  "cloud_workflow_status": "not_executed",
+  "scope": "Fresh project source/build using explicit local dependency source, same host/toolchain",
+  "full_suite_source": "results/clean-ci-offline-20261017",
+  "full_suite": {
+    "state": "passed",
+    "completed_at": "2026-10-17T10:16:26.8354429+08:00",
+    "source_commit": "92dd00ff98a4416f0acadd3a20859eb5714a4bed",
+    "archive_sha256": "6C62E235E45BE465DF18CE83B8A8FCE17B872679765ED427E53C27C009F15805",
+    "source_files": 371,
+    "suites": [
+      "behavior",
+      "asan",
+      "benchmark"
+    ],
+    "dependency_mode": "explicit-local-source-cache",
+    "dependency_source": "D:\\moonbit\\moonffi-lab\\.mooncakes",
+    "fresh_project_build": true,
+    "independent_environment": false,
+    "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+  },
+  "behavior": {
+    "completed_at": "2026-10-17T10:15:46.5258425+08:00",
+    "platform": "Microsoft Windows 10.0.26200",
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "async_version": "0.22.5",
+    "build": "native/debug; Windows/MSVC; behavior only",
+    "executable_sha256": {
+      "eigen": "D22BC6B2CFCEA4B558458645DC31AA9D13D9409EB76AA652277CAE101E07B91E",
+      "buffer": "FF3342B74C898587786D03CF2B4F71CD15847BFC3A5965CDF207469061FA86E7"
+    },
+    "facts": [
+      {
+        "adapter": "buffer",
+        "cases": 10,
+        "outcome": "Pass"
+      },
+      {
+        "adapter": "eigen",
+        "cases": 10,
+        "outcome": "Pass"
+      },
+      {
+        "mode": "nul",
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "executions": 19,
+        "confirmed": true,
+        "fingerprint": "property:bytes-roundtrip:s25",
+        "proper_subsets_checked": 3,
+        "corrected_replay": "Pass"
+      },
+      {
+        "mode": "share",
+        "original_steps": 32,
+        "reduced_steps": 4,
+        "executions": 23,
+        "confirmed": true,
+        "fingerprint": "property:shared-reference-alive:s11",
+        "proper_subsets_checked": 15,
+        "corrected_replay": "Pass"
+      },
+      {
+        "mode": "error",
+        "original_steps": 32,
+        "reduced_steps": 3,
+        "executions": 23,
+        "confirmed": true,
+        "fingerprint": "property:bytes-roundtrip:s6",
+        "proper_subsets_checked": 7,
+        "corrected_replay": "Pass"
+      },
+      {
+        "probe": "crash",
+        "outcome": "Crash",
+        "raw_exit_code": -1073740286
+      },
+      {
+        "probe": "hang",
+        "outcome": "Timeout",
+        "raw_exit_code": null
+      },
+      {
+        "probe": "oracle-stable-100",
+        "stop_reason": "search_complete",
+        "confirmed": true,
+        "executions": 27
+      },
+      {
+        "probe": "oracle-stable-6",
+        "stop_reason": "execution_budget",
+        "confirmed": true,
+        "executions": 6
+      },
+      {
+        "probe": "oracle-flaky-baseline-100",
+        "stop_reason": "unstable_baseline",
+        "confirmed": false,
+        "executions": 2
+      },
+      {
+        "probe": "oracle-changing-fingerprint-100",
+        "stop_reason": "unstable_baseline",
+        "confirmed": false,
+        "executions": 2
+      },
+      {
+        "probe": "oracle-flaky-final-100",
+        "stop_reason": "unstable_final",
+        "confirmed": false,
+        "executions": 98
+      },
+      {
+        "probe": "oracle-bad-repair-100",
+        "stop_reason": "search_complete",
+        "confirmed": true,
+        "executions": 6
+      },
+      {
+        "probe": "oracle-pass-100",
+        "stop_reason": "unsupported_outcome",
+        "confirmed": false,
+        "executions": 1
+      },
+      {
+        "probe": "wall-budget",
+        "stop_reason": "wall_budget",
+        "elapsed_ms": "118"
+      }
+    ]
+  },
+  "asan": {
+    "state": "passed",
+    "completed_at": "2026-10-17T10:15:54.4312955+08:00",
+    "profile": "windows-msvc-asan-stubs",
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "runtime": "E:\\VSBuildTools\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\clang_rt.asan_dynamic-x86_64.dll",
+    "runtime_sha256": "7F901A239979C49B36A3B18ECD1843F551F94B5879585BDED41A650C5B71F35F",
+    "canary_runs": 3,
+    "canary_outcome": "MemoryError",
+    "category": "heap-buffer-overflow",
+    "correct_buffer_runs": 10,
+    "correct_eigen_runs": 10,
+    "resize_alias_control": "Pass",
+    "instrumented_translation_units": [
+      "fixtures/buffer/buffer.c",
+      "vendor/eigen-binding/eigen_shim.cpp (including instantiated Eigen headers)"
+    ],
+    "not_instrumented": [
+      "MoonBit-generated C",
+      "MoonBit runtime",
+      "async dependency C stubs",
+      "other prebuilt/system libraries"
+    ],
+    "dependency_source": "local pinned .mooncakes source cache; no build outputs copied",
+    "buffer_sha256": "BA391454D01FC341C246E9C12E4364E58ED26DB3073ABE7DCC29EA5723BE40D1",
+    "eigen_sha256": "8B2896C0A1CA8251D7D56669F19236A64144343F78DA6A873E19261059A7224F"
+  },
+  "benchmark": {
+    "state": "passed",
+    "cases": 9,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "measurements": 27,
+    "completed_at": "2026-10-17T10:16:26.788639+08:00",
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "executable_sha256": "FF3342B74C898587786D03CF2B4F71CD15847BFC3A5965CDF207469061FA86E7"
+  },
+  "unit_tests_passed": 28,
+  "metadata_driver_check": {
+    "state": "passed",
+    "completed_at": "2026-10-17T10:17:37.58776+08:00",
+    "source_commit": "92dd00ff98a4416f0acadd3a20859eb5714a4bed",
+    "archive_sha256": "6C62E235E45BE465DF18CE83B8A8FCE17B872679765ED427E53C27C009F15805",
+    "driver_sha256": "80E52A60F7CA3DAF2A5222BE1EA08CCB0D28E943F03EC345702DE8D5A9CDA493",
+    "source_files": 371,
+    "suites": [
+      "behavior"
+    ],
+    "dependency_mode": "explicit-local-source-cache",
+    "dependency_source": "D:\\moonbit\\moonffi-lab\\.mooncakes",
+    "fresh_project_build": true,
+    "host_environment": {
+      "os": "Microsoft Windows 10.0.26200",
+      "architecture": "X64",
+      "powershell": "7.6.5",
+      "github_actions": null,
+      "runner_os": null,
+      "runner_arch": null,
+      "image_os": null,
+      "image_version": null
+    },
+    "independent_environment": false,
+    "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+  },
+  "boundaries": {
+    "output_reuse_rejected": true,
+    "old_evidence_unchanged": true,
+    "invalid_ref_diagnosed": true
+  },
+  "version_drift": {
+    "version_drift_rejected": true,
+    "inline_powershell_blocks_parsed": 2,
+    "yaml_parser_used": false
+  }
+}

@@ -24,7 +24,15 @@
 
 `results/benchmark-state-separated-20261017`：27 次对照、111 个最终真子集核验通过。plain/dependency/state 无效候选分别为 65/1/0，执行次数为 186/219/219，最终步数相同。状态修整确实删除了失去扩容前提的写入，但当前数据没有证明更快或缩得更短。详见 [实验记录](REDUCTION-STUDY.md)。
 
-## 下一阶段
+## 继续实现：Windows CI 与新源码目录复验
+
+`cd93caa` 已提交状态感知缩减阶段。`92dd00f` 新增 `.github/workflows/windows-native.yml`、`toolchain.json`、`scripts/assert-toolchain.ps1` 和 `scripts/verify-clean.ps1`。CI 拆分 behavior、asan、benchmark，并在失败时上传诊断；版本安装入口使用 latest，严格版本闸门会拒绝漂移。详见 [复现指南](REPRODUCIBILITY.md)。
+
+`results/clean-ci-offline-20261017` 从 92dd00f 导出无构建产物的源码，在新目录完成 28/28 单测、完整集成、ASan 和 27 次对照。依赖明确复用本地 async 源码。这不算独立主机或全新联网依赖验证。
+
+本地下载安装器遇到套接字权限拒绝；经批准的沙箱外诊断请求又遇到传输 EOF。没有成功取得或执行安装脚本。云端 CI 和联网恢复仍待执行，不要把配置提交或本地复验写成 CI 已通过。
+
+## 后续工作
 
 本次接续收尾包括持久摘要、实验快照、完整实验文档，并在对照脚本中要求语义修整分支实际被覆盖。后续可推进独立干净环境复现与 CI、更多真实库语料、生成器探索能力和重复测量。参数简化仍受 JSON 编码长度下降限制，不能声称全局最小、任意参数最小或同一原生根因。
 
