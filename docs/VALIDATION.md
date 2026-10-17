@@ -1,14 +1,24 @@
 # 缩减器验证记录
 
+## 云端与用户手动验收：2026-10-17
+
+[GitHub Actions run 38994542498](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38994542498) 对提交 `4f46b0188fb2f355761e2c1389f5be5af3fca2c9` 的 behavior、ASan、benchmark 三个任务全部成功，最后一个任务于 **10:22:08（Asia/Shanghai）** 完成。下载并核对了三个任务的验收产物，而不只依据绿色状态。
+
+三个任务使用 GitHub 托管的 Windows x64 runner，镜像 `win25-vs2026 / 20261007.264.1`，PowerShell 7.6.6。安装 MoonBit 后通过严格版本检查；依赖检查日志均记录重新下载 async 0.22.5，`dependency_mode=registry`；三个源码归档哈希一致。behavior 的 28/28 单测与完整集成检查、ASan 三次 canary 和正常对照、benchmark 的 27 次策略对照与 111 个真子集核验全部通过。
+
+这是开发机之外的托管 runner 复现证据。脚本自身的 `independent_environment=false` 字段仍保留原义；独立运行来源由 Actions 任务、runner 信息、安装日志和产物共同补充。不能据此宣称任意 Windows 版本、整个程序的 ASan 覆盖或不可变工具链复现。结构化摘要见 [云端证据快照](evidence/github-ci-38994542498.json)，本地完整下载在 `results/github-ci-38994542498/`。
+
+用户随后手动运行 `verify.ps1` 也通过：`results/verify-0fe000bac8dc42f0b3dfd7aabb7b3470`，完成时间 10:34:55（Asia/Shanghai），已核对 28/28 单测及 verification.json。后文保留早期本地验证与限制记录，其中当时的“云端待验证”状态已由上述运行更新。
+
 ## Windows CI 与源码复验：2026-10-17
 
 `92dd00f` 新增 Windows CI 三个独立 suite，以及 `verify-clean.ps1` 和工具版本闸门。使用 `git archive` 从该提交导出的源码，在 `results/clean-ci-offline-20261017` 完成全新项目构建；明确使用本地 async 0.22.5 源码缓存，没有复制项目构建产物。28/28 单测、完整 behavior 集成验收、ASan 三次 canary 与 Buffer/Eigen 正常对照及 Resize 控制、27 次策略对照和 111 个真子集核验全部通过。
 
 补齐环境元数据后，又用同一源提交运行 behavior 验收，验证驱动脚本哈希和环境记录正确。完整本地结果及边界检查摘要保存在 [源码复验快照](evidence/clean-source-20261017.json)。
 
-工具版本漂移测试会失败并保存报告；无效 commit 会保存失败阶段；复用输出目录会在启动构建前拒绝，原报告哈希不变。边界证据保存在 `results/ci-script-checks-20261017` 与 `results/clean-ci-invalid-ref-20261017`。CI 内嵌的两个 PowerShell 块已通过语法解析；完整 YAML 和云端执行仍需 GitHub 实际验证。
+工具版本漂移测试会失败并保存报告；无效 commit 会保存失败阶段；复用输出目录会在启动构建前拒绝，原报告哈希不变。边界证据保存在 `results/ci-script-checks-20261017` 与 `results/clean-ci-invalid-ref-20261017`。本地先完成了两个 CI 内嵌 PowerShell 块的语法解析，随后完整 YAML 与云端执行也已通过上述 Actions 运行验证。
 
-这次证明的是“从指定提交的新源码目录重新构建”，不是独立机器或全新依赖下载。官方安装脚本的本地下载先被套接字权限拒绝，经批准的沙箱外诊断请求又遇到传输 EOF；联网安装、registry 恢复和云端 CI 尚未验证。版本安装入口当前为 latest，但实际工具必须与 toolchain.json 完全匹配。配置和操作见 [复现指南](REPRODUCIBILITY.md)。
+这次本地离线运行证明的是“从指定提交的新源码目录重新构建”，不是独立机器或全新依赖下载。官方安装脚本的早期本地下载先被套接字权限拒绝，经批准的沙箱外诊断请求又遇到传输 EOF；后续云端运行已成功安装并恢复 registry 依赖。版本安装入口当前为 latest，但实际工具必须与 toolchain.json 完全匹配。配置和操作见 [复现指南](REPRODUCIBILITY.md)。
 
 ## 最新状态：2026-10-17 10:00（Asia/Shanghai）
 
@@ -73,7 +83,7 @@ Buffer 与 Eigen 各运行 10 个独立进程的正确场景，全部通过。
 上次原生测试在启动 `buffer.whitebox_test.exe` 时返回“拒绝访问（os error 5）”，当时已停止，没有用其他方式绕过限制。
 诊断保留在 `results/verify-reducer-boundaries-20261016/tests.log`；本次按用户要求正常重试后通过，没有修改权限或安全设置。
 
-当前仍需补齐 CI 和独立干净环境复现。behavior 测试通过不代表已完成内存检测。
+当时仍需补齐 CI 和独立干净环境复现；2026-10-17 的后续结果见本文开头。behavior 测试通过不代表已完成内存检测。
 参数缩减目前要求 JSON 编码长度严格减少，未覆盖等长数值简化；搜索完成也不宣称任意适配器下的全局最小性。
 
 ## ASan stub profile：2026-10-16 22:01

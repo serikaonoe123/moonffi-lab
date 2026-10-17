@@ -45,4 +45,6 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 
 本地实际验收使用提交 `92dd00f` 和显式依赖源码缓存，三套 suite 全部通过；结果摘要见 [验证记录](VALIDATION.md)。该结果保留了离线来源和环境边界。
 
-本次本地下载官方安装器时被套接字权限拒绝；经批准的沙箱外诊断请求仍收到传输流 EOF，没有取得安装脚本。没有执行下载内容。联网依赖恢复和云端 workflow 尚未执行，不能声称 CI 已通过；可完成的本地验证及其证据会继续记录在 VALIDATION 文档中。
+2026-10-17 的 [Actions run 38994542498](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38994542498) 已在三个托管 runner 任务中完成提交 `4f46b01` 的安装、registry 依赖恢复及 behavior、ASan、benchmark 验收，全部成功。镜像为 `win25-vs2026 / 20261007.264.1`，PowerShell 7.6.6，三个任务的依赖日志均记录下载 async 0.22.5。安装器 SHA-256 为 `A5101E91FFA9905FB25CD009B9A4AA942971A294BD055C89836E3AF89B710C64`。产物已下载核对，结构化摘要见 [云端证据快照](evidence/github-ci-38994542498.json)。
+
+早期本地安装器下载曾被套接字权限拒绝，经批准的诊断请求又遇到传输 EOF；这些历史失败保留，云端安装成功不改变其记录。已验证的范围是该提交、该 runner 镜像及其工具链，不把 latest 入口视作不可变安装包锁定。
