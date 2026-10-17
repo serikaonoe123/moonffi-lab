@@ -213,7 +213,7 @@
     "cmd/reducer-probe/iterative_checks.mbt": "B4829640DB61C25F8447F204AA5196DAC353F29C63EF7BCA45CD5FE29462249B"
   },
   "powershell_source_changed": false,
-  "hosted_validation": "pending implementation commit",
+  "hosted_validation": "passed: https://github.com/serikaonoe123/moonffi-lab/actions/runs/39036211299; tested commit d804195c66e9f38617186f86b5170c1939c4002b; five artifacts downloaded and inspected",
   "benchmark": {
     "schema": 2,
     "state": "passed",

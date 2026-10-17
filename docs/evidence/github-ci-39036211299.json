@@ -1,0 +1,188 @@
+{
+  "schema": 2,
+  "observed_on": "2026-10-17",
+  "tested_commit": "d804195c66e9f38617186f86b5170c1939c4002b",
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39036211299",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "native (benchmark)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39036211299/job/117406380649",
+      "startedAt": "2026-10-17T13:21:21Z",
+      "completedAt": "2026-10-17T13:25:15Z"
+    },
+    {
+      "name": "native (behavior)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39036211299/job/117406380740",
+      "startedAt": "2026-10-17T13:21:21Z",
+      "completedAt": "2026-10-17T13:23:33Z"
+    },
+    {
+      "name": "native (sdk)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39036211299/job/117406380768",
+      "startedAt": "2026-10-17T13:21:22Z",
+      "completedAt": "2026-10-17T13:22:22Z"
+    },
+    {
+      "name": "native (generation)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39036211299/job/117406380785",
+      "startedAt": "2026-10-17T13:21:22Z",
+      "completedAt": "2026-10-17T13:22:53Z"
+    },
+    {
+      "name": "native (asan)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39036211299/job/117406380788",
+      "startedAt": "2026-10-17T13:21:22Z",
+      "completedAt": "2026-10-17T13:22:24Z"
+    }
+  ],
+  "checks": {
+    "online_bootstraps_verified": 5,
+    "archive_pins_per_job": 2,
+    "binary_pins_per_job": 3,
+    "core_source_files": 1201,
+    "boundary_checks": 11,
+    "root_unit_tests": 52,
+    "numeric_probe_checks": 4,
+    "iterative_probe_checks": 11,
+    "sdk_unit_tests": 5,
+    "source_archive_equal": true,
+    "selected_exported_source_files_checked_per_job": 16,
+    "buffer_generation_cases": 512,
+    "eigen_generation_cases": 192,
+    "eigen_input_hashes_match_local": 192,
+    "legacy_input_hashes_checked": 128,
+    "complete_reductions": 189,
+    "repeatable_groups": 63,
+    "proper_subsets_checked": 214,
+    "reduction_structural_rows_match_baseline": 189,
+    "reduction_semantic_traces_match_baseline": 189,
+    "frozen_corpus_semantic_cases_match_baseline": 21,
+    "input_hash_different_rows": 0,
+    "reduced_hash_different_rows": 0,
+    "corrected_replays_passed": 189,
+    "diagnostic_binary_files": 0,
+    "baseline_run": "local iterative-arguments, one repetition",
+    "argument_progress_rows_match_local": 189,
+    "iterative_probes_bytes_match_local": true
+  },
+  "lock_sha256": "5A9008CC7EA40DE44E0A47F8EA72DB4F344040A4601A52774493FF1F9DFEFB7F",
+  "source_archive_sha256": "261933AA5F8DF1AB87B37D7486820124FE5DC8DAD36FF34056F6FBC7FCA090D6",
+  "source_verifications": [
+    {
+      "suite": "behavior",
+      "state": "passed",
+      "commit": "d804195c66e9f38617186f86b5170c1939c4002b",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "asan",
+      "state": "passed",
+      "commit": "d804195c66e9f38617186f86b5170c1939c4002b",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "benchmark",
+      "state": "passed",
+      "commit": "d804195c66e9f38617186f86b5170c1939c4002b",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "generation",
+      "state": "passed",
+      "commit": "d804195c66e9f38617186f86b5170c1939c4002b",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "sdk",
+      "state": "passed",
+      "commit": "d804195c66e9f38617186f86b5170c1939c4002b",
+      "dependency_mode": "registry"
+    }
+  ],
+  "iterative_probe_sha256": "6A699CBE9DECEB7EA6D7B378A339ECECA0A470E8F3C00D2E132294DFC6FD1F94",
+  "iterative_probe_local_evidence": "docs/evidence/iterative-arguments-20261017.json",
+  "sdk": {
+    "state": "passed",
+    "completed_at": "2026-10-17T21:22:15.7076897+08:00",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "consumer_module": "moonffi-example/counter-lab",
+    "dependency_mode": "registry-or-tool-cache",
+    "dependency_source": "",
+    "source_manifest_sha256": "F531FE5D034BAAD33E7C422AAC96A58F99828361E8EB1F6B146AC9849777953C",
+    "executable_sha256": "78DE2AA56D5C2BF5D20E93EA0E2C0F5B610C9ECD8CB6BD9AAC444FB556799B91",
+    "unit_tests": 5,
+    "pure_oracle_traces": 768,
+    "repair_subsets": 128,
+    "native_unit_walks": 32,
+    "correct_contract_cases": 8,
+    "correct_walk_cases": 32,
+    "original_steps": 32,
+    "reduced_steps": 2,
+    "fingerprint": "property:counter-value:s30",
+    "executions": 27,
+    "deletion_minimal": true,
+    "proper_subsets_checked": 3,
+    "corrected_replay": "Pass",
+    "budget_stop_reason": "execution_budget",
+    "preflight_rejection": true,
+    "output_reuse_rejected": true,
+    "separate_process_determinism": true,
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "independent_environment": false,
+    "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+  },
+  "benchmark": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 21,
+    "cases": 21,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 3,
+    "measurements": 189,
+    "complete_searches": 189,
+    "repeatable_case_strategies": 63,
+    "case_strategy_groups": 63,
+    "actual_proper_subsets_checked": 214.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-17T21:24:46.4437835+08:00",
+    "executable_sha256": "03453641BD7E96E641AC4F43E02DE22BC02BDCA1CDD61A34E3708285E5F55BD5",
+    "protocol_sha256": "3A2B63CAC35DB241DCBB9D076433D0390C3E0BA46D37BDF4928A9DC3164AE185"
+  },
+  "comparison_with_previous": {
+    "rows": 63,
+    "input_hash_differences": 0,
+    "reduced_hash_differences": 33,
+    "step_count_differences": 0,
+    "worker_count_different_rows": 36,
+    "extra_worker_executions": 174,
+    "previous_worker_executions": 1763.0,
+    "current_worker_executions": 1937.0,
+    "note": "Single local repetition; final step counts unchanged. More accepted parameter simplifications, with extra executions; no speed improvement claim.",
+    "smaller_argument_rows": 33,
+    "larger_argument_rows": 0,
+    "saved_argument_bytes_across_rows": 1236
+  },
+  "comparison_note": "All 189 hosted input/reduced byte hashes, measured counts and argument_search fields match the corresponding local result. Later-repetition subset-cache reuse is checked separately. Previous-version comparisons cover one local repetition, without speedup or parameter-minimality claims.",
+  "raw_evidence_directory": "results/github-ci-39036211299",
+  "scope": "Exported commit on fresh content-locked Windows/MSVC hosted runners. Full bootstrap/source/canary inspection is in raw inspection.json. No immutable latest URL, hermetic host, whole-program ASan or global/argument minimality claim."
+}

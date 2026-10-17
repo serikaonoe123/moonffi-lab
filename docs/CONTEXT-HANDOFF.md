@@ -10,6 +10,8 @@
 
 单轮 63 次固定语料缩减、214 个真子集及全部正确实现重放通过，33 项参数编码更短、0 项更长，步骤数和输入哈希不变，合计减少 1,236 参数编码字节；工作进程总数 1,763→1,937，未声称加速。原始记录为 `results/benchmark-iterative-arguments-20261017`，持久快照为 `docs/evidence/iterative-arguments-20261017.json`。必须针对本轮实际提交检查新的五项 CI；前一版 189 条结构计数不能直接沿用。
 
+最终核心提交 `d804195c66e9f38617186f86b5170c1939c4002b` 已推送，Actions `39036211299` 五项全部通过并下载核对：52+5 单测、11 个交替缩减探针、四组既有数值/预算检查、704 个生成场景、ASan 控制、189 次完整缩减、63 组重复一致及 214 个真子集通过。189 项输入/结果哈希、结构计数和 argument_search 进度与本地对应结果一致；后续轮次的子集缓存另行核验；探针汇总字节一致，16 个关键导出源文件逐任务核对。原始证据 `results/github-ci-39036211299`，快照 `docs/evidence/github-ci-39036211299.json`。后续继续优先 MoonBit 核心与原生验证；本轮没有新增 PowerShell 源码。
+
 ## 当前优先方向与 MoonBit 参数缩减
 
 用户指出 MoonBit 占比偏少，后续优先增加 MoonBit 核心能力和原生 MoonBit 验证，控制 PowerShell 编排规模。接续前 GitHub 语言 API 返回 MoonBit 114,012 字节、PowerShell 107,522、C 3,907、AMPL 330，MoonBit 约 50.5%；Eigen vendor 已被排除，不应通过隐藏自有脚本调整占比。
