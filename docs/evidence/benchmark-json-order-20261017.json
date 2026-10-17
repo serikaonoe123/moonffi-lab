@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-17",
+  "source_parent_commit": "00712a73082e012ae0df447b5c80fdaf3f95f7c2",
+  "script": "scripts/benchmark-reduction.ps1",
+  "script_sha256": "21D6E299BD498E7CC0F035BB8D55CC0A6654D40479B5C36F1B9C2451E7827F8F",
+  "cause": "Synthetic environment used an unordered PowerShell hashtable. Object key order changed JSON hashes without changing trace values.",
+  "change": "Use an ordered environment object; freeze/reduction protocol and engine unchanged.",
+  "pre_fix_ci": "39014758043",
+  "baseline_ci": "39013008257",
+  "independent_processes": 2,
+  "inputs_per_process": 9,
+  "all_input_hashes_match_each_other_and_baseline": true,
+  "inputs": [
+    {
+      "case": "generated-error-1",
+      "sha256": "F73CE2600AFE2CD027C79C2110AF86DCF673A5E56771786841D7C4D8537EAD66"
+    },
+    {
+      "case": "generated-error-17",
+      "sha256": "30DEC9BC4290D24AF40BE9A363B747EEB71102E222F1B89BAD51EF4E021E07B3"
+    },
+    {
+      "case": "generated-error-20261016",
+      "sha256": "819E72C03CAC93E7E54071AF8AE1BBBBE7D8DB78CE58999323B2D5CB5A01198F"
+    },
+    {
+      "case": "resize-alias-0",
+      "sha256": "79C9842FDD8B3048A79BFF0D9678130A2747E513FD690682C6D6696B388F85F3"
+    },
+    {
+      "case": "separated-resize-0",
+      "sha256": "07385AE0A863AA35180B6386EB16EE3BA99663B6758172FE00D7DD607861A06F"
+    },
+    {
+      "case": "resize-alias-2",
+      "sha256": "CA4482934A2761AFB544BAB412A42DC0370FEEBA53E1C35FAAB0EC09F5B17C39"
+    },
+    {
+      "case": "separated-resize-2",
+      "sha256": "2EF6FD684A4D569E5AC13C571DA36E9845A764F4004B607D72B3BEB6FC6DDC22"
+    },
+    {
+      "case": "resize-alias-6",
+      "sha256": "A7A797CBF4BE2B8874C0256429577147DFF8342D1DA84E0E6EA9EEC051C75A72"
+    },
+    {
+      "case": "separated-resize-6",
+      "sha256": "87F8DD9C6E60961E362584139013810AD15228F94986BC73116997CFF1ED09DC"
+    }
+  ],
+  "budget_controls": [
+    {
+      "directory": "results/benchmark-ordered-inputs-a-20261017",
+      "verification": {
+        "schema": 2,
+        "state": "passed",
+        "screened_cases": 9,
+        "cases": 9,
+        "passing_inputs": 0,
+        "strategies": [
+          "plain",
+          "dependency",
+          "state"
+        ],
+        "repetitions": 1,
+        "measurements": 27,
+        "complete_searches": 0,
+        "repeatable_case_strategies": 27,
+        "case_strategy_groups": 27,
+        "actual_proper_subsets_checked": 0.0,
+        "large_state_results": 0,
+        "completed_at": "2026-10-17T15:54:41.2849236+08:00",
+        "executable_sha256": "20ADACF4F961B2D0E6C4DFF953E72C0A248D6961D521D57DF75FE74E1711BB7A",
+        "protocol_sha256": "CC232E6882C03CC241522A54F2A0B54D7A8F9D0C950ED55EE776D2381A5E9A72"
+      },
+      "budget_exhausted_rows": 27
+    },
+    {
+      "directory": "results/benchmark-ordered-inputs-b-20261017",
+      "verification": {
+        "schema": 2,
+        "state": "passed",
+        "screened_cases": 9,
+        "cases": 9,
+        "passing_inputs": 0,
+        "strategies": [
+          "plain",
+          "dependency",
+          "state"
+        ],
+        "repetitions": 1,
+        "measurements": 27,
+        "complete_searches": 0,
+        "repeatable_case_strategies": 27,
+        "case_strategy_groups": 27,
+        "actual_proper_subsets_checked": 0.0,
+        "large_state_results": 0,
+        "completed_at": "2026-10-17T15:54:41.1598331+08:00",
+        "executable_sha256": "20ADACF4F961B2D0E6C4DFF953E72C0A248D6961D521D57DF75FE74E1711BB7A",
+        "protocol_sha256": "CC232E6882C03CC241522A54F2A0B54D7A8F9D0C950ED55EE776D2381A5E9A72"
+      },
+      "budget_exhausted_rows": 27
+    }
+  ],
+  "scope": "Two bounded driver runs test byte determinism and retain all 54 execution-budget stops. They are not complete 189-reduction studies; full follow-up CI is separate."
+}

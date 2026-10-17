@@ -48,4 +48,8 @@ moon update
 
 CI 五项 suite 均先创建内容锁定的独立工具链，behavior 任务额外运行上述边界检查；诊断只上传 JSON 和日志，不上传下载归档、工具目录或边界测试的复制二进制。整体工程、原生内存及 SDK 验收仍按 [复现指南](REPRODUCIBILITY.md) 执行。
 
-本轮不锁定 Windows runner 镜像、MSVC、Windows SDK、GitHub Actions 的版本标签或 registry 内容，也不声明完整的密闭构建、供应商签名验证或任意时间均可从上游恢复历史工具链。来源 URL 和摘要同时变更时，需要人工核对来源并重新运行五项验收。
+[Actions run 39014758043](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39014758043) 对 `00712a7` 的五项验收通过；五份产物已下载核对，均从官方在线取得同一份锁定内容，bundle 前后 core 身份一致。11 边界、43 主模块/5 SDK 单测、704 场景、189 次完整缩减、63 组重复一致和 214 个真子集通过，见 [云端快照](evidence/github-ci-39014758043.json)。
+
+核对旧实验时发现六个合成输入的 environment 字段顺序未固定，导致 54 行记录的输入/结果字节哈希不同；全部 21 个输入和 189 个缩减轨迹在仅规范化该对象的键顺序后相等，结构计数与指纹均相同。后续将合成 environment 改为 ordered；单独的[字节确定性验证](evidence/benchmark-json-order-20261017.json)记录了两个独立进程生成相同输入的检查。原始差异及预算终止记录均保留。
+
+本轮不锁定 Windows runner 镜像、MSVC、Windows SDK、GitHub Actions 的版本标签或 registry 内容，也不声明完整的密闭构建、供应商签名验证或任意时间均可从上游恢复历史工具链。来源 URL 和摘要同时变更时，需要重新核对来源并运行五项验收。

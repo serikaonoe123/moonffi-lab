@@ -10,6 +10,8 @@
 
 本地两次全新目录安装、11 边界通过；新 MOON_HOME 用 moon update 初始化索引后，43 主模块测试/完整 behavior 与 5 SDK 测试/集成通过。最初索引缺失失败日志保留，SDK 依赖明确使用本地 async 源码。对应提交云端状态需查询实际 Actions，不能沿用下面算术阶段的成功。
 
+`00712a7` 已推送，Actions `39014758043` 五项通过，全部产物在 `results/github-ci-39014758043`，快照为 `docs/evidence/github-ci-39014758043.json`。五次在线归档身份一致，11 边界、43+5 单测、704 场景、189 次缩减、63 组重复和 214 个真子集通过。与旧基准比较时有六个合成 JSON 的 environment 键顺序变化，影响 54 行字节哈希；21 输入/189 缩减的具体内容和结构结果相同。后续已将 benchmark 中该对象改为 ordered，两个独立进程的九输入哈希与旧基准一致；后续提交的完整 CI 需按其自身 run 确认。初次差异没有被隐藏为字节一致。
+
 ## 最新阶段：Eigen 合法算术
 
 新增 Add/Mul、`--generator arithmetic`（`eigen-arithmetic-1`），旧 default/stateful 的 128 个已记录输入哈希不变。Int64 模型把存储元素限制在 ±10^6，点积中间量不超过 4×10^12，因此对 binary64 结果精确比较。Eigen 改用纯数值状态修整，覆盖删除 Set 后算术越界；所有变更核对全部存活矩阵。真实绑定、core/runner 未改动。

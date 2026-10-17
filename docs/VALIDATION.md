@@ -6,7 +6,9 @@
 
 两次隔离安装通过，最终一次覆盖相对 LockFile 路径和调用进程环境恢复；11 项安装拒绝边界通过。新 MOON_HOME 初次验收因缺少 registry 索引失败，保留 `results/verify-locked-toolchain-20261017/check.log`；随后在该隔离目录执行 `moon update`，索引初始化成功，43/43 主模块单测及完整 behavior、5/5 SDK 单测与集成验收通过。SDK 显式复用了 async 源码，未将本地过程描述为全新下载全部依赖。
 
-证据位于 `results/bootstrap-locked-final-20261017`、`results/toolchain-checks-final-20261017`、`results/verify-locked-toolchain-final-20261017`、`results/sdk-locked-toolchain-20261017`，见 [安装与范围](TOOLCHAIN-LOCK.md) 及 [本地快照](evidence/toolchain-lock-20261017.json)。CI 五项已改用新安装流程，behavior 额外执行边界检查；云端结果须按对应提交核对。
+证据位于 `results/bootstrap-locked-final-20261017`、`results/toolchain-checks-final-20261017`、`results/verify-locked-toolchain-final-20261017`、`results/sdk-locked-toolchain-20261017`，见 [安装与范围](TOOLCHAIN-LOCK.md) 及 [本地快照](evidence/toolchain-lock-20261017.json)。
+
+`00712a7` 的 [Actions run 39014758043](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39014758043) 五项通过，已核对五次在线内容锁定安装、11 项边界、43 主模块/5 SDK 单测、704 场景、189 次完整缩减及 214 个真子集。六个合成输入仅 environment JSON 键顺序与旧运行不同，影响 54 行输入/结果哈希；21 个输入与 189 个缩减内容、结构计数和指纹一致，见 [云端快照](evidence/github-ci-39014758043.json)。后续已将该 environment 显式 ordered；两个独立进程的九输入字节与彼此及旧基准一致，54 个预算边界结果仍保留预算耗尽状态。见 [序列化修正记录](evidence/benchmark-json-order-20261017.json)。
 
 ## Eigen 合法算术：2026-10-17
 

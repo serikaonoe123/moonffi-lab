@@ -88,7 +88,7 @@ foreach ($noiseCount in @(0,2,6)) {
   $operations.Add((Step 'observe' 'read' @('Read','b') @() @('b')))
   $trace = [ordered]@{
     schema = 1; adapter = 'buffer'; adapter_version = '1'; generator_version = 'resize-benchmark-1'; seed = "$noiseCount"
-    environment = @{ fixture_mode = 'error'; profile = 'behavior' }; steps = $operations.ToArray()
+    environment = [ordered]@{ fixture_mode = 'error'; profile = 'behavior' }; steps = $operations.ToArray()
   }
   $inputPath = Join-Path $Out "resize-$noiseCount.json"
   $trace | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath $inputPath -Encoding utf8
