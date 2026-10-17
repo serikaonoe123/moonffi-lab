@@ -1,0 +1,297 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-17",
+  "base_commit": "8bb16d335a0dd0f749e951f9348a0f1afba1348e",
+  "state": "passed",
+  "root_unit_tests": 61,
+  "sdk_unit_tests": 6,
+  "signed_threshold_oracle_cases": 16769,
+  "full_width_inputs": 10,
+  "max_candidates": 32,
+  "integer_process_checks": [
+    {
+      "strategy": "plain",
+      "initial": 200,
+      "threshold": 73,
+      "result": 73,
+      "executions": 26,
+      "passing_candidates": 15,
+      "accepted_candidates": 3,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "plain",
+      "initial": -200,
+      "threshold": 73,
+      "result": -73,
+      "executions": 26,
+      "passing_candidates": 15,
+      "accepted_candidates": 3,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "plain",
+      "initial": 9,
+      "threshold": 7,
+      "result": 7,
+      "executions": 14,
+      "passing_candidates": 5,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "plain",
+      "initial": -9,
+      "threshold": 7,
+      "result": -7,
+      "executions": 14,
+      "passing_candidates": 5,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "plain",
+      "initial": 2147483647,
+      "threshold": 2147483646,
+      "result": 2147483646,
+      "executions": 70,
+      "passing_candidates": 61,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "plain",
+      "initial": -2147483648,
+      "threshold": 2147483647,
+      "result": -2147483647,
+      "executions": 71,
+      "passing_candidates": 62,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "dependency",
+      "initial": 200,
+      "threshold": 73,
+      "result": 73,
+      "executions": 28,
+      "passing_candidates": 15,
+      "accepted_candidates": 3,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "dependency",
+      "initial": -200,
+      "threshold": 73,
+      "result": -73,
+      "executions": 28,
+      "passing_candidates": 15,
+      "accepted_candidates": 3,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "dependency",
+      "initial": 9,
+      "threshold": 7,
+      "result": 7,
+      "executions": 16,
+      "passing_candidates": 5,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "dependency",
+      "initial": -9,
+      "threshold": 7,
+      "result": -7,
+      "executions": 16,
+      "passing_candidates": 5,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "dependency",
+      "initial": 2147483647,
+      "threshold": 2147483646,
+      "result": 2147483646,
+      "executions": 72,
+      "passing_candidates": 61,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "dependency",
+      "initial": -2147483648,
+      "threshold": 2147483647,
+      "result": -2147483647,
+      "executions": 73,
+      "passing_candidates": 62,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "state",
+      "initial": 200,
+      "threshold": 73,
+      "result": 73,
+      "executions": 28,
+      "passing_candidates": 15,
+      "accepted_candidates": 3,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "state",
+      "initial": -200,
+      "threshold": 73,
+      "result": -73,
+      "executions": 28,
+      "passing_candidates": 15,
+      "accepted_candidates": 3,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "state",
+      "initial": 9,
+      "threshold": 7,
+      "result": 7,
+      "executions": 16,
+      "passing_candidates": 5,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "state",
+      "initial": -9,
+      "threshold": 7,
+      "result": -7,
+      "executions": 16,
+      "passing_candidates": 5,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "state",
+      "initial": 2147483647,
+      "threshold": 2147483646,
+      "result": 2147483646,
+      "executions": 72,
+      "passing_candidates": 61,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    },
+    {
+      "strategy": "state",
+      "initial": -2147483648,
+      "threshold": 2147483647,
+      "result": -2147483647,
+      "executions": 73,
+      "passing_candidates": 62,
+      "accepted_candidates": 1,
+      "complete": true,
+      "confirmed": true
+    }
+  ],
+  "sdk": {
+    "state": "passed",
+    "completed_at": "2026-10-17T22:12:57.527624+08:00",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "consumer_module": "moonffi-example/counter-lab",
+    "dependency_mode": "explicit-local-source-cache",
+    "dependency_source": "D:\\moonbit\\moonffi-lab\\.mooncakes",
+    "source_manifest_sha256": "2030954DFEB046525424FA74F8030F82C977723128615016014528B02F0A520A",
+    "executable_sha256": "62B9BEDE84BABFF40FD28DC199A4DAA5BFFFE29D33171214937F247A1097D83E",
+    "unit_tests": 6,
+    "pure_oracle_traces": 768,
+    "repair_subsets": 128,
+    "native_unit_walks": 32,
+    "correct_contract_cases": 8,
+    "correct_walk_cases": 32,
+    "original_steps": 32,
+    "reduced_steps": 2,
+    "fingerprint": "property:counter-value:s30",
+    "executions": 29,
+    "deletion_minimal": true,
+    "proper_subsets_checked": 3,
+    "corrected_replay": "Pass",
+    "budget_stop_reason": "execution_budget",
+    "preflight_rejection": true,
+    "output_reuse_rejected": true,
+    "separate_process_determinism": true,
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "independent_environment": false,
+    "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+  },
+  "sdk_argument_change": {
+    "initial_value": 1,
+    "previous_delta": 200,
+    "reduced_delta": 100,
+    "previous_executions": 27,
+    "executions": 29,
+    "fingerprint": "property:counter-value:s30"
+  },
+  "source_hashes": [
+    {
+      "path": "core/integers.mbt",
+      "sha256": "4BB38456410B44DF590D8B32E150691E80AED9036EE74BA59A72858FDAFADA67"
+    },
+    {
+      "path": "core/integers_wbtest.mbt",
+      "sha256": "3C5EC3C39F21184862DA872547AD7EDC6C2F5BEED854532F6C9765D9C8D60B50"
+    },
+    {
+      "path": "cmd/reducer-probe/integer_checks.mbt",
+      "sha256": "D069F54CB3A085BACF22D924A107AFEAEB602B9BB259385130D73B11CF81D892"
+    },
+    {
+      "path": "cmd/reducer-probe/main.mbt",
+      "sha256": "BEB13C4774DD7A0B9259B9DDDC8D61B977F2AEC0132AFE719F27A2DD99D18508"
+    },
+    {
+      "path": "cmd/reducer-probe/argument_checks.mbt",
+      "sha256": "2293F79C1102FBE02A6257AFA60978DBCA0B1E374AECAE643AF29117AC89630D"
+    },
+    {
+      "path": "examples/adapter-starter/counter/adapter.mbt",
+      "sha256": "CB2F4E6366900703C396312A245BE98CED3A6A2C4490DA15E24E7DABE385EFD3"
+    },
+    {
+      "path": "examples/adapter-starter/counter/counter_wbtest.mbt",
+      "sha256": "3C9EEC56C9CB69A99B84221F05B95EDD8049721306442F2B9447B81682420B69"
+    },
+    {
+      "path": "scripts/verify-sdk.ps1",
+      "sha256": "A5D850E09B1184EF56BFFC973877382CE640F56EBC2B3951D26B56DFF0EC8F40"
+    }
+  ],
+  "raw_evidence": [
+    "results/verify-integer-candidates-20261017",
+    "results/sdk-integer-candidates-20261017"
+  ],
+  "scope": "Finite optional Int candidate generation, unchanged JSON progress gate. Adapter validation and worker fingerprint checks remain necessary. Exhaustive bounded monotone predicates and selected full-width/process cases do not establish a global minimum for arbitrary non-monotone properties or a speed improvement. SDK local run uses explicit async source cache."
+}

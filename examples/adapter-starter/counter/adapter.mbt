@@ -155,8 +155,9 @@ pub impl @lab.Adapter for CounterAdapter with fn teardown(self) {
 pub impl @lab.Adapter for CounterAdapter with fn shrink_arguments(_, step) {
   let operation : Operation = try { @json.from_json(step.args) } catch { _ => return [] }
   match operation {
-    New(id, value) => if value != 0 { [operation_step(step.id, New(id, 0))] } else { [] }
-    Add(id, delta) => if delta != 0 { [operation_step(step.id, Add(id, 0))] } else { [] }
+    New(id, value) => @lab.shrink_int(value).map(smaller => operation_step(step.id, New(id, smaller)))
+    Add(id, delta) => @lab.shrink_int(delta).map(smaller => operation_step(step.id, Add(id, smaller)))
+    RejectAdd(id, delta) => @lab.shrink_int(delta).map(smaller => operation_step(step.id, RejectAdd(id, smaller)))
     _ => []
   }
 }

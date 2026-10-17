@@ -27,7 +27,7 @@ impl @lab.Adapter for Oracle with fn repair(self, trace) {
 impl @lab.Adapter for Oracle with fn validate(self, trace) {
   for step in trace.steps {
     if !["arm", "noise", "fail"].contains(step.op) { return Some("unknown oracle operation") }
-    if (["numeric", "chain", "repair-shift", "argument-error", "coupled"].contains(self.mode) && step.op == "fail") ||
+    if (["numeric", "chain", "repair-shift", "argument-error", "coupled", "integer-threshold"].contains(self.mode) && step.op == "fail") ||
       (self.mode == "coupled" && step.op == "arm") {
       if numeric_args(step) is None { return Some("oracle requires numeric payload") }
       continue
@@ -48,6 +48,12 @@ impl @lab.Adapter for Oracle with fn execute(self, step) {
   if step.op == "noise" { self.blocker = true }
   if step.op != "fail" || !self.armed { return None }
   if self.mode == "numeric" && numeric_args(step) is Some(args) && args.value == 1 { return None }
+  if self.mode == "integer-threshold" {
+    let args = numeric_args(step).unwrap()
+    let wide = args.value.to_int64()
+    let magnitude = if wide < 0L { -wide } else { wide }
+    if magnitude < args.guard_value.to_int64() { return None }
+  }
   if self.mode == "coupled" {
     let value = numeric_args(step).unwrap().value
     if (value != 0 && (!self.blocker || self.arm_value == 0)) ||
@@ -70,6 +76,10 @@ impl @lab.Adapter for Oracle with fn shrink_arguments(self, step) {
     return [{ ..step, args: { ..args, value: 0 }.to_json() }]
   }
   if step.op != "fail" { return [] }
+  if self.mode == "integer-threshold" {
+    let args = numeric_args(step).unwrap()
+    return @lab.shrink_int(args.value).map(value => { ..step, args: { ..args, value }.to_json() })
+  }
   if ["chain", "repair-shift", "argument-error"].contains(self.mode) { return chain_candidates(step) }
   if self.mode == "numeric" { return numeric_candidates(step) }
   [

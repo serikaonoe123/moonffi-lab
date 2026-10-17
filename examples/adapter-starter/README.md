@@ -23,7 +23,7 @@ $counter = '..\_build\native\debug\build\moonffi-example\counter-lab\cmd\main\ma
 & $counter replay results/small/reduced.json --mode correct --out results/fixed
 ```
 
-输出目录必须尚不存在，重复演示请更换目录名。上述五条执行命令的预期退出码分别为 0、1、1、1、0。默认契约案例包含 32 步，在人工缺陷下可缩成两步：构造值 1 的计数器，进行越界加法；改用正确实现后通过。`--generator walk` 则按当前值和对象寿命选择合法操作，不保证观察人工缺陷。
+输出目录必须尚不存在，重复演示请更换目录名。上述五条执行命令的预期退出码分别为 0、1、1、1、0。默认契约案例包含 32 步，在人工缺陷下可缩成两步：构造值 1 的计数器，进行加 100 的越界加法（原参数为 200）；改用正确实现后通过。`shrink_arguments` 使用公开的 `core.shrink_int` 生成整数候选，完整模型拒绝不再越界的参数，工作进程拒绝使缺陷不可观察的初值 0。`--generator walk` 则按当前值和对象寿命选择合法操作，不保证观察人工缺陷。
 
 一次性验收从仓库根目录运行：
 

@@ -1,6 +1,35 @@
 ///| Audit query is a test-only FFI; it does not increment target-call counts.
 extern "C" fn native_calls() -> Int = "starter_counter_calls"
 
+///| Exercise the public helper from a separate module, keeping operation and
+/// dependency declarations intact. Domain-invalid proposals are still generated
+/// and left to validation; candidate generation must never call the C target.
+test "public integer candidates preserve metadata and expose both error boundaries" {
+  let before = native_calls()
+  for sign in [-1, 1] {
+    let input = trace(17UL, "error", "integer-candidates-1", [New("a", sign), RejectAdd("a", sign * 200)])
+    let adapter = CounterAdapter::new(input)
+    assert_true(adapter.validate(input) is None)
+    for operation in [New("a", sign * 90), Add("a", sign * 80), RejectAdd("a", sign * 200)] {
+      let original = operation_step("candidate", operation)
+      let candidates = adapter.shrink_arguments(original)
+      assert_true(!candidates.is_empty())
+      for candidate in candidates {
+        assert_true({ ..candidate, args: original.args } == original)
+        assert_true(@lab.arguments_simpler(candidate.args, original.args))
+      }
+    }
+    let proposals = adapter.shrink_arguments(input.steps[1])
+    let boundary = operation_step(input.steps[1].id, RejectAdd("a", sign * 100))
+    assert_true(proposals.contains(boundary))
+    assert_true(adapter.validate(input.with_steps([input.steps[0], boundary])) is None)
+    let below = operation_step(input.steps[1].id, RejectAdd("a", sign * 99))
+    assert_true(adapter.validate(input.with_steps([input.steps[0], below])) is Some(_))
+    assert_true(adapter.shrink_arguments(operation_step("zero", Add("a", 0))).is_empty())
+  }
+  assert_true(native_calls() == before)
+}
+
 ///| Independent scalar oracle for the one-live-counter walk. Only the native
 /// branch touches the target; expected values do not use Model or repair.
 fn check_walk(input : @lab.Trace, coverage : Map[String, Bool], native~ : Bool = false) -> Unit raise {

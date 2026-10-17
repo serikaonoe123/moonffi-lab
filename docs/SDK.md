@@ -66,7 +66,7 @@ members = ["moonffi-lab", "my-counter"]
 & .\scripts\verify-sdk.ps1 -OfflineDependencySource .\.mooncakes
 ```
 
-脚本在新工作区中只复制引擎的 core、runner、模块清单和独立消费者；不会复制引擎 fixtures、vendor、cmd、构建产物或 Git 数据。它核对 `moon tree` 的模块路径，并要求引擎包图恰为 core/runner；随后使用 warning 作为错误的检查、5 项单测及全新 native 构建。
+脚本在新工作区中只复制引擎的 core、runner、模块清单和独立消费者；不会复制引擎 fixtures、vendor、cmd、构建产物或 Git 数据。它核对 `moon tree` 的模块路径，并要求引擎包图恰为 core/runner；随后使用 warning 作为错误的检查、6 项单测及全新 native 构建。第六项从独立模块消费公开的 `core.shrink_int`，核对元数据、正负错误边界及纯候选阶段没有原生调用。下面的五项单测和执行计数是早期验收记录；本轮整数候选结果见 [缩减器验证记录](VALIDATION.md)。
 
 本地显式依赖源码复用验收在 `results/sdk-external-offline-20261017`：
 

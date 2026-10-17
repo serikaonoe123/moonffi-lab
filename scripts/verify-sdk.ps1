@@ -66,7 +66,7 @@ try {
   Require (($enginePackages.rel | Sort-Object) -join ',' -eq 'core,runner') 'External SDK consumer used private fixtures or commands'
   $stage='test-and-build'
   Invoke-Checked 'moon' @('test','--target','native','--frozen','--deny-warn','-j','1','counter') @(0) (Join-Path $Out 'tests.log')
-  Require ((Get-Content (Join-Path $Out 'tests.log') -Raw).Contains('Total tests: 5, passed: 5, failed: 0.')) 'SDK unit tests incomplete'
+  Require ((Get-Content (Join-Path $Out 'tests.log') -Raw).Contains('Total tests: 6, passed: 6, failed: 0.')) 'SDK unit tests incomplete'
   Invoke-Checked 'moon' @('build','--target','native','--frozen','--deny-warn','cmd/main') @(0) (Join-Path $Out 'build.log')
   $executables=@(Get-ChildItem -LiteralPath (Join-Path $workspace '_build/native/debug/build') -Recurse -File -Filter main.exe)
   Require ($executables.Count -eq 1) 'SDK executable discovery ambiguous'
@@ -92,6 +92,7 @@ try {
   Require ((Read-Json (Join-Path $Out 'replay/case-1/report.json')).fingerprint -eq $baseline.fingerprint) 'SDK saved replay changed fingerprint'
   Invoke-Checked $exe @('replay',$reducedPath,'--mode','correct','--out',(Join-Path $Out 'corrected')) @(0) (Join-Path $Out 'corrected.log')
   $trace=Read-Json $reducedPath; $steps=@($trace.steps)
+  Require ($steps[0].args[2] -eq 1 -and $steps[1].args[2] -eq 100) 'SDK integer candidates did not reach the concrete error boundary'
   foreach ($mask in 0..2) {
     $trace.steps=@(for ($i=0;$i -lt 2;$i++) { if ($mask -band (1 -shl $i)) { $steps[$i] } })
     $subsetPath=Join-Path $Out "subset-$mask.json"
@@ -118,7 +119,7 @@ try {
   [ordered]@{state='passed';completed_at=[DateTimeOffset]::UtcNow.ToString('o');engine_packages=@($enginePackages.rel | Sort-Object)
     consumer_module='moonffi-example/counter-lab';dependency_mode=$dependencyMode;dependency_source=$OfflineDependencySource
     source_manifest_sha256=(Get-FileHash (Join-Path $Out 'source-manifest.json')).Hash;executable_sha256=(Get-FileHash $exe).Hash
-    unit_tests=5;pure_oracle_traces=768;repair_subsets=128;native_unit_walks=32;correct_contract_cases=8;correct_walk_cases=32
+    unit_tests=6;pure_oracle_traces=768;repair_subsets=128;native_unit_walks=32;correct_contract_cases=8;correct_walk_cases=32
     original_steps=$reduction.original_steps;reduced_steps=$reduction.reduced_steps;fingerprint=$baseline.fingerprint;executions=$reduction.executions
     deletion_minimal=$reduction.deletion_minimal;proper_subsets_checked=3;corrected_replay='Pass';budget_stop_reason=$budget.stop_reason
     preflight_rejection=$true;output_reuse_rejected=$true;separate_process_determinism=$true;toolchain=@(& moon version --all)

@@ -103,5 +103,6 @@ async fn check_argument_reduction(executable : String, output : String) -> Unit 
   @fs.write_file(output + "/checks.json", Json(checks).stringify(indent=2))
   println("MoonBit argument reduction checks passed: " + output)
   check_iterative_reduction(executable, output + "/iterative")
+  check_integer_reduction(executable, output + "/integers")
   check_dependency_scaling(output + "/dependencies")
 }

@@ -2,6 +2,12 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-17（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
+## 最新阶段：MoonBit 整数候选生成器
+
+新增公开纯函数 `core.shrink_int(Int) -> Array[Int]`，先零、再逐步靠近原值、含向零邻值；至多 32 个唯一且严格减小绝对值的候选，支持完整 Int 边界。独立 SDK 的 New/Add/RejectAdd 使用该函数，保留原步骤身份与依赖。没有修改 JSON 参数排序门槛；模型和进程仍判断合法性与失败指纹。
+
+本地 61 主模块/6 SDK 单测、完整 behavior/SDK 验收通过，16,769 个阈值组合和完整宽度边界通过，新增 18 个 MoonBit 进程探针通过。SDK 两步结果的初值仍是 1，拒绝加法量从 200 降到 100，执行数 27→29；三子集及正确实现重放通过。原始 `results/verify-integer-candidates-20261017`、`results/sdk-integer-candidates-20261017`，快照 `docs/evidence/integer-candidates-20261017.json`。本轮云端 CI 尚待推送和实际检查；下方 CI 成功记录属于旧提交。继续优先 MoonBit 核心，不通过隐藏脚本改语言统计。
+
 ## 最新阶段：MoonBit 增量依赖修整
 
 `core/dependencies.mbt` 提供私有事务式依赖索引，`validate_dependencies` 和 `repair_with_model` 共用；逐步结构检查之后调用模型，模型接受后才提交依赖变化。拒绝释放/定义及后期结构错误不消耗步骤 ID 或改变引擎的句柄状态。`check_repair` 用 ID 索引核对删除解释，保留重复 ID 等畸形输入的旧诊断。适配器模型仍须自行遵守拒绝不改状态约定；哈希表平均开销下，结构工作不再重扫全部前缀，不含模型、字符串哈希和参数比较成本。
