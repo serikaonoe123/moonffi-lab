@@ -103,5 +103,17 @@
       "budget_exhausted_rows": 27
     }
   ],
-  "scope": "Two bounded driver runs test byte determinism and retain all 54 execution-budget stops. They are not complete 189-reduction studies; full follow-up CI is separate."
+  "scope": "Two bounded driver runs test byte determinism and retain all 54 execution-budget stops. They are not complete 189-reduction studies; full follow-up CI is separate.",
+  "hosted_followup": {
+    "tested_commit": "2b7f92c3272e154b2d3c9d488d6f20418259e6e0",
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39015558264",
+    "all_five_suites": "success",
+    "complete_reductions": 189,
+    "input_hash_different_rows": 0,
+    "reduced_hash_different_rows": 0,
+    "structural_rows_match_baseline": 189,
+    "proper_subsets_checked": 214,
+    "baseline_run": "39013008257",
+    "snapshot": "github-ci-39015558264.json"
+  }
 }

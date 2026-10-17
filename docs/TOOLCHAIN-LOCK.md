@@ -52,4 +52,6 @@ CI 五项 suite 均先创建内容锁定的独立工具链，behavior 任务额�
 
 核对旧实验时发现六个合成输入的 environment 字段顺序未固定，导致 54 行记录的输入/结果字节哈希不同；全部 21 个输入和 189 个缩减轨迹在仅规范化该对象的键顺序后相等，结构计数与指纹均相同。后续将合成 environment 改为 ordered；单独的[字节确定性验证](evidence/benchmark-json-order-20261017.json)记录了两个独立进程生成相同输入的检查。原始差异及预算终止记录均保留。
 
+修正提交 `2b7f92c3272e154b2d3c9d488d6f20418259e6e0` 的 [Actions run 39015558264](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39015558264) 五项再次通过。全部产物已核对：五次在线安装身份一致，11 边界与 43+5 单测、704 场景通过；189 次缩减全部完成，63 组重复一致，214 个真子集通过。全部 189 行输入/结果字节哈希和结构指标与旧基准一致，不再需要规范化 JSON 键顺序才能比较。见 [最终云端快照](evidence/github-ci-39015558264.json)，完整下载在 `results/github-ci-39015558264`。
+
 本轮不锁定 Windows runner 镜像、MSVC、Windows SDK、GitHub Actions 的版本标签或 registry 内容，也不声明完整的密闭构建、供应商签名验证或任意时间均可从上游恢复历史工具链。来源 URL 和摘要同时变更时，需要重新核对来源并运行五项验收。

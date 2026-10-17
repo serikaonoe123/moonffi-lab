@@ -10,6 +10,8 @@
 
 `00712a7` 的 [Actions run 39014758043](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39014758043) 五项通过，已核对五次在线内容锁定安装、11 项边界、43 主模块/5 SDK 单测、704 场景、189 次完整缩减及 214 个真子集。六个合成输入仅 environment JSON 键顺序与旧运行不同，影响 54 行输入/结果哈希；21 个输入与 189 个缩减内容、结构计数和指纹一致，见 [云端快照](evidence/github-ci-39014758043.json)。后续已将该 environment 显式 ordered；两个独立进程的九输入字节与彼此及旧基准一致，54 个预算边界结果仍保留预算耗尽状态。见 [序列化修正记录](evidence/benchmark-json-order-20261017.json)。
 
+最终修正提交 `2b7f92c` 的 [Actions run 39015558264](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39015558264) 五项再次通过，全部产物已下载。五次在线锁定安装、11 项边界、43+5 单测、704 场景、189 次完整缩减、63 组重复一致与 214 个真子集通过；189 行输入/结果字节哈希及结构指标均与 `39013008257` 一致，字节差异数为零。诊断中没有归档或二进制文件。见 [最终云端快照](evidence/github-ci-39015558264.json)。
+
 ## Eigen 合法算术：2026-10-17
 
 新增 `Add` / `Mul` 及 `eigen-arithmetic-1`，使用元素限制为 ±10^6 的 Int64 模型，核对精确 binary64 整数结果与全部存活矩阵的独立性；纯验证及状态修整检查形状和实际数值。绑定、core/runner 源码未修改。
