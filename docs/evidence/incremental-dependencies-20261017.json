@@ -298,7 +298,7 @@
       "reference_dependency_visits": "4198400"
     }
   ],
-  "timing_scope": "Three samples per profile/size, alternating measurement order, native debug build; pure dependency repair only. Reference is the frozen pre-optimization prefix algorithm. IO/equality/serialization excluded. Millisecond resolution may report zero. No end-to-end speed claim or timing threshold.",
+  "timing_scope": "Three samples per profile/size, alternating measurement order, native debug build; only repair_with_model is timed. Reference is the frozen pre-optimization prefix algorithm. Result validation, IO, equality and serialization excluded. Millisecond resolution may report zero. No end-to-end speed claim or timing threshold.",
   "sdk": {
     "state": "passed",
     "completed_at": "2026-10-17T21:43:20.9121096+08:00",
@@ -347,7 +347,7 @@
     "cmd/reducer-probe/argument_checks.mbt": "C55DB2AE23D73212AA4BBB0014381187B73ED127E0D058BCDDDDFEB44BD11B84"
   },
   "powershell_source_changed": false,
-  "hosted_validation": "pending implementation commit",
+  "hosted_validation": "passed: https://github.com/serikaonoe123/moonffi-lab/actions/runs/39037983530; tested commit 3b881c65c6244693aed10af7400738c762d82c0f; all five artifacts downloaded and inspected",
   "benchmark": {
     "schema": 2,
     "state": "passed",

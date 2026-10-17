@@ -22,7 +22,7 @@ moon build --target native
 
 `verify.ps1` 创建新的 `results/verify-<随机ID>`，检查源码快照完整性，运行单测、两个适配器的正常场景、三类缺陷的缩减和修复后重放、独立子集校验、崩溃/超时及缩减器边界测试。失败时保留已有日志，不自动删除任何输出。若执行被权限或安全策略拦截，停止对应操作并检查原始报错。
 
-Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[最新 MoonBit 核心云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39036211299)的 behavior、ASan、benchmark、generation、sdk 五个任务已通过，测试提交为 `d804195`；52 主模块/5 SDK 单测、11 个交替缩减进程探针及 189 次缩减通过，五份产物已下载核对，见 [证据快照](docs/evidence/github-ci-39036211299.json)。
+Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[最新 MoonBit 核心云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39037983530)的 behavior、ASan、benchmark、generation、sdk 五个任务已通过，测试提交为 `3b881c6`；58 主模块/5 SDK 单测、18 次依赖修整对照及 189 次缩减通过，五份产物已下载核对，见 [证据快照](docs/evidence/github-ci-39037983530.json)。
 
 Buffer 新增 `--generator stateful`，按当前句柄、共享引用和长度选择合法的随机操作，覆盖扩缩容与边界数据；原默认生成器保留固定契约回归。运行 `scripts/verify-generation.ps1` 可复现两种生成器的操作覆盖与人工缺陷观测，方法、结果及限制见 [生成实验](docs/GENERATION-STUDY.md)。
 

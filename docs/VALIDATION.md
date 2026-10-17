@@ -17,9 +17,13 @@
 | 拒绝释放 | 1024 | 128 | 0 |
 | 拒绝释放 | 4096 | 2122 | 1 |
 
-4096 步时旧算法分别检查 8,390,656 / 4,198,400 个前缀步骤位置。测量交替执行顺序，IO、比较和序列化不计时；0 表示记录值低于毫秒分辨率，数值不构成整体 FFI 加速或跨机器性能保证，也不设置速度通过阈值。原始记录为 `results/verify-incremental-dependencies-20261017`、`results/sdk-incremental-dependencies-20261017`，见 [本地快照](evidence/incremental-dependencies-20261017.json)。
+4096 步时旧算法分别检查 8,390,656 / 4,198,400 个前缀步骤位置。测量交替执行顺序，仅计 `repair_with_model`，不含结果校验、IO 和序列化；0 表示记录值低于毫秒分辨率，数值不构成整体 FFI 加速或跨机器性能保证，也不设置速度通过阈值。原始记录为 `results/verify-incremental-dependencies-20261017`、`results/sdk-incremental-dependencies-20261017`，见 [本地快照](evidence/incremental-dependencies-20261017.json)。
 
 固定 21 输入 × 三策略的单轮 63 次缩减、214 个真子集及全部正确实现重放通过。与交替缩减版本相比，输入/结果字节、失败指纹、步骤数、候选及执行计数等全部一致，仍为 1,937 次工作进程；不将不同轮次的墙钟波动解释为整体加速。记录在 `results/benchmark-incremental-dependencies-20261017`。
+
+提交 `3b881c6` 的 [Actions run 39037983530](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39037983530) 五项通过，全部产物已下载核对。58+5 单测、20,736 个 oracle、18 次纯修整对照、既有 11 个交替缩减探针及四组数值/预算检查、704 个生成场景、ASan 控制通过。189 次缩减的输入/结果哈希、结构计数与前一云端运行 `39036211299` 逐条相同；参数进度与本地一致，63 组重复一致、214 个真子集及正确实现重放通过。20 个关键源文件逐任务核对，六个纯修整输入哈希与本地相同，18 次语义记录一致。
+
+云端 4096 步纯修整中位数为：活句柄定义 10302→4 ms，拒绝释放 3638→2 ms；仍只计 `repair_with_model`，不据此解释整个 CI 任务耗时。首次下载遇到一次 TLS 握手超时，保留未完成目录后在新目录正常重试成功；最终产物位于 `results/github-ci-39037983530/artifacts-final`，完整核查及 [云端快照](evidence/github-ci-39037983530.json) 保留实际测量和范围。
 
 ## MoonBit 交替参数与删除搜索：2026-10-17
 

@@ -1,0 +1,247 @@
+{
+  "schema": 2,
+  "observed_on": "2026-10-17",
+  "tested_commit": "3b881c65c6244693aed10af7400738c762d82c0f",
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39037983530",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "native (behavior)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39037983530/job/117411560367",
+      "startedAt": "2026-10-17T13:47:04Z",
+      "completedAt": "2026-10-17T13:49:42Z"
+    },
+    {
+      "name": "native (benchmark)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39037983530/job/117411560531",
+      "startedAt": "2026-10-17T13:47:04Z",
+      "completedAt": "2026-10-17T13:56:26Z"
+    },
+    {
+      "name": "native (sdk)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39037983530/job/117411560537",
+      "startedAt": "2026-10-17T13:47:04Z",
+      "completedAt": "2026-10-17T13:47:51Z"
+    },
+    {
+      "name": "native (asan)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39037983530/job/117411560610",
+      "startedAt": "2026-10-17T13:47:05Z",
+      "completedAt": "2026-10-17T13:48:13Z"
+    },
+    {
+      "name": "native (generation)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39037983530/job/117411560634",
+      "startedAt": "2026-10-17T13:47:04Z",
+      "completedAt": "2026-10-17T13:49:00Z"
+    }
+  ],
+  "checks": {
+    "online_bootstraps_verified": 5,
+    "archive_pins_per_job": 2,
+    "binary_pins_per_job": 3,
+    "core_source_files": 1201,
+    "boundary_checks": 11,
+    "root_unit_tests": 58,
+    "numeric_probe_checks": 4,
+    "iterative_probe_checks": 11,
+    "dependency_scaling_samples": 18,
+    "dependency_input_hashes_match_local": 6,
+    "exhaustive_small_traces": 20736,
+    "sdk_unit_tests": 5,
+    "source_archive_equal": true,
+    "selected_exported_source_files_checked_per_job": 20,
+    "buffer_generation_cases": 512,
+    "eigen_generation_cases": 192,
+    "eigen_input_hashes_match_local": 192,
+    "legacy_input_hashes_checked": 128,
+    "complete_reductions": 189,
+    "repeatable_groups": 63,
+    "proper_subsets_checked": 214,
+    "reduction_structural_rows_match_baseline": 189,
+    "reduction_semantic_traces_match_baseline": 189,
+    "frozen_corpus_semantic_cases_match_baseline": 21,
+    "input_hash_different_rows": 0,
+    "reduced_hash_different_rows": 0,
+    "corrected_replays_passed": 189,
+    "diagnostic_binary_files": 0,
+    "baseline_run": "local incremental-dependencies, one repetition",
+    "previous_ci_structural_and_hash_rows_equal": 189,
+    "previous_ci_run": "39036211299",
+    "argument_progress_rows_match_local": 189
+  },
+  "lock_sha256": "5A9008CC7EA40DE44E0A47F8EA72DB4F344040A4601A52774493FF1F9DFEFB7F",
+  "source_archive_sha256": "9E18AD6F4A885372A7C8C232E1047EF9C7AD1B144D1497AB5AE897F036FA3F76",
+  "source_verifications": [
+    {
+      "suite": "behavior",
+      "state": "passed",
+      "commit": "3b881c65c6244693aed10af7400738c762d82c0f",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "asan",
+      "state": "passed",
+      "commit": "3b881c65c6244693aed10af7400738c762d82c0f",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "benchmark",
+      "state": "passed",
+      "commit": "3b881c65c6244693aed10af7400738c762d82c0f",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "generation",
+      "state": "passed",
+      "commit": "3b881c65c6244693aed10af7400738c762d82c0f",
+      "dependency_mode": "registry"
+    },
+    {
+      "suite": "sdk",
+      "state": "passed",
+      "commit": "3b881c65c6244693aed10af7400738c762d82c0f",
+      "dependency_mode": "registry"
+    }
+  ],
+  "dependency_timing_summary": [
+    {
+      "profile": "live-handles",
+      "steps": 256,
+      "samples": 3,
+      "incremental_ms_median": 0,
+      "prefix_ms_median": 34,
+      "incremental_ms_min": 0,
+      "incremental_ms_max": 1,
+      "prefix_ms_min": 33,
+      "prefix_ms_max": 35
+    },
+    {
+      "profile": "live-handles",
+      "steps": 1024,
+      "samples": 3,
+      "incremental_ms_median": 1,
+      "prefix_ms_median": 597,
+      "incremental_ms_min": 0,
+      "incremental_ms_max": 2,
+      "prefix_ms_min": 590,
+      "prefix_ms_max": 601
+    },
+    {
+      "profile": "live-handles",
+      "steps": 4096,
+      "samples": 3,
+      "incremental_ms_median": 4,
+      "prefix_ms_median": 10302,
+      "incremental_ms_min": 4,
+      "incremental_ms_max": 6,
+      "prefix_ms_min": 10187,
+      "prefix_ms_max": 10601
+    },
+    {
+      "profile": "rejected-releases",
+      "steps": 256,
+      "samples": 3,
+      "incremental_ms_median": 0,
+      "prefix_ms_median": 14,
+      "incremental_ms_min": 0,
+      "incremental_ms_max": 0,
+      "prefix_ms_min": 14,
+      "prefix_ms_max": 15
+    },
+    {
+      "profile": "rejected-releases",
+      "steps": 1024,
+      "samples": 3,
+      "incremental_ms_median": 2,
+      "prefix_ms_median": 220,
+      "incremental_ms_min": 0,
+      "incremental_ms_max": 2,
+      "prefix_ms_min": 218,
+      "prefix_ms_max": 222
+    },
+    {
+      "profile": "rejected-releases",
+      "steps": 4096,
+      "samples": 3,
+      "incremental_ms_median": 2,
+      "prefix_ms_median": 3638,
+      "incremental_ms_min": 2,
+      "incremental_ms_max": 2,
+      "prefix_ms_min": 3638,
+      "prefix_ms_max": 3661
+    }
+  ],
+  "dependency_timing_scope": "Only repair_with_model is timed: three native/debug samples per profile and size, alternating order; validation, equality, IO and serialization excluded. Zero is below millisecond resolution. No timing threshold or end-to-end speed claim.",
+  "sdk": {
+    "state": "passed",
+    "completed_at": "2026-10-17T21:47:45.7032668+08:00",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "consumer_module": "moonffi-example/counter-lab",
+    "dependency_mode": "registry-or-tool-cache",
+    "dependency_source": "",
+    "source_manifest_sha256": "61EB09ABCD0F7CF2A98819F3E02622016B9ABC716589101FBDE1B0A644B753E4",
+    "executable_sha256": "BF22BB4946E6339C1B056DA77C917D9128ED258B24AE00611DCE4336E50BEB96",
+    "unit_tests": 5,
+    "pure_oracle_traces": 768,
+    "repair_subsets": 128,
+    "native_unit_walks": 32,
+    "correct_contract_cases": 8,
+    "correct_walk_cases": 32,
+    "original_steps": 32,
+    "reduced_steps": 2,
+    "fingerprint": "property:counter-value:s30",
+    "executions": 27,
+    "deletion_minimal": true,
+    "proper_subsets_checked": 3,
+    "corrected_replay": "Pass",
+    "budget_stop_reason": "execution_budget",
+    "preflight_rejection": true,
+    "output_reuse_rejected": true,
+    "separate_process_determinism": true,
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "independent_environment": false,
+    "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+  },
+  "benchmark": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 21,
+    "cases": 21,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 3,
+    "measurements": 189,
+    "complete_searches": 189,
+    "repeatable_case_strategies": 63,
+    "case_strategy_groups": 63,
+    "actual_proper_subsets_checked": 214.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-17T21:55:34.5574721+08:00",
+    "executable_sha256": "0E1AF43B4B3BF80E09B1B88945E8F9A051A52C62BDBA2664516DB29CBFED74D7",
+    "protocol_sha256": "032D3036A88ADD2A065120FF700EF4992D7CAF1659C8F786C7031929F55B8FAA"
+  },
+  "comparison_note": "All 189 input/reduced hashes and measured structural results match both local output and the previous hosted implementation. Current argument progress matches local output; subset-cache reuse is checked separately. Timing values are not equality constraints.",
+  "raw_evidence_directory": "results/github-ci-39037983530",
+  "raw_artifact_directory": "results/github-ci-39037983530/artifacts-final",
+  "download_note": "The first four-artifact download timed out during TLS handshake; partial output was preserved in artifacts/. A normal retry succeeded in artifacts-final/.",
+  "scope": "Fresh content-locked Windows/MSVC hosted checks. Full source/bootstrap/canary/sample inspection is retained in raw inspection.json and artifacts-final/. No immutable latest URL, hermetic host, full-program ASan or parameter/global minimality claim."
+}
