@@ -18,7 +18,7 @@ pub(all) struct Repair {
 ///| Repair only by deletion, preserving order, concrete inputs and metadata.
 /// This guard prevents an adapter from silently rewriting the tested scenario.
 pub fn deletion_only(original : Trace, repaired : Trace) -> Bool {
-  if original.with_steps(repaired.steps) != repaired { return false }
+  if original.with_steps([]) != repaired.with_steps([]) { return false }
   let mut cursor = 0
   for step in repaired.steps {
     while cursor < original.steps.length() && original.steps[cursor] != step { cursor += 1 }
@@ -31,8 +31,13 @@ pub fn deletion_only(original : Trace, repaired : Trace) -> Bool {
 ///| Verify the repair's explanation covers exactly the skipped concrete steps.
 pub fn check_repair(original : Trace, repair : Repair) -> String? {
   if !deletion_only(original, repair.trace) { return Some("repair changed metadata, order or concrete operations") }
-  let kept = repair.trace.steps.map(s => s.id)
-  let skipped = original.steps.filter(s => !kept.contains(s.id)).map(s => s.id)
+  let kept : Map[String, Bool] = Map([])
+  for step in repair.trace.steps { kept[step.id] = true }
+  let skipped : Map[String, Bool] = Map([])
+  let mut skipped_count = 0
+  for step in original.steps {
+    if !kept.contains(step.id) { skipped[step.id] = true; skipped_count += 1 }
+  }
   let seen : Map[String, Bool] = Map([])
   for removal in repair.removed {
     if !skipped.contains(removal.step_id) || seen.contains(removal.step_id) || removal.reason == "" {
@@ -40,23 +45,26 @@ pub fn check_repair(original : Trace, repair : Repair) -> String? {
     }
     seen[removal.step_id] = true
   }
-  if seen.length() != skipped.length() { return Some("repair is missing removal evidence") }
+  if seen.length() != skipped_count { return Some("repair is missing removal evidence") }
   None
 }
 
 ///| Check dependencies on each retained prefix, advancing the supplied fresh
-/// model only on accepted transitions. A rejected transition must not mutate it.
-/// Prefix validation is quadratic in trace length (bounded by the trace limit).
+/// model only on accepted transitions. Structural changes commit after model
+/// acceptance; a rejected transition must still leave the adapter model intact.
+/// Dependency work is linear in steps and handle mentions on average with maps.
 pub fn[M : StateModel] repair_with_model(model : M, trace : Trace) -> Repair {
+  let dependencies = DependencyState::new(trace.schema)
   let kept : Array[Step] = []
   let removed : Array[Removal] = []
   for step in trace.steps {
-    kept.push(step)
-    let structural = validate_dependencies(trace.with_steps(kept))
+    let structural = dependencies.check(step)
     let rejection = if structural is Some(_) { structural } else { model.apply(step) }
     if rejection is Some(reason) {
-      let _ = kept.pop()
       removed.push({ step_id: step.id, reason })
+    } else {
+      dependencies.commit(step)
+      kept.push(step)
     }
   }
   { trace: trace.with_steps(kept), removed }

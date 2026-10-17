@@ -2,6 +2,16 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-17（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
+## 最新阶段：MoonBit 增量依赖修整
+
+`core/dependencies.mbt` 提供私有事务式依赖索引，`validate_dependencies` 和 `repair_with_model` 共用；逐步结构检查之后调用模型，模型接受后才提交依赖变化。拒绝释放/定义及后期结构错误不消耗步骤 ID 或改变引擎的句柄状态。`check_repair` 用 ID 索引核对删除解释，保留重复 ID 等畸形输入的旧诊断。适配器模型仍须自行遵守拒绝不改状态约定；哈希表平均开销下，结构工作不再重扫全部前缀，不含模型、字符串哈希和参数比较成本。
+
+58/58 根模块单测与完整 behavior、5/5 SDK 单测及接入验收通过。新增独立数组 oracle 穷举 20,736 个四步轨迹，并验证调用顺序、删除理由、回滚和边界。`cmd/reducer-probe/dependency_checks.mbt` 保留旧前缀算法，2 场景 × 3 长度 × 3 样本共 18 项等价检查通过；由既有检查入口调用，无 PowerShell 源码改动。4096 步本地纯修整中位数：活句柄定义 5891→3 ms，拒绝释放 2122→1 ms；仅是纯依赖修整测量，不代表整体 FFI 加速，0 ms 不用于计算倍数。
+
+原始记录 `results/verify-incremental-dependencies-20261017`、`results/sdk-incremental-dependencies-20261017`，快照 `docs/evidence/incremental-dependencies-20261017.json`。固定缩减语料与新提交 CI 尚须按实际结果核对，下面的成功记录属于前一轮版本。
+
+固定语料单轮 63 次缩减、214 个真子集与全部正确实现重放通过。与前一交替缩减版本相比，输入/结果字节、指纹、步骤数及结构计数完全一致，仍为 1,937 次工作进程。记录在 `results/benchmark-incremental-dependencies-20261017`；本轮只对纯修整给出计时，不宣称整个 FFI 流程加速。
+
 ## 最新阶段：MoonBit 交替缩减
 
 用户要求继续优先 MoonBit 核心开发。本轮 runner 从一次参数遍历改为参数/单步删除交替：接受任何变化后重新生成候选，丢弃可能失效的步骤索引及旧候选；共用原预算，预留最后三次确认。报告增加 `argument_search: ArgumentSearch?`，记录扫描轮数、当前候选检查数、完成状态及未决数；旧 JSON 可缺失该字段，不表示已完成。只在参数枚举和最终删除检查都完成时返回 search_complete，仍不保证参数最小。

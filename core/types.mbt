@@ -96,34 +96,10 @@ pub fn decode_trace(text : String) -> Trace raise {
 pub fn validate_dependencies(trace : Trace) -> String? {
   if trace.schema != 1 { return Some("unsupported trace schema") }
   if trace.steps.length() > 4096 { return Some("trace exceeds 4096 steps") }
-  let ids : Map[String, Bool] = Map([])
-  let defined : Map[String, Bool] = Map([])
-  let live : Map[String, Bool] = Map([])
+  let state = DependencyState::new(trace.schema)
   for step in trace.steps {
-    if step.id == "" || ids.contains(step.id) {
-      return Some("empty or duplicate step ID: \{step.id}")
-    }
-    ids[step.id] = true
-    let mentioned : Map[String, Bool] = Map([])
-    for handle in [..step.uses, ..step.releases] {
-      if !live.contains(handle) {
-        return Some("\{step.id}: unavailable handle \{handle}")
-      }
-    }
-    for handle in step.releases {
-      if mentioned.contains(handle) {
-        return Some("\{step.id}: repeated release \{handle}")
-      }
-      mentioned[handle] = true
-      live.remove(handle)
-    }
-    for handle in step.defines {
-      if handle == "" || defined.contains(handle) {
-        return Some("\{step.id}: duplicate or empty handle \{handle}")
-      }
-      defined[handle] = true
-      live[handle] = true
-    }
+    if state.check(step) is Some(error) { return Some(error) }
+    state.commit(step)
   }
   None
 }
