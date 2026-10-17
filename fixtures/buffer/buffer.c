@@ -88,6 +88,18 @@ MOONBIT_FFI_EXPORT int32_t lab_buffer_write(Handle *h, int32_t index, int32_t va
   return 0;
 }
 
+MOONBIT_FFI_EXPORT int32_t lab_buffer_resize(Handle *h, int32_t len) {
+  if (h->closed || !h->buffer->alive || len < 0 || len > 256) return -1;
+  Buffer *b = h->buffer;
+  uint8_t *replacement = (uint8_t *)realloc(b->data, (size_t)len + 1);
+  if (!replacement) abort();
+  if (len > b->len) memset(replacement + b->len, 0, (size_t)(len - b->len));
+  replacement[len] = 0;
+  b->data = replacement;
+  b->len = len;
+  return 0;
+}
+
 MOONBIT_FFI_EXPORT void lab_buffer_probe(int32_t mode) {
 #ifdef _WIN32
   SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX);

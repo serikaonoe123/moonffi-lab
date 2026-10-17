@@ -30,3 +30,7 @@ extern "C" fn native_write(handle : Handle, index : Int, value : Int, mode : Int
 
 ///|
 extern "C" fn native_probe(mode : Int) -> Unit = "lab_buffer_probe"
+
+///|
+#borrow(handle)
+extern "C" fn native_resize(handle : Handle, length : Int) -> Int = "lab_buffer_resize"

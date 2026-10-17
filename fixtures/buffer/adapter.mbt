@@ -6,12 +6,18 @@ enum Operation {
   Read(String)
   Write(String, Int, Int)
   RejectWrite(String, Int)
+  Resize(String, Int)
 } derive(ToJson, @json.FromJson)
+
+///| Aliases refer to this shared model resource, rather than copied lengths.
+struct BufferState {
+  mut data : Array[Byte]
+}
 
 ///|
 pub struct BufferAdapter {
   handles : Map[String, Handle]
-  model : Map[String, Array[Byte]]
+  model : Map[String, BufferState]
   mut mode : Int
 }
 
@@ -46,6 +52,7 @@ fn operation_step(id : String, operation : Operation) -> @lab.Step {
     Read(id) => ("read", [], [id], [])
     Write(id, _, _) => ("write", [], [id], [])
     RejectWrite(id, _) => ("reject_write", [], [id], [])
+    Resize(id, _) => ("resize", [], [id], [])
   }
   { id, op, defines, uses, releases, args: operation.to_json() }
 }
@@ -66,8 +73,24 @@ pub impl @lab.Adapter for BufferAdapter with fn validate(_, trace) {
   if (profile == "asan" || mode == "asan-canary") && !asan_profile_built() {
     return Some("ASan profile is not built; use scripts/verify-asan.ps1")
   }
-  let model : Map[String, Int] = Map([])
+  if @lab.validate_dependencies(trace) is Some(message) { return Some(message) }
+  let model = BufferModel::new()
   for step in trace.steps {
+    if model.apply(step) is Some(message) { return Some(message) }
+  }
+  None
+}
+
+///| State validation and repair use fresh pure state, never worker resources.
+struct BufferModel {
+  objects : Map[String, BufferState]
+}
+
+///|
+fn BufferModel::new() -> BufferModel { { objects: Map([]) } }
+
+///|
+impl @lab.StateModel for BufferModel with fn apply(self, step) {
     let operation : Operation = try { @json.from_json(step.args) } catch {
       _ => return Some("\{step.id}: invalid operation payload")
     }
@@ -80,27 +103,38 @@ pub impl @lab.Adapter for BufferAdapter with fn validate(_, trace) {
       New(id, hex) => {
         let bytes = try { @hex.decode(hex) } catch { _ => return Some("invalid byte encoding") }
         if bytes.length() > 256 { return Some("buffer exceeds 256 bytes") }
-        model[id] = bytes.length()
+        self.objects[id] = { data: bytes.to_array() }
       }
       Share(id, other) => {
-        guard model.get(id) is Some(length) else { return Some("share source unavailable") }
-        model[other] = length
+        guard self.objects.get(id) is Some(state) else { return Some("share source unavailable") }
+        self.objects[other] = state
       }
-      Close(id) => model.remove(id)
-      Read(id) => if !model.contains(id) { return Some("read source unavailable") }
+      Close(id) => self.objects.remove(id)
+      Read(id) => if !self.objects.contains(id) { return Some("read source unavailable") }
       Write(id, index, value) => {
-        guard model.get(id) is Some(length) else { return Some("write source unavailable") }
-        if index < 0 || index >= length || value < 0 || value > 255 {
+        guard self.objects.get(id) is Some(state) else { return Some("write source unavailable") }
+        if index < 0 || index >= state.data.length() || value < 0 || value > 255 {
           return Some("write precondition violated")
         }
+        state.data[index] = value.to_byte()
       }
       RejectWrite(id, index) => {
-        guard model.get(id) is Some(length) else { return Some("write source unavailable") }
-        if index >= 0 && index < length { return Some("reject_write requires invalid index") }
+        guard self.objects.get(id) is Some(state) else { return Some("write source unavailable") }
+        if index >= 0 && index < state.data.length() { return Some("reject_write requires invalid index") }
+      }
+      Resize(id, length) => {
+        guard self.objects.get(id) is Some(state) else { return Some("resize source unavailable") }
+        if length < 0 || length > 256 { return Some("resize exceeds bounds") }
+        let before = state.data
+        state.data = Array::makei(length, i => if i < before.length() { before[i] } else { b'\x00' })
       }
     }
-  }
   None
+}
+
+///|
+pub impl @lab.Adapter for BufferAdapter with fn repair(_, trace) {
+  @lab.repair_with_model(BufferModel::new(), trace)
 }
 
 ///|
@@ -115,7 +149,7 @@ pub impl @lab.Adapter for BufferAdapter with fn execute(self, step) {
     New(id, hex) => {
       let bytes = try! @hex.decode(hex)
       self.handles[id] = native_new(bytes, bytes.length(), self.mode)
-      self.model[id] = bytes.to_array()
+      self.model[id] = { data: bytes.to_array() }
     }
     Share(id, other) => {
       self.handles[other] = native_share(self.handles.get(id).unwrap())
@@ -131,7 +165,7 @@ pub impl @lab.Adapter for BufferAdapter with fn execute(self, step) {
       let handle = self.handles.get(id).unwrap()
       if native_alive(handle) != 1 { return mismatch(step, "shared-reference-alive", "a valid open alias lost its native resource") }
       let actual = native_read(handle).to_array()
-      let expected = self.model.get(id).unwrap()
+      let expected = self.model.get(id).unwrap().data
       if actual != expected {
         return mismatch(step, "bytes-roundtrip", "native bytes differ from the model (including embedded NUL)")
       }
@@ -140,11 +174,19 @@ pub impl @lab.Adapter for BufferAdapter with fn execute(self, step) {
       let handle = self.handles.get(id).unwrap()
       if native_alive(handle) != 1 { return mismatch(step, "shared-reference-alive", "write alias lost its native resource") }
       if native_write(handle, index, value, self.mode) != 0 { return mismatch(step, "valid-write", "valid byte write rejected") }
-      self.model.get(id).unwrap()[index] = value.to_byte()
+      self.model.get(id).unwrap().data[index] = value.to_byte()
     }
     RejectWrite(id, index) => {
       let handle = self.handles.get(id).unwrap()
       if native_write(handle, index, 0, self.mode) != -1 { return mismatch(step, "invalid-index-rejected", "invalid write did not return an error") }
+    }
+    Resize(id, length) => {
+      let handle = self.handles.get(id).unwrap()
+      if native_alive(handle) != 1 { return mismatch(step, "shared-reference-alive", "resize alias lost its native resource") }
+      if native_resize(handle, length) != 0 { return mismatch(step, "valid-resize", "valid resize rejected") }
+      let state = self.model.get(id).unwrap()
+      let before = state.data
+      state.data = Array::makei(length, i => if i < before.length() { before[i] } else { b'\x00' })
     }
   }
   None
@@ -237,4 +279,7 @@ pub extend Operation with ToJson::{to_json}
 pub extend Operation with @json.FromJson::{from_json}
 
 ///|
-pub extend BufferAdapter with @lab.Adapter::{identity, version, validate, execute, teardown, shrink_arguments}
+pub extend BufferAdapter with @lab.Adapter::{identity, version, validate, execute, teardown, shrink_arguments, repair}
+
+///|
+pub extend BufferModel with @lab.StateModel::{apply}

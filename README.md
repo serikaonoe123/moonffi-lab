@@ -61,7 +61,13 @@ Eigen 场景检查读写、转置结果与源矩阵的独立性，以及不兼�
 - `reduction.json`：原始和最终步数、执行次数、基线报告、停止原因、接受/拒绝/无效候选数、重放确认数。
 - `reduction-events.jsonl`：每个执行或无效候选的阶段、具体输入、决定及原因；已执行候选还可对应到 `case-N` 原始日志。
 
+缩减可选 `--strategy plain|dependency|state`（默认 `state`）：普通删除、对象依赖级联删除、纯状态模型修整。三者共享调度、预算和失败指纹。状态修整只删除不再合法的步骤，不重写输入；每个额外删除都必须记录原因。Buffer 模型现在支持共享引用及通过别名扩缩容后的索引约束。
+
 `confirmed=true` 只表示最终候选连续三次保持失败指纹。必须再看 `stop_reason`：`search_complete` 表示完成本轮策略；`execution_budget`/`wall_budget` 表示预算终止；`unstable_baseline`/`unstable_final` 表示重放不稳定；`unsupported_outcome` 表示没有可缩减的性质失败。**确认失败不代表已经缩短，也不代表全局最短。**
+
+`deletion_minimal=true` 进一步要求最终轨迹的每个单步删除候选都已在当前策略下检查，没有保留指纹的候选，没有环境/协议错误等未决结果，且最终三次重放一致。这是在声明的模型和观测范围内完成删除邻域检查，不表示参数最小、全局最小或底层根因相同。`neighborhood_checked`、`neighborhood_complete` 和 `inconclusive_neighbors` 保留核查计数。
+
+运行 `& .\scripts\benchmark-reduction.ps1` 可在已构建的 Buffer 运行器上复现三种策略的对照。数据、候选日志、独立子集校验与 Markdown 表格写入新结果目录。实验范围和结论见 [缩减对照实验](docs/REDUCTION-STUDY.md)。
 
 ## 接入和边界
 

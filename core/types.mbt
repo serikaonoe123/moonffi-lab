@@ -66,6 +66,7 @@ pub(open) trait Adapter {
   execute(Self, Step) -> Failure?
   teardown(Self) -> Failure?
   shrink_arguments(Self, Step) -> Array[Step]
+  repair(Self, Trace) -> Repair
 }
 
 ///|

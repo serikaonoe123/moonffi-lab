@@ -51,6 +51,7 @@ foreach ($mode in @('nul','share','error')) {
   $reduction = Read-Json (Join-Path $reductionDir 'reduction.json')
   Check ($reduction.confirmed -and $reduction.reduced_steps -lt $reduction.original_steps -and $reduction.executions -le 100) "Reduction not confirmed/smaller/bounded for $mode"
   Check ($reduction.baseline_checks -eq 3 -and $reduction.final_checks -eq 3 -and $reduction.stop_reason -eq 'search_complete') "Incomplete search/stability checks for $mode"
+  Check ($reduction.deletion_minimal -and $reduction.neighborhood_complete -and $reduction.neighborhood_checked -eq $reduction.reduced_steps) "Missing final deletion-neighborhood evidence for $mode"
   $reducedPath = Join-Path $reductionDir 'reduced.json'
   $replayDir = Join-Path $Out "replay-$mode"
   Invoke-Tool $buffer @('replay',$reducedPath,'--out',$replayDir) 1 (Join-Path $Out "replay-$mode.log")
@@ -96,6 +97,7 @@ foreach ($scenario in @(
   @('flaky-baseline',100,3,'unstable_baseline',$false),
   @('changing-fingerprint',100,3,'unstable_baseline',$false),
   @('flaky-final',100,3,'unstable_final',$false),
+  @('bad-repair',100,1,'search_complete',$true),
   @('pass',100,3,'unsupported_outcome',$false)
 )) {
   $mode = [string]$scenario[0]
@@ -115,9 +117,15 @@ foreach ($scenario in @(
     Check ($reduction.reduced_steps -eq 2) 'Synthetic oracle must retain arm + fail'
     Check ($reduction.invalid_candidates -ge 3) 'Invalid parameter candidates were not diagnosed'
     Check (@($ledger | Where-Object { $_.message -like '*changed operation*' }).Count -ge 2) 'Missing structural candidate rejection'
+    Check ($reduction.deletion_minimal) 'Stable oracle missing neighborhood evidence'
   }
   if ($budget -eq 6) {
     Check ($reduction.executions -eq 6 -and $reduction.reduced_steps -eq $reduction.original_steps) 'Six-run budget must reserve baseline/final checks without claiming reduction'
+    Check (-not $reduction.deletion_minimal -and -not $reduction.neighborhood_complete) 'Budget exhaustion was reported as minimal'
+  }
+  if ($mode -eq 'bad-repair') {
+    Check (-not $reduction.deletion_minimal -and $reduction.inconclusive_neighbors -eq $reduction.reduced_steps) 'Invalid adapter repair was reported as minimal'
+    Check (@($ledger | Where-Object { $_.message -like '*repair changed metadata*' }).Count -gt 0) 'Missing invalid repair diagnostics'
   }
   $facts.Add([ordered]@{ probe = $label; stop_reason = $reduction.stop_reason; confirmed = $reduction.confirmed; executions = $reduction.executions })
 }

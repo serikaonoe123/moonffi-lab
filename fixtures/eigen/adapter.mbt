@@ -50,6 +50,11 @@ pub impl @lab.Adapter for EigenAdapter with fn identity(_) { "eigen" }
 ///|
 pub impl @lab.Adapter for EigenAdapter with fn version(_) { "1" }
 
+///|
+pub impl @lab.Adapter for EigenAdapter with fn repair(_, trace) {
+  @lab.repair_dependencies(trace)
+}
+
 ///| Bounded integers keep the trace lossless and expectations independent of
 /// native Eigen. Shape/argument validation is pure and starts from scratch.
 pub impl @lab.Adapter for EigenAdapter with fn validate(_, trace) {
@@ -208,7 +213,7 @@ pub fn generate(seed : UInt64, mode~ : String = "correct", steps~ : Int = 32) ->
 }
 
 ///|
-pub extend EigenAdapter with @lab.Adapter::{identity, version, validate, execute, teardown, shrink_arguments}
+pub extend EigenAdapter with @lab.Adapter::{identity, version, validate, execute, teardown, shrink_arguments, repair}
 
 ///|
 pub extend Operation with ToJson::{to_json}

@@ -99,6 +99,25 @@ try {
     $controls = @(Read-Json (Join-Path $destination 'summary.json'))
     Require ($controls.Count -eq 10 -and @($controls | Where-Object outcome -ne 'Pass').Count -eq 0) "$kind control did not pass with ASan runtime active"
   }
+  $stage = 'resize-alias-control'
+  $resizeTrace = Read-Json (Join-Path $Out 'buffer-correct/case-1/case.json')
+  $resizeTrace.generator_version = 'asan-resize-control-1'
+  $resizeTrace.seed = '0'
+  $resizeTrace.steps = @(
+    @{ id='n'; op='new'; args=@('New','a','41'); defines=@('a'); uses=@(); releases=@() },
+    @{ id='s'; op='share'; args=@('Share','a','b'); defines=@('b'); uses=@('a'); releases=@() },
+    @{ id='grow'; op='resize'; args=@('Resize','b',16); defines=@(); uses=@('b'); releases=@() },
+    @{ id='write'; op='write'; args=@('Write','a',15,9); defines=@(); uses=@('a'); releases=@() },
+    @{ id='read-alias'; op='read'; args=@('Read','b'); defines=@(); uses=@('b'); releases=@() },
+    @{ id='close-a'; op='close'; args=@('Close','a'); defines=@(); uses=@(); releases=@('a') },
+    @{ id='empty'; op='resize'; args=@('Resize','b',0); defines=@(); uses=@('b'); releases=@() },
+    @{ id='read-empty'; op='read'; args=@('Read','b'); defines=@(); uses=@('b'); releases=@() },
+    @{ id='regrow'; op='resize'; args=@('Resize','b',2); defines=@(); uses=@('b'); releases=@() },
+    @{ id='read-zeroes'; op='read'; args=@('Read','b'); defines=@(); uses=@('b'); releases=@() }
+  )
+  $resizePath = Join-Path $Out 'resize-control.json'
+  $resizeTrace | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $resizePath -Encoding utf8
+  Invoke-Checked $buffer @('replay',$resizePath,'--timeout-ms','10000','--out',(Join-Path $Out 'resize-control')) 0 (Join-Path $Out 'resize-control.log')
   $stage = 'memory-reduction-boundary'
   $shrinkDir = Join-Path $Out 'canary-shrink'
   Invoke-Checked $buffer @('shrink',(Join-Path $canaryDir 'case-1/case.json'),'--timeout-ms','10000','--out',$shrinkDir) 3 (Join-Path $Out 'canary-shrink.log')
@@ -113,6 +132,7 @@ try {
     runtime_sha256 = (Get-FileHash -LiteralPath (Join-Path $asanDir 'clang_rt.asan_dynamic-x86_64.dll')).Hash
     canary_runs = 3; canary_outcome = 'MemoryError'; category = 'heap-buffer-overflow'
     correct_buffer_runs = 10; correct_eigen_runs = 10
+    resize_alias_control = 'Pass'
     instrumented_translation_units = @('fixtures/buffer/buffer.c','vendor/eigen-binding/eigen_shim.cpp (including instantiated Eigen headers)')
     not_instrumented = @('MoonBit-generated C','MoonBit runtime','async dependency C stubs','other prebuilt/system libraries')
     dependency_source = 'local pinned .mooncakes source cache; no build outputs copied'

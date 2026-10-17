@@ -17,7 +17,7 @@ pub async fn[A : @lab.Adapter] cli(
   generate : (UInt64, String, Int) -> @lab.Trace,
 ) -> Int {
   if arguments.length() < 2 || arguments[1] == "--help" {
-    println("MoonFFI Lab\n  run [--seed N] [--cases N] [--steps N] [--mode MODE] [--out DIR]\n  generate [same options except --cases]\n  replay CASE.json [--mode MODE] [--out DIR]\n  shrink CASE.json [--budget N] [--wall-ms N] [--out DIR]\n  all execution commands accept --timeout-ms N\nAn output directory must be new; it contains complete evidence.")
+    println("MoonFFI Lab\n  run [--seed N] [--cases N] [--steps N] [--mode MODE] [--out DIR]\n  generate [same options except --cases]\n  replay CASE.json [--mode MODE] [--out DIR]\n  shrink CASE.json [--budget N] [--wall-ms N] [--strategy plain|dependency|state] [--out DIR]\n  all execution commands accept --timeout-ms N\nAn output directory must be new; it contains complete evidence.")
     return 0
   }
   if arguments[1] == "--worker" {
@@ -34,7 +34,7 @@ pub async fn[A : @lab.Adapter] cli(
   let mut index = if has_input { 3 } else { 2 }
   while index < arguments.length() {
     let key = arguments[index]
-    if !["--out", "--seed", "--cases", "--steps", "--mode", "--timeout-ms", "--budget", "--wall-ms"].contains(key) || index + 1 >= arguments.length() {
+    if !["--out", "--seed", "--cases", "--steps", "--mode", "--timeout-ms", "--budget", "--wall-ms", "--strategy"].contains(key) || index + 1 >= arguments.length() {
       fail("unknown option or missing value: \{key}")
     }
     if options.contains(key) { fail("repeated option: \{key}") }
@@ -56,7 +56,8 @@ pub async fn[A : @lab.Adapter] cli(
     if command == "shrink" {
       let budget = bounded_int(options, "--budget", "200", 6, 10000)
       let wall_ms = bounded_int(options, "--wall-ms", "60000", 100, 600000)
-      let reduction = controller.shrink(adapter, trace, budget~, wall_ms~)
+      let strategy = option(options, "--strategy", "state")
+      let reduction = controller.shrink(adapter, trace, budget~, wall_ms~, strategy~)
       println(reduction.to_json().stringify(indent=2))
       return if reduction.confirmed { 1 } else { 3 }
     }

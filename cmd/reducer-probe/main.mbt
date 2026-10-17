@@ -11,6 +11,12 @@ impl @lab.Adapter for Oracle with fn identity(_) { "reducer-oracle" }
 ///|
 impl @lab.Adapter for Oracle with fn version(_) { "1" }
 ///|
+impl @lab.Adapter for Oracle with fn repair(self, trace) {
+  if self.mode == "bad-repair" {
+    { trace: { ..trace, seed: "silently-rewritten" }, removed: [] }
+  } else { @lab.repair_dependencies(trace) }
+}
+///|
 impl @lab.Adapter for Oracle with fn validate(_, trace) {
   for step in trace.steps {
     if !["arm", "noise", "fail"].contains(step.op) { return Some("unknown oracle operation") }

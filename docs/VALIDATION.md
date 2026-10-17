@@ -1,5 +1,15 @@
 # 缩减器验证记录
 
+## 最新状态：2026-10-17 10:00（Asia/Shanghai）
+
+状态感知缩减版本已完成 **28/28 单测**、完整 behavior 集成验收和 ASan stub profile 验收。证据分别保存在 `results/verify-state-final-20261017` 和 `results/asan-state-final-20261017`。后者额外检查通过别名扩容、关闭原句柄、缩到零和重新扩容，结果为 Pass。
+
+新增验证包括纯状态修整、共享别名索引约束、七步轨迹全部 128 个子集的独立模型校验，以及最终删除邻域审计。预算耗尽和错误修整器不能报告 `deletion_minimal=true`。错误修整器可以稳定重放原失败，也可以走完邻域遍历，但未决邻居使其证据不足以判定删除最小性。
+
+9 个案例、27 次策略对照与 state 结果 111 个真子集的独立重放已通过。具体数据、方法和结论限制见 [对照实验](REDUCTION-STUDY.md)；历史验证记录保留如下。
+
+本次上下文接续后重新运行完整验收，28/28 单测及集成检查通过，证据位于 `results/verify-context-continuation-20261017`。带语义修整覆盖断言的三策略对照也已重新通过，证据位于 `results/benchmark-context-continuation-20261017`。ASan 源清单核对仅发现 `core/repair.mbt` 的注释变化；原生及适配器实现与前述 ASan 验收一致。
+
 验证时间：2026-10-16 21:55（Asia/Shanghai）。平台：Windows x64 / MSVC，native debug，behavior profile。
 工具链：moon 0.1.20261012、moonc 0.10.15，async 0.22.5。
 
