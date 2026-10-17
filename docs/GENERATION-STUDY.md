@@ -53,6 +53,6 @@ $buffer = '.\_build\native\debug\build\cmd\buffer-lab\buffer-lab.exe'
 - 同 seed 进程内与跨独立生成进程均产生相同具体输入；人工缺陷模式不改变操作序列。
 - 原有完整集成验收通过，证据在 `results/verify-stateful-generator-20261017`。ASan canary 与正常对照通过，额外 16 条 stateful 正确场景通过，证据在 `results/asan-stateful-generator-20261017`。
 
-机器可读摘要见 [生成实验快照](evidence/generation-stateful-20261017.json)。原始输入、逐候选日志、缩减和修复后重放记录保留在各 results 目录。CI 新增 generation 任务，使用导出提交在独立 runner 上重复上述实验；云端状态以对应提交的实际运行记录为准。
+机器可读摘要见 [生成实验快照](evidence/generation-stateful-20261017.json)。原始输入、逐候选日志、缩减和修复后重放记录保留在各 results 目录。[Actions run 38997018833](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38997018833) 已在托管 Windows runner 上验证提交 `ee6bb3a`，behavior、ASan、benchmark、generation 四项全部通过。已下载核对产物：32/32 单测、512 场景的失败计数与操作/状态特征观测、三个固定案例重放均与本地一致，见 [云端快照](evidence/github-ci-38997018833.json)。
 
-后续重点是扩充更长依赖历史和更多失败根因的对照语料，重复测量缩减开销，以及扩展真实绑定的探索生成。当前没有覆盖率引导、状态空间穷尽或全局最小性声明。
+新增的 seed 17–20 × 三种模式现已纳入 [三轮缩减对照](REDUCTION-STUDY.md)，所有筛选输入及未完成结果均保留。后续重点是扩充更长依赖历史和更多失败根因的对照语料，以及扩展真实绑定的探索生成。当前没有覆盖率引导、状态空间穷尽或全局最小性声明。

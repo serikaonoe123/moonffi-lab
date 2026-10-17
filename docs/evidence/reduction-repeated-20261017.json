@@ -1,0 +1,3611 @@
+{
+  "schema": 2,
+  "observed_on": "2026-10-17",
+  "evidence_directory": "results/benchmark-repeated-final-20261017",
+  "engine_source_commit": "ee6bb3a034d84500dbf34e33addbc7022a391e9b",
+  "protocol": {
+    "schema": 2,
+    "study": "reduction-study-2",
+    "repetitions": 3,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "execution_budget": 200,
+    "wall_budget_ms": 60000,
+    "exhaustive_subset_limit": 6,
+    "exploration_seeds": [
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "exploration_modes": [
+      "nul",
+      "share",
+      "error"
+    ],
+    "exploration_steps": 64,
+    "default_seeds": [
+      "1",
+      "17",
+      "20261016"
+    ],
+    "synthetic_noise_counts": [
+      0,
+      2,
+      6
+    ],
+    "screening": "Freeze every input and screen it before any timed reduction; retain passing inputs in screening.json",
+    "order": "For repetition r and zero-based case c, rotate plain/dependency/state by (r-1+c) modulo 3",
+    "validation": "Corrected replays and bounded subset enumeration occur after all timed reductions; reuse identical subset oracles by concrete trace hash and fingerprint",
+    "timing": "Record controller elapsed_ms and CLI invocation_ms, including output capture; no warm-up samples discarded",
+    "installer_or_engine_changes": false,
+    "executable_sha256": "24390BA3903E64E259D82EE370059276EC92A7FAB83B538E598C08800785CC4E",
+    "script_sha256": "1DC2F46A3BA03D730F6600B56F20048764AC593AA2F7302933835B543CDD3717",
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "host_environment": {
+      "os": "Microsoft Windows 10.0.26200",
+      "powershell": "7.6.5",
+      "image_version": null
+    }
+  },
+  "verification": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 21,
+    "cases": 21,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 3,
+    "measurements": 189,
+    "complete_searches": 189,
+    "repeatable_case_strategies": 63,
+    "case_strategy_groups": 63,
+    "actual_proper_subsets_checked": 214.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-17T11:16:06.4384265+08:00",
+    "executable_sha256": "24390BA3903E64E259D82EE370059276EC92A7FAB83B538E598C08800785CC4E",
+    "protocol_sha256": "C6DFF38EAF0E81BF2A81086CB82F6E53E9653605874790D9CD84BF586C83CC1B"
+  },
+  "screening": [
+    {
+      "case": "generated-error-1",
+      "family": "original-generator",
+      "seed": "1",
+      "fixture_mode": "error",
+      "path": "generated-1/case.json",
+      "sha256": "F73CE2600AFE2CD027C79C2110AF86DCF673A5E56771786841D7C4D8537EAD66",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s2",
+      "included": true
+    },
+    {
+      "case": "generated-error-17",
+      "family": "original-generator",
+      "seed": "17",
+      "fixture_mode": "error",
+      "path": "generated-17/case.json",
+      "sha256": "30DEC9BC4290D24AF40BE9A363B747EEB71102E222F1B89BAD51EF4E021E07B3",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s6",
+      "included": true
+    },
+    {
+      "case": "generated-error-20261016",
+      "family": "original-generator",
+      "seed": "20261016",
+      "fixture_mode": "error",
+      "path": "generated-20261016/case.json",
+      "sha256": "819E72C03CAC93E7E54071AF8AE1BBBBE7D8DB78CE58999323B2D5CB5A01198F",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s6",
+      "included": true
+    },
+    {
+      "case": "resize-alias-0",
+      "family": "synthetic-resize-alias",
+      "seed": "0",
+      "fixture_mode": "error",
+      "path": "resize-0.json",
+      "sha256": "79C9842FDD8B3048A79BFF0D9678130A2747E513FD690682C6D6696B388F85F3",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "separated-resize-0",
+      "family": "synthetic-separated-resize",
+      "seed": "0",
+      "fixture_mode": "error",
+      "path": "separated-resize-0.json",
+      "sha256": "07385AE0A863AA35180B6386EB16EE3BA99663B6758172FE00D7DD607861A06F",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "resize-alias-2",
+      "family": "synthetic-resize-alias",
+      "seed": "2",
+      "fixture_mode": "error",
+      "path": "resize-2.json",
+      "sha256": "CA4482934A2761AFB544BAB412A42DC0370FEEBA53E1C35FAAB0EC09F5B17C39",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "separated-resize-2",
+      "family": "synthetic-separated-resize",
+      "seed": "2",
+      "fixture_mode": "error",
+      "path": "separated-resize-2.json",
+      "sha256": "2EF6FD684A4D569E5AC13C571DA36E9845A764F4004B607D72B3BEB6FC6DDC22",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "resize-alias-6",
+      "family": "synthetic-resize-alias",
+      "seed": "6",
+      "fixture_mode": "error",
+      "path": "resize-6.json",
+      "sha256": "A7A797CBF4BE2B8874C0256429577147DFF8342D1DA84E0E6EA9EEC051C75A72",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "separated-resize-6",
+      "family": "synthetic-separated-resize",
+      "seed": "6",
+      "fixture_mode": "error",
+      "path": "separated-resize-6.json",
+      "sha256": "87F8DD9C6E60961E362584139013810AD15228F94986BC73116997CFF1ED09DC",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "stateful-nul-17",
+      "family": "stateful-exploration",
+      "seed": "17",
+      "fixture_mode": "nul",
+      "path": "stateful-nul-17-input/case.json",
+      "sha256": "C039C64FABA6DF1B256397B66E08D0A108E0B092D16CD52C41BF44386B81E521",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s5",
+      "included": true
+    },
+    {
+      "case": "stateful-share-17",
+      "family": "stateful-exploration",
+      "seed": "17",
+      "fixture_mode": "share",
+      "path": "stateful-share-17-input/case.json",
+      "sha256": "435812BC70D8CDBA04699AF758AEE3EDC105AC18BFE7B472C268B6C46A248019",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:shared-reference-alive:s29",
+      "included": true
+    },
+    {
+      "case": "stateful-error-17",
+      "family": "stateful-exploration",
+      "seed": "17",
+      "fixture_mode": "error",
+      "path": "stateful-error-17-input/case.json",
+      "sha256": "D329861732E6C6EFFB23B93569C0588D881374B6C6F5B16D1EC79E0107DA7592",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s5",
+      "included": true
+    },
+    {
+      "case": "stateful-nul-18",
+      "family": "stateful-exploration",
+      "seed": "18",
+      "fixture_mode": "nul",
+      "path": "stateful-nul-18-input/case.json",
+      "sha256": "44B814F44CE57804164CF1DEC7F661733758C72E8CCA08D568B7E37B5073CF61",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:valid-write:s13",
+      "included": true
+    },
+    {
+      "case": "stateful-share-18",
+      "family": "stateful-exploration",
+      "seed": "18",
+      "fixture_mode": "share",
+      "path": "stateful-share-18-input/case.json",
+      "sha256": "D2E0EB81F14784120F8867236FAE3CE013CC767DF82A1F7D11284D4CFDC1C862",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:shared-reference-alive:s53",
+      "included": true
+    },
+    {
+      "case": "stateful-error-18",
+      "family": "stateful-exploration",
+      "seed": "18",
+      "fixture_mode": "error",
+      "path": "stateful-error-18-input/case.json",
+      "sha256": "570E1BE985FBB88FFB504046D462F4CD9A10C9A3E02567479A4C705D93FA2A92",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s7",
+      "included": true
+    },
+    {
+      "case": "stateful-nul-19",
+      "family": "stateful-exploration",
+      "seed": "19",
+      "fixture_mode": "nul",
+      "path": "stateful-nul-19-input/case.json",
+      "sha256": "B51F2CC2AAD56ABC8431B78F4019FB4AD212E5D66C2E8C48963C3C50E7A7C0A6",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:valid-write:s1",
+      "included": true
+    },
+    {
+      "case": "stateful-share-19",
+      "family": "stateful-exploration",
+      "seed": "19",
+      "fixture_mode": "share",
+      "path": "stateful-share-19-input/case.json",
+      "sha256": "FE69320A9C9C4222A8A7C5A2040F3F90327131784D3C42585F13B444ADED292A",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:shared-reference-alive:s39",
+      "included": true
+    },
+    {
+      "case": "stateful-error-19",
+      "family": "stateful-exploration",
+      "seed": "19",
+      "fixture_mode": "error",
+      "path": "stateful-error-19-input/case.json",
+      "sha256": "71909AE727EEDB8A211F5CE6F35A6A449D85E961B9E4368AA4B091FCE11D751C",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s24",
+      "included": true
+    },
+    {
+      "case": "stateful-nul-20",
+      "family": "stateful-exploration",
+      "seed": "20",
+      "fixture_mode": "nul",
+      "path": "stateful-nul-20-input/case.json",
+      "sha256": "414ED91968B7FC103F9AC690FA1E1292CDEA299760B70376DC0FD21B0C4678EF",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s2",
+      "included": true
+    },
+    {
+      "case": "stateful-share-20",
+      "family": "stateful-exploration",
+      "seed": "20",
+      "fixture_mode": "share",
+      "path": "stateful-share-20-input/case.json",
+      "sha256": "9D298C531EDA0EFFAAE4FBAF7CAAA0D21CD6387F2A5EF5E7DEF08536A847A0AA",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:shared-reference-alive:s30",
+      "included": true
+    },
+    {
+      "case": "stateful-error-20",
+      "family": "stateful-exploration",
+      "seed": "20",
+      "fixture_mode": "error",
+      "path": "stateful-error-20-input/case.json",
+      "sha256": "54AFC7E22F18673C4DDD0243F1CE6CA134F2432CC1F21C6498A4FD6E89BF1943",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s39",
+      "included": true
+    }
+  ],
+  "aggregate": [
+    {
+      "case": "generated-error-1",
+      "family": "original-generator",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 67.0,
+        "minimum": 67.0,
+        "maximum": 67.0
+      },
+      "worker_executions": {
+        "median": 20.0,
+        "minimum": 20.0,
+        "maximum": 20.0
+      },
+      "invalid_proposals": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "elapsed_ms": {
+        "median": 579.0,
+        "minimum": 579.0,
+        "maximum": 630.0
+      },
+      "invocation_ms": {
+        "median": 595.0,
+        "minimum": 594.0,
+        "maximum": 647.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "generated-error-1",
+      "family": "original-generator",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 67.0,
+        "minimum": 67.0,
+        "maximum": 67.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 665.0,
+        "minimum": 653.0,
+        "maximum": 708.0
+      },
+      "invocation_ms": {
+        "median": 683.0,
+        "minimum": 669.0,
+        "maximum": 725.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "generated-error-1",
+      "family": "original-generator",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 67.0,
+        "minimum": 67.0,
+        "maximum": 67.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 674.0,
+        "minimum": 645.0,
+        "maximum": 690.0
+      },
+      "invocation_ms": {
+        "median": 688.0,
+        "minimum": 658.0,
+        "maximum": 705.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "generated-error-17",
+      "family": "original-generator",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 71.0,
+        "minimum": 71.0,
+        "maximum": 71.0
+      },
+      "worker_executions": {
+        "median": 20.0,
+        "minimum": 20.0,
+        "maximum": 20.0
+      },
+      "invalid_proposals": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "elapsed_ms": {
+        "median": 602.0,
+        "minimum": 586.0,
+        "maximum": 606.0
+      },
+      "invocation_ms": {
+        "median": 617.0,
+        "minimum": 600.0,
+        "maximum": 620.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "generated-error-17",
+      "family": "original-generator",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 71.0,
+        "minimum": 71.0,
+        "maximum": 71.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 694.0,
+        "minimum": 670.0,
+        "maximum": 705.0
+      },
+      "invocation_ms": {
+        "median": 710.0,
+        "minimum": 684.0,
+        "maximum": 720.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "generated-error-17",
+      "family": "original-generator",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 71.0,
+        "minimum": 71.0,
+        "maximum": 71.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 683.0,
+        "minimum": 662.0,
+        "maximum": 727.0
+      },
+      "invocation_ms": {
+        "median": 697.0,
+        "minimum": 676.0,
+        "maximum": 741.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "generated-error-20261016",
+      "family": "original-generator",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 71.0,
+        "minimum": 71.0,
+        "maximum": 71.0
+      },
+      "worker_executions": {
+        "median": 20.0,
+        "minimum": 20.0,
+        "maximum": 20.0
+      },
+      "invalid_proposals": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "elapsed_ms": {
+        "median": 595.0,
+        "minimum": 589.0,
+        "maximum": 598.0
+      },
+      "invocation_ms": {
+        "median": 610.0,
+        "minimum": 605.0,
+        "maximum": 613.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "generated-error-20261016",
+      "family": "original-generator",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 71.0,
+        "minimum": 71.0,
+        "maximum": 71.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 698.0,
+        "minimum": 677.0,
+        "maximum": 702.0
+      },
+      "invocation_ms": {
+        "median": 713.0,
+        "minimum": 692.0,
+        "maximum": 717.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "generated-error-20261016",
+      "family": "original-generator",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 71.0,
+        "minimum": 71.0,
+        "maximum": 71.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 677.0,
+        "minimum": 661.0,
+        "maximum": 684.0
+      },
+      "invocation_ms": {
+        "median": 693.0,
+        "minimum": 675.0,
+        "maximum": 698.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "resize-alias-0",
+      "family": "synthetic-resize-alias",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 15.0,
+        "minimum": 15.0,
+        "maximum": 15.0
+      },
+      "invalid_proposals": {
+        "median": 6.0,
+        "minimum": 6.0,
+        "maximum": 6.0
+      },
+      "elapsed_ms": {
+        "median": 455.0,
+        "minimum": 454.0,
+        "maximum": 479.0
+      },
+      "invocation_ms": {
+        "median": 469.0,
+        "minimum": 468.0,
+        "maximum": 495.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "resize-alias-0",
+      "family": "synthetic-resize-alias",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 21.0,
+        "minimum": 21.0,
+        "maximum": 21.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 628.0,
+        "minimum": 598.0,
+        "maximum": 670.0
+      },
+      "invocation_ms": {
+        "median": 642.0,
+        "minimum": 611.0,
+        "maximum": 684.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "resize-alias-0",
+      "family": "synthetic-resize-alias",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 21.0,
+        "minimum": 21.0,
+        "maximum": 21.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 599.0,
+        "minimum": 595.0,
+        "maximum": 615.0
+      },
+      "invocation_ms": {
+        "median": 613.0,
+        "minimum": 609.0,
+        "maximum": 632.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "separated-resize-0",
+      "family": "synthetic-separated-resize",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 17.0,
+        "minimum": 17.0,
+        "maximum": 17.0
+      },
+      "invalid_proposals": {
+        "median": 7.0,
+        "minimum": 7.0,
+        "maximum": 7.0
+      },
+      "elapsed_ms": {
+        "median": 517.0,
+        "minimum": 515.0,
+        "maximum": 533.0
+      },
+      "invocation_ms": {
+        "median": 532.0,
+        "minimum": 530.0,
+        "maximum": 549.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "separated-resize-0",
+      "family": "synthetic-separated-resize",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 1.0,
+        "minimum": 1.0,
+        "maximum": 1.0
+      },
+      "elapsed_ms": {
+        "median": 682.0,
+        "minimum": 672.0,
+        "maximum": 689.0
+      },
+      "invocation_ms": {
+        "median": 696.0,
+        "minimum": 687.0,
+        "maximum": 705.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "separated-resize-0",
+      "family": "synthetic-separated-resize",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 681.0,
+        "minimum": 657.0,
+        "maximum": 682.0
+      },
+      "invocation_ms": {
+        "median": 694.0,
+        "minimum": 671.0,
+        "maximum": 695.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "resize-alias-2",
+      "family": "synthetic-resize-alias",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 26.0,
+        "minimum": 26.0,
+        "maximum": 26.0
+      },
+      "invalid_proposals": {
+        "median": 16.0,
+        "minimum": 16.0,
+        "maximum": 16.0
+      },
+      "elapsed_ms": {
+        "median": 875.0,
+        "minimum": 863.0,
+        "maximum": 893.0
+      },
+      "invocation_ms": {
+        "median": 890.0,
+        "minimum": 879.0,
+        "maximum": 909.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "resize-alias-2",
+      "family": "synthetic-resize-alias",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 676.0,
+        "minimum": 674.0,
+        "maximum": 691.0
+      },
+      "invocation_ms": {
+        "median": 691.0,
+        "minimum": 688.0,
+        "maximum": 706.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "resize-alias-2",
+      "family": "synthetic-resize-alias",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 683.0,
+        "minimum": 678.0,
+        "maximum": 697.0
+      },
+      "invocation_ms": {
+        "median": 697.0,
+        "minimum": 691.0,
+        "maximum": 711.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "separated-resize-2",
+      "family": "synthetic-separated-resize",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 21.0,
+        "minimum": 21.0,
+        "maximum": 21.0
+      },
+      "invalid_proposals": {
+        "median": 8.0,
+        "minimum": 8.0,
+        "maximum": 8.0
+      },
+      "elapsed_ms": {
+        "median": 671.0,
+        "minimum": 658.0,
+        "maximum": 712.0
+      },
+      "invocation_ms": {
+        "median": 686.0,
+        "minimum": 673.0,
+        "maximum": 728.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "separated-resize-2",
+      "family": "synthetic-separated-resize",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 27.0,
+        "minimum": 27.0,
+        "maximum": 27.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 807.0,
+        "minimum": 804.0,
+        "maximum": 807.0
+      },
+      "invocation_ms": {
+        "median": 822.0,
+        "minimum": 819.0,
+        "maximum": 823.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "separated-resize-2",
+      "family": "synthetic-separated-resize",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 27.0,
+        "minimum": 27.0,
+        "maximum": 27.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 811.0,
+        "minimum": 799.0,
+        "maximum": 850.0
+      },
+      "invocation_ms": {
+        "median": 826.0,
+        "minimum": 814.0,
+        "maximum": 865.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "resize-alias-6",
+      "family": "synthetic-resize-alias",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 24.0,
+        "minimum": 24.0,
+        "maximum": 24.0
+      },
+      "invalid_proposals": {
+        "median": 11.0,
+        "minimum": 11.0,
+        "maximum": 11.0
+      },
+      "elapsed_ms": {
+        "median": 871.0,
+        "minimum": 863.0,
+        "maximum": 883.0
+      },
+      "invocation_ms": {
+        "median": 887.0,
+        "minimum": 877.0,
+        "maximum": 898.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "resize-alias-6",
+      "family": "synthetic-resize-alias",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 27.0,
+        "minimum": 27.0,
+        "maximum": 27.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 842.0,
+        "minimum": 835.0,
+        "maximum": 945.0
+      },
+      "invocation_ms": {
+        "median": 857.0,
+        "minimum": 850.0,
+        "maximum": 961.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "resize-alias-6",
+      "family": "synthetic-resize-alias",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 27.0,
+        "minimum": 27.0,
+        "maximum": 27.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 853.0,
+        "minimum": 849.0,
+        "maximum": 864.0
+      },
+      "invocation_ms": {
+        "median": 868.0,
+        "minimum": 863.0,
+        "maximum": 879.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "separated-resize-6",
+      "family": "synthetic-separated-resize",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 8.0,
+        "minimum": 8.0,
+        "maximum": 8.0
+      },
+      "elapsed_ms": {
+        "median": 807.0,
+        "minimum": 780.0,
+        "maximum": 808.0
+      },
+      "invocation_ms": {
+        "median": 820.0,
+        "minimum": 793.0,
+        "maximum": 821.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "separated-resize-6",
+      "family": "synthetic-separated-resize",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 29.0,
+        "minimum": 29.0,
+        "maximum": 29.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 901.0,
+        "minimum": 892.0,
+        "maximum": 943.0
+      },
+      "invocation_ms": {
+        "median": 916.0,
+        "minimum": 905.0,
+        "maximum": 957.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "separated-resize-6",
+      "family": "synthetic-separated-resize",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 73.0,
+        "minimum": 73.0,
+        "maximum": 73.0
+      },
+      "worker_executions": {
+        "median": 29.0,
+        "minimum": 29.0,
+        "maximum": 29.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 926.0,
+        "minimum": 905.0,
+        "maximum": 944.0
+      },
+      "invocation_ms": {
+        "median": 941.0,
+        "minimum": 919.0,
+        "maximum": 959.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-17",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 30.0,
+        "minimum": 30.0,
+        "maximum": 30.0
+      },
+      "worker_executions": {
+        "median": 18.0,
+        "minimum": 18.0,
+        "maximum": 18.0
+      },
+      "invalid_proposals": {
+        "median": 7.0,
+        "minimum": 7.0,
+        "maximum": 7.0
+      },
+      "elapsed_ms": {
+        "median": 551.0,
+        "minimum": 544.0,
+        "maximum": 573.0
+      },
+      "invocation_ms": {
+        "median": 565.0,
+        "minimum": 559.0,
+        "maximum": 588.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-17",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 30.0,
+        "minimum": 30.0,
+        "maximum": 30.0
+      },
+      "worker_executions": {
+        "median": 25.0,
+        "minimum": 25.0,
+        "maximum": 25.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 735.0,
+        "minimum": 733.0,
+        "maximum": 742.0
+      },
+      "invocation_ms": {
+        "median": 749.0,
+        "minimum": 748.0,
+        "maximum": 757.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-17",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 30.0,
+        "minimum": 30.0,
+        "maximum": 30.0
+      },
+      "worker_executions": {
+        "median": 25.0,
+        "minimum": 25.0,
+        "maximum": 25.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 756.0,
+        "minimum": 752.0,
+        "maximum": 757.0
+      },
+      "invocation_ms": {
+        "median": 771.0,
+        "minimum": 767.0,
+        "maximum": 773.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-17",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 63.0,
+        "minimum": 63.0,
+        "maximum": 63.0
+      },
+      "worker_executions": {
+        "median": 33.0,
+        "minimum": 33.0,
+        "maximum": 33.0
+      },
+      "invalid_proposals": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "elapsed_ms": {
+        "median": 1237.0,
+        "minimum": 1226.0,
+        "maximum": 1250.0
+      },
+      "invocation_ms": {
+        "median": 1253.0,
+        "minimum": 1242.0,
+        "maximum": 1266.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-17",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 63.0,
+        "minimum": 63.0,
+        "maximum": 63.0
+      },
+      "worker_executions": {
+        "median": 31.0,
+        "minimum": 31.0,
+        "maximum": 31.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 1047.0,
+        "minimum": 1021.0,
+        "maximum": 1078.0
+      },
+      "invocation_ms": {
+        "median": 1062.0,
+        "minimum": 1037.0,
+        "maximum": 1093.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-17",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 63.0,
+        "minimum": 63.0,
+        "maximum": 63.0
+      },
+      "worker_executions": {
+        "median": 31.0,
+        "minimum": 31.0,
+        "maximum": 31.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 1073.0,
+        "minimum": 1045.0,
+        "maximum": 1078.0
+      },
+      "invocation_ms": {
+        "median": 1089.0,
+        "minimum": 1060.0,
+        "maximum": 1092.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-17",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 173.0,
+        "minimum": 173.0,
+        "maximum": 173.0
+      },
+      "worker_executions": {
+        "median": 22.0,
+        "minimum": 22.0,
+        "maximum": 22.0
+      },
+      "invalid_proposals": {
+        "median": 7.0,
+        "minimum": 7.0,
+        "maximum": 7.0
+      },
+      "elapsed_ms": {
+        "median": 686.0,
+        "minimum": 685.0,
+        "maximum": 701.0
+      },
+      "invocation_ms": {
+        "median": 701.0,
+        "minimum": 700.0,
+        "maximum": 719.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-17",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 173.0,
+        "minimum": 173.0,
+        "maximum": 173.0
+      },
+      "worker_executions": {
+        "median": 29.0,
+        "minimum": 29.0,
+        "maximum": 29.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 886.0,
+        "minimum": 866.0,
+        "maximum": 912.0
+      },
+      "invocation_ms": {
+        "median": 901.0,
+        "minimum": 880.0,
+        "maximum": 928.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-17",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 173.0,
+        "minimum": 173.0,
+        "maximum": 173.0
+      },
+      "worker_executions": {
+        "median": 29.0,
+        "minimum": 29.0,
+        "maximum": 29.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 886.0,
+        "minimum": 875.0,
+        "maximum": 915.0
+      },
+      "invocation_ms": {
+        "median": 900.0,
+        "minimum": 889.0,
+        "maximum": 929.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-18",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 547.0,
+        "minimum": 547.0,
+        "maximum": 547.0
+      },
+      "worker_executions": {
+        "median": 24.0,
+        "minimum": 24.0,
+        "maximum": 24.0
+      },
+      "invalid_proposals": {
+        "median": 15.0,
+        "minimum": 15.0,
+        "maximum": 15.0
+      },
+      "elapsed_ms": {
+        "median": 806.0,
+        "minimum": 800.0,
+        "maximum": 822.0
+      },
+      "invocation_ms": {
+        "median": 820.0,
+        "minimum": 815.0,
+        "maximum": 838.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-18",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 547.0,
+        "minimum": 547.0,
+        "maximum": 547.0
+      },
+      "worker_executions": {
+        "median": 25.0,
+        "minimum": 25.0,
+        "maximum": 25.0
+      },
+      "invalid_proposals": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "elapsed_ms": {
+        "median": 782.0,
+        "minimum": 763.0,
+        "maximum": 788.0
+      },
+      "invocation_ms": {
+        "median": 796.0,
+        "minimum": 778.0,
+        "maximum": 803.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-18",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 547.0,
+        "minimum": 547.0,
+        "maximum": 547.0
+      },
+      "worker_executions": {
+        "median": 27.0,
+        "minimum": 27.0,
+        "maximum": 27.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 843.0,
+        "minimum": 825.0,
+        "maximum": 866.0
+      },
+      "invocation_ms": {
+        "median": 858.0,
+        "minimum": 841.0,
+        "maximum": 882.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-18",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 578.0,
+        "minimum": 578.0,
+        "maximum": 578.0
+      },
+      "worker_executions": {
+        "median": 53.0,
+        "minimum": 53.0,
+        "maximum": 53.0
+      },
+      "invalid_proposals": {
+        "median": 43.0,
+        "minimum": 43.0,
+        "maximum": 43.0
+      },
+      "elapsed_ms": {
+        "median": 2557.0,
+        "minimum": 2480.0,
+        "maximum": 2635.0
+      },
+      "invocation_ms": {
+        "median": 2572.0,
+        "minimum": 2495.0,
+        "maximum": 2650.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-18",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 578.0,
+        "minimum": 578.0,
+        "maximum": 578.0
+      },
+      "worker_executions": {
+        "median": 33.0,
+        "minimum": 33.0,
+        "maximum": 33.0
+      },
+      "invalid_proposals": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "elapsed_ms": {
+        "median": 1152.0,
+        "minimum": 1144.0,
+        "maximum": 1228.0
+      },
+      "invocation_ms": {
+        "median": 1167.0,
+        "minimum": 1160.0,
+        "maximum": 1246.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-18",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 578.0,
+        "minimum": 578.0,
+        "maximum": 578.0
+      },
+      "worker_executions": {
+        "median": 35.0,
+        "minimum": 35.0,
+        "maximum": 35.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 1215.0,
+        "minimum": 1208.0,
+        "maximum": 1229.0
+      },
+      "invocation_ms": {
+        "median": 1231.0,
+        "minimum": 1222.0,
+        "maximum": 1244.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-18",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 53.0,
+        "minimum": 53.0,
+        "maximum": 53.0
+      },
+      "worker_executions": {
+        "median": 21.0,
+        "minimum": 21.0,
+        "maximum": 21.0
+      },
+      "invalid_proposals": {
+        "median": 9.0,
+        "minimum": 9.0,
+        "maximum": 9.0
+      },
+      "elapsed_ms": {
+        "median": 664.0,
+        "minimum": 649.0,
+        "maximum": 668.0
+      },
+      "invocation_ms": {
+        "median": 678.0,
+        "minimum": 665.0,
+        "maximum": 683.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-18",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 53.0,
+        "minimum": 53.0,
+        "maximum": 53.0
+      },
+      "worker_executions": {
+        "median": 27.0,
+        "minimum": 27.0,
+        "maximum": 27.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 831.0,
+        "minimum": 827.0,
+        "maximum": 840.0
+      },
+      "invocation_ms": {
+        "median": 845.0,
+        "minimum": 842.0,
+        "maximum": 855.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-18",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 53.0,
+        "minimum": 53.0,
+        "maximum": 53.0
+      },
+      "worker_executions": {
+        "median": 27.0,
+        "minimum": 27.0,
+        "maximum": 27.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 831.0,
+        "minimum": 829.0,
+        "maximum": 841.0
+      },
+      "invocation_ms": {
+        "median": 846.0,
+        "minimum": 845.0,
+        "maximum": 856.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-19",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 391.0,
+        "minimum": 391.0,
+        "maximum": 391.0
+      },
+      "worker_executions": {
+        "median": 14.0,
+        "minimum": 14.0,
+        "maximum": 14.0
+      },
+      "invalid_proposals": {
+        "median": 9.0,
+        "minimum": 9.0,
+        "maximum": 9.0
+      },
+      "elapsed_ms": {
+        "median": 404.0,
+        "minimum": 396.0,
+        "maximum": 463.0
+      },
+      "invocation_ms": {
+        "median": 419.0,
+        "minimum": 411.0,
+        "maximum": 479.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-19",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 391.0,
+        "minimum": 391.0,
+        "maximum": 391.0
+      },
+      "worker_executions": {
+        "median": 21.0,
+        "minimum": 21.0,
+        "maximum": 21.0
+      },
+      "invalid_proposals": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "elapsed_ms": {
+        "median": 612.0,
+        "minimum": 609.0,
+        "maximum": 617.0
+      },
+      "invocation_ms": {
+        "median": 627.0,
+        "minimum": 624.0,
+        "maximum": 632.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-19",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 391.0,
+        "minimum": 391.0,
+        "maximum": 391.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 663.0,
+        "minimum": 643.0,
+        "maximum": 668.0
+      },
+      "invocation_ms": {
+        "median": 677.0,
+        "minimum": 660.0,
+        "maximum": 685.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-19",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 6.0,
+        "minimum": 6.0,
+        "maximum": 6.0
+      },
+      "reduced_argument_bytes": {
+        "median": 110.0,
+        "minimum": 110.0,
+        "maximum": 110.0
+      },
+      "worker_executions": {
+        "median": 46.0,
+        "minimum": 46.0,
+        "maximum": 46.0
+      },
+      "invalid_proposals": {
+        "median": 45.0,
+        "minimum": 45.0,
+        "maximum": 45.0
+      },
+      "elapsed_ms": {
+        "median": 2213.0,
+        "minimum": 2031.0,
+        "maximum": 5156.0
+      },
+      "invocation_ms": {
+        "median": 2229.0,
+        "minimum": 2046.0,
+        "maximum": 5171.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-19",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 6.0,
+        "minimum": 6.0,
+        "maximum": 6.0
+      },
+      "reduced_argument_bytes": {
+        "median": 110.0,
+        "minimum": 110.0,
+        "maximum": 110.0
+      },
+      "worker_executions": {
+        "median": 47.0,
+        "minimum": 47.0,
+        "maximum": 47.0
+      },
+      "invalid_proposals": {
+        "median": 6.0,
+        "minimum": 6.0,
+        "maximum": 6.0
+      },
+      "elapsed_ms": {
+        "median": 2024.0,
+        "minimum": 1870.0,
+        "maximum": 5664.0
+      },
+      "invocation_ms": {
+        "median": 2041.0,
+        "minimum": 1885.0,
+        "maximum": 5679.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-19",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 6.0,
+        "minimum": 6.0,
+        "maximum": 6.0
+      },
+      "reduced_argument_bytes": {
+        "median": 110.0,
+        "minimum": 110.0,
+        "maximum": 110.0
+      },
+      "worker_executions": {
+        "median": 53.0,
+        "minimum": 53.0,
+        "maximum": 53.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 2193.0,
+        "minimum": 2123.0,
+        "maximum": 6301.0
+      },
+      "invocation_ms": {
+        "median": 2209.0,
+        "minimum": 2138.0,
+        "maximum": 6317.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-19",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 67.0,
+        "minimum": 67.0,
+        "maximum": 67.0
+      },
+      "worker_executions": {
+        "median": 43.0,
+        "minimum": 43.0,
+        "maximum": 43.0
+      },
+      "invalid_proposals": {
+        "median": 32.0,
+        "minimum": 32.0,
+        "maximum": 32.0
+      },
+      "elapsed_ms": {
+        "median": 1694.0,
+        "minimum": 1688.0,
+        "maximum": 1736.0
+      },
+      "invocation_ms": {
+        "median": 1710.0,
+        "minimum": 1702.0,
+        "maximum": 1751.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-19",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 67.0,
+        "minimum": 67.0,
+        "maximum": 67.0
+      },
+      "worker_executions": {
+        "median": 32.0,
+        "minimum": 32.0,
+        "maximum": 32.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 1096.0,
+        "minimum": 1070.0,
+        "maximum": 2877.0
+      },
+      "invocation_ms": {
+        "median": 1111.0,
+        "minimum": 1084.0,
+        "maximum": 2894.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-19",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 67.0,
+        "minimum": 67.0,
+        "maximum": 67.0
+      },
+      "worker_executions": {
+        "median": 32.0,
+        "minimum": 32.0,
+        "maximum": 32.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 1098.0,
+        "minimum": 1074.0,
+        "maximum": 1554.0
+      },
+      "invocation_ms": {
+        "median": 1113.0,
+        "minimum": 1089.0,
+        "maximum": 1568.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-20",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 30.0,
+        "minimum": 30.0,
+        "maximum": 30.0
+      },
+      "worker_executions": {
+        "median": 16.0,
+        "minimum": 16.0,
+        "maximum": 16.0
+      },
+      "invalid_proposals": {
+        "median": 7.0,
+        "minimum": 7.0,
+        "maximum": 7.0
+      },
+      "elapsed_ms": {
+        "median": 472.0,
+        "minimum": 463.0,
+        "maximum": 479.0
+      },
+      "invocation_ms": {
+        "median": 487.0,
+        "minimum": 479.0,
+        "maximum": 494.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-20",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 30.0,
+        "minimum": 30.0,
+        "maximum": 30.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 687.0,
+        "minimum": 664.0,
+        "maximum": 692.0
+      },
+      "invocation_ms": {
+        "median": 703.0,
+        "minimum": 679.0,
+        "maximum": 707.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-nul-20",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 2.0,
+        "minimum": 2.0,
+        "maximum": 2.0
+      },
+      "reduced_argument_bytes": {
+        "median": 30.0,
+        "minimum": 30.0,
+        "maximum": 30.0
+      },
+      "worker_executions": {
+        "median": 23.0,
+        "minimum": 23.0,
+        "maximum": 23.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 660.0,
+        "minimum": 645.0,
+        "maximum": 678.0
+      },
+      "invocation_ms": {
+        "median": 675.0,
+        "minimum": 659.0,
+        "maximum": 692.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-20",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 6.0,
+        "minimum": 6.0,
+        "maximum": 6.0
+      },
+      "reduced_argument_bytes": {
+        "median": 107.0,
+        "minimum": 107.0,
+        "maximum": 107.0
+      },
+      "worker_executions": {
+        "median": 34.0,
+        "minimum": 34.0,
+        "maximum": 34.0
+      },
+      "invalid_proposals": {
+        "median": 29.0,
+        "minimum": 29.0,
+        "maximum": 29.0
+      },
+      "elapsed_ms": {
+        "median": 1391.0,
+        "minimum": 1349.0,
+        "maximum": 1428.0
+      },
+      "invocation_ms": {
+        "median": 1408.0,
+        "minimum": 1364.0,
+        "maximum": 1446.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-20",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 69.0,
+        "minimum": 69.0,
+        "maximum": 69.0
+      },
+      "worker_executions": {
+        "median": 39.0,
+        "minimum": 39.0,
+        "maximum": 39.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 1390.0,
+        "minimum": 1288.0,
+        "maximum": 1509.0
+      },
+      "invocation_ms": {
+        "median": 1405.0,
+        "minimum": 1305.0,
+        "maximum": 1525.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-share-20",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 4.0,
+        "minimum": 4.0,
+        "maximum": 4.0
+      },
+      "reduced_argument_bytes": {
+        "median": 69.0,
+        "minimum": 69.0,
+        "maximum": 69.0
+      },
+      "worker_executions": {
+        "median": 39.0,
+        "minimum": 39.0,
+        "maximum": 39.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 1396.0,
+        "minimum": 1380.0,
+        "maximum": 1414.0
+      },
+      "invocation_ms": {
+        "median": 1412.0,
+        "minimum": 1395.0,
+        "maximum": 1429.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-20",
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 287.0,
+        "minimum": 287.0,
+        "maximum": 287.0
+      },
+      "worker_executions": {
+        "median": 45.0,
+        "minimum": 45.0,
+        "maximum": 45.0
+      },
+      "invalid_proposals": {
+        "median": 42.0,
+        "minimum": 42.0,
+        "maximum": 42.0
+      },
+      "elapsed_ms": {
+        "median": 1953.0,
+        "minimum": 1860.0,
+        "maximum": 5151.0
+      },
+      "invocation_ms": {
+        "median": 1969.0,
+        "minimum": 1875.0,
+        "maximum": 5166.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-20",
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 287.0,
+        "minimum": 287.0,
+        "maximum": 287.0
+      },
+      "worker_executions": {
+        "median": 36.0,
+        "minimum": 36.0,
+        "maximum": 36.0
+      },
+      "invalid_proposals": {
+        "median": 1.0,
+        "minimum": 1.0,
+        "maximum": 1.0
+      },
+      "elapsed_ms": {
+        "median": 1303.0,
+        "minimum": 1279.0,
+        "maximum": 1330.0
+      },
+      "invocation_ms": {
+        "median": 1318.0,
+        "minimum": 1293.0,
+        "maximum": 1344.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    },
+    {
+      "case": "stateful-error-20",
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "repetitions": 3,
+      "reduced_steps": {
+        "median": 3.0,
+        "minimum": 3.0,
+        "maximum": 3.0
+      },
+      "reduced_argument_bytes": {
+        "median": 287.0,
+        "minimum": 287.0,
+        "maximum": 287.0
+      },
+      "worker_executions": {
+        "median": 37.0,
+        "minimum": 37.0,
+        "maximum": 37.0
+      },
+      "invalid_proposals": {
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "elapsed_ms": {
+        "median": 1381.0,
+        "minimum": 1380.0,
+        "maximum": 1388.0
+      },
+      "invocation_ms": {
+        "median": 1397.0,
+        "minimum": 1395.0,
+        "maximum": 1403.0
+      },
+      "complete_searches": 3,
+      "structurally_repeatable": true
+    }
+  ],
+  "structural_totals_per_repetition": [
+    {
+      "family": "all",
+      "strategy": "plain",
+      "cases": 21,
+      "proposals": 762.0,
+      "invalid_proposals": 333.0,
+      "workers": 555.0,
+      "sum_case_median_elapsed_ms": 20600.0
+    },
+    {
+      "family": "all",
+      "strategy": "dependency",
+      "cases": 21,
+      "proposals": 475.0,
+      "invalid_proposals": 14.0,
+      "workers": 587.0,
+      "sum_case_median_elapsed_ms": 19138.0
+    },
+    {
+      "family": "all",
+      "strategy": "state",
+      "cases": 21,
+      "proposals": 474.0,
+      "invalid_proposals": 0.0,
+      "workers": 600.0,
+      "sum_case_median_elapsed_ms": 19582.0
+    },
+    {
+      "family": "stateful-exploration",
+      "strategy": "plain",
+      "cases": 12,
+      "proposals": 565.0,
+      "invalid_proposals": 268.0,
+      "workers": 369.0,
+      "sum_case_median_elapsed_ms": 14628.0
+    },
+    {
+      "family": "stateful-exploration",
+      "strategy": "dependency",
+      "cases": 12,
+      "proposals": 309.0,
+      "invalid_proposals": 13.0,
+      "workers": 368.0,
+      "sum_case_median_elapsed_ms": 12545.0
+    },
+    {
+      "family": "stateful-exploration",
+      "strategy": "state",
+      "cases": 12,
+      "proposals": 309.0,
+      "invalid_proposals": 0.0,
+      "workers": 381.0,
+      "sum_case_median_elapsed_ms": 12995.0
+    }
+  ],
+  "state_subset_oracles": [
+    {
+      "case": "generated-error-1",
+      "repetition": 1,
+      "reduced_sha256": "AA18A2AADAF62BB21FBD3B7EA3C1523223DA406487FD6E7491AD102A7A847D6F",
+      "fingerprint": "property:bytes-roundtrip:s2",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 7,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "generated-error-1-repeat-1-state"
+    },
+    {
+      "case": "generated-error-17",
+      "repetition": 1,
+      "reduced_sha256": "4F5EED9131D5F965A64643E85FBE3B3B46E8A211E42ECDC1F13C8D77AD31A6DA",
+      "fingerprint": "property:bytes-roundtrip:s6",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 7,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "generated-error-17-repeat-1-state"
+    },
+    {
+      "case": "generated-error-20261016",
+      "repetition": 1,
+      "reduced_sha256": "B83ED93318293D6A950C5810655B5696EC3346B1AE12C68C5CF3BC21C3CA484E",
+      "fingerprint": "property:bytes-roundtrip:s6",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 7,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "generated-error-20261016-repeat-1-state"
+    },
+    {
+      "case": "resize-alias-0",
+      "repetition": 1,
+      "reduced_sha256": "9108753451A11F5B5539DD5C443B8858EB3A7C2A2788DC194FE3A11F39416997",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 15,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-0-repeat-1-state"
+    },
+    {
+      "case": "separated-resize-0",
+      "repetition": 1,
+      "reduced_sha256": "9108753451A11F5B5539DD5C443B8858EB3A7C2A2788DC194FE3A11F39416997",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-0-repeat-1-state"
+    },
+    {
+      "case": "resize-alias-2",
+      "repetition": 1,
+      "reduced_sha256": "398C6CDB6DC6249F7FCE2FC7A4449B0DFD6F61FEFD77E4D1725297189B4CD129",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 15,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-2-repeat-1-state"
+    },
+    {
+      "case": "separated-resize-2",
+      "repetition": 1,
+      "reduced_sha256": "398C6CDB6DC6249F7FCE2FC7A4449B0DFD6F61FEFD77E4D1725297189B4CD129",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-2-repeat-1-state"
+    },
+    {
+      "case": "resize-alias-6",
+      "repetition": 1,
+      "reduced_sha256": "CA89C5F62763B17BA28EF3B2290A977584F09C47A0EF8445451CCA4575EB39D1",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 15,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-6-repeat-1-state"
+    },
+    {
+      "case": "separated-resize-6",
+      "repetition": 1,
+      "reduced_sha256": "CA89C5F62763B17BA28EF3B2290A977584F09C47A0EF8445451CCA4575EB39D1",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-6-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-17",
+      "repetition": 1,
+      "reduced_sha256": "86B8FAA47EFEA8996F7E40000D19CA046EBDFE0F815BA4147B1EE5A9EE0EEB53",
+      "fingerprint": "property:bytes-roundtrip:s5",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 3,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-17-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-17",
+      "repetition": 1,
+      "reduced_sha256": "BBA46345FE1BD734FD06E7838D3E18B61222649F7CC66C964C9BBED0F4C43138",
+      "fingerprint": "property:shared-reference-alive:s29",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 15,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "stateful-share-17-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-17",
+      "repetition": 1,
+      "reduced_sha256": "50CD79E120C599332E38918D3970037FB3EBD0B8C509288B9EA26086C3E06AEA",
+      "fingerprint": "property:bytes-roundtrip:s5",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 7,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-17-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-18",
+      "repetition": 1,
+      "reduced_sha256": "FE47335DC6BF5AA277B72FB3BF023FB0A4A7A77DE663C6E20855C79778CBB1C4",
+      "fingerprint": "property:valid-write:s13",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 3,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-18-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-18",
+      "repetition": 1,
+      "reduced_sha256": "0E156D16483B302B1B7F6DC8F099E3EAB22FCA76DFB92E1114F708159143EE87",
+      "fingerprint": "property:shared-reference-alive:s53",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 15,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "stateful-share-18-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-18",
+      "repetition": 1,
+      "reduced_sha256": "8FB3E8404262F89EC0BB4787EA129F087A03B03EB092F378E32D446BA1FF5E89",
+      "fingerprint": "property:bytes-roundtrip:s7",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 7,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-18-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-19",
+      "repetition": 1,
+      "reduced_sha256": "A158D978AD94D944FDFAD4863E58A61EF831133D29172358CE8FC3214441C538",
+      "fingerprint": "property:valid-write:s1",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 3,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-19-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-19",
+      "repetition": 1,
+      "reduced_sha256": "008CC2B9897889DF8D3397E8C2D19F1EFD81D73B61B5596799F98F31F9B61774",
+      "fingerprint": "property:shared-reference-alive:s39",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 63,
+      "proper_subsets_total": 63,
+      "subset_oracle_source": "stateful-share-19-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-19",
+      "repetition": 1,
+      "reduced_sha256": "5D4B7362A0258ECA74182D8CC81288C2513B0E82B41027DADBC348CB9A1C6386",
+      "fingerprint": "property:bytes-roundtrip:s24",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 7,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-19-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-20",
+      "repetition": 1,
+      "reduced_sha256": "F71135C4B15ED3FE66CA2CB09834852DA581E283CAEB025CD507022D0040152C",
+      "fingerprint": "property:bytes-roundtrip:s2",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 3,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-20-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-20",
+      "repetition": 1,
+      "reduced_sha256": "396AE4B0018F8A269722EAB4F92B7DCF94D39ED6BC9FEB828E470B2FBAAA518A",
+      "fingerprint": "property:shared-reference-alive:s30",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 15,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "stateful-share-20-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-20",
+      "repetition": 1,
+      "reduced_sha256": "4DBE18A9177BB2FF1B3E352B58DC766D650DC811D52F8491B9793478E207A865",
+      "fingerprint": "property:bytes-roundtrip:s39",
+      "subset_oracle_status": "checked",
+      "proper_subsets_checked": 7,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-20-repeat-1-state"
+    },
+    {
+      "case": "generated-error-1",
+      "repetition": 2,
+      "reduced_sha256": "AA18A2AADAF62BB21FBD3B7EA3C1523223DA406487FD6E7491AD102A7A847D6F",
+      "fingerprint": "property:bytes-roundtrip:s2",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "generated-error-1-repeat-1-state"
+    },
+    {
+      "case": "generated-error-17",
+      "repetition": 2,
+      "reduced_sha256": "4F5EED9131D5F965A64643E85FBE3B3B46E8A211E42ECDC1F13C8D77AD31A6DA",
+      "fingerprint": "property:bytes-roundtrip:s6",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "generated-error-17-repeat-1-state"
+    },
+    {
+      "case": "generated-error-20261016",
+      "repetition": 2,
+      "reduced_sha256": "B83ED93318293D6A950C5810655B5696EC3346B1AE12C68C5CF3BC21C3CA484E",
+      "fingerprint": "property:bytes-roundtrip:s6",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "generated-error-20261016-repeat-1-state"
+    },
+    {
+      "case": "resize-alias-0",
+      "repetition": 2,
+      "reduced_sha256": "9108753451A11F5B5539DD5C443B8858EB3A7C2A2788DC194FE3A11F39416997",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-0-repeat-1-state"
+    },
+    {
+      "case": "separated-resize-0",
+      "repetition": 2,
+      "reduced_sha256": "9108753451A11F5B5539DD5C443B8858EB3A7C2A2788DC194FE3A11F39416997",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-0-repeat-1-state"
+    },
+    {
+      "case": "resize-alias-2",
+      "repetition": 2,
+      "reduced_sha256": "398C6CDB6DC6249F7FCE2FC7A4449B0DFD6F61FEFD77E4D1725297189B4CD129",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-2-repeat-1-state"
+    },
+    {
+      "case": "separated-resize-2",
+      "repetition": 2,
+      "reduced_sha256": "398C6CDB6DC6249F7FCE2FC7A4449B0DFD6F61FEFD77E4D1725297189B4CD129",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-2-repeat-1-state"
+    },
+    {
+      "case": "resize-alias-6",
+      "repetition": 2,
+      "reduced_sha256": "CA89C5F62763B17BA28EF3B2290A977584F09C47A0EF8445451CCA4575EB39D1",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-6-repeat-1-state"
+    },
+    {
+      "case": "separated-resize-6",
+      "repetition": 2,
+      "reduced_sha256": "CA89C5F62763B17BA28EF3B2290A977584F09C47A0EF8445451CCA4575EB39D1",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-6-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-17",
+      "repetition": 2,
+      "reduced_sha256": "86B8FAA47EFEA8996F7E40000D19CA046EBDFE0F815BA4147B1EE5A9EE0EEB53",
+      "fingerprint": "property:bytes-roundtrip:s5",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-17-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-17",
+      "repetition": 2,
+      "reduced_sha256": "BBA46345FE1BD734FD06E7838D3E18B61222649F7CC66C964C9BBED0F4C43138",
+      "fingerprint": "property:shared-reference-alive:s29",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "stateful-share-17-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-17",
+      "repetition": 2,
+      "reduced_sha256": "50CD79E120C599332E38918D3970037FB3EBD0B8C509288B9EA26086C3E06AEA",
+      "fingerprint": "property:bytes-roundtrip:s5",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-17-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-18",
+      "repetition": 2,
+      "reduced_sha256": "FE47335DC6BF5AA277B72FB3BF023FB0A4A7A77DE663C6E20855C79778CBB1C4",
+      "fingerprint": "property:valid-write:s13",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-18-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-18",
+      "repetition": 2,
+      "reduced_sha256": "0E156D16483B302B1B7F6DC8F099E3EAB22FCA76DFB92E1114F708159143EE87",
+      "fingerprint": "property:shared-reference-alive:s53",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "stateful-share-18-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-18",
+      "repetition": 2,
+      "reduced_sha256": "8FB3E8404262F89EC0BB4787EA129F087A03B03EB092F378E32D446BA1FF5E89",
+      "fingerprint": "property:bytes-roundtrip:s7",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-18-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-19",
+      "repetition": 2,
+      "reduced_sha256": "A158D978AD94D944FDFAD4863E58A61EF831133D29172358CE8FC3214441C538",
+      "fingerprint": "property:valid-write:s1",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-19-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-19",
+      "repetition": 2,
+      "reduced_sha256": "008CC2B9897889DF8D3397E8C2D19F1EFD81D73B61B5596799F98F31F9B61774",
+      "fingerprint": "property:shared-reference-alive:s39",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 63,
+      "subset_oracle_source": "stateful-share-19-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-19",
+      "repetition": 2,
+      "reduced_sha256": "5D4B7362A0258ECA74182D8CC81288C2513B0E82B41027DADBC348CB9A1C6386",
+      "fingerprint": "property:bytes-roundtrip:s24",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-19-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-20",
+      "repetition": 2,
+      "reduced_sha256": "F71135C4B15ED3FE66CA2CB09834852DA581E283CAEB025CD507022D0040152C",
+      "fingerprint": "property:bytes-roundtrip:s2",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-20-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-20",
+      "repetition": 2,
+      "reduced_sha256": "396AE4B0018F8A269722EAB4F92B7DCF94D39ED6BC9FEB828E470B2FBAAA518A",
+      "fingerprint": "property:shared-reference-alive:s30",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "stateful-share-20-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-20",
+      "repetition": 2,
+      "reduced_sha256": "4DBE18A9177BB2FF1B3E352B58DC766D650DC811D52F8491B9793478E207A865",
+      "fingerprint": "property:bytes-roundtrip:s39",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-20-repeat-1-state"
+    },
+    {
+      "case": "generated-error-1",
+      "repetition": 3,
+      "reduced_sha256": "AA18A2AADAF62BB21FBD3B7EA3C1523223DA406487FD6E7491AD102A7A847D6F",
+      "fingerprint": "property:bytes-roundtrip:s2",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "generated-error-1-repeat-1-state"
+    },
+    {
+      "case": "generated-error-17",
+      "repetition": 3,
+      "reduced_sha256": "4F5EED9131D5F965A64643E85FBE3B3B46E8A211E42ECDC1F13C8D77AD31A6DA",
+      "fingerprint": "property:bytes-roundtrip:s6",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "generated-error-17-repeat-1-state"
+    },
+    {
+      "case": "generated-error-20261016",
+      "repetition": 3,
+      "reduced_sha256": "B83ED93318293D6A950C5810655B5696EC3346B1AE12C68C5CF3BC21C3CA484E",
+      "fingerprint": "property:bytes-roundtrip:s6",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "generated-error-20261016-repeat-1-state"
+    },
+    {
+      "case": "resize-alias-0",
+      "repetition": 3,
+      "reduced_sha256": "9108753451A11F5B5539DD5C443B8858EB3A7C2A2788DC194FE3A11F39416997",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-0-repeat-1-state"
+    },
+    {
+      "case": "separated-resize-0",
+      "repetition": 3,
+      "reduced_sha256": "9108753451A11F5B5539DD5C443B8858EB3A7C2A2788DC194FE3A11F39416997",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-0-repeat-1-state"
+    },
+    {
+      "case": "resize-alias-2",
+      "repetition": 3,
+      "reduced_sha256": "398C6CDB6DC6249F7FCE2FC7A4449B0DFD6F61FEFD77E4D1725297189B4CD129",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-2-repeat-1-state"
+    },
+    {
+      "case": "separated-resize-2",
+      "repetition": 3,
+      "reduced_sha256": "398C6CDB6DC6249F7FCE2FC7A4449B0DFD6F61FEFD77E4D1725297189B4CD129",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-2-repeat-1-state"
+    },
+    {
+      "case": "resize-alias-6",
+      "repetition": 3,
+      "reduced_sha256": "CA89C5F62763B17BA28EF3B2290A977584F09C47A0EF8445451CCA4575EB39D1",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-6-repeat-1-state"
+    },
+    {
+      "case": "separated-resize-6",
+      "repetition": 3,
+      "reduced_sha256": "CA89C5F62763B17BA28EF3B2290A977584F09C47A0EF8445451CCA4575EB39D1",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "resize-alias-6-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-17",
+      "repetition": 3,
+      "reduced_sha256": "86B8FAA47EFEA8996F7E40000D19CA046EBDFE0F815BA4147B1EE5A9EE0EEB53",
+      "fingerprint": "property:bytes-roundtrip:s5",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-17-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-17",
+      "repetition": 3,
+      "reduced_sha256": "BBA46345FE1BD734FD06E7838D3E18B61222649F7CC66C964C9BBED0F4C43138",
+      "fingerprint": "property:shared-reference-alive:s29",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "stateful-share-17-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-17",
+      "repetition": 3,
+      "reduced_sha256": "50CD79E120C599332E38918D3970037FB3EBD0B8C509288B9EA26086C3E06AEA",
+      "fingerprint": "property:bytes-roundtrip:s5",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-17-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-18",
+      "repetition": 3,
+      "reduced_sha256": "FE47335DC6BF5AA277B72FB3BF023FB0A4A7A77DE663C6E20855C79778CBB1C4",
+      "fingerprint": "property:valid-write:s13",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-18-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-18",
+      "repetition": 3,
+      "reduced_sha256": "0E156D16483B302B1B7F6DC8F099E3EAB22FCA76DFB92E1114F708159143EE87",
+      "fingerprint": "property:shared-reference-alive:s53",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "stateful-share-18-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-18",
+      "repetition": 3,
+      "reduced_sha256": "8FB3E8404262F89EC0BB4787EA129F087A03B03EB092F378E32D446BA1FF5E89",
+      "fingerprint": "property:bytes-roundtrip:s7",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-18-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-19",
+      "repetition": 3,
+      "reduced_sha256": "A158D978AD94D944FDFAD4863E58A61EF831133D29172358CE8FC3214441C538",
+      "fingerprint": "property:valid-write:s1",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-19-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-19",
+      "repetition": 3,
+      "reduced_sha256": "008CC2B9897889DF8D3397E8C2D19F1EFD81D73B61B5596799F98F31F9B61774",
+      "fingerprint": "property:shared-reference-alive:s39",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 63,
+      "subset_oracle_source": "stateful-share-19-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-19",
+      "repetition": 3,
+      "reduced_sha256": "5D4B7362A0258ECA74182D8CC81288C2513B0E82B41027DADBC348CB9A1C6386",
+      "fingerprint": "property:bytes-roundtrip:s24",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-19-repeat-1-state"
+    },
+    {
+      "case": "stateful-nul-20",
+      "repetition": 3,
+      "reduced_sha256": "F71135C4B15ED3FE66CA2CB09834852DA581E283CAEB025CD507022D0040152C",
+      "fingerprint": "property:bytes-roundtrip:s2",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 3,
+      "subset_oracle_source": "stateful-nul-20-repeat-1-state"
+    },
+    {
+      "case": "stateful-share-20",
+      "repetition": 3,
+      "reduced_sha256": "396AE4B0018F8A269722EAB4F92B7DCF94D39ED6BC9FEB828E470B2FBAAA518A",
+      "fingerprint": "property:shared-reference-alive:s30",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 15,
+      "subset_oracle_source": "stateful-share-20-repeat-1-state"
+    },
+    {
+      "case": "stateful-error-20",
+      "repetition": 3,
+      "reduced_sha256": "4DBE18A9177BB2FF1B3E352B58DC766D650DC811D52F8491B9793478E207A865",
+      "fingerprint": "property:bytes-roundtrip:s39",
+      "subset_oracle_status": "reused",
+      "proper_subsets_checked": 0,
+      "proper_subsets_total": 7,
+      "subset_oracle_source": "stateful-error-20-repeat-1-state"
+    }
+  ],
+  "checks": {
+    "balanced_positions": true,
+    "corrected_replays": 189,
+    "subset_cache_sources_verified": true,
+    "actual_subset_replays": 214.0,
+    "logical_subsets_first_repetition": 259.0
+  },
+  "budget_boundary": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 9,
+    "cases": 9,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 1,
+    "measurements": 27,
+    "complete_searches": 0,
+    "repeatable_case_strategies": 27,
+    "case_strategy_groups": 27,
+    "actual_proper_subsets_checked": 0.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-17T11:06:44.9018127+08:00",
+    "executable_sha256": "24390BA3903E64E259D82EE370059276EC92A7FAB83B538E598C08800785CC4E",
+    "protocol_sha256": "C4893808C39ECF5E8AB791C9A23BA73B23C8FAB3B566EA18C4365F55F0857924"
+  },
+  "passing_boundary": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 12,
+    "cases": 11,
+    "passing_inputs": 1,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 1,
+    "measurements": 33,
+    "complete_searches": 0,
+    "repeatable_case_strategies": 33,
+    "case_strategy_groups": 33,
+    "actual_proper_subsets_checked": 0.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-17T11:11:25.189249+08:00",
+    "executable_sha256": "24390BA3903E64E259D82EE370059276EC92A7FAB83B538E598C08800785CC4E",
+    "protocol_sha256": "643A927808766A5D4B9D63245107176F3B681D909B01D76E17634F4504E12C2E"
+  },
+  "passing_boundary_screening": [
+    {
+      "case": "generated-error-1",
+      "family": "original-generator",
+      "seed": "1",
+      "fixture_mode": "error",
+      "path": "generated-1/case.json",
+      "sha256": "F73CE2600AFE2CD027C79C2110AF86DCF673A5E56771786841D7C4D8537EAD66",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s2",
+      "included": true
+    },
+    {
+      "case": "generated-error-17",
+      "family": "original-generator",
+      "seed": "17",
+      "fixture_mode": "error",
+      "path": "generated-17/case.json",
+      "sha256": "30DEC9BC4290D24AF40BE9A363B747EEB71102E222F1B89BAD51EF4E021E07B3",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s6",
+      "included": true
+    },
+    {
+      "case": "generated-error-20261016",
+      "family": "original-generator",
+      "seed": "20261016",
+      "fixture_mode": "error",
+      "path": "generated-20261016/case.json",
+      "sha256": "819E72C03CAC93E7E54071AF8AE1BBBBE7D8DB78CE58999323B2D5CB5A01198F",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s6",
+      "included": true
+    },
+    {
+      "case": "resize-alias-0",
+      "family": "synthetic-resize-alias",
+      "seed": "0",
+      "fixture_mode": "error",
+      "path": "resize-0.json",
+      "sha256": "04F033347005872E33FE35C3AE5FFDD9286E207FB8D6EF6E0DF81F5A96DD837E",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "separated-resize-0",
+      "family": "synthetic-separated-resize",
+      "seed": "0",
+      "fixture_mode": "error",
+      "path": "separated-resize-0.json",
+      "sha256": "219BCAF661448BBA319862D09A4F7844754779588A141641CCF59F1799457D08",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "resize-alias-2",
+      "family": "synthetic-resize-alias",
+      "seed": "2",
+      "fixture_mode": "error",
+      "path": "resize-2.json",
+      "sha256": "5F2A0B2D68056E609F8B65CC16C8688FDA8D837D29FA60831F5AC69B0D6938F1",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "separated-resize-2",
+      "family": "synthetic-separated-resize",
+      "seed": "2",
+      "fixture_mode": "error",
+      "path": "separated-resize-2.json",
+      "sha256": "6AD561107CF6AB3197404B4941ECF0291609B3D791EE6FE9BE26462DE6B5824C",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "resize-alias-6",
+      "family": "synthetic-resize-alias",
+      "seed": "6",
+      "fixture_mode": "error",
+      "path": "resize-6.json",
+      "sha256": "27F072140CFAD1432C38DC0382AC6FB9E6F92BE47712FC1D4A159A0D66709A0C",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "separated-resize-6",
+      "family": "synthetic-separated-resize",
+      "seed": "6",
+      "fixture_mode": "error",
+      "path": "separated-resize-6.json",
+      "sha256": "0473BACE6386C3860E4162706D33862255E93C2071B5D1F446FBAD8891039275",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:observe",
+      "included": true
+    },
+    {
+      "case": "stateful-nul-26",
+      "family": "stateful-exploration",
+      "seed": "26",
+      "fixture_mode": "nul",
+      "path": "stateful-nul-26-input/case.json",
+      "sha256": "69F01B93112E12B5DE5C9E2DEBD53DBB50FF10749EE16737D10089A115C6C63D",
+      "outcome": "Pass",
+      "fingerprint": null,
+      "included": false
+    },
+    {
+      "case": "stateful-share-26",
+      "family": "stateful-exploration",
+      "seed": "26",
+      "fixture_mode": "share",
+      "path": "stateful-share-26-input/case.json",
+      "sha256": "0BD702B47115B6A5994C234BB8ED0A05CA59A10871A40F6E974D29814B600B30",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:shared-reference-alive:s13",
+      "included": true
+    },
+    {
+      "case": "stateful-error-26",
+      "family": "stateful-exploration",
+      "seed": "26",
+      "fixture_mode": "error",
+      "path": "stateful-error-26-input/case.json",
+      "sha256": "F1B833DA7CA5C0C70FBFB3CB1802809A0BF94BAF10F6731CCDB2B4F794CCD6C2",
+      "outcome": "PropertyFailure",
+      "fingerprint": "property:bytes-roundtrip:s20",
+      "included": true
+    }
+  ],
+  "preceding_run": {
+    "evidence_directory": "results/benchmark-repeated-20261017",
+    "verification": {
+      "schema": 2,
+      "state": "passed",
+      "screened_cases": 21,
+      "cases": 21,
+      "passing_inputs": 0,
+      "strategies": [
+        "plain",
+        "dependency",
+        "state"
+      ],
+      "repetitions": 3,
+      "measurements": 189,
+      "complete_searches": 189,
+      "repeatable_case_strategies": 63,
+      "case_strategy_groups": 63,
+      "actual_proper_subsets_checked": 214.0,
+      "large_state_results": 0,
+      "completed_at": "2026-10-17T11:10:35.36642+08:00",
+      "executable_sha256": "24390BA3903E64E259D82EE370059276EC92A7FAB83B538E598C08800785CC4E",
+      "protocol_sha256": "3AE331DCE4153406080EC5A53FCD600011338703473ACB476BC6317381491801"
+    },
+    "scope": "Same corpus and measurement procedure; final rerun follows a clarification of summary wording for non-default repetition counts."
+  },
+  "scope": "Fixed labelled artificial defects. Three repeats on one host; timing includes process/file IO. No external defect distribution, statistical speedup, parameter minimality, global minimality, or native-root-cause claim."
+}

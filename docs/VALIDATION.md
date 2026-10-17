@@ -1,5 +1,19 @@
 # 缩减器验证记录
 
+## 扩展语料与三轮缩减：2026-10-17
+
+`scripts/benchmark-reduction.ps1` 默认扩展为原九例加十二个 stateful 场景，先冻结/筛选全部输入，再进行三轮轮换顺序的测量。21 个输入均出现性质失败；189 次缩减全部完成搜索和确认，63 个“案例 × 策略”组合的具体结果与结构计数在三轮一致。189 个结果的正确实现重放通过，实际独立核验 214 个真子集，相同输入/指纹的核验复用有来源记录。
+
+seed 20 的 share 场景中 plain 为 6 步、dependency/state 为 4 步；全语料每轮工作进程次数为 555/587/600，无效候选为 333/14/0。这支持候选合法性和特定案例的缩短，不支持 state 全面更快或优于 dependency 的结论。完整协议、逐例中位数/范围及限制见 [缩减实验](REDUCTION-STUDY.md) 与 [快照](evidence/reduction-repeated-20261017.json)。原始记录在 `results/benchmark-repeated-final-20261017`，前一轮同协议结果保留于 `results/benchmark-repeated-20261017`。
+
+预算为 6 的九例边界运行保留全部 27 个预算耗尽结果，没有误报最小性。新增 seed 26 的边界运行保留 12 个筛选输入，其中 nul 为 Pass，余下 11 例的 33 个缩减均保留预算耗尽状态。以上是实验驱动脚本验证；本阶段没有修改 MoonBit 引擎或原生 fixture。
+
+## 状态探索版本的四项云端验收：2026-10-17
+
+[Actions run 38997018833](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38997018833) 对提交 `ee6bb3a034d84500dbf34e33addbc7022a391e9b` 的 behavior、ASan、benchmark、generation 四项全部成功，最后一项于 **11:00:47（Asia/Shanghai）** 完成。四份产物均已下载并核对，源码归档哈希一致，严格工具链检查通过，registry 重新下载 async 0.22.5。
+
+behavior 通过 32/32 单测与完整集成，ASan 额外 16 条 stateful 正确轨迹通过，generation 复现 512 个场景、三个固定案例及与本地相同的计数。该提交的 benchmark 仍是旧版九例单轮（27 次及 111 个真子集），不将它作为本页新增 189 次重复实验的云端验证。托管 runner 为 `win25-vs2026 / 20261007.264.1`、PowerShell 7.6.6；声明范围仍受文档中的安装器与 ASan 限制约束。见 [云端快照](evidence/github-ci-38997018833.json)，完整下载位于 `results/github-ci-38997018833/`。
+
 ## 状态探索生成器：2026-10-17
 
 新增 Buffer `--generator stateful`，默认契约场景保持原生成版本。32/32 单测、原有完整集成验收与 ASan profile 验收通过；ASan 额外运行 16 条 64 步 stateful 正确轨迹，全部通过。

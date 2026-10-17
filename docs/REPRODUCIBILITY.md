@@ -1,6 +1,6 @@
 # Windows 自动验收与源码复现
 
-仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发会分别运行 behavior、ASan、benchmark、generation 四个任务。generation 验证新增的状态生成与标记人工缺陷实验。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单。归档不含工作目录或二进制。
+仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发会分别运行 behavior、ASan、benchmark、generation 四个任务。generation 验证新增的状态生成与标记人工缺陷实验；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减，保存通过输入及预算终止结果，并在全部计时结束后核验。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单。归档不含工作目录或二进制。
 
 ## 版本与安装
 
@@ -46,5 +46,7 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 本地实际验收使用提交 `92dd00f` 和显式依赖源码缓存，三套 suite 全部通过；结果摘要见 [验证记录](VALIDATION.md)。该结果保留了离线来源和环境边界。
 
 2026-10-17 的 [Actions run 38994542498](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38994542498) 已在三个托管 runner 任务中完成提交 `4f46b01` 的安装、registry 依赖恢复及 behavior、ASan、benchmark 验收，全部成功。镜像为 `win25-vs2026 / 20261007.264.1`，PowerShell 7.6.6，三个任务的依赖日志均记录下载 async 0.22.5。安装器 SHA-256 为 `A5101E91FFA9905FB25CD009B9A4AA942971A294BD055C89836E3AF89B710C64`。产物已下载核对，结构化摘要见 [云端证据快照](evidence/github-ci-38994542498.json)。
+
+随后 [Actions run 38997018833](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38997018833) 在相同镜像和 PowerShell 版本上通过提交 `ee6bb3a` 的四项验收，新增 generation，32 单测与 512 场景均通过；四份产物的源码归档哈希一致，依赖恢复与版本闸门通过。见 [状态探索版本云端快照](evidence/github-ci-38997018833.json)。该提交的 benchmark 为九例单轮，后续 21 例三轮版本需按其自身提交的运行记录判断。
 
 早期本地安装器下载曾被套接字权限拒绝，经批准的诊断请求又遇到传输 EOF；这些历史失败保留，云端安装成功不改变其记录。已验证的范围是该提交、该 runner 镜像及其工具链，不把 latest 入口视作不可变安装包锁定。

@@ -20,7 +20,7 @@ moon build --target native
 
 `verify.ps1` 创建新的 `results/verify-<随机ID>`，检查源码快照完整性，运行单测、两个适配器的正常场景、三类缺陷的缩减和修复后重放、独立子集校验、崩溃/超时及缩减器边界测试。失败时保留已有日志，不自动删除任何输出。若执行被权限或安全策略拦截，停止对应操作并检查原始报错。
 
-Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[2026-10-17 云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38994542498)的 behavior、ASan、benchmark 三个任务已通过，测试提交为 `4f46b01`。
+Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[2026-10-17 云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38997018833)的 behavior、ASan、benchmark、generation 四个任务已通过，测试提交为 `ee6bb3a`。
 
 Buffer 新增 `--generator stateful`，按当前句柄、共享引用和长度选择合法的随机操作，覆盖扩缩容与边界数据；原默认生成器保留固定契约回归。运行 `scripts/verify-generation.ps1` 可复现两种生成器的操作覆盖与人工缺陷观测，方法、结果及限制见 [生成实验](docs/GENERATION-STUDY.md)。
 
@@ -72,7 +72,7 @@ Eigen 场景检查读写、转置结果与源矩阵的独立性，以及不兼�
 
 `deletion_minimal=true` 进一步要求最终轨迹的每个单步删除候选都已在当前策略下检查，没有保留指纹的候选，没有环境/协议错误等未决结果，且最终三次重放一致。这是在声明的模型和观测范围内完成删除邻域检查，不表示参数最小、全局最小或底层根因相同。`neighborhood_checked`、`neighborhood_complete` 和 `inconclusive_neighbors` 保留核查计数。
 
-运行 `& .\scripts\benchmark-reduction.ps1` 可在已构建的 Buffer 运行器上复现三种策略的对照。数据、候选日志、独立子集校验与 Markdown 表格写入新结果目录。实验范围和结论见 [缩减对照实验](docs/REDUCTION-STUDY.md)。
+运行 `& .\scripts\benchmark-reduction.ps1` 可在已构建的 Buffer 运行器上复现三种策略的对照，默认 21 个固定案例、三轮重复并轮换策略顺序。数据、候选日志、独立子集校验与 Markdown 表格写入新结果目录，通过输入及预算耗尽结果均有记录。实验范围和结论见 [缩减对照实验](docs/REDUCTION-STUDY.md)。
 
 ## 接入和边界
 
