@@ -395,12 +395,104 @@
     },
     {
       "path": "scripts/verify.ps1",
-      "sha256": "AE6019D2FADF1206DBE4F23BB835827A5E320C6A219F6C036ECFB3DF026F138D"
+      "sha256": "8D148BA1657C1B9E1B0F03311290F2D6D826DFA408D6663C60BBD1147A2F41A0"
     }
   ],
   "raw_evidence": [
     "results/verify-binding-arguments-20261018",
-    "results/sdk-binding-arguments-20261018"
+    "results/sdk-binding-arguments-20261018",
+    "results/benchmark-binding-arguments-20261018",
+    "results/verify-binding-arguments-final-20261018"
   ],
-  "scope": "Existing integer helper integrated in real Buffer/Eigen adapters. Buffer error is an explicitly injected teaching defect; Eigen runs verify correct binding behavior and do not establish defect discovery. Parameter/global minimality and speed are not claimed. SDK uses explicit local async source cache; hosted verification is recorded separately."
+  "scope": "Existing integer helper integrated in real Buffer/Eigen adapters. Buffer error is an explicitly injected teaching defect; Eigen runs verify correct binding behavior and do not establish defect discovery. Parameter/global minimality and speed are not claimed. SDK uses explicit local async source cache; hosted verification is recorded separately.",
+  "implementation_commit": "d7d0c1b0060e8fa7c7b3a7b2e30234fe9c6f611d",
+  "benchmark": {
+    "verification": {
+      "schema": 2,
+      "state": "passed",
+      "screened_cases": 21,
+      "cases": 21,
+      "passing_inputs": 0,
+      "strategies": [
+        "plain",
+        "dependency",
+        "state"
+      ],
+      "repetitions": 1,
+      "measurements": 63,
+      "complete_searches": 63,
+      "repeatable_case_strategies": 63,
+      "case_strategy_groups": 63,
+      "actual_proper_subsets_checked": 214.0,
+      "large_state_results": 0,
+      "completed_at": "2026-10-18T17:48:02.9751625+08:00",
+      "executable_sha256": "FE629118C0A839521E64F0BCA3F06603CE0F3626C86271B322E8FEEFE7818FA1",
+      "protocol_sha256": "E896E3821EC89E86B11F72DCA6DEBC848F69F17BDC28BFC53203940DC990AAD4"
+    },
+    "comparison": {
+      "state": "passed",
+      "measurements": 63,
+      "difference_count": 0,
+      "differences": [],
+      "worker_executions": 1937.0,
+      "previous_worker_executions": 1937.0,
+      "baseline": "results/benchmark-integer-candidates-20261017",
+      "current": "results/benchmark-binding-arguments-20261018",
+      "compared_fields": [
+        "input_sha256",
+        "reduced_sha256",
+        "original_steps",
+        "reduced_steps",
+        "original_argument_bytes",
+        "reduced_argument_bytes",
+        "proposals",
+        "invalid_proposals",
+        "worker_executions",
+        "repair_removals",
+        "semantic_write_removals",
+        "fingerprint",
+        "confirmed",
+        "stop_reason",
+        "deletion_minimal",
+        "inconclusive_neighbors",
+        "corrected_replay",
+        "proper_subsets_checked",
+        "proper_subsets_total"
+      ]
+    },
+    "scope": "One local repetition of the existing fixed corpus; no speed claim. New capabilities are independently exercised by dedicated binding probes."
+  },
+  "final_tested_commit": "b7c961cf75a7bf0e4ae3f4e4a1135e321119cef1",
+  "final_behavior_directory": "results/verify-binding-arguments-final-20261018",
+  "crash_probe_fix": {
+    "failed_run": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39116730378",
+    "failed_commit": "d7d0c1b0060e8fa7c7b3a7b2e30234fe9c6f611d",
+    "observed_crash_mode_outcome": "Timeout",
+    "observed_elapsed_ms": 502,
+    "last_step": "s2",
+    "completed_steps": 2,
+    "previous_crash_budget_ms": 500,
+    "crash_budget_ms": 10000,
+    "hang_budget_ms": 500,
+    "requires_target_read": true,
+    "local_outcomes": [
+      "Crash",
+      "Timeout"
+    ],
+    "failed_run_preserved": true
+  },
+  "hosted_ci": {
+    "tested_commit": "b7c961cf75a7bf0e4ae3f4e4a1135e321119cef1",
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39117413994",
+    "conclusion": "success",
+    "core_tests": 64,
+    "sdk_tests": 6,
+    "binding_buffer_reductions": 3,
+    "binding_eigen_runs": 36,
+    "reductions": 189,
+    "repeatable_groups": 63,
+    "corpus_proper_subsets": 214,
+    "binding_proper_subsets": 45,
+    "selected_source_files_per_job": 33
+  }
 }

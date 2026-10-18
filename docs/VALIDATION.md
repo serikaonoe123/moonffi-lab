@@ -8,7 +8,11 @@ Buffer Write 和 Eigen Set 使用公开的 `core.shrink_int`；Eigen New 保留�
 
 真实 Buffer 人工 error 轨迹从零字节缓冲区开始，写入 200 后用拒绝写入破坏原生状态，再读取观察失败。三策略均接受 `[100,50,25,13,7,4,2,1]`，每种策略拒绝十次不再失败的归零候选；plain/dependency/state 分别 32/35/35 次执行，最终四步且保持原指纹。每策略独立检查 15 个真子集及正确实现重放。Eigen 正负数据的构造与赋值候选经真实转置/乘法执行，共 36 个独立进程、每个六步全部 Pass；不声称发现 Eigen 缺陷。
 
-原始记录 `results/verify-binding-arguments-20261018`、`results/sdk-binding-arguments-20261018`，见 [本地快照](evidence/binding-arguments-20261018.json)。通过原有探针入口增加两个目标程序路径，PowerShell 只修改一行调用；验证与证据断言在 MoonBit 中。固定语料与本提交云端结果须按新运行核对，下方 CI 属于历史提交。
+原始记录 `results/verify-binding-arguments-20261018`、`results/sdk-binding-arguments-20261018`，见 [本地快照](evidence/binding-arguments-20261018.json)。通过原有探针入口增加两个目标程序路径，PowerShell 只修改一行调用；验证与证据断言在 MoonBit 中。本地固定语料 63 次缩减、214 真子集和正确实现重放通过，所有输入/结果哈希、结构计数及参数进度与上一版逐条相同，仍为 1,937 次工作进程；记录 `results/benchmark-binding-arguments-20261018`。
+
+首次提交 `d7d0c1b` 的 Actions `39116730378` 中，新探针、64 单测及另四套验收通过，但 behavior 在既有 crash 探针失败：目标读取步骤 s2 已开始、两步已完成，500 ms 到期时没有观察到异常退出，报告 Timeout（502 ms）。此运行和全部产物保留，见 [失败快照](evidence/github-ci-39116730378.json)；不把该运行写成通过，也不将退出延迟归因于已证明的主机原因。
+
+提交 `b7c961c` 给 crash 探针单独设置 10,000 ms 的有界退出预算，hang 保持 500 ms，并要求两者都到达目标读取步骤，crash 还必须有非零原始退出码。没有修改产品的超时或分类逻辑。完整本地回归再次通过，原始记录 `results/verify-binding-arguments-final-20261018`；最终提交 `b7c961c` 的 [Actions 39117413994](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39117413994) 五项全部通过，产物下载核查完成。64+6 单测、新 Buffer 三策略缩减和 36 个 Eigen 进程记录与本地汇总逐字节相同，crash 的真实异常退出码与 10 秒预算、hang 的 500 ms 预算及目标步骤均已核对。33 个关键源文件逐任务对照 Git 归档；704 生成场景、ASan 控制、189 次完整缩减、63/63 组重复一致及 214 真子集通过。189 行输入/结果哈希、结构计数和参数进度与本地一致，新 Buffer 的另 45 个真子集也通过。原始 `results/github-ci-39117413994`，见 [最终云端快照](evidence/github-ci-39117413994.json)。
 ## MoonBit 可复用整数候选：2026-10-17
 
 公开 `core.shrink_int(Int)` 为适配器生成至多 32 个确定性候选：先 0，再逐步靠近原值，包含向零相邻的整数；非零候选保持符号，绝对值严格下降，不对 Int 最小值取负。独立 SDK 在构造、加法和拒绝加法中使用它，模型与真实工作进程仍负责筛选合法且保持原失败的候选。

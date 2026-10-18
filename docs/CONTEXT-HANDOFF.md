@@ -1,12 +1,14 @@
 # 接续工作摘要
 
-来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-17（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
+来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-18（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
 ## 最新阶段：真实 Buffer/Eigen 整数候选
 
 2026-10-18：Buffer Write、Eigen Set 接入 `core.shrink_int`，Eigen New 先整体归零，再单元素缩减，跳过重复零和原样候选，保持形状/坐标/依赖。没有新增公共 API。64 主模块/6 SDK 单测及完整本地 behavior/SDK 通过；新单测覆盖 256 字节值、201 赋值及矩阵边界。既有 reducer-probe 可额外接收 Buffer/Eigen 路径，原有三参数检查方式仍可用；verify.ps1 只改变一行调用。
 
-新增进程探针：真实 Buffer error 中的 Write 200 在三策略均缩为 1，接受链 `[100,50,25,13,7,4,2,1]`，归零掩盖失败被拒绝；执行数 32/35/35，四步保持原指纹。每策略独立 15 真子集和正确实现重放通过。Eigen 36 个真实独立进程执行正负构造/赋值候选及转置/乘法，全部六步 Pass，不是发现 Eigen 缺陷。原始 `results/verify-binding-arguments-20261018`、`results/sdk-binding-arguments-20261018`，快照 `docs/evidence/binding-arguments-20261018.json`。固定语料与新提交 CI 待核对；下方 39040088228 的 62/63 计数差异属于上一版本，不能沿用为本轮结果。
+新增进程探针：真实 Buffer error 中的 Write 200 在三策略均缩为 1，接受链 `[100,50,25,13,7,4,2,1]`，归零掩盖失败被拒绝；执行数 32/35/35，四步保持原指纹。每策略独立 15 真子集和正确实现重放通过。Eigen 36 个真实独立进程执行正负构造/赋值候选及转置/乘法，全部六步 Pass，不是发现 Eigen 缺陷。原始 `results/verify-binding-arguments-20261018`、`results/sdk-binding-arguments-20261018`，快照 `docs/evidence/binding-arguments-20261018.json`。本地固定语料 63 次缩减与 214 真子集通过，所有字节/计数/参数进度与上一版本一致，1,937 个工作进程；记录 `results/benchmark-binding-arguments-20261018`。实现提交 `d7d0c1b` 已推送。首次 CI `39116730378` 的 64 单测及新探针通过，另外四套也通过；behavior 因既有 crash 探针 500 ms 内未观察到异常退出而失败，s2 读取已开始、完成两步，记录 Timeout 502 ms。全部首次产物和 `docs/evidence/github-ci-39116730378.json` 保留，不写成通过，也不推断已证明的主机原因。
+
+修复提交 `b7c961cf75a7bf0e4ae3f4e4a1135e321119cef1` 单独给 crash 探针 10 秒预算，hang 仍 500 ms；两者须达到目标 read，crash 必须保留真实非零退出码。没有改变产品超时/分类逻辑。完整本地回归 `results/verify-binding-arguments-final-20261018` 再次通过。最终 Actions `39117413994` 五项通过并下载核查：64+6、新三策略 Buffer/36 Eigen 与本地汇总逐字节一致，33 个源文件逐任务对照归档，704 场景及 ASan 控制通过；189 次结果字节、结构计数、参数进度与本地一致，63/63 组重复一致、214 语料真子集及正确重放通过，另 45 新探针真子集通过。原始 `results/github-ci-39117413994`、快照 `docs/evidence/github-ci-39117413994.json`。上一轮的 62/63 计数差异不属于本轮。
 
 默认受限 shell/Node 执行入口在本轮开始无响应；通过授权的 require_escalated + login=false 本地命令恢复读取、编辑和验证。工作开始时 main 干净且同步，未修改系统安全设置。继续优先 MoonBit 实际能力，不通过语言统计排除自有脚本。
 ## 最新阶段：MoonBit 整数候选生成器

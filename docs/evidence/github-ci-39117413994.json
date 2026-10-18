@@ -1,0 +1,408 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-18",
+  "state": "passed",
+  "tested_commit": "b7c961cf75a7bf0e4ae3f4e4a1135e321119cef1",
+  "feature_commit": "d7d0c1b0060e8fa7c7b3a7b2e30234fe9c6f611d",
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39117413994",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "native (behavior)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39117413994/job/117645907093",
+      "startedAt": "2026-10-18T09:58:27Z",
+      "completedAt": "2026-10-18T10:01:46Z"
+    },
+    {
+      "name": "native (generation)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39117413994/job/117645907156",
+      "startedAt": "2026-10-18T09:58:27Z",
+      "completedAt": "2026-10-18T10:00:23Z"
+    },
+    {
+      "name": "native (asan)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39117413994/job/117645907170",
+      "startedAt": "2026-10-18T09:58:26Z",
+      "completedAt": "2026-10-18T09:59:28Z"
+    },
+    {
+      "name": "native (benchmark)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39117413994/job/117645907192",
+      "startedAt": "2026-10-18T09:58:26Z",
+      "completedAt": "2026-10-18T10:02:36Z"
+    },
+    {
+      "name": "native (sdk)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39117413994/job/117645907218",
+      "startedAt": "2026-10-18T09:58:26Z",
+      "completedAt": "2026-10-18T09:59:23Z"
+    }
+  ],
+  "checks": {
+    "online_bootstraps_verified": 5,
+    "archive_pins_per_job": 2,
+    "binary_pins_per_job": 3,
+    "core_source_files": 1201,
+    "boundary_checks": 11,
+    "root_unit_tests": 64,
+    "binding_buffer_reductions": 3,
+    "binding_eigen_process_runs": 36,
+    "binding_buffer_proper_subsets": 45,
+    "integer_candidate_probe_checks": 18,
+    "numeric_probe_checks": 4,
+    "iterative_probe_checks": 11,
+    "dependency_scaling_samples": 18,
+    "dependency_input_hashes_match_local": 6,
+    "exhaustive_small_traces": 20736,
+    "sdk_unit_tests": 6,
+    "source_archive_equal": true,
+    "selected_exported_source_files_checked_per_job": 33,
+    "buffer_generation_cases": 512,
+    "eigen_generation_cases": 192,
+    "eigen_input_hashes_match_local": 192,
+    "legacy_input_hashes_checked": 128,
+    "complete_reductions": 189,
+    "repeatable_groups": 63,
+    "proper_subsets_checked": 214,
+    "reduction_structural_rows_match_baseline": 189,
+    "reduction_semantic_traces_match_baseline": 189,
+    "frozen_corpus_semantic_cases_match_baseline": 21,
+    "input_hash_different_rows": 0,
+    "reduced_hash_different_rows": 0,
+    "corrected_replays_passed": 189,
+    "diagnostic_binary_files": 0,
+    "baseline_run": "local binding-arguments, one repetition"
+  },
+  "lock_sha256": "5A9008CC7EA40DE44E0A47F8EA72DB4F344040A4601A52774493FF1F9DFEFB7F",
+  "source_verifications": [
+    {
+      "suite": "behavior",
+      "source_commit": "b7c961cf75a7bf0e4ae3f4e4a1135e321119cef1",
+      "archive_sha256": "87FF0FD65A3F841C2AA81EF53EEA0C8CDFE2FD2CE7DFD51A398B5115B4757115",
+      "dependency_mode": "registry",
+      "selected_files_verified": 33
+    },
+    {
+      "suite": "asan",
+      "source_commit": "b7c961cf75a7bf0e4ae3f4e4a1135e321119cef1",
+      "archive_sha256": "87FF0FD65A3F841C2AA81EF53EEA0C8CDFE2FD2CE7DFD51A398B5115B4757115",
+      "dependency_mode": "registry",
+      "selected_files_verified": 33
+    },
+    {
+      "suite": "benchmark",
+      "source_commit": "b7c961cf75a7bf0e4ae3f4e4a1135e321119cef1",
+      "archive_sha256": "87FF0FD65A3F841C2AA81EF53EEA0C8CDFE2FD2CE7DFD51A398B5115B4757115",
+      "dependency_mode": "registry",
+      "selected_files_verified": 33
+    },
+    {
+      "suite": "generation",
+      "source_commit": "b7c961cf75a7bf0e4ae3f4e4a1135e321119cef1",
+      "archive_sha256": "87FF0FD65A3F841C2AA81EF53EEA0C8CDFE2FD2CE7DFD51A398B5115B4757115",
+      "dependency_mode": "registry",
+      "selected_files_verified": 33
+    },
+    {
+      "suite": "sdk",
+      "source_commit": "b7c961cf75a7bf0e4ae3f4e4a1135e321119cef1",
+      "archive_sha256": "87FF0FD65A3F841C2AA81EF53EEA0C8CDFE2FD2CE7DFD51A398B5115B4757115",
+      "dependency_mode": "registry",
+      "selected_files_verified": 33
+    }
+  ],
+  "selected_exported_source_hashes": [
+    {
+      "path": ".github/workflows/windows-native.yml",
+      "sha256": "98251455DED55487BCE497200773D1A79741BD4F6EAC8DDD0DE60CCC370FAAA8"
+    },
+    {
+      "path": "cmd/reducer-probe/argument_checks.mbt",
+      "sha256": "2293F79C1102FBE02A6257AFA60978DBCA0B1E374AECAE643AF29117AC89630D"
+    },
+    {
+      "path": "cmd/reducer-probe/binding_checks.mbt",
+      "sha256": "ED90A44B0344A131A963503BDDE3F9CC49D70C7129D896A4881D0AF8FC8B830C"
+    },
+    {
+      "path": "cmd/reducer-probe/dependency_checks.mbt",
+      "sha256": "FFDE9333BC2978EE0BAC0657614882C83BCA3D894641E93F0C0E5CC813C58DC1"
+    },
+    {
+      "path": "cmd/reducer-probe/integer_checks.mbt",
+      "sha256": "D069F54CB3A085BACF22D924A107AFEAEB602B9BB259385130D73B11CF81D892"
+    },
+    {
+      "path": "cmd/reducer-probe/iterative_checks.mbt",
+      "sha256": "B4829640DB61C25F8447F204AA5196DAC353F29C63EF7BCA45CD5FE29462249B"
+    },
+    {
+      "path": "cmd/reducer-probe/main.mbt",
+      "sha256": "85A32FAB2A5321131C2126F34D6121D7F6D21FB3FA501E54434F2608B53F9C69"
+    },
+    {
+      "path": "cmd/reducer-probe/moon.pkg",
+      "sha256": "BEABF332045979C17B0841332BFD7C3EC0F62B0F2ACDFD4C627F48E71CA91496"
+    },
+    {
+      "path": "core/arguments_wbtest.mbt",
+      "sha256": "E74130F0924684AF9AB5F65063E5A08364030A4F0EDDE6C192AAA43DBECAEB60"
+    },
+    {
+      "path": "core/arguments.mbt",
+      "sha256": "99A9FB00446C9C083CEC796FA12A6978BCE30AEEE7F54AE75BB8D24A022B9A2C"
+    },
+    {
+      "path": "core/dependencies_wbtest.mbt",
+      "sha256": "21B57BC79A871076B0D7469E79EDDA8D4B8BFC5CD9176CDA2D924CAC04DB7A6B"
+    },
+    {
+      "path": "core/dependencies.mbt",
+      "sha256": "F77741CBB010684D7F1D343A3164B7CB4F4DFB56BE13A4ED097BCC7A18530E03"
+    },
+    {
+      "path": "core/integers_wbtest.mbt",
+      "sha256": "3C5EC3C39F21184862DA872547AD7EDC6C2F5BEED854532F6C9765D9C8D60B50"
+    },
+    {
+      "path": "core/integers.mbt",
+      "sha256": "4BB38456410B44DF590D8B32E150691E80AED9036EE74BA59A72858FDAFADA67"
+    },
+    {
+      "path": "core/repair.mbt",
+      "sha256": "E5AE7CC03CD232489CFFBA429713DE5C4E99375833C047578C853FC6F178A8BD"
+    },
+    {
+      "path": "core/types.mbt",
+      "sha256": "02C0E365D5A1174E8B5B84954930F749BF5DA4749E2F9E8D8FD84BF6BD9985FC"
+    },
+    {
+      "path": "examples/adapter-starter/counter/adapter.mbt",
+      "sha256": "CB2F4E6366900703C396312A245BE98CED3A6A2C4490DA15E24E7DABE385EFD3"
+    },
+    {
+      "path": "examples/adapter-starter/counter/counter_wbtest.mbt",
+      "sha256": "3C9EEC56C9CB69A99B84221F05B95EDD8049721306442F2B9447B81682420B69"
+    },
+    {
+      "path": "fixtures/buffer/adapter.mbt",
+      "sha256": "1DFDEDBD9719E4830DC60398F73C7040581D2DF3D60387CCB896CF05BCE2792A"
+    },
+    {
+      "path": "fixtures/buffer/arguments_wbtest.mbt",
+      "sha256": "4E5A817929F2776884FC74048CF00639C9F88F259E34E28B068A9C07856A0D6B"
+    },
+    {
+      "path": "fixtures/eigen/adapter.mbt",
+      "sha256": "CF173EE714A403279A69B166A1B1F599315BBFC4ECA8865EA504BD3582450B00"
+    },
+    {
+      "path": "fixtures/eigen/arguments_wbtest.mbt",
+      "sha256": "8EF1EADC90E00B1EFB21575B8E8FE92111CE30CA030A841D5DE72815DC2D4F55"
+    },
+    {
+      "path": "runner/extends.mbt",
+      "sha256": "D666FDC77A262FE7DB0D51C4C4927653E70AD926A2B75338D7DC8CB39ED2B5BF"
+    },
+    {
+      "path": "runner/runner_wbtest.mbt",
+      "sha256": "DC1123C6FCFC25CB5B6F23B17C4F6DF8E6B7E6868F9D658718E7ACF3A293439A"
+    },
+    {
+      "path": "runner/shrink.mbt",
+      "sha256": "803AC080DE302CA37A9F8164FFEB3EBF71B0F0F8E75783677E5D4C1062BC1874"
+    },
+    {
+      "path": "scripts/assert-toolchain.ps1",
+      "sha256": "EE36166A295A355AA4CE4A471FB2B6C056B4D2702AD221483A7C7821A86B59C0"
+    },
+    {
+      "path": "scripts/benchmark-reduction.ps1",
+      "sha256": "21D6E299BD498E7CC0F035BB8D55CC0A6654D40479B5C36F1B9C2451E7827F8F"
+    },
+    {
+      "path": "scripts/install-toolchain.ps1",
+      "sha256": "EEB4A415DA82594F5F9EBDDBC149C4FF8355F3CDCE2CC9D8D57E3BD8413A88D0"
+    },
+    {
+      "path": "scripts/toolchain-common.ps1",
+      "sha256": "DCC9DED8BC211FF981A9EF7535FC3559FF87B0278DF7E792CF113189316CF465"
+    },
+    {
+      "path": "scripts/verify-sdk.ps1",
+      "sha256": "2C1F78D347624D5F49CF60100A7B370488801C0101397B75FDD942DDCC35FFF5"
+    },
+    {
+      "path": "scripts/verify-toolchain.ps1",
+      "sha256": "71A50A69D7C003000E9AF2FAFBC631504075F4F85516C2DEA6EC2454A897C3D3"
+    },
+    {
+      "path": "scripts/verify.ps1",
+      "sha256": "AC0C7A177FC0A60B38883E888176D307DCE21955754939D443873551EC5B5D11"
+    },
+    {
+      "path": "toolchain.json",
+      "sha256": "5A9008CC7EA40DE44E0A47F8EA72DB4F344040A4601A52774493FF1F9DFEFB7F"
+    }
+  ],
+  "binding_probes": {
+    "buffer": [
+      {
+        "strategy": "plain",
+        "executions": 32,
+        "write_value": 1,
+        "zero_rejections": 10,
+        "accepted_values": [
+          100,
+          50,
+          25,
+          13,
+          7,
+          4,
+          2,
+          1
+        ],
+        "confirmed": true,
+        "deletion_minimal": true,
+        "proper_subsets": 15,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "dependency",
+        "executions": 35,
+        "write_value": 1,
+        "zero_rejections": 10,
+        "accepted_values": [
+          100,
+          50,
+          25,
+          13,
+          7,
+          4,
+          2,
+          1
+        ],
+        "confirmed": true,
+        "deletion_minimal": true,
+        "proper_subsets": 15,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "state",
+        "executions": 35,
+        "write_value": 1,
+        "zero_rejections": 10,
+        "accepted_values": [
+          100,
+          50,
+          25,
+          13,
+          7,
+          4,
+          2,
+          1
+        ],
+        "confirmed": true,
+        "deletion_minimal": true,
+        "proper_subsets": 15,
+        "corrected_replay": "Pass"
+      }
+    ],
+    "eigen_process_runs": 36,
+    "eigen_executed_steps_per_run": 6,
+    "summary_sha256": "93AF4E7CDCEAFEE7037B80EB6B10B598F97A2BD68FD8A13EBFC4E02D9EED1901",
+    "local_byte_equal": true,
+    "proper_subsets": 45
+  },
+  "controller_probes": [
+    {
+      "probe": "crash",
+      "outcome": "Crash",
+      "raw_exit_code": -1073740286,
+      "timeout_ms": 10000,
+      "reached_target_read": true
+    },
+    {
+      "probe": "hang",
+      "outcome": "Timeout",
+      "raw_exit_code": null,
+      "timeout_ms": 500,
+      "reached_target_read": true
+    }
+  ],
+  "sdk": {
+    "state": "passed",
+    "completed_at": "2026-10-18T17:59:17.9407072+08:00",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "consumer_module": "moonffi-example/counter-lab",
+    "dependency_mode": "registry-or-tool-cache",
+    "dependency_source": "",
+    "source_manifest_sha256": "D72D5F0EA8DCADA7162A1D666565A76BE595CD89684627796486DDCF460DC0FE",
+    "executable_sha256": "94798CC821CFAB8C42E02B4BBDB6770DC85EDBE9CD873F49CE9D1BC8FAFED265",
+    "unit_tests": 6,
+    "pure_oracle_traces": 768,
+    "repair_subsets": 128,
+    "native_unit_walks": 32,
+    "correct_contract_cases": 8,
+    "correct_walk_cases": 32,
+    "original_steps": 32,
+    "reduced_steps": 2,
+    "fingerprint": "property:counter-value:s30",
+    "executions": 29,
+    "deletion_minimal": true,
+    "proper_subsets_checked": 3,
+    "corrected_replay": "Pass",
+    "budget_stop_reason": "execution_budget",
+    "preflight_rejection": true,
+    "output_reuse_rejected": true,
+    "separate_process_determinism": true,
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "independent_environment": false,
+    "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+  },
+  "benchmark": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 21,
+    "cases": 21,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 3,
+    "measurements": 189,
+    "complete_searches": 189,
+    "repeatable_case_strategies": 63,
+    "case_strategy_groups": 63,
+    "actual_proper_subsets_checked": 214.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-18T18:01:58.8679799+08:00",
+    "executable_sha256": "36473F9CBE0C8E926279F58F96982310F6A6417698B49A1ACB4FB249A0EC6E86",
+    "protocol_sha256": "5FB33BD2062EF5C8DFC8FA0D32003AC31F420173D952A73C162192DFE4FCE673"
+  },
+  "prior_failed_run": {
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39116730378",
+    "conclusion": "failure",
+    "snapshot": "docs/evidence/github-ci-39116730378.json",
+    "reason": "500 ms crash probe reached target read but observed Timeout; new binding probes passed. Fixed with separate 10000 ms crash deadline and target-read/abnormal-exit assertions. Hang remains 500 ms."
+  },
+  "raw_evidence_directory": "results/github-ci-39117413994",
+  "source_identity_reference": "Selected file hashes verified per job against Git archive of tested commit. Full manifests, pinned bootstrap details and inspection remain in raw evidence.",
+  "scope": "Five hosted suites on exported source and freshly installed content-pinned official archives. 189 fixed-corpus reductions match local byte hashes, counts and argument progress; 63 groups repeat. Dedicated probes establish the new integer shrink behavior on an injected Buffer teaching defect and correct Eigen behavior, not new Eigen defect discovery, global parameter minimum, speed improvement, hermetic builds or broader ASan coverage."
+}
