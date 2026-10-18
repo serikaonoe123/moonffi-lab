@@ -31,7 +31,7 @@ Invoke-Tool 'moon' @('build','--target','native') 0 (Join-Path $Out 'build.log')
 $buffer = Join-Path $projectRoot '_build/native/debug/build/cmd/buffer-lab/buffer-lab.exe'
 $eigen = Join-Path $projectRoot '_build/native/debug/build/cmd/eigen-lab/eigen-lab.exe'
 $oracle = Join-Path $projectRoot '_build/native/debug/build/cmd/reducer-probe/reducer-probe.exe'
-Invoke-Tool $oracle @('--check-arguments',(Join-Path $Out 'numeric-arguments')) 0 (Join-Path $Out 'numeric-arguments.log')
+Invoke-Tool $oracle @('--check-arguments',(Join-Path $Out 'numeric-arguments'),$buffer,$eigen) 0 (Join-Path $Out 'numeric-arguments.log')
 $facts = [System.Collections.Generic.List[object]]::new()
 foreach ($kind in @('buffer','eigen')) {
   $exe = if ($kind -eq 'buffer') { $buffer } else { $eigen }

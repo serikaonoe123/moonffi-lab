@@ -1,0 +1,406 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-18",
+  "base_commit": "d94d1518fa317c31733257e0f4c06c13a375e9ec",
+  "state": "passed",
+  "root_unit_tests": 64,
+  "sdk_unit_tests": 6,
+  "byte_values": 256,
+  "signed_assignment_values": 201,
+  "binding_probes": {
+    "buffer": [
+      {
+        "strategy": "plain",
+        "executions": 32,
+        "write_value": 1,
+        "zero_rejections": 10,
+        "accepted_values": [
+          100,
+          50,
+          25,
+          13,
+          7,
+          4,
+          2,
+          1
+        ],
+        "confirmed": true,
+        "deletion_minimal": true,
+        "proper_subsets": 15,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "dependency",
+        "executions": 35,
+        "write_value": 1,
+        "zero_rejections": 10,
+        "accepted_values": [
+          100,
+          50,
+          25,
+          13,
+          7,
+          4,
+          2,
+          1
+        ],
+        "confirmed": true,
+        "deletion_minimal": true,
+        "proper_subsets": 15,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "state",
+        "executions": 35,
+        "write_value": 1,
+        "zero_rejections": 10,
+        "accepted_values": [
+          100,
+          50,
+          25,
+          13,
+          7,
+          4,
+          2,
+          1
+        ],
+        "confirmed": true,
+        "deletion_minimal": true,
+        "proper_subsets": 15,
+        "corrected_replay": "Pass"
+      }
+    ],
+    "eigen": [
+      {
+        "sign": -1,
+        "step": "baseline",
+        "candidate": -1,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "new",
+        "candidate": 0,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "new",
+        "candidate": 1,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "new",
+        "candidate": 2,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "new",
+        "candidate": 3,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "new",
+        "candidate": 4,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "new",
+        "candidate": 5,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "new",
+        "candidate": 6,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "new",
+        "candidate": 7,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "new",
+        "candidate": 8,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "new",
+        "candidate": 9,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "new",
+        "candidate": 10,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "set",
+        "candidate": 0,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "set",
+        "candidate": 1,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "set",
+        "candidate": 2,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "identity",
+        "candidate": 0,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "identity",
+        "candidate": 1,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": -1,
+        "step": "identity",
+        "candidate": 2,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "baseline",
+        "candidate": -1,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "new",
+        "candidate": 0,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "new",
+        "candidate": 1,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "new",
+        "candidate": 2,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "new",
+        "candidate": 3,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "new",
+        "candidate": 4,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "new",
+        "candidate": 5,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "new",
+        "candidate": 6,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "new",
+        "candidate": 7,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "new",
+        "candidate": 8,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "new",
+        "candidate": 9,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "new",
+        "candidate": 10,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "set",
+        "candidate": 0,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "set",
+        "candidate": 1,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "set",
+        "candidate": 2,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "identity",
+        "candidate": 0,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "identity",
+        "candidate": 1,
+        "outcome": "Pass",
+        "executed": 6
+      },
+      {
+        "sign": 1,
+        "step": "identity",
+        "candidate": 2,
+        "outcome": "Pass",
+        "executed": 6
+      }
+    ]
+  },
+  "sdk": {
+    "state": "passed",
+    "completed_at": "2026-10-18T17:38:39.673388+08:00",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "consumer_module": "moonffi-example/counter-lab",
+    "dependency_mode": "explicit-local-source-cache",
+    "dependency_source": "D:\\moonbit\\moonffi-lab\\.mooncakes",
+    "source_manifest_sha256": "1B0B2392793522B03236D4568742E1C02BBD10D7194C173B1686E4641FC193D3",
+    "executable_sha256": "7E232EDCF0127A4283F39BF9250E78A41785627A77D30CF1A84109FD44BAFB5F",
+    "unit_tests": 6,
+    "pure_oracle_traces": 768,
+    "repair_subsets": 128,
+    "native_unit_walks": 32,
+    "correct_contract_cases": 8,
+    "correct_walk_cases": 32,
+    "original_steps": 32,
+    "reduced_steps": 2,
+    "fingerprint": "property:counter-value:s30",
+    "executions": 29,
+    "deletion_minimal": true,
+    "proper_subsets_checked": 3,
+    "corrected_replay": "Pass",
+    "budget_stop_reason": "execution_budget",
+    "preflight_rejection": true,
+    "output_reuse_rejected": true,
+    "separate_process_determinism": true,
+    "toolchain": [
+      "moon 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moon.exe",
+      "moonc v0.10.15+943464bfa (2026-10-12) ~\\.moon\\bin\\moonc.exe",
+      "moonrun 0.1.20261012 (748b63c 2026-10-12) ~\\.moon\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "independent_environment": false,
+    "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+  },
+  "source_hashes": [
+    {
+      "path": "fixtures/buffer/adapter.mbt",
+      "sha256": "1DFDEDBD9719E4830DC60398F73C7040581D2DF3D60387CCB896CF05BCE2792A"
+    },
+    {
+      "path": "fixtures/eigen/adapter.mbt",
+      "sha256": "CF173EE714A403279A69B166A1B1F599315BBFC4ECA8865EA504BD3582450B00"
+    },
+    {
+      "path": "fixtures/buffer/arguments_wbtest.mbt",
+      "sha256": "4E5A817929F2776884FC74048CF00639C9F88F259E34E28B068A9C07856A0D6B"
+    },
+    {
+      "path": "fixtures/eigen/arguments_wbtest.mbt",
+      "sha256": "8EF1EADC90E00B1EFB21575B8E8FE92111CE30CA030A841D5DE72815DC2D4F55"
+    },
+    {
+      "path": "cmd/reducer-probe/binding_checks.mbt",
+      "sha256": "ED90A44B0344A131A963503BDDE3F9CC49D70C7129D896A4881D0AF8FC8B830C"
+    },
+    {
+      "path": "cmd/reducer-probe/main.mbt",
+      "sha256": "85A32FAB2A5321131C2126F34D6121D7F6D21FB3FA501E54434F2608B53F9C69"
+    },
+    {
+      "path": "cmd/reducer-probe/moon.pkg",
+      "sha256": "DF8CFE89CA09CD37AD2EB9A63FEC421F8EA3C22D0C783F281E7D74BC396FCBC0"
+    },
+    {
+      "path": "scripts/verify.ps1",
+      "sha256": "AE6019D2FADF1206DBE4F23BB835827A5E320C6A219F6C036ECFB3DF026F138D"
+    }
+  ],
+  "raw_evidence": [
+    "results/verify-binding-arguments-20261018",
+    "results/sdk-binding-arguments-20261018"
+  ],
+  "scope": "Existing integer helper integrated in real Buffer/Eigen adapters. Buffer error is an explicitly injected teaching defect; Eigen runs verify correct binding behavior and do not establish defect discovery. Parameter/global minimality and speed are not claimed. SDK uses explicit local async source cache; hosted verification is recorded separately."
+}

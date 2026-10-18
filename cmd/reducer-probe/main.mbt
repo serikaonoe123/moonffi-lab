@@ -107,8 +107,9 @@ extern "C" fn exit_process(code : Int) -> Unit = "exit"
 async fn main {
   let code = try {
     let arguments = @env.args()
-    if arguments.length() == 3 && arguments[1] == "--check-arguments" {
+    if (arguments.length() == 3 || arguments.length() == 5) && arguments[1] == "--check-arguments" {
       check_argument_reduction(arguments[0], arguments[2])
+      if arguments.length() == 5 { check_binding_arguments(arguments[3], arguments[4], arguments[2] + "/bindings") }
       exit_process(0)
     }
     let ordinal = if arguments.length() == 4 && arguments[1] == "--worker" {

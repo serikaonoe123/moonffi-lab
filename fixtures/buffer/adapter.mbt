@@ -215,7 +215,7 @@ pub impl @lab.Adapter for BufferAdapter with fn shrink_arguments(_, step) {
       }
       candidates
     }
-    Write(id, index, value) => if value > 0 { [operation_step(step.id, Write(id, index, 0))] } else { [] }
+    Write(id, index, value) => @lab.shrink_int(value).map(smaller => operation_step(step.id, Write(id, index, smaller)))
     RejectWrite(id, index) => if index != -1 { [operation_step(step.id, RejectWrite(id, -1))] } else { [] }
     _ => []
   }

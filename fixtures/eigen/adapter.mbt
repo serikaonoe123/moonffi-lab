@@ -251,8 +251,22 @@ pub impl @lab.Adapter for EigenAdapter with fn teardown(self) {
 pub impl @lab.Adapter for EigenAdapter with fn shrink_arguments(_, step) {
   let operation : Operation = try! @json.from_json(step.args)
   match operation {
-    New(id, rows, cols, data) => [operation_step(step.id, New(id, rows, cols, data.map(_ => 0)))]
-    Set(id, row, col, value) => if value != 0 { [operation_step(step.id, Set(id, row, col, 0))] } else { [] }
+    New(id, rows, cols, data) => {
+      let zero = data.map(_ => 0)
+      let candidates : Array[@lab.Step] = []
+      if data != zero { candidates.push(operation_step(step.id, New(id, rows, cols, zero))) }
+      // A valid construction has at most sixteen entries. Keep the fast all-zero
+      // proposal, then change one component at a time without reshaping data.
+      for index = 0; index < data.length(); index = index + 1 {
+        for smaller in @lab.shrink_int(data[index]) {
+          let changed = data.copy()
+          changed[index] = smaller
+          if changed != zero { candidates.push(operation_step(step.id, New(id, rows, cols, changed))) }
+        }
+      }
+      candidates
+    }
+    Set(id, row, col, value) => @lab.shrink_int(value).map(smaller => operation_step(step.id, Set(id, row, col, smaller)))
     _ => []
   }
 }
