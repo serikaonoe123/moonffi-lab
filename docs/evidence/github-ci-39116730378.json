@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-18",
+  "tested_commit": "d7d0c1b0060e8fa7c7b3a7b2e30234fe9c6f611d",
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39116730378",
+  "conclusion": "failure",
+  "jobs": [
+    {
+      "name": "native (behavior)",
+      "conclusion": "failure",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39116730378/job/117643925961"
+    },
+    {
+      "name": "native (asan)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39116730378/job/117643926119"
+    },
+    {
+      "name": "native (sdk)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39116730378/job/117643926166"
+    },
+    {
+      "name": "native (benchmark)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39116730378/job/117643926167"
+    },
+    {
+      "name": "native (generation)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39116730378/job/117643926193"
+    }
+  ],
+  "root_unit_tests": 64,
+  "binding_buffer_checks": [
+    {
+      "strategy": "plain",
+      "executions": 32,
+      "write_value": 1,
+      "zero_rejections": 10,
+      "accepted_values": [
+        100,
+        50,
+        25,
+        13,
+        7,
+        4,
+        2,
+        1
+      ],
+      "confirmed": true,
+      "deletion_minimal": true,
+      "proper_subsets": 15,
+      "corrected_replay": "Pass"
+    },
+    {
+      "strategy": "dependency",
+      "executions": 35,
+      "write_value": 1,
+      "zero_rejections": 10,
+      "accepted_values": [
+        100,
+        50,
+        25,
+        13,
+        7,
+        4,
+        2,
+        1
+      ],
+      "confirmed": true,
+      "deletion_minimal": true,
+      "proper_subsets": 15,
+      "corrected_replay": "Pass"
+    },
+    {
+      "strategy": "state",
+      "executions": 35,
+      "write_value": 1,
+      "zero_rejections": 10,
+      "accepted_values": [
+        100,
+        50,
+        25,
+        13,
+        7,
+        4,
+        2,
+        1
+      ],
+      "confirmed": true,
+      "deletion_minimal": true,
+      "proper_subsets": 15,
+      "corrected_replay": "Pass"
+    }
+  ],
+  "binding_eigen_runs": 36,
+  "failure": {
+    "state": "failed",
+    "stage": "behavior",
+    "error": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\ci\\workspace\\_build\\native\\debug\\build\\cmd\\buffer-lab\\buffer-lab.exe run --mode crash --timeout-ms 500 --out D:\\a\\moonffi-lab\\moonffi-lab\\results\\ci\\behavior\\crash exited 3, expected 1. See D:\\a\\moonffi-lab\\moonffi-lab\\results\\ci\\behavior\\crash.log"
+  },
+  "crash_report": {
+    "outcome": "Timeout",
+    "last_step": "s2",
+    "executed": 2,
+    "elapsed_ms": "502",
+    "message": "worker terminated after timeout"
+  },
+  "crash_events": [
+    {
+      "kind": "step_begin",
+      "step_id": "s0",
+      "index": 0
+    },
+    {
+      "kind": "step_end",
+      "step_id": "s0",
+      "index": 0
+    },
+    {
+      "kind": "step_begin",
+      "step_id": "s1",
+      "index": 1
+    },
+    {
+      "kind": "step_end",
+      "step_id": "s1",
+      "index": 1
+    },
+    {
+      "kind": "step_begin",
+      "step_id": "s2",
+      "index": 2
+    }
+  ],
+  "benchmark": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 21,
+    "cases": 21,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 3,
+    "measurements": 189,
+    "complete_searches": 189,
+    "repeatable_case_strategies": 63,
+    "case_strategy_groups": 63,
+    "actual_proper_subsets_checked": 214.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-18T17:53:11.0518868+08:00",
+    "executable_sha256": "34354836072A21AA3C48D5254F00EAAE28E48A6C9593DBB8FAC1ED9DE620ED5A",
+    "protocol_sha256": "52956B7FF19C499CBE879EB263BAF4AABA28DB36D633B9C4506E24D78B31A2F1"
+  },
+  "planned_fix": "Give the abnormal-exit crash probe its own 10000 ms budget; keep the intentional hang at 500 ms and require both to reach the target read. Product timeout semantics remain unchanged.",
+  "raw_evidence_directory": "results/github-ci-39116730378",
+  "scope": "Failed run retained in full. All new feature probes and four suites passed, but behavior failed because its 500 ms crash probe observed Timeout at an already begun target read. This snapshot does not claim the failed run passed or identify the underlying exit delay cause."
+}

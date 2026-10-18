@@ -83,12 +83,16 @@ foreach ($mode in @('nul','share','error')) {
   $facts.Add([ordered]@{ mode = $mode; original_steps = $reduction.original_steps; reduced_steps = $reduction.reduced_steps; executions = $reduction.executions; confirmed = $reduction.confirmed; fingerprint = $original.fingerprint; proper_subsets_checked = $subsetCount; corrected_replay = 'Pass' })
 }
 
-foreach ($probe in @(@('crash',1,'Crash'), @('hang',3,'Timeout'))) {
+foreach ($probe in @(@('crash',1,'Crash',10000), @('hang',3,'Timeout',500))) {
   $destination = Join-Path $Out $probe[0]
-  Invoke-Tool $buffer @('run','--mode',$probe[0],'--timeout-ms','500','--out',$destination) ([int]$probe[1]) (Join-Path $Out ($probe[0] + '.log'))
+  Invoke-Tool $buffer @('run','--mode',$probe[0],'--timeout-ms',[string]$probe[3],'--out',$destination) ([int]$probe[1]) (Join-Path $Out ($probe[0] + '.log'))
   $report = Read-Json (Join-Path $destination 'case-1/report.json')
   Check ($report.outcome -eq $probe[2]) 'Wrong controller probe classification'
-  $facts.Add([ordered]@{ probe = $probe[0]; outcome = $report.outcome; raw_exit_code = $report.raw_exit_code })
+  $input = Read-Json (Join-Path $destination 'case-1/case.json')
+  $observed = @($input.steps | Where-Object id -eq $report.last_step)
+  Check ($observed.Count -eq 1 -and $observed[0].op -eq 'read') 'Controller probe did not reach the target read'
+  if ($probe[0] -eq 'crash') { Check ($null -ne $report.raw_exit_code -and $report.raw_exit_code -ne 0) 'Crash probe has no abnormal exit code' }
+  $facts.Add([ordered]@{ probe = $probe[0]; outcome = $report.outcome; raw_exit_code = $report.raw_exit_code; timeout_ms = $probe[3]; reached_target_read = $true })
 }
 
 # Synthetic subprocess oracle isolates reducer logic from the real FFI fixtures.
