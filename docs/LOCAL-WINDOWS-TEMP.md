@@ -40,3 +40,5 @@ Set-Location D:\moonbit\moonffi-lab
 首轮手动设置工作区临时目录的 behavior/SDK 验收也通过，保存在 `results/local-msvc-clean-recovery-20261019`。该轮运行期间驱动文件被加入新选项，原脚本在结束时读取到修改后的文件哈希，因此该字段不能证明其已执行新选项；最终验收单独固定前后哈希并通过真实选项调用，未用首轮记录替代。
 
 本轮未重跑本机 ASan、benchmark 和 generation；这些范围的既有云端通过证据仍按各自提交与运行记录解释。本地离线源码复用不等于独立主机或全新 registry 下载。
+
+修复提交 `b43aad6` 已推送，[Actions 39239977335](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39239977335) 五项全部通过并下载核对产物，见 [云端快照](evidence/github-ci-39239977335.json)。53 个关键文件逐任务匹配 Git 导出，五次驱动身份核对通过，默认 `temporary_directory=null`；此次云端是未开启选项的回归，不能替代前述本机新选项验收。704 场景、128 份历史输入及 189 次缩减与原基准一致，63/63 组重复、214 真子集及全部正确实现重放通过。

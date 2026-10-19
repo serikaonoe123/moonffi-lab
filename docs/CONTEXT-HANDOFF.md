@@ -8,6 +8,10 @@
 
 最终新选项入口记录在 `results/local-msvc-workspace-final-20261019`，驱动运行前后哈希一致；选项独立 SDK 与恢复控制在 `results/local-msvc-temp-option-sdk-20261019` 和 `results/local-msvc-temp-controls-20261019`。验证导出源码为 c53a019，本轮驱动变更单独记录 SHA。首次根目录验证扫描了 results 中缺文件的历史部分源码快照，失败记录在 `results/local-msvc-recovery-20261019`，未删除快照。优先使用 `verify-clean -WorkspaceTemp` 导出指定提交，避免诊断目录被视为产品包。首轮外层手动设置 TEMP 的通过记录在 `results/local-msvc-clean-recovery-20261019`；该轮驱动文件中途被编辑，结束时读取的 driver_sha256 不能单独证明实际加载版本，最终另跑固定驱动验证，没有覆盖初次记录。
 
+修复提交 `b43aad65254a2254118cbe736e1c327793109d69` 已通过正式审批以相同 Git tree/commit SHA、预期父提交及 `force=false` 同步到现有公开仓库；[Actions 39239977335](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39239977335) 五项通过且全部产物核对完成。53 个关键文件逐任务匹配 Git 导出，五次驱动匹配 LF/CRLF 内容身份，默认 TEMP/TMP 行为不变；云端未开启新选项，新选项的证明来自上述本地验证。69+6 单测、11 项安装边界、704 场景、128 份历史输入通过，189 次缩减的输入/结果字节、结构计数与旧基准逐项一致，63/63 重复、214 真子集及全部正确实现重放通过。见 [新云端快照](evidence/github-ci-39239977335.json)。后续仅更新本轮验收文档，不改变已测试脚本。
+
+本轮下载前三份 CLI 产物成功；剩余下载超过两分钟未报告完成后，仅取消已核实的本轮 gh 进程，未确定是网络还是解包缓慢，原目录保留。标准 HTTPS 客户端经正式审批只向官方 API 使用既有登录凭据，产物主机请求不携带凭据，保留 TLS 校验；两份 ZIP 大小和摘要与 GitHub 元数据完全一致。首次解包因 CLI 留下的已有目标而主动停止，随后仅在新的 `verified-artifacts` 解包。全部核对使用该新目录，三个完整 CLI 产物只复制过去；没有删除/覆盖旧目录、改权限或解除安全限制。传输与解包记录在 `results/github-ci-39239977335`，没有向公开证据写入凭据或签名下载 URL。
+
 ## 前一阶段：官方工具链 0.10.16 升级与随机流兼容，2026-10-19
 
 最终实现 `410612240ac6be025148cc6505d3155cd726d912` 已同步 GitHub；[Actions 39233803279](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279) 五项全部成功并下载核对，CI 旧锁阻塞已解决。五次官方在线安装、11 项拒绝边界、69+6 单测、21 个 Int64 探针、704 生成场景、128 份历史 Eigen 输入、189 次缩减、63/63 重复一致、214 真子集及正确实现重放通过。44 个关键源文件逐任务对照 Git 归档，所有 189 行输入/结果字节及结构计数与旧 Int64 本地基准一致；见 [最终快照](evidence/github-ci-39233803279.json)。后续收尾仅为文档，不改变已验收代码。

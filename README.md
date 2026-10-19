@@ -25,7 +25,7 @@ moon build --target native
 
 工作区中的工具带低完整性标签、系统临时目录不可写时，可运行 `& .\scripts\verify-clean.ps1 -WorkspaceTemp -Suite behavior,sdk -OfflineDependencySource .\.mooncakes`。它只在本轮输出目录内放置临时文件，结束后恢复进程环境，并用 Git 导出的源码避免扫描 `results` 中的历史快照；没有依赖源码缓存时省略离线参数。详见 [复现与权限边界](docs/LOCAL-WINDOWS-TEMP.md)。
 
-Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[最新云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279)已通过提交 `4106122` 的 behavior、ASan、benchmark、generation、sdk 五项，并下载核对全部产物：69 主模块/6 SDK 单测、21 组 Int64 探针、704 个生成场景、128 份历史 Eigen 输入及 189 次固定语料缩减通过，63/63 组重复一致，214 个真子集和全部正确实现重放通过。44 个关键源文件逐任务对照 Git 归档，见 [云端证据](docs/evidence/github-ci-39233803279.json)。
+Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[最新云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39239977335)已通过临时目录修复提交 `b43aad6` 的 behavior、ASan、benchmark、generation、sdk 五项，并下载核对全部产物：69 主模块/6 SDK 单测、21 组 Int64 探针、704 个生成场景、128 份历史 Eigen 输入及 189 次固定语料缩减通过，63/63 组重复一致，214 个真子集和全部正确实现重放通过。53 个关键文件逐任务对照 Git 归档，五次默认临时目录流程保持不变；见 [云端证据](docs/evidence/github-ci-39239977335.json)。新选项本身的本地验收见前述本机记录。
 
 本次升级先遇旧锁归档变化，再发现新标准库的随机算法变化；全部失败证据保留在 [验证记录](docs/VALIDATION.md)。Buffer/Eigen 原生成器版本使用固定历史随机流，保留旧输入 SHA 检查；独立 SDK 的新随机流明确标为 `counter-walk-2`。工具链仍按固定内容身份检查，不自动接受任意 latest 归档。
 

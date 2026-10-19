@@ -34,6 +34,8 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 
 工作区内工具以低完整性运行、不能写系统临时目录时，在上述命令中加入 `-WorkspaceTemp`。它创建 `<Out>/temp` 并只为本轮设置进程 `TEMP/TMP`，结束或失败后恢复原值；输出目录必须在项目内。验证 JSON 的 `temporary_directory` 记录实际路径，未开启时为 null。该选项不更改完整性标签、ACL、身份或系统配置，详细对照和验收见 [本机临时目录说明](LOCAL-WINDOWS-TEMP.md)。
 
+该修复提交 `b43aad6` 的 [Actions 39239977335](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39239977335) 已通过五项默认流程，全部产物核对完成，五次 `temporary_directory=null`、驱动身份及 53 个关键文件逐任务匹配。69+6 单测、704 场景、128 历史输入、189 次缩减、63/63 重复和 214 真子集通过，见 [云端快照](evidence/github-ci-39239977335.json)。本机新选项另外通过完整 behavior/SDK 与五项恢复/拒绝控制，不将云端默认配置成功当作该选项已在云端执行。
+
 ## 输出与验证边界
 
 `results/clean-<随机ID>/` 保存：
