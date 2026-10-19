@@ -2,7 +2,7 @@
 
 仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发会分别运行 behavior、ASan、benchmark、generation、sdk 五个任务。generation 验证 Buffer 的 512 个人工 fixture 场景，以及真实 Eigen 绑定的 192 个正确场景、保存输入重放、旧输入哈希和 CLI 边界；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减，保存通过输入及预算终止结果，并在全部计时结束后核验。sdk 在另一个工作区中用公开 core/runner 编译独立消费者，验证完整失败与缩减流程。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单。归档不含工作目录或二进制。
 
-最新验证提交 `4106122` 使用固定内容的官方 0.10.16 工具链，在 [Actions run 39233803279](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279) 通过五项，全部产物已下载核对。五次在线安装、11 项工具链边界、69 主模块/6 SDK 单测、704 场景、128 份历史 Eigen 输入、189 次完整缩减和 214 个真子集通过；44 个关键源文件逐任务匹配 Git 导出，189 行输入/结果哈希及结构计数与旧 Int64 本地基准一致。见 [云端快照](evidence/github-ci-39233803279.json)。本机的 MSVC D8050 编译失败记录独立保留于 [验证记录](VALIDATION.md)。
+工具链升级提交 `4106122` 使用固定内容的官方 0.10.16 工具链，在 [Actions run 39233803279](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279) 通过五项，全部产物已下载核对。五次在线安装、11 项工具链边界、69 主模块/6 SDK 单测、704 场景、128 份历史 Eigen 输入、189 次完整缩减和 214 个真子集通过；44 个关键源文件逐任务匹配 Git 导出，189 行输入/结果哈希及结构计数与旧 Int64 本地基准一致。见 [云端快照](evidence/github-ci-39233803279.json)。本机后续通过工作区临时目录恢复 native behavior/SDK 验收，原 D8050 失败仍保留，见 [解决记录](LOCAL-WINDOWS-TEMP.md)。
 
 ## 版本与安装
 
@@ -31,6 +31,8 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 ```
 
 离线模式仅复制指定 async 模块的源码，排除构建目录和编译产物，校验版本并生成依赖文件哈希。源码检查使用 `--frozen`。结果标记 `dependency_mode=explicit-local-source-cache`，不能把这种运行写成从 registry 重新下载、全新安装工具链或独立机器验证。
+
+工作区内工具以低完整性运行、不能写系统临时目录时，在上述命令中加入 `-WorkspaceTemp`。它创建 `<Out>/temp` 并只为本轮设置进程 `TEMP/TMP`，结束或失败后恢复原值；输出目录必须在项目内。验证 JSON 的 `temporary_directory` 记录实际路径，未开启时为 null。该选项不更改完整性标签、ACL、身份或系统配置，详细对照和验收见 [本机临时目录说明](LOCAL-WINDOWS-TEMP.md)。
 
 ## 输出与验证边界
 

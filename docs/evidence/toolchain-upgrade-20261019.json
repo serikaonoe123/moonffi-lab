@@ -3,6 +3,12 @@
   "observed_on": "2026-10-19",
   "source_parent_commit": "e5bb27a60ffca5a1f3b503eb9855710ee2a1c6bd",
   "state": "hosted_upgrade_validated_local_native_compilation_still_blocked",
+  "follow_up": {
+    "observed_on": "2026-10-19",
+    "state": "local_native_behavior_and_sdk_validated_with_workspace_temp",
+    "evidence": "local-msvc-temp-20261019.json",
+    "note": "The state above preserves the upgrade-closeout observation. A later workspace TEMP/TMP configuration resolves the local D8050 without changing integrity labels, ACLs or locked tools."
+  },
   "user_decision": "也不用保持旧锁，有新的可以使用新的",
   "previous_lock_decision_superseded": true,
   "lock": {

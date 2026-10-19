@@ -1,0 +1,193 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-19",
+  "state": "local_native_behavior_and_sdk_validated_with_workspace_temp",
+  "runtime_source_commit": "c53a019c6eff5ad6fcf8d3b1c59e1c1420c60743",
+  "source_archive_sha256": "A287ABE11414FA006A0345DD7FC38248555E239AE373F2EEFCAD74AFDE75A14A",
+  "validation_driver_sha256": "79FB07DC6D17EF4965FE62645333BF23E01EF10127658A3A4E8ACF78904CB23E",
+  "validation_driver_unchanged_during_final_run": true,
+  "toolchain_lock_sha256": "3BDEED5E80B2F485E93E6B79F27AC91F188B725071C6EF985FB043957DB02B51",
+  "toolchain_home": "results/toolchain-upgrade-20261019/installed",
+  "compiler": "MSVC 19.51.36260, HostX64/x64",
+  "compiler_installation": "E:/VSBuildTools/VC/Tools/MSVC/14.51.36231",
+  "diagnosis": {
+    "executable_file_integrity": "Low Mandatory Level, inherited",
+    "diagnostic_process_integrity_rid": 4096,
+    "original_temp_integrity": "No explicit Low label; Windows treats unlabeled objects as Medium",
+    "default_temp_exit": 2,
+    "default_temp_diagnostic": "D8050",
+    "workspace_temp_exit": 0,
+    "workspace_temp_process_integrity_rid": 4096,
+    "same_probe_and_compile_command": true,
+    "only_temp_and_tmp_changed_between_cases": true,
+    "microsoft_reference": "https://learn.microsoft.com/en-us/windows/win32/secauthz/mandatory-integrity-control",
+    "security_descriptor_modified": false,
+    "executable_relocated": false,
+    "locked_binaries_modified": false,
+    "global_environment_modified": false,
+    "rejected_hypotheses": [
+      "command quoting",
+      "normal/extended output path",
+      "working directory",
+      "process group",
+      "startup handle list",
+      "window flag"
+    ]
+  },
+  "validation": {
+    "main_unit_tests": 69,
+    "behavior": "passed",
+    "sdk_unit_tests": 6,
+    "sdk": "passed",
+    "integer64_probes": 21,
+    "integer64_reduction_workers": 1701,
+    "integer64_independent_controls": 36,
+    "sdk_pure_oracle_traces": 768,
+    "sdk_repair_subsets": 128,
+    "sdk_native_unit_walks": 32,
+    "sdk_correct_contract_cases": 8,
+    "sdk_correct_walk_cases": 32,
+    "sdk_reduction_steps": [
+      32,
+      2
+    ],
+    "sdk_corrected_replay": "Pass",
+    "crash": {
+      "probe": "crash",
+      "outcome": "Crash",
+      "raw_exit_code": -1073740286,
+      "timeout_ms": 10000,
+      "reached_target_read": true
+    },
+    "hang": {
+      "probe": "hang",
+      "outcome": "Timeout",
+      "raw_exit_code": null,
+      "timeout_ms": 500,
+      "reached_target_read": true
+    },
+    "temp_controls": [
+      {
+        "name": "failure-existing-environment",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true
+      },
+      {
+        "name": "failure-absent-environment",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true
+      },
+      {
+        "name": "existing-output",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true
+      },
+      {
+        "name": "outside-project",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true
+      },
+      {
+        "name": "default-environment",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true
+      }
+    ],
+    "caller_environment_restored": true,
+    "caller_location_restored": true,
+    "fresh_project_build": true,
+    "dependency_mode": "explicit-local-source-cache",
+    "independent_environment": false
+  },
+  "retained_failures": [
+    {
+      "path": "results/local-msvc-recovery-20261019/tests.log",
+      "reason": "Root scan picked partial historical source snapshots in results, whose buffer.c is absent. Final validation uses Git export."
+    },
+    {
+      "path": "results/local-msvc-clean-recovery-20261019/verification.json",
+      "note": "Manual TEMP setup passed behavior/SDK, but driver file changed while the original script was running; end-of-run driver hash is not proof of loaded driver. Final option-based run checks unchanged hash before/after."
+    }
+  ],
+  "raw_records": [
+    {
+      "path": "scripts/verify-clean.ps1",
+      "sha256": "79FB07DC6D17EF4965FE62645333BF23E01EF10127658A3A4E8ACF78904CB23E"
+    },
+    {
+      "path": "results/toolchain-upgrade-20261019/msvc-probe/process-probe.c",
+      "sha256": "6FC863661E7AB1878CAFAC618244B69C97CE90871C491CC5345CED793A89DFC7"
+    },
+    {
+      "path": "results/toolchain-upgrade-20261019/msvc-probe/process-default-temp.log",
+      "sha256": "F41894C4F5880159AA0189A2B9F4B85453877E3869D4D4E15EB07DE5E4DF40F7"
+    },
+    {
+      "path": "results/toolchain-upgrade-20261019/msvc-probe/process-workspace-temp.log",
+      "sha256": "2AE93EEDDAF262E83FC9C2170335890FA56983570A1659A4A2F29CAA38B80726"
+    },
+    {
+      "path": "results/toolchain-upgrade-20261019/msvc-probe/workspace-temp-comparison.json",
+      "sha256": "278E650C46F22DD0F48013E01A5BF39133C0842B598F99B05E9E470A9850EED8"
+    },
+    {
+      "path": "results/toolchain-upgrade-20261019/msvc-probe/integrity-labels.json",
+      "sha256": "4DD07C66CE5CC0F8DED74D9FD4227A2534A9317E8C0D0FCC3B7819B99D873D2A"
+    },
+    {
+      "path": "results/local-msvc-workspace-final-20261019/verification.json",
+      "sha256": "8D2107D9730EAD8D97C2F056997E178C484ED71799831E2E229C2BD6A3182DD6"
+    },
+    {
+      "path": "results/local-msvc-workspace-final-20261019/toolchain.json",
+      "sha256": "0CEBDF74238E467DE140360FBEFA65D561171DDFF76D6B2DC76D8A0FE913DF8A"
+    },
+    {
+      "path": "results/local-msvc-workspace-final-20261019/caller-environment.json",
+      "sha256": "C9866333C4C7FC5A061C06A8A174773A7A5757208C0573AD6706FACE4596CFFB"
+    },
+    {
+      "path": "results/local-msvc-workspace-final-20261019/behavior/tests.log",
+      "sha256": "C8CC0A3DA1EEB8243229BCAEE85CB59BEE1A0E6D7D209C0637166DA80A6407E4"
+    },
+    {
+      "path": "results/local-msvc-workspace-final-20261019/behavior/verification.json",
+      "sha256": "CF57C439AAF95DF6D10F0F7372B9694C1E6AAB4601A64A2A7EBF7DF4045B3BA2"
+    },
+    {
+      "path": "results/local-msvc-workspace-final-20261019/behavior/numeric-arguments/integers64/checks.json",
+      "sha256": "3B81C515639F8546379F4058D76596CB0E23B37356F3A8B9B65ED846921AA769"
+    },
+    {
+      "path": "results/local-msvc-workspace-final-20261019/sdk/tests.log",
+      "sha256": "8E53643F5F41B94B0022FC75051D26CF6E45378CFF384796E6B60F347D155F27"
+    },
+    {
+      "path": "results/local-msvc-workspace-final-20261019/sdk/verification.json",
+      "sha256": "B40F56BCE3ACD7B354ED4458EEAEF4E5713A1E3ED7C1020D48FD855461347179"
+    },
+    {
+      "path": "results/local-msvc-temp-controls-20261019/verification.json",
+      "sha256": "4926FA9AD15C76481151A85B5E1C824F7329D7FFEE74DCF660E62F4E7A2A6705"
+    },
+    {
+      "path": "results/verify-workspace-temp-controls-20261019.ps1",
+      "sha256": "D4EE95752B5CB5BF9FA3122308C6921E8F47F8F24C110665F0065E696B804CE6"
+    },
+    {
+      "path": "results/local-msvc-recovery-20261019/tests.log",
+      "sha256": "CBA4DFAEC1722253D0738977B4317756B9E568BDF4EF600E250ECC3FB92A7527"
+    }
+  ],
+  "limits": [
+    "No ACL, integrity label, token privilege or system configuration changed.",
+    "No local ASan, benchmark or generation rerun in this recovery.",
+    "The default command still uses inherited TEMP/TMP; select -WorkspaceTemp for this host.",
+    "No new hosted CI result is inferred from local validation."
+  ]
+}

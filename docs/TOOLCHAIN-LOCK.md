@@ -14,7 +14,7 @@
 | core zip | 2,606,935 字节 | `D58CAF5EE6E2A95D8785ADF7D90FD68DD9366D174DF1DFAA36646DD6B47C5663` |
 | core 源码树 | 1,211 文件 | `B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915` |
 
-隔离安装、bundle、静态检查及 11 项安装拒绝边界通过。最终提交 `4106122` 的 [Actions 39233803279](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279) 五项全部成功，五次官方在线安装身份一致，产物已核对，见 [最终快照](evidence/github-ci-39233803279.json)。本机 native 单测仍在 C 编译阶段遇 MSVC D8050，见 [验证记录](VALIDATION.md)与[本地升级快照](evidence/toolchain-upgrade-20261019.json)。现有安装器和执行前校验继续使用固定身份；只更新已核对的新版本内容，不自动接受任意 latest 内容。
+隔离安装、bundle、静态检查及 11 项安装拒绝边界通过。最终提交 `4106122` 的 [Actions 39233803279](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279) 五项全部成功，五次官方在线安装身份一致，产物已核对，见 [最终快照](evidence/github-ci-39233803279.json)。本机初期 C 编译的 D8050 后续通过 `verify-clean.ps1 -WorkspaceTemp` 解决，69+6 单测及完整 behavior/SDK 通过，详见 [解决记录](LOCAL-WINDOWS-TEMP.md)；保留[原升级快照](evidence/toolchain-upgrade-20261019.json)。现有安装器和执行前校验继续使用固定身份；本次临时目录修复没有修改工具链锁或二进制。
 
 ## 2026-10-19：旧锁因滚动下载内容变化而阻塞（历史记录）
 

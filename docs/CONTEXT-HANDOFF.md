@@ -2,11 +2,17 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-19（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
-## 最新阶段：官方工具链 0.10.16 升级与随机流兼容，2026-10-19
+## 最新阶段：本机 MSVC D8050 恢复，2026-10-19
+
+工作区内 moon 与自写诊断程序均带 Low 完整性标签，诊断令牌 RID=4096；系统临时目录没有 Low 标签。最小同命令在原 TEMP/TMP 下 D8050/退出 2，仅把临时目录设到工作区后退出 0，令牌仍为 Low。没有修改 ACL/标签/安全策略，没有移动已锁定程序或改锁。新增 `scripts/verify-clean.ps1 -WorkspaceTemp`，使用项目内新 `<Out>/temp`，finally 恢复调用进程 TEMP/TMP 和目录；成功及失败报告记录临时路径。通过 69 主模块单测、完整 behavior（21 个 Int64 探针、1701 缩减/预算执行及 36 独立对照）、6 SDK 单测和完整独立消费者验收，以及五项环境恢复/拒绝控制。见 [本机记录](LOCAL-WINDOWS-TEMP.md)和[快照](evidence/local-msvc-temp-20261019.json)。本轮未重跑本机 ASan/benchmark/generation，不扩展结论。
+
+最终新选项入口记录在 `results/local-msvc-workspace-final-20261019`，驱动运行前后哈希一致；选项独立 SDK 与恢复控制在 `results/local-msvc-temp-option-sdk-20261019` 和 `results/local-msvc-temp-controls-20261019`。验证导出源码为 c53a019，本轮驱动变更单独记录 SHA。首次根目录验证扫描了 results 中缺文件的历史部分源码快照，失败记录在 `results/local-msvc-recovery-20261019`，未删除快照。优先使用 `verify-clean -WorkspaceTemp` 导出指定提交，避免诊断目录被视为产品包。首轮外层手动设置 TEMP 的通过记录在 `results/local-msvc-clean-recovery-20261019`；该轮驱动文件中途被编辑，结束时读取的 driver_sha256 不能单独证明实际加载版本，最终另跑固定驱动验证，没有覆盖初次记录。
+
+## 前一阶段：官方工具链 0.10.16 升级与随机流兼容，2026-10-19
 
 最终实现 `410612240ac6be025148cc6505d3155cd726d912` 已同步 GitHub；[Actions 39233803279](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279) 五项全部成功并下载核对，CI 旧锁阻塞已解决。五次官方在线安装、11 项拒绝边界、69+6 单测、21 个 Int64 探针、704 生成场景、128 份历史 Eigen 输入、189 次缩减、63/63 重复一致、214 真子集及正确实现重放通过。44 个关键源文件逐任务对照 Git 归档，所有 189 行输入/结果字节及结构计数与旧 Int64 本地基准一致；见 [最终快照](evidence/github-ci-39233803279.json)。后续收尾仅为文档，不改变已验收代码。
 
-普通 Git 推送三次连接失败；官方 GitHub API 可用且父提交与写权限已确认。通过正式审批以 Git 数据 API 同步了完全相同的本地 tree 和 commit SHA，父提交前后核对，分支更新 `force=false`，未修改网络、安全或身份设置。本轮 benchmark 产物在 CLI 下 TLS 握手超时，改经正式审批使用系统 HTTPS 客户端请求原 GitHub 签发的同一地址；保持 TLS 校验，ZIP 摘要与 GitHub artifact digest 相同，检查 ZIP 路径后才解包诊断。本机 native 的 D8050 仍未解决，不能用云端成功写成本机通过；原安装未覆盖，全局 PATH 未修改。
+普通 Git 推送三次连接失败；官方 GitHub API 可用且父提交与写权限已确认。通过正式审批以 Git 数据 API 同步了完全相同的本地 tree 和 commit SHA，父提交前后核对，分支更新 `force=false`，未修改网络、安全或身份设置。本轮 benchmark 产物在 CLI 下 TLS 握手超时，改经正式审批使用系统 HTTPS 客户端请求原 GitHub 签发的同一地址；保持 TLS 校验，ZIP 摘要与 GitHub artifact digest 相同，检查 ZIP 路径后才解包诊断。该升级阶段结束时本机 native D8050 未解决，后续恢复见本文件首节；原安装未覆盖，全局 PATH 未修改。
 
 首轮候选提交 `3b7e0d4` 已推送，CI `39225026215` 四项成功、generation 失败；五项新锁安装通过，云端 68+6 单测通过。失败是新 core 修改 SplitMix 后改变历史 Eigen seed 数据（17 的初始矩阵 `[6,-4,-1]` → `[-9,4,7]`），并使 benchmark 语料/真子集计数变化，详见 [失败快照](evidence/github-ci-39225026215.json)。随后以 `fixtures/random` 固定原 core 0.10.15 流，保留 Apache LICENSE/NOTICE、所有历史 SHA 检查及原 Buffer/Eigen generator_version；独立 SDK walk 使用新 RNG，版本提高为 `counter-walk-2`。新纯随机流锚点 wasm-gc 单测与 native 静态检查通过，完整云端 69+6 单测通过。PATH 双 moon 发现修复的默认身份校验通过。本机全新源码与核心运行时仍有 D8050，不能写成本地 native 通过。
 

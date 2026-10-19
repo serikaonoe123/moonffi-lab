@@ -2,7 +2,8 @@ param(
   [string]$Out = '',
   [string]$Ref = 'HEAD',
   [ValidateSet('behavior','asan','benchmark','generation','sdk')][string[]]$Suite = @('behavior'),
-  [string]$OfflineDependencySource = ''
+  [string]$OfflineDependencySource = '',
+  [switch]$WorkspaceTemp
 )
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $false
@@ -11,9 +12,15 @@ $savedLocation = Get-Location
 $stage = 'setup'
 if (-not $Out) { $Out = Join-Path $projectRoot ('results/clean-' + [guid]::NewGuid().ToString('N')) }
 $Out = [System.IO.Path]::GetFullPath($Out)
+if ($WorkspaceTemp -and -not $Out.StartsWith($projectRoot + [System.IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) {
+  throw 'WorkspaceTemp requires an output directory inside this project.'
+}
 if (Test-Path -LiteralPath $Out) { throw "Output must be new: $Out" }
 if ($OfflineDependencySource) { $OfflineDependencySource = (Resolve-Path -LiteralPath $OfflineDependencySource).Path }
 New-Item -ItemType Directory -Path $Out | Out-Null
+$savedTemp = [Environment]::GetEnvironmentVariable('TEMP', 'Process')
+$savedTmp = [Environment]::GetEnvironmentVariable('TMP', 'Process')
+$temporaryDirectory = $null
 
 function Invoke-Logged([string]$Exe, [string[]]$ToolArgs, [string]$Log) {
   $lines = & $Exe @ToolArgs 2>&1
@@ -22,6 +29,12 @@ function Invoke-Logged([string]$Exe, [string[]]$ToolArgs, [string]$Log) {
   if ($code -ne 0) { throw "$Exe exited $code. See $Log" }
 }
 try {
+  if ($WorkspaceTemp) {
+    $temporaryDirectory = Join-Path $Out 'temp'
+    New-Item -ItemType Directory -Path $temporaryDirectory | Out-Null
+    $env:TEMP = $temporaryDirectory
+    $env:TMP = $temporaryDirectory
+  }
   Set-Location -LiteralPath $projectRoot
   $stage = 'export-commit'
   $sourceCommit = & git rev-parse --verify "$Ref^{commit}"
@@ -99,6 +112,7 @@ try {
     driver_sha256 = (Get-FileHash -LiteralPath $PSCommandPath).Hash
     source_files = $sourceManifest.Count; suites = $Suite; dependency_mode = $dependencyMode
     dependency_source = $OfflineDependencySource; fresh_project_build = $true
+    temporary_directory = $temporaryDirectory
     host_environment = [ordered]@{
       os = [System.Runtime.InteropServices.RuntimeInformation]::OSDescription
       architecture = [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()
@@ -111,6 +125,12 @@ try {
   } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $Out 'verification.json') -Encoding utf8
   Write-Host "Clean source verification passed. Evidence: $Out"
 } catch {
-  [ordered]@{ state = 'failed'; stage = $stage; error = $_.Exception.Message } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $Out 'failure.json') -Encoding utf8
+  [ordered]@{ state = 'failed'; stage = $stage; error = $_.Exception.Message; temporary_directory = $temporaryDirectory } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $Out 'failure.json') -Encoding utf8
   throw
-} finally { Set-Location -LiteralPath $savedLocation }
+} finally {
+  if ($WorkspaceTemp) {
+    [Environment]::SetEnvironmentVariable('TEMP', $savedTemp, 'Process')
+    [Environment]::SetEnvironmentVariable('TMP', $savedTmp, 'Process')
+  }
+  Set-Location -LiteralPath $savedLocation
+}

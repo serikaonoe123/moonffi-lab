@@ -6,7 +6,7 @@
 
 ## 准备和验证
 
-已通过云端验收的工具链：moon 0.1.20261016、moonc 0.10.16；依赖锁定 `moonbitlang/async@0.22.5`。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools。本机隔离安装、静态检查和安装边界检查通过，native 编译仍有 MSVC D8050，详见 [验证记录](docs/VALIDATION.md)。
+已通过云端验收的工具链：moon 0.1.20261016、moonc 0.10.16；依赖锁定 `moonbitlang/async@0.22.5`。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools。本机通过工作区临时目录配置恢复 native 编译，69 主模块/6 SDK 单测及完整 behavior、SDK 验收通过，详见 [本机 D8050 解决记录](docs/LOCAL-WINDOWS-TEMP.md)。
 
 需要安装当前锁定工具链时，可运行 `scripts/install-toolchain.ps1`，按固定 SHA-256 在新目录安装工具包和标准库，支持保留归档后的离线重装。使用方法及滚动下载地址的可用性限制见 [工具链内容锁定](docs/TOOLCHAIN-LOCK.md)。
 
@@ -22,6 +22,8 @@ moon build --target native
 ```
 
 `verify.ps1` 创建新的 `results/verify-<随机ID>`，检查源码快照完整性，运行单测、两个适配器的正常场景、三类缺陷的缩减和修复后重放、独立子集校验、崩溃/超时及缩减器边界测试。失败时保留已有日志，不自动删除任何输出。若执行被权限或安全策略拦截，停止对应操作并检查原始报错。
+
+工作区中的工具带低完整性标签、系统临时目录不可写时，可运行 `& .\scripts\verify-clean.ps1 -WorkspaceTemp -Suite behavior,sdk -OfflineDependencySource .\.mooncakes`。它只在本轮输出目录内放置临时文件，结束后恢复进程环境，并用 Git 导出的源码避免扫描 `results` 中的历史快照；没有依赖源码缓存时省略离线参数。详见 [复现与权限边界](docs/LOCAL-WINDOWS-TEMP.md)。
 
 Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[最新云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279)已通过提交 `4106122` 的 behavior、ASan、benchmark、generation、sdk 五项，并下载核对全部产物：69 主模块/6 SDK 单测、21 组 Int64 探针、704 个生成场景、128 份历史 Eigen 输入及 189 次固定语料缩减通过，63/63 组重复一致，214 个真子集和全部正确实现重放通过。44 个关键源文件逐任务对照 Git 归档，见 [云端证据](docs/evidence/github-ci-39233803279.json)。
 
