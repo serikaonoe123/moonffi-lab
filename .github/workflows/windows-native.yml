@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: [behavior, asan, benchmark, generation, sdk]
+        suite: [behavior, asan, benchmark, generation, sdk, sqlite]
     defaults:
       run:
         shell: pwsh
@@ -40,6 +40,10 @@ jobs:
           LAB_SUITE: ${{ matrix.suite }}
         run: |
           & ./scripts/verify-clean.ps1 -Suite $env:LAB_SUITE -Out results/ci
+      - name: Verify source rejection and caller environment restoration
+        if: matrix.suite == 'sqlite'
+        run: |
+          & ./scripts/verify-script-controls.ps1 -UpstreamArchive results/ci/sqlite/upstream-source.zip -Out results/script-controls
       - name: Retain diagnostics on success or failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -52,6 +56,8 @@ jobs:
             results/bootstrap/*.log
             results/toolchain-checks/*.json
             results/toolchain-checks/*-output/*.json
+            results/script-controls/**/*.json
+            results/script-controls/**/*.log
             results/ci/**/*.json
             results/ci/**/*.jsonl
             results/ci/**/*.log

@@ -1,7 +1,7 @@
 param(
   [string]$Out = '',
   [string]$Ref = 'HEAD',
-  [ValidateSet('behavior','asan','benchmark','generation','sdk')][string[]]$Suite = @('behavior'),
+  [ValidateSet('behavior','asan','benchmark','generation','sdk','sqlite')][string[]]$Suite = @('behavior'),
   [string]$OfflineDependencySource = '',
   [switch]$WorkspaceTemp
 )
@@ -103,6 +103,9 @@ try {
           & (Join-Path $workspace 'scripts/verify-sdk.ps1') -Out $suiteOutput -OfflineDependencySource (Join-Path $workspace '.mooncakes')
         } else { & (Join-Path $workspace 'scripts/verify-sdk.ps1') -Out $suiteOutput }
       }
+      'sqlite' {
+        & (Join-Path $workspace 'scripts/verify-sqlite.ps1') -Out $suiteOutput -OfflineDependencySource (Join-Path $workspace '.mooncakes')
+      }
     }
     if (-not (Test-Path -LiteralPath (Join-Path $suiteOutput 'verification.json'))) { throw "Suite produced no success evidence: $selectedSuite" }
   }
@@ -129,8 +132,11 @@ try {
   throw
 } finally {
   if ($WorkspaceTemp) {
-    [Environment]::SetEnvironmentVariable('TEMP', $savedTemp, 'Process')
-    [Environment]::SetEnvironmentVariable('TMP', $savedTmp, 'Process')
+    foreach ($variable in @(@{name='TEMP';value=$savedTemp},@{name='TMP';value=$savedTmp})) {
+      if ($null -eq $variable.value) {
+        [Environment]::SetEnvironmentVariable($variable.name, [NullString]::Value, 'Process')
+      } else { [Environment]::SetEnvironmentVariable($variable.name, $variable.value, 'Process') }
+    }
   }
   Set-Location -LiteralPath $savedLocation
 }

@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "module": "moonbit-community/sqlite3",
+  "version": "0.2.3",
+  "repository": "https://github.com/moonbit-community/sqlite3.mbt",
+  "commit": "1405639063c52b1474b2622d4c5b5e36110aa74c",
+  "git_tree": "1405639063c52b1474b2622d4c5b5e36110aa74c",
+  "archive_url": "https://codeload.github.com/moonbit-community/sqlite3.mbt/zip/1405639063c52b1474b2622d4c5b5e36110aa74c",
+  "archive_bytes": 2619220,
+  "archive_sha256": "F877BA0001D7051E72543F01DC43E5B73EFC0A32FB459E787F57A0B79ED8B9A1",
+  "archive_prefix": "sqlite3.mbt-1405639063c52b1474b2622d4c5b5e36110aa74c",
+  "license": "Apache-2.0",
+  "sqlite_version": "3.49.1",
+  "declared_async_version": "0.22.4",
+  "workspace_async_version": "0.22.5"
+}

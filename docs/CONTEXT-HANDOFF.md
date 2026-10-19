@@ -2,6 +2,12 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-19（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
+## 最新阶段：真实社区 SQLite 接入，本地通过，云端待验收
+
+新增 examples/sqlite-lab 和 verify-sqlite，只用 core/runner，固定上游提交 1405639063c52b1474b2622d4c5b5e36110aa74c、ZIP 大小/SHA 及 49 个 Git blob。上游原样源码、脚本不执行；async 声明 0.22.4，明确 workspace 成员选 0.22.5，清单未改。48+8 单测、1,024 修整子集、256 纯 walk、32 native 单测 walk、32+64 隔离场景及重放/边界通过，记录 results/sqlite-external-accepted-20261019。没有发现未知缺陷或注入上游 mutant，不宣称 SQLite ASan/堆泄漏/并发覆盖。详见 [接入记录](SQLITE-INTEGRATION.md)。
+
+首次 47/48：上游持久化测试依赖模块目录的 _build；仅创建普通空测试目录后原测试通过。verify-clean / verify-sqlite 另修复缺失环境变量被恢复为空字符串的问题，用 NullString 保留真正缺失；九项新控制通过。早期 absent 控制实际准备为空字符串，旧记录未覆盖或删除，后续结论已更正。六项 CI 中新增 sqlite，并执行九项边界控制；本段编写时尚未提交/推送或完成云端验收，不将本地通过当作云端成功。
+
 ## 最新阶段：本机 MSVC D8050 恢复，2026-10-19
 
 工作区内 moon 与自写诊断程序均带 Low 完整性标签，诊断令牌 RID=4096；系统临时目录没有 Low 标签。最小同命令在原 TEMP/TMP 下 D8050/退出 2，仅把临时目录设到工作区后退出 0，令牌仍为 Low。没有修改 ACL/标签/安全策略，没有移动已锁定程序或改锁。新增 `scripts/verify-clean.ps1 -WorkspaceTemp`，使用项目内新 `<Out>/temp`，finally 恢复调用进程 TEMP/TMP 和目录；成功及失败报告记录临时路径。通过 69 主模块单测、完整 behavior（21 个 Int64 探针、1701 缩减/预算执行及 36 独立对照）、6 SDK 单测和完整独立消费者验收，以及五项环境恢复/拒绝控制。见 [本机记录](LOCAL-WINDOWS-TEMP.md)和[快照](evidence/local-msvc-temp-20261019.json)。本轮未重跑本机 ASan/benchmark/generation，不扩展结论。

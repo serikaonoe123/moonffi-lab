@@ -1,0 +1,200 @@
+{
+  "recorded_at": "2026-10-19T11:48:33.8570002+00:00",
+  "state": "local-passed-cloud-pending",
+  "local": {
+    "state": "passed",
+    "completed_at": "2026-10-19T19:46:31.3623519+08:00",
+    "consumer_module": "moonffi-example/sqlite-lab",
+    "upstream_module": "moonbit-community/sqlite3",
+    "upstream_commit": "1405639063c52b1474b2622d4c5b5e36110aa74c",
+    "upstream_archive_mode": "explicit-local-source-archive",
+    "upstream_archive_bytes": 2619220,
+    "upstream_archive_sha256": "F877BA0001D7051E72543F01DC43E5B73EFC0A32FB459E787F57A0B79ED8B9A1",
+    "upstream_git_blobs_checked_before_and_after": 49,
+    "upstream_source_modified": false,
+    "upstream_scripts_executed": false,
+    "sqlite_version": "3.49.1",
+    "upstream_persistence_fixture": "Empty module-local _build directory created before unchanged upstream tests",
+    "declared_upstream_async_version": "0.22.4",
+    "resolved_workspace_async_version": "0.22.5",
+    "dependency_mode": "explicit-local-source-cache",
+    "dependency_source": "D:\\moonbit\\moonffi-lab\\.mooncakes",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "source_manifest_sha256": "D3B655C928CD24D702EA73D7FBBBBDC89C7AF653E958CDE3278C1913FA12E0E2",
+    "upstream_unit_tests": 48,
+    "adapter_unit_tests": 8,
+    "repair_subsets": 1024,
+    "pure_generated_walks": 256,
+    "native_unit_walks": 32,
+    "contract_cases": 32,
+    "walk_cases": 64,
+    "operation_kinds": [
+      "bind_int",
+      "bind_text",
+      "busy_close",
+      "close",
+      "finalize",
+      "open",
+      "prepare",
+      "read",
+      "reset",
+      "step"
+    ],
+    "saved_replays": 2,
+    "separate_process_determinism": true,
+    "passing_shrink_stop_reason": "unsupported_outcome",
+    "passing_shrink_claimed_failure": false,
+    "invalid_preflight_rejected": true,
+    "output_reuse_rejected": true,
+    "executable_sha256": "01A8404F9458E4F9B088950D940C785FFCDB3CAD492234E86B8AAAB9B80E0A4F",
+    "temporary_directory": "D:\\moonbit\\moonffi-lab\\results\\sqlite-external-accepted-20261019\\temp",
+    "async_fd_leak_check": "1",
+    "unknown_defects_found": 0,
+    "artificial_target_mutants_used": false,
+    "independent_environment": false,
+    "scope": "Unchanged pinned community binding consumed through public core/runner. Synchronous in-memory SELECT/bind/reset/step/read and explicit lifecycle contracts only; no unknown defect, heap-leak proof, concurrency coverage or SQLite ASan coverage claimed."
+  },
+  "controls": {
+    "state": "passed",
+    "checks": [
+      {
+        "name": "clean-present",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "export-commit"
+      },
+      {
+        "name": "sqlite-present",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "clean-absent",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "export-commit"
+      },
+      {
+        "name": "sqlite-absent",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "clean-empty",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "export-commit"
+      },
+      {
+        "name": "sqlite-empty",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "sqlite-wrong-hash",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "sqlite-existing-output",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": ""
+      },
+      {
+        "name": "clean-existing-output",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": ""
+      }
+    ],
+    "original_archive_preserved": true,
+    "environment_states": [
+      "present",
+      "absent",
+      "empty"
+    ],
+    "source_not_extracted_on_archive_rejection": true,
+    "existing_evidence_preserved": true,
+    "drivers": [
+      {
+        "path": "scripts/verify-clean.ps1",
+        "sha256": "D7450A16AD2BC289591B3853642A3D581A4ED50F89EE17CF38FE994B1BA89586"
+      },
+      {
+        "path": "scripts/verify-sqlite.ps1",
+        "sha256": "D910138452026188528C5C403B09122AF76CE5110FA0AB6963C687BADC94FA18"
+      }
+    ]
+  },
+  "caller": {
+    "environment_restored": true,
+    "driver_unchanged": true,
+    "state": "passed",
+    "location_restored": true,
+    "driver_sha256": "D910138452026188528C5C403B09122AF76CE5110FA0AB6963C687BADC94FA18"
+  },
+  "source_files": [
+    {
+      "sha256": "6EFB76D0CBC345551B00721567F5FF25104EEA276647B66D69413E8B7C97A758",
+      "path": "examples/sqlite-lab/cmd/main/main.mbt"
+    },
+    {
+      "sha256": "CD858CDF04C2CC63C6319BCF8078BB85465E0A6C57B126B42CE1EA3247934462",
+      "path": "examples/sqlite-lab/cmd/main/moon.pkg"
+    },
+    {
+      "sha256": "6AAC8B7C0536174C96F7D806E61499B3C9FE50EE9BDBE0B56259D4A19168C9B8",
+      "path": "examples/sqlite-lab/moon.mod"
+    },
+    {
+      "sha256": "0C2D6C8FC8387D2AE150495F146687BCDAC9DDE2B84DEBF29AA5093502F14F55",
+      "path": "examples/sqlite-lab/README.md"
+    },
+    {
+      "sha256": "FE8F4B9E943DFF6F0531511A764328BE4A40F8E12B9CACE4BED45CFFA33B1137",
+      "path": "examples/sqlite-lab/sqlite/adapter.mbt"
+    },
+    {
+      "sha256": "954123EA65AF21165980097846FCF1CDAB29F99D6F14853DF8897D087847F2FF",
+      "path": "examples/sqlite-lab/sqlite/generator.mbt"
+    },
+    {
+      "sha256": "B6977D7CA5412316DE7EFB5F8713555C19BFEC4BF233D27A7A35093006803B2D",
+      "path": "examples/sqlite-lab/sqlite/model.mbt"
+    },
+    {
+      "sha256": "7EBD29E26AA6437C7773B4A18B1931BD2A168F11F56E473E52C0825C747611AB",
+      "path": "examples/sqlite-lab/sqlite/moon.pkg"
+    },
+    {
+      "sha256": "4A086289972B3A4436AADEA246DE1B3EBAA1775DA4DFBDD233E95D5754EAB0ED",
+      "path": "examples/sqlite-lab/sqlite/sqlite_wbtest.mbt"
+    },
+    {
+      "sha256": "0A906802FE894C650194062E44DFCD60E6033F89F54182A1C4E47A6C48B1EA8A",
+      "path": "examples/sqlite-lab/upstream-files.json"
+    },
+    {
+      "sha256": "8F5EFAAA5A9FE17F9BA09B02DE381B160A2676F316A9113B7C07E079344704B3",
+      "path": "examples/sqlite-lab/upstream.json"
+    }
+  ],
+  "limits": "Same host, no unknown upstream defect, no SQLite ASan or heap-leak claim. No release published."
+}

@@ -33,9 +33,11 @@ Set-Location D:\moonbit\moonffi-lab
 
 - 69/69 主模块单测和完整 behavior：包括 21 组 Int64 探针、1,701 次缩减/预算执行及 36 次独立对照；既有正常、人工失败、缩减、重放、崩溃、超时和预算验收通过。
 - 6/6 SDK 单测及独立消费者验收：768 条纯 oracle、128 个修整子集、32 条 native 单测 walk、8+32 个正确场景、失败缩减和修复后重放通过。
-- 五项恢复/拒绝检查：原环境存在、原环境不存在、已有输出、项目外输出，以及未开启选项时的失败路径；没有在项目外创建输出。
+- 当时五项恢复/拒绝检查覆盖已有输出、项目外输出及默认路径；其中名为“原环境不存在”的准备代码实际生成了空字符串，因此不能证明真正缺失变量的恢复。原始证据保留；后续修正和九项控制见下文。
 
 原始对照在 `results/toolchain-upgrade-20261019/msvc-probe`；最终主模块/SDK 验收在 `results/local-msvc-workspace-final-20261019`；新选项的独立 SDK 验收和控制分别在 `results/local-msvc-temp-option-sdk-20261019`、`results/local-msvc-temp-controls-20261019`。
+
+后续 SQLite 接入发现 PowerShell 会将 `[Environment]::SetEnvironmentVariable(name, $null, 'Process')` 的 null 转为空字符串，导致缺失变量未被真正移除。现使用 `[NullString]::Value` 恢复缺失状态，保留显式空字符串。[官方环境变量说明](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5)描述了该差异。`scripts/verify-script-controls.ps1` 对 verify-clean 与 verify-sqlite 分别验证存在、真正缺失和空字符串，另检查归档哈希与已有输出，共九项通过。当前记录在 `results/script-controls-accepted-20261019` 和 [SQLite 快照](evidence/sqlite-external-20261019.json)；早期恢复记录不据此改写为当时已覆盖缺失状态。
 
 首轮手动设置工作区临时目录的 behavior/SDK 验收也通过，保存在 `results/local-msvc-clean-recovery-20261019`。该轮运行期间驱动文件被加入新选项，原脚本在结束时读取到修改后的文件哈希，因此该字段不能证明其已执行新选项；最终验收单独固定前后哈希并通过真实选项调用，未用首轮记录替代。
 
