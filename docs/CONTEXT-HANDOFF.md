@@ -6,7 +6,7 @@
 
 新增 examples/sqlite-lab 和 verify-sqlite，只用 core/runner，固定上游提交 1405639063c52b1474b2622d4c5b5e36110aa74c、ZIP 大小/SHA 及 49 个 Git blob。上游原样源码、脚本不执行；async 声明 0.22.4，明确 workspace 成员选 0.22.5，清单未改。48+8 单测、1,024 修整子集、256 纯 walk、32 native 单测 walk、32+64 隔离场景及重放/边界通过，记录 results/sqlite-external-accepted-20261019。没有发现未知缺陷或注入上游 mutant，不宣称 SQLite ASan/堆泄漏/并发覆盖。详见 [接入记录](SQLITE-INTEGRATION.md)。
 
-首次 47/48：上游持久化测试依赖模块目录的 _build；仅创建普通空测试目录后原测试通过。verify-clean / verify-sqlite 另修复缺失环境变量被恢复为空字符串的问题，用 NullString 保留真正缺失；九项新控制通过。早期 absent 控制实际准备为空字符串，旧记录未覆盖或删除，后续结论已更正。六项 CI 中新增 sqlite，并执行九项边界控制；初始实现 0d2ea85、来源 tree 字段更正 5e5347c 已推送；两轮 SQLite 断言通过但预期非零 native 状态泄漏到 CI 外层，故任务失败，九项 CI 控制未执行。修正为仅在全部断言通过后归零；按 CI 包装本地复验 48+8 单测、96 场景及九项控制通过，记录 results/sqlite-ci-exit-accepted-20261019、results/script-controls-ci-exit-20261019。另 clean-sdk-absent-success 验证成功路径恢复真正缺失的 TEMP/TMP。下一步提交该退出修复并审计最终六项 CI；不将本地通过当作云端成功。
+首次 47/48：上游持久化测试依赖模块目录的 _build；仅创建普通空测试目录后原测试通过。verify-clean / verify-sqlite 另修复缺失环境变量被恢复为空字符串的问题，用 NullString 保留真正缺失；九项新控制通过。早期 absent 控制实际准备为空字符串，旧记录未覆盖或删除，后续结论已更正。六项 CI 中新增 sqlite，并执行九项边界控制；初始实现 0d2ea85、来源 tree 字段更正 5e5347c 已推送；两轮 SQLite 断言通过但预期非零 native 状态泄漏到 CI 外层，故任务失败，九项 CI 控制未执行。修正为仅在全部断言通过后归零；按 CI 包装本地复验 48+8 单测、96 场景及九项控制通过，记录 results/sqlite-ci-exit-accepted-20261019、results/script-controls-ci-exit-20261019。另 clean-sdk-absent-success 验证成功路径恢复真正缺失的 TEMP/TMP。退出修复 be3ec51 已推送；第三轮 39248320859 主验收成功，九项控制默认找 checkout 根缓存而失败。控制新增显式 OfflineDependencySource，workflow 使用 results/ci/workspace/.mooncakes；无根缓存的新目录九项控制和 CI 包装退出 0 已通过，记录 results/script-controls-fresh-checkout-fixed-20261019（首次新目录漏复制清单的准备失败保留）。下一步提交依赖路径修复并审计最终六项 CI，不将本地通过当作云端成功。
 
 ## 最新阶段：本机 MSVC D8050 恢复，2026-10-19
 

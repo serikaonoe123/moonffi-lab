@@ -24,6 +24,8 @@
 
 首两轮 CI（39247453969、39247655451）的 SQLite 验证断言通过，但末尾预期拒绝命令留下非零 LASTEXITCODE，使外层 PowerShell 任务失败，九项控制步骤因此未执行。这两轮不能写成完整验收成功。现只在全部验证断言通过后清零脚本最终 native 状态，失败仍抛错；`results/sqlite-ci-exit-accepted-20261019` 与 `results/script-controls-ci-exit-20261019` 按 GitHub 的退出包装复验通过。另从提交 5e5347c 导出源码，TEMP/TMP 真正缺失时完整 SDK 成功后仍保持缺失，记录 `results/sqlite-clean-sdk-absent-success-20261019`。最终修复的六项 CI 尚待验收。
 
+第三轮 39248320859 的 SQLite 主验收成功，九项控制启动后因默认读取 checkout 根目录 `.mooncakes` 而失败；CI 依赖实际由 verify-clean 放在 `results/ci/workspace/.mooncakes`。控制脚本新增显式 `-OfflineDependencySource`，workflow 指向真实依赖路径。没有根缓存的新目录回归九项通过且 CI 包装退出 0，记录 `results/script-controls-fresh-checkout-fixed-20261019`；第一次新目录准备漏复制来源清单的失败另保留在 `results/script-controls-fresh-checkout-20261019`。
+
 ## 贡献与未完成项
 
 本轮新增真实绑定的可复现接入范例、资源/语义模型与验证脚本，减少后续作者从零实现协议的工作。尚未发现未知上游缺陷；现有历史修复线索不算新发现，也没有制造上游缺陷作为成绩。

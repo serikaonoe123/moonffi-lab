@@ -363,6 +363,19 @@
       "commit": "5e5347c",
       "reason": "Unchanged validation wrapper, SQLite job failed; final run status retained separately",
       "run": "39247655451"
+    },
+    {
+      "reason": "SQLite validation step succeeded; script controls used absent checkout root dependency cache. Explicit dependency source added, tested without root cache.",
+      "commit": "be3ec51",
+      "run": "39248320859"
     }
-  ]
+  ],
+  "fresh_checkout_controls": {
+    "control_driver_sha256": "D3451F256DFAE0A646B76F710C95850E9B68596DD60CEA09506B27D3DE914C92",
+    "checkout_has_dependency_cache": false,
+    "state": "passed",
+    "dependency_source_explicit": true,
+    "ci_wrapper_exit": 0,
+    "checks": 9
+  }
 }

@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$UpstreamArchive, [string]$Out = '')
+param([Parameter(Mandatory)][string]$UpstreamArchive, [string]$Out = '', [string]$OfflineDependencySource = '')
 $ErrorActionPreference = 'Stop'
 $project = Split-Path -Parent $PSScriptRoot
 $originalLocation = Get-Location
@@ -9,6 +9,8 @@ if (-not $Out) { $Out = Join-Path $project ('results/script-controls-' + [guid]:
 $Out = [IO.Path]::GetFullPath($Out)
 if (Test-Path -LiteralPath $Out) { throw 'Controls output must be new' }
 $UpstreamArchive = (Resolve-Path -LiteralPath $UpstreamArchive).Path
+if (-not $OfflineDependencySource) { $OfflineDependencySource = Join-Path $project '.mooncakes' }
+$OfflineDependencySource = (Resolve-Path -LiteralPath $OfflineDependencySource).Path
 $lock = Get-Content (Join-Path $project 'examples/sqlite-lab/upstream.json') -Raw | ConvertFrom-Json
 if ((Get-FileHash $UpstreamArchive).Hash -ne $lock.archive_sha256) { throw 'Control source archive is not pinned' }
 New-Item -ItemType Directory -Path $Out | Out-Null
@@ -52,15 +54,15 @@ try {
       if (($state -eq 'absent' -and $null -ne $value) -or ($state -eq 'empty' -and ($null -eq $value -or $value -cne ''))) { throw 'Control environment setup failed' }
     }
     Reject "clean-$state" 'verify-clean.ps1' @{Out=(Join-Path $Out "clean-$state");Ref='missing-script-controls-ref';WorkspaceTemp=$true} 'export-commit'
-    Reject "sqlite-$state" 'verify-sqlite.ps1' @{Out=(Join-Path $Out "sqlite-$state");UpstreamArchive=(Join-Path $Out 'wrong-size.zip')} 'upstream-archive'
+    Reject "sqlite-$state" 'verify-sqlite.ps1' @{Out=(Join-Path $Out "sqlite-$state");UpstreamArchive=(Join-Path $Out 'wrong-size.zip');OfflineDependencySource=$OfflineDependencySource} 'upstream-archive'
   }
   foreach ($name in $names) { Set-ProcessValue $name $original[$name] }
-  Reject 'sqlite-wrong-hash' 'verify-sqlite.ps1' @{Out=(Join-Path $Out 'sqlite-wrong-hash');UpstreamArchive=(Join-Path $Out 'wrong-hash.zip')} 'upstream-archive'
+  Reject 'sqlite-wrong-hash' 'verify-sqlite.ps1' @{Out=(Join-Path $Out 'sqlite-wrong-hash');UpstreamArchive=(Join-Path $Out 'wrong-hash.zip');OfflineDependencySource=$OfflineDependencySource} 'upstream-archive'
   $existing = Join-Path $Out 'existing'
   New-Item -ItemType Directory -Path $existing | Out-Null
   'preserve evidence' | Set-Content (Join-Path $existing 'marker.txt')
   $markerHash = (Get-FileHash (Join-Path $existing 'marker.txt')).Hash
-  Reject 'sqlite-existing-output' 'verify-sqlite.ps1' @{Out=$existing;UpstreamArchive=$UpstreamArchive} ''
+  Reject 'sqlite-existing-output' 'verify-sqlite.ps1' @{Out=$existing;UpstreamArchive=$UpstreamArchive;OfflineDependencySource=$OfflineDependencySource} ''
   Reject 'clean-existing-output' 'verify-clean.ps1' @{Out=$existing;WorkspaceTemp=$true} ''
   if ((Get-FileHash (Join-Path $existing 'marker.txt')).Hash -ne $markerHash -or @(Get-ChildItem $existing -Force).Count -ne 1) { throw 'Existing evidence changed' }
   if ((Get-FileHash $UpstreamArchive).Hash -ne $lock.archive_sha256) { throw 'Original archive changed' }

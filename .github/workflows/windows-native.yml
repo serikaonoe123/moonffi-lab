@@ -43,7 +43,7 @@ jobs:
       - name: Verify source rejection and caller environment restoration
         if: matrix.suite == 'sqlite'
         run: |
-          & ./scripts/verify-script-controls.ps1 -UpstreamArchive results/ci/sqlite/upstream-source.zip -Out results/script-controls
+          & ./scripts/verify-script-controls.ps1 -UpstreamArchive results/ci/sqlite/upstream-source.zip -OfflineDependencySource results/ci/workspace/.mooncakes -Out results/script-controls
       - name: Retain diagnostics on success or failure
         if: always()
         uses: actions/upload-artifact@v4
