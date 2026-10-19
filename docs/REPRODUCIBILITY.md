@@ -6,7 +6,7 @@
 
 ## 版本与安装
 
-`toolchain.json` 记录实际验证的 moon、moonc、moonrun 版本、三个二进制摘要、core 版本及源码树身份，以及 Windows 工具包/core 归档的固定大小和 SHA-256。`scripts/assert-toolchain.ps1` 先核对二进制，再查询版本和核对 core 的 1,201 个源码文件；漂移时保存诊断并失败。
+`toolchain.json` 记录待验收或已验证的 moon、moonc、moonrun 版本、三个二进制摘要、core 版本及源码树身份，以及 Windows 工具包/core 归档的固定大小和 SHA-256。具体通过状态见 [验证记录](VALIDATION.md)。`scripts/assert-toolchain.ps1` 先核对二进制，再查询版本并按锁核对 core 源码文件数和整体摘要；漂移时保存诊断并失败。
 
 CI 调用仓库内 `scripts/install-toolchain.ps1`，全部归档校验通过后才在新目录解包、查询版本并 bundle core，不执行滚动的上游安装脚本。来源仍是官方 latest URL，内容由仓库中的固定摘要锁定；地址变化后会失败，未声称已取得不可变历史下载地址。保留归档可用 `-ArchiveDirectory` 离线重装。来源确认、安装及范围见 [工具链内容锁定](TOOLCHAIN-LOCK.md)。升级时须一起更新内容身份并重新验收。
 

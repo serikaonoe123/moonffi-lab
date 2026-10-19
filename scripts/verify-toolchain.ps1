@@ -105,7 +105,8 @@ try {
   [IO.File]::AppendAllText((Join-Path $coreDrift 'lib/core/README.md'), "`nLabelled source identity control.`n")
   Expect-Rejection 'core-source-drift-with-unchanged-version' { & $assert -ToolchainRoot $coreDrift -Out (Join-Path $Out 'core-drift.json') }
   $driftReport = Read-Json (Join-Path $Out 'core-drift.json')
-  Require ($driftReport.core.files -eq 1201 -and ($driftReport.mismatches -join ' ').Contains('source tree SHA256 mismatch')) 'Core source mutation was not detected'
+  $lockedCoreFiles = (Read-Json $lockPath).core_source_identity.files
+  Require ($driftReport.core.files -eq $lockedCoreFiles -and ($driftReport.mismatches -join ' ').Contains('source tree SHA256 mismatch')) 'Core source mutation was not detected'
 
   $rejectedOutput = Join-Path $Out 'reused-destination-output'
   Expect-Rejection 'existing-installation-preserved' { & $install -ArchiveDirectory $ArchiveDirectory -Destination $ToolchainRoot -Out $rejectedOutput }

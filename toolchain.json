@@ -8,33 +8,33 @@
         "kind": "toolchain",
         "file": "moonbit-windows-x86_64.zip",
         "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
-        "sha256": "6E3EF6CB96AA5086D122183972687F79FC912F80652000907D96EE6AD967E3BF",
-        "bytes": 91640641,
+        "sha256": "653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F",
+        "bytes": 90915394,
         "upstream_checksum_url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256"
       },
       {
         "kind": "core",
         "file": "core-latest.zip",
         "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
-        "sha256": "05556B27B156348950EA88AE6838032C8B478AE532B18B3929387D1DA4C18D55",
-        "bytes": 2529648
+        "sha256": "D58CAF5EE6E2A95D8785ADF7D90FD68DD9366D174DF1DFAA36646DD6B47C5663",
+        "bytes": 2606935
       }
     ]
   },
   "components": {
-    "moon": "0.1.20261012 (748b63c 2026-10-12)",
-    "moonc": "v0.10.15+943464bfa (2026-10-12)",
-    "moonrun": "moonrun 0.1.20261012 (748b63c 2026-10-12)"
+    "moon": "0.1.20261016 (1af328f 2026-10-16)",
+    "moonc": "v0.10.16+b1a0e846e (2026-10-16)",
+    "moonrun": "moonrun 0.1.20261016 (1af328f 2026-10-16)"
   },
   "binary_sha256": {
-    "moon": "296A895D934B6A07522214CBF89CAF0CF5605EFE4FB82EFE07B929FBF9D27432",
-    "moonc": "B3C2D72DB047E27791477683D99A977761DDCB2A91FEE97BD0F60DFC8935D753",
-    "moonrun": "8198BAF593AD09B690A3551E6009B28B7F615A3D3F68AD660DA8F7D648E5BE1B"
+    "moon": "EB4DE9FBBFA886B721A8080206FCAF7C9DDB344F5229AA489A26112F99695EBA",
+    "moonc": "5F0B138A6679D5EF3B6A081AEAE66C8BCE75E0E7BF2ED72AE2B415AD984D33E8",
+    "moonrun": "12F279DE0D00EA369D4A2A07B695C65EF9DDEEB4741392A781530C9BDBDC8FFD"
   },
-  "core_version": "0.10.15+943464bfa",
+  "core_version": "0.10.16+b1a0e846e",
   "core_source_identity": {
-    "files": 1201,
-    "sha256": "6D80301068B8870D314E8AAFCC9ADCD439162E93AD9D59E150FF2DDDA890C49B"
+    "files": 1211,
+    "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915"
   },
   "async_version": "0.22.5"
 }

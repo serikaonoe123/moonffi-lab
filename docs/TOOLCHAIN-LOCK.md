@@ -4,7 +4,19 @@
 
 这是**内容锁定**。来源仍是官方 `latest` URL，不能保证未来继续提供这份内容；变化时安装会失败，不自动接受新版本。历史版本地址本轮没有取得成功响应，没有把猜测的日期或版本 URL 写入配置。保留的原始归档可以通过 `-ArchiveDirectory` 离线重装；仓库和 CI 诊断产物不包含这两个归档。
 
-## 2026-10-19：滚动下载内容变化，CI 阻塞
+## 当前升级候选（2026-10-19）
+
+用户随后明确允许使用新工具链，当前评估 moon 0.1.20261016 (1af328f)、moonc v0.10.16+b1a0e846e，取代保留旧锁的决定。只在新的 `results/toolchain-upgrade-20261019/installed` 安装，保留原安装与旧失败证据。当前工具包和三个关键二进制已核对[官方归档清单](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256)及[二进制清单](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.sha256)；core 仍来自官方 HTTPS，摘要为下载后实测，版本与新编译器一致，不声称取得了 core 的独立官方校验文件。
+
+| 当前候选内容 | 字节数 / 文件数 | SHA-256 |
+|---|---:|---|
+| Windows x64 zip | 90,915,394 字节 | `653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F` |
+| core zip | 2,606,935 字节 | `D58CAF5EE6E2A95D8785ADF7D90FD68DD9366D174DF1DFAA36646DD6B47C5663` |
+| core 源码树 | 1,211 文件 | `B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915` |
+
+隔离安装、bundle、静态检查及 11 项安装拒绝边界通过。本机 native 单测仍在 C 编译阶段遇 MSVC D8050，新版本完整验收尚未通过，见 [验证记录](VALIDATION.md)与[升级快照](evidence/toolchain-upgrade-20261019.json)。现有安装器和执行前校验继续使用固定身份；只更新已核对的新版本内容，不自动接受任意 latest 内容。
+
+## 2026-10-19：旧锁因滚动下载内容变化而阻塞（历史记录）
 
 Int64 实现提交 `e7dd774` 的 [Actions 39216392303](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39216392303) 五项均在 `verify-archives` 拒绝 Windows 工具包，接受归档数为零，未解包或执行下载工具，尚未开始云端业务验收。只读取得的当前[官方归档校验文件](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256)为 `653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F`，已与下表原锁不同；失败报告没有提供 CI 实际拒绝内容的摘要或字节数，不将其版本或身份视为已确认。
 
@@ -12,7 +24,7 @@ Int64 实现提交 `e7dd774` 的 [Actions 39216392303](https://github.com/serika
 
 后续只读评估已整理为 [原版本 CI 恢复方案](TOOLCHAIN-CI-RECOVERY.md)：归档身份仍匹配，现有离线安装接口可复用；完整 Windows 工具包的再分发依据尚待确认。候选存储和接入步骤仅供审阅，没有上传归档或改变 CI。
 
-## 固定内容与来源
+## 初始锁定内容与来源（2026-10-17，历史记录）
 
 | 内容 | 字节数 / 文件数 | SHA-256 |
 |---|---:|---|
@@ -29,7 +41,7 @@ Int64 实现提交 `e7dd774` 的 [Actions 39216392303](https://github.com/serika
 使用 PowerShell 7。目标安装目录和证据目录都必须不存在：
 
 ```powershell
-$locked = 'D:\moonbit\toolchains\moonffi-20261012'
+$locked = 'D:\moonbit\toolchains\moonffi-20261016'
 & .\scripts\install-toolchain.ps1 -Destination $locked
 # 仅当前终端使用它
 $env:MOON_HOME = $locked

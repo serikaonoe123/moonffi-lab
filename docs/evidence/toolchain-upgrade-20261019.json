@@ -1,0 +1,346 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-19",
+  "source_parent_commit": "e5bb27a60ffca5a1f3b503eb9855710ee2a1c6bd",
+  "state": "isolated_installation_and_static_checks_passed_native_compilation_blocked",
+  "user_decision": "也不用保持旧锁，有新的可以使用新的",
+  "previous_lock_decision_superseded": true,
+  "lock": {
+    "bootstrap": {
+      "schema": 1,
+      "platform": "windows-x86_64",
+      "source_mode": "official-rolling-urls-with-fixed-content-hashes",
+      "archives": [
+        {
+          "kind": "toolchain",
+          "file": "moonbit-windows-x86_64.zip",
+          "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+          "sha256": "653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F",
+          "bytes": 90915394,
+          "upstream_checksum_url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256"
+        },
+        {
+          "kind": "core",
+          "file": "core-latest.zip",
+          "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+          "sha256": "D58CAF5EE6E2A95D8785ADF7D90FD68DD9366D174DF1DFAA36646DD6B47C5663",
+          "bytes": 2606935
+        }
+      ]
+    },
+    "components": {
+      "moon": "0.1.20261016 (1af328f 2026-10-16)",
+      "moonc": "v0.10.16+b1a0e846e (2026-10-16)",
+      "moonrun": "moonrun 0.1.20261016 (1af328f 2026-10-16)"
+    },
+    "binary_sha256": {
+      "moon": "EB4DE9FBBFA886B721A8080206FCAF7C9DDB344F5229AA489A26112F99695EBA",
+      "moonc": "5F0B138A6679D5EF3B6A081AEAE66C8BCE75E0E7BF2ED72AE2B415AD984D33E8",
+      "moonrun": "12F279DE0D00EA369D4A2A07B695C65EF9DDEEB4741392A781530C9BDBDC8FFD"
+    },
+    "core_version": "0.10.16+b1a0e846e",
+    "core_source_identity": {
+      "files": 1211,
+      "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915"
+    },
+    "async_version": "0.22.5"
+  },
+  "downloads": [
+    {
+      "url": "https://cli.moonbitlang.com/version.json",
+      "path": "upstream/version.json",
+      "bytes": 428,
+      "sha256": "9A4A474EE19EA86C2486528B38F0A083B2024F0597E0941376E6836F360F3606"
+    },
+    {
+      "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256",
+      "path": "upstream/archive.sha256",
+      "bytes": 93,
+      "sha256": "315DE54E705AFC3E19B35A4FA02BC26BEF3DFD484D0B9C4190278698E32E15F2"
+    },
+    {
+      "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.sha256",
+      "path": "upstream/binaries.sha256",
+      "bytes": 1391,
+      "sha256": "AD5A28F6877372BB542630B60633C3C12F4602F68A8282E7B17C4A825E6EA95F"
+    },
+    {
+      "url": "https://cli.moonbitlang.com/install/powershell.ps1",
+      "path": "upstream/installer.ps1.txt",
+      "bytes": 3218,
+      "sha256": "A5101E91FFA9905FB25CD009B9A4AA942971A294BD055C89836E3AF89B710C64"
+    },
+    {
+      "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+      "path": "downloads/moonbit-windows-x86_64.zip",
+      "bytes": 90915394,
+      "sha256": "653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F"
+    },
+    {
+      "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+      "path": "downloads/core-latest.zip",
+      "bytes": 2606935,
+      "sha256": "D58CAF5EE6E2A95D8785ADF7D90FD68DD9366D174DF1DFAA36646DD6B47C5663"
+    }
+  ],
+  "three_binary_pins": [
+    {
+      "name": "moon",
+      "sha256": "EB4DE9FBBFA886B721A8080206FCAF7C9DDB344F5229AA489A26112F99695EBA",
+      "official_match": true
+    },
+    {
+      "name": "moonc",
+      "sha256": "5F0B138A6679D5EF3B6A081AEAE66C8BCE75E0E7BF2ED72AE2B415AD984D33E8",
+      "official_match": true
+    },
+    {
+      "name": "moonrun",
+      "sha256": "12F279DE0D00EA369D4A2A07B695C65EF9DDEEB4741392A781530C9BDBDC8FFD",
+      "official_match": true
+    }
+  ],
+  "official_core_separate_checksum_obtained": false,
+  "core_archive_identity_basis": "Measured official HTTPS archive plus matching core module version; no independent core archive checksum claimed",
+  "bootstrap": {
+    "state": "passed",
+    "completed_at": "2026-10-19T16:30:44.7415108+08:00",
+    "destination": "D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\installed",
+    "source_mode": "explicit-local-archives",
+    "lock_sha256": "64623A615218E0D0808731801E885F832E97F35B89671A177E2F9627AF8D0798",
+    "archives": [
+      {
+        "kind": "toolchain",
+        "file": "moonbit-windows-x86_64.zip",
+        "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+        "path": "D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\downloads\\moonbit-windows-x86_64.zip",
+        "bytes": 90915394,
+        "sha256": "653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F"
+      },
+      {
+        "kind": "core",
+        "file": "core-latest.zip",
+        "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+        "path": "D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\downloads\\core-latest.zip",
+        "bytes": 2606935,
+        "sha256": "D58CAF5EE6E2A95D8785ADF7D90FD68DD9366D174DF1DFAA36646DD6B47C5663"
+      }
+    ],
+    "upstream_installer_executed": false,
+    "bundled_core": true,
+    "environment_restored": true,
+    "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+  },
+  "installed_identity": {
+    "state": "passed",
+    "stage": "core-source",
+    "lock_sha256": "64623A615218E0D0808731801E885F832E97F35B89671A177E2F9627AF8D0798",
+    "toolchain_root": "D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\installed",
+    "expected": {
+      "moon": "0.1.20261016 (1af328f 2026-10-16)",
+      "moonc": "v0.10.16+b1a0e846e (2026-10-16)",
+      "moonrun": "moonrun 0.1.20261016 (1af328f 2026-10-16)"
+    },
+    "actual": [
+      {
+        "name": "moon",
+        "version": "0.1.20261016 (1af328f 2026-10-16)",
+        "path": "D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\installed\\bin\\moon.exe"
+      },
+      {
+        "name": "moonc",
+        "version": "v0.10.16+b1a0e846e (2026-10-16)",
+        "path": "D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\installed\\bin\\moonc.exe"
+      },
+      {
+        "name": "moonrun",
+        "version": "moonrun 0.1.20261016 (1af328f 2026-10-16)",
+        "path": "D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\installed\\bin\\moonrun.exe"
+      }
+    ],
+    "binaries": [
+      {
+        "name": "moon",
+        "path": "D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\installed\\bin\\moon.exe",
+        "sha256": "EB4DE9FBBFA886B721A8080206FCAF7C9DDB344F5229AA489A26112F99695EBA",
+        "expected_sha256": "EB4DE9FBBFA886B721A8080206FCAF7C9DDB344F5229AA489A26112F99695EBA"
+      },
+      {
+        "name": "moonc",
+        "path": "D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\installed\\bin\\moonc.exe",
+        "sha256": "5F0B138A6679D5EF3B6A081AEAE66C8BCE75E0E7BF2ED72AE2B415AD984D33E8",
+        "expected_sha256": "5F0B138A6679D5EF3B6A081AEAE66C8BCE75E0E7BF2ED72AE2B415AD984D33E8"
+      },
+      {
+        "name": "moonrun",
+        "path": "D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\installed\\bin\\moonrun.exe",
+        "sha256": "12F279DE0D00EA369D4A2A07B695C65EF9DDEEB4741392A781530C9BDBDC8FFD",
+        "expected_sha256": "12F279DE0D00EA369D4A2A07B695C65EF9DDEEB4741392A781530C9BDBDC8FFD"
+      }
+    ],
+    "core": {
+      "files": 1211,
+      "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915",
+      "algorithm": "ordinal paths, path TAB uppercase file SHA256 LF, UTF-8; exclude root _build/.mooncakes"
+    },
+    "expected_core": {
+      "files": 1211,
+      "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915"
+    },
+    "mismatches": [],
+    "scope": "Windows x64 binaries and core source are content-pinned. Generated core bundles, MSVC, Windows SDK, registry state and host environment are not covered by this identity."
+  },
+  "boundary_checks": {
+    "state": "passed",
+    "completed_at": "2026-10-19T16:40:28.5280696+08:00",
+    "checks": [
+      {
+        "name": "valid-isolated-toolchain",
+        "outcome": "passed"
+      },
+      {
+        "name": "corrupt-second-archive-before-extraction",
+        "outcome": "rejected",
+        "message": "Locked archive content mismatch: core-latest.zip"
+      },
+      {
+        "name": "missing-offline-archive-no-network-fallback",
+        "outcome": "rejected",
+        "message": "Missing locked archive: moonbit-windows-x86_64.zip"
+      },
+      {
+        "name": "archive-path-traversal-before-extraction",
+        "outcome": "rejected",
+        "message": "Unsafe archive path: ../escape.txt"
+      },
+      {
+        "name": "non-https-lock-before-download",
+        "outcome": "rejected",
+        "message": "Malformed bootstrap archive entry"
+      },
+      {
+        "name": "missing-binary-pin-before-any-installation",
+        "outcome": "rejected",
+        "message": "Missing version or binary SHA256 pin: moon"
+      },
+      {
+        "name": "version-drift",
+        "outcome": "rejected",
+        "message": "moon: expected 'deliberate-version-drift', got '0.1.20261016 (1af328f 2026-10-16)'"
+      },
+      {
+        "name": "binary-drift-before-execution",
+        "outcome": "rejected",
+        "message": "moon: binary SHA256 mismatch"
+      },
+      {
+        "name": "core-source-drift-with-unchanged-version",
+        "outcome": "rejected",
+        "message": "core: source tree SHA256 mismatch"
+      },
+      {
+        "name": "existing-installation-preserved",
+        "outcome": "rejected",
+        "message": "Toolchain destination must be new: D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\installed"
+      },
+      {
+        "name": "existing-evidence-preserved",
+        "outcome": "rejected",
+        "message": "Output must be new: D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\boundary-checks"
+      }
+    ],
+    "environment_restored": true,
+    "original_installation_preserved": true
+  },
+  "static_check": "passed_after_registry_initialization",
+  "initial_missing_registry_log": "results\\toolchain-upgrade-20261019\\check.log",
+  "native_tests": "not_run_assertions_compile_failed_D8050",
+  "native_build": "not_run_after_tests_failed",
+  "local_behavior": "not_run",
+  "local_sdk": "not_run",
+  "hosted_ci": "pending_new_commit",
+  "msvc_diagnostics": {
+    "normal_and_extended_output_paths": [
+      {
+        "variant": "normal",
+        "exit_code": 0,
+        "object_path": "D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\msvc-probe\\normal.obj",
+        "diagnostic": "probe.c\r\n"
+      },
+      {
+        "variant": "extended",
+        "exit_code": 0,
+        "object_path": "\\\\?\\D:\\moonbit\\moonffi-lab\\results\\toolchain-upgrade-20261019\\msvc-probe\\extended.obj",
+        "diagnostic": "probe.c\r\n"
+      }
+    ],
+    "normal_and_extended_working_directories": [
+      {
+        "variant": "normal-cwd",
+        "working_directory": "D:\\moonbit\\moonffi-lab",
+        "exit_code": 0,
+        "diagnostic": "probe.c\r\n"
+      },
+      {
+        "variant": "extended-cwd",
+        "working_directory": "\\\\?\\D:\\moonbit\\moonffi-lab",
+        "exit_code": 0,
+        "diagnostic": "probe.c\r\n"
+      }
+    ],
+    "window_mode": [
+      {
+        "create_no_window": false,
+        "exit_code": 0,
+        "diagnostic": "probe.c\r\n"
+      },
+      {
+        "create_no_window": true,
+        "exit_code": 0,
+        "diagnostic": "probe.c\r\n"
+      }
+    ],
+    "direct_async_compile_in_developer_environment": "passed",
+    "same_command_from_module_directory": "passed",
+    "developer_environment_only_tests": "D8050",
+    "explicit_same_compiler_tests": "D8050",
+    "official_C_backend_mode_tests": "D8050",
+    "cause": "unresolved_not_attributed_to_security_review"
+  },
+  "logs": [
+    {
+      "path": "results\\toolchain-upgrade-20261019\\check.log",
+      "sha256": "DD60052AC6A89820F93F8B78A21F01CF9D180E7B8373CB4A52D0ADA2BB997271"
+    },
+    {
+      "path": "results\\toolchain-upgrade-20261019\\registry-update.log",
+      "sha256": "3C583D4A320D6503B1D20059509BBC7A1A9F4E37B3553C337132E3059B832D4A"
+    },
+    {
+      "path": "results\\toolchain-upgrade-20261019\\check-after-registry.log",
+      "sha256": "602DFD858CCE0DFEFC8A0FC9F9EEE6EB97668B853695A5B609DE739B756132A9"
+    },
+    {
+      "path": "results\\toolchain-upgrade-20261019\\tests.log",
+      "sha256": "78731B37F4E9AA06ADBF841FDBC53C959EE503E79A449D40A433D6F3DC9B6EB6"
+    },
+    {
+      "path": "results\\toolchain-upgrade-20261019\\tests-devshell.log",
+      "sha256": "78731B37F4E9AA06ADBF841FDBC53C959EE503E79A449D40A433D6F3DC9B6EB6"
+    },
+    {
+      "path": "results\\toolchain-upgrade-20261019\\tests-explicit-compiler.log",
+      "sha256": "78731B37F4E9AA06ADBF841FDBC53C959EE503E79A449D40A433D6F3DC9B6EB6"
+    },
+    {
+      "path": "results\\toolchain-upgrade-20261019\\tests-c-backend.log",
+      "sha256": "78731B37F4E9AA06ADBF841FDBC53C959EE503E79A449D40A433D6F3DC9B6EB6"
+    }
+  ],
+  "original_installation_overwritten": false,
+  "global_environment_changed": false,
+  "upstream_installer_executed": false,
+  "tool_archives_publicly_uploaded": false,
+  "upstream_contacted": false,
+  "raw_evidence_directory": "results/toolchain-upgrade-20261019"
+}
