@@ -1,0 +1,145 @@
+{
+  "observed_on": "2026-10-19",
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248320859",
+  "tested_commit": "be3ec51a30a8677d896bd3f4c60c9834620bee80",
+  "conclusion": "failure",
+  "jobs": [
+    {
+      "name": "native (sdk)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248320859/job/118045612520"
+    },
+    {
+      "name": "native (behavior)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248320859/job/118045612933"
+    },
+    {
+      "name": "native (sqlite)",
+      "conclusion": "failure",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248320859/job/118045612947"
+    },
+    {
+      "name": "native (generation)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248320859/job/118045613013"
+    },
+    {
+      "name": "native (asan)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248320859/job/118045613094"
+    },
+    {
+      "name": "native (benchmark)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248320859/job/118045613142"
+    }
+  ],
+  "sqlite_validation_assertions_passed": true,
+  "source": {
+    "state": "passed",
+    "completed_at": "2026-10-19T19:58:18.9542228+08:00",
+    "source_commit": "be3ec51a30a8677d896bd3f4c60c9834620bee80",
+    "archive_sha256": "C452CB9FAFE485480C402D4F6322DDA6EE54241E4D8B8B7B58479C332E003BD0",
+    "driver_sha256": "CD38F315632D77FC8273691736115552CDBD0C39157010F6269C63637810BC90",
+    "source_files": 487,
+    "suites": [
+      "sqlite"
+    ],
+    "dependency_mode": "registry",
+    "dependency_source": "",
+    "fresh_project_build": true,
+    "temporary_directory": null,
+    "host_environment": {
+      "os": "Microsoft Windows 10.0.26100",
+      "architecture": "X64",
+      "powershell": "7.6.6",
+      "github_actions": "true",
+      "runner_os": "Windows",
+      "runner_arch": "X64",
+      "image_os": "win25-vs2026",
+      "image_version": "20261007.264.1"
+    },
+    "independent_environment": false,
+    "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+  },
+  "sqlite": {
+    "state": "passed",
+    "completed_at": "2026-10-19T19:58:18.9373044+08:00",
+    "consumer_module": "moonffi-example/sqlite-lab",
+    "upstream_module": "moonbit-community/sqlite3",
+    "upstream_commit": "1405639063c52b1474b2622d4c5b5e36110aa74c",
+    "upstream_archive_mode": "official-fixed-commit-download",
+    "upstream_archive_bytes": 2619220,
+    "upstream_archive_sha256": "F877BA0001D7051E72543F01DC43E5B73EFC0A32FB459E787F57A0B79ED8B9A1",
+    "upstream_git_blobs_checked_before_and_after": 49,
+    "upstream_source_modified": false,
+    "upstream_scripts_executed": false,
+    "sqlite_version": "3.49.1",
+    "upstream_persistence_fixture": "Empty module-local _build directory created before unchanged upstream tests",
+    "declared_upstream_async_version": "0.22.4",
+    "resolved_workspace_async_version": "0.22.5",
+    "dependency_mode": "explicit-local-source-cache",
+    "dependency_source": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\ci\\workspace\\.mooncakes",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "source_manifest_sha256": "D4F2E287FFE4E2C28BC51DAC3E3B61B4CC52A03E0D30CC0A329C25ABCD34934C",
+    "upstream_unit_tests": 48,
+    "adapter_unit_tests": 8,
+    "repair_subsets": 1024,
+    "pure_generated_walks": 256,
+    "native_unit_walks": 32,
+    "contract_cases": 32,
+    "walk_cases": 64,
+    "operation_kinds": [
+      "bind_int",
+      "bind_text",
+      "busy_close",
+      "close",
+      "finalize",
+      "open",
+      "prepare",
+      "read",
+      "reset",
+      "step"
+    ],
+    "saved_replays": 2,
+    "separate_process_determinism": true,
+    "passing_shrink_stop_reason": "unsupported_outcome",
+    "passing_shrink_claimed_failure": false,
+    "invalid_preflight_rejected": true,
+    "output_reuse_rejected": true,
+    "executable_sha256": "93157D7F801E10DB72391B14E40BBC00ECDDB096E4175FF3CCF03BF67BD250AB",
+    "temporary_directory": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\ci\\sqlite\\temp",
+    "async_fd_leak_check": "1",
+    "unknown_defects_found": 0,
+    "artificial_target_mutants_used": false,
+    "independent_environment": false,
+    "scope": "Unchanged pinned community binding consumed through public core/runner. Synchronous in-memory SELECT/bind/reset/step/read and explicit lifecycle contracts only; no unknown defect, heap-leak proof, concurrency coverage or SQLite ASan coverage claimed."
+  },
+  "script_controls_started": true,
+  "script_controls_complete": false,
+  "artifact_download": {
+    "state": "passed",
+    "records": [
+      {},
+      {
+        "artifact_id": 12184421861,
+        "name": "windows-native-sqlite-39248320859",
+        "bytes": 375696,
+        "digest": "sha256:5f0266b26ba55ad0400e82aa9aabb5cf4cf7bbf4b324de0d575b1b8e2f06c577",
+        "entries": 743,
+        "source": "GitHub artifact API redirect",
+        "download_host": "productionresultssa5.blob.core.windows.net",
+        "retained_zip_revalidated": false,
+        "tls_verification": "default",
+        "credentials_forwarded_to_artifact_host": false,
+        "zip_paths_checked": true
+      }
+    ]
+  },
+  "cause": "The SQLite validation step succeeded. Script controls failed because their default checkout-root .mooncakes did not exist; the actual cache was under the exported workspace. No full script-control success is claimed.",
+  "raw_evidence_directory": "results/github-ci-39248320859"
+}

@@ -89,7 +89,7 @@ Eigen 支持 `--generator stateful` 的六操作探索，以及 `--generator ari
 
 [SDK 接入指南](docs/SDK.md) 和[独立计数器模块](examples/adapter-starter/README.md)提供可运行的接入起点，覆盖纯模型、C FFI、额外生成器、失败保存、缩减及正确实现重放。`scripts/verify-sdk.ps1` 会在新工作区中只用 core/runner 公开包编译消费者并验收；当前使用本地源码工作区，没有发布 registry SDK 包。
 
-[社区 SQLite 独立消费者](examples/sqlite-lab/README.md)接入未经修改的 `moonbit-community/sqlite3` 固定源码，通过公开 core/runner 检查绑定参数、查询状态及连接/语句生命周期。[本地验收](docs/SQLITE-INTEGRATION.md)通过 48 项上游测试、8 项适配测试及 96 个隔离场景；这证明真实绑定可以复用协议，尚未发现未知缺陷。Windows CI 新增 sqlite 任务，结果按具体运行记录解释。
+[社区 SQLite 独立消费者](examples/sqlite-lab/README.md)接入未经修改的 `moonbit-community/sqlite3` 固定源码，通过公开 core/runner 检查绑定参数、查询状态及连接/语句生命周期。[验收记录](docs/SQLITE-INTEGRATION.md)包含 48 项上游测试、8 项适配测试及 96 个隔离场景；[六项 Windows CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440) 全部通过且产物已核对。这证明真实绑定可以复用协议，尚未发现未知缺陷。
 
 执行 `& .\scripts\verify-asan.ps1` 会在新的结果目录创建源码副本，仅在副本中启用 MSVC ASan：先要求三次明确标注的越界 canary 产生真实检测报告，再运行 Buffer/Eigen 各十个正常场景。主源码和普通构建配置保持原样，脚本保留构建日志、运行时和二进制哈希、源码清单及插桩范围。匹配的 ASan 诊断头与摘要被分类为 `MemoryError`；没有足够根因指纹时不自动缩减。普通构建拒绝 ASan profile/canary。
 

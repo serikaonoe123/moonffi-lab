@@ -14,7 +14,9 @@
 - 全部 49 个上游 Git blob 在构建前后相同；包图证明引擎接入范围恰为 core/runner。
 - 九项脚本拒绝/环境恢复控制通过。成功验收的驱动哈希在运行前后相同，调用者环境和目录恢复。
 
-这是同一台本机的验证，不等于独立维护者验收。新增第六项 Windows CI sqlite 任务，只有取得运行及产物后才记录云端成功。
+上述本地记录来自同一台主机。最终提交 `1f065527f9fa584dc52a79399f0a36e40ed3c321` 的 [Actions 39248905440](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440) 六项全部通过，且已下载核对全部诊断产物；这是托管 runner 的另一环境验证，仍不等于独立维护者使用验收。见 [云端快照](evidence/github-ci-39248905440.json)。
+
+六次官方锁定工具链安装通过；每个任务的 68 个关键导出文件匹配同一 Git 提交，驱动身份按 LF/CRLF 核对。SQLite 的 48+8 单测、96 场景、两份重放和九项环境/拒绝控制通过；96 份输入与本地逐字节相同，49 个上游 blob 构建前后一致。既有 69+6 单测、704 生成场景、128 份历史输入、189 次缩减、63 组重复与 214 真子集通过；189 行输入/结果字节、结构计数及正确实现重放均与旧基准一致。六份下载 ZIP 的大小与 SHA-256 匹配 GitHub 元数据，诊断包不含工具归档或二进制。
 
 ## 发现并处理的问题
 
@@ -22,9 +24,9 @@
 
 负向控制发现脚本把缺失环境变量恢复成了空字符串。verify-clean 和 verify-sqlite 现使用 NullString 恢复真正缺失状态，并分别覆盖存在/缺失/空值。早期名为 absent 的控制本身准备错误，其结论仅覆盖空值；旧日志保留。详见 [临时目录记录](LOCAL-WINDOWS-TEMP.md)。
 
-首两轮 CI（39247453969、39247655451）的 SQLite 验证断言通过，但末尾预期拒绝命令留下非零 LASTEXITCODE，使外层 PowerShell 任务失败，九项控制步骤因此未执行。这两轮不能写成完整验收成功。现只在全部验证断言通过后清零脚本最终 native 状态，失败仍抛错；`results/sqlite-ci-exit-accepted-20261019` 与 `results/script-controls-ci-exit-20261019` 按 GitHub 的退出包装复验通过。另从提交 5e5347c 导出源码，TEMP/TMP 真正缺失时完整 SDK 成功后仍保持缺失，记录 `results/sqlite-clean-sdk-absent-success-20261019`。最终修复的六项 CI 尚待验收。
+首两轮 CI（[39247453969](evidence/github-ci-39247453969-failed-sqlite.json)、[39247655451](evidence/github-ci-39247655451-failed-sqlite.json)）的 SQLite 验证断言通过，但末尾预期拒绝命令留下非零 LASTEXITCODE，使外层 PowerShell 任务失败，九项控制步骤因此未执行。这两轮不能写成完整验收成功。现只在全部验证断言通过后清零脚本最终 native 状态，失败仍抛错；`results/sqlite-ci-exit-accepted-20261019` 与 `results/script-controls-ci-exit-20261019` 按 GitHub 的退出包装复验通过。另从提交 5e5347c 导出源码，TEMP/TMP 真正缺失时完整 SDK 成功后仍保持缺失，记录 `results/sqlite-clean-sdk-absent-success-20261019`。
 
-第三轮 39248320859 的 SQLite 主验收成功，九项控制启动后因默认读取 checkout 根目录 `.mooncakes` 而失败；CI 依赖实际由 verify-clean 放在 `results/ci/workspace/.mooncakes`。控制脚本新增显式 `-OfflineDependencySource`，workflow 指向真实依赖路径。没有根缓存的新目录回归九项通过且 CI 包装退出 0，记录 `results/script-controls-fresh-checkout-fixed-20261019`；第一次新目录准备漏复制来源清单的失败另保留在 `results/script-controls-fresh-checkout-20261019`。
+第三轮 [39248320859](evidence/github-ci-39248320859-failed-sqlite.json) 的 SQLite 主验收成功，九项控制启动后因默认读取 checkout 根目录 `.mooncakes` 而失败；CI 依赖实际由 verify-clean 放在 `results/ci/workspace/.mooncakes`。控制脚本新增显式 `-OfflineDependencySource`，workflow 指向真实依赖路径。没有根缓存的新目录回归九项通过且 CI 包装退出 0，记录 `results/script-controls-fresh-checkout-fixed-20261019`；第一次新目录准备漏复制来源清单的失败另保留在 `results/script-controls-fresh-checkout-20261019`。最终六项成功与以上三次失败分开保存，没有覆盖失败证据。
 
 ## 贡献与未完成项
 

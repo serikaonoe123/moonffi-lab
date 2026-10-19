@@ -1,6 +1,6 @@
 {
   "recorded_at": "2026-10-19T19:48:33.8570002+08:00",
-  "state": "local-passed-cloud-pending",
+  "state": "passed-local-and-hosted",
   "local": {
     "state": "passed",
     "completed_at": "2026-10-19T19:46:31.3623519+08:00",
@@ -377,5 +377,16 @@
     "dependency_source_explicit": true,
     "ci_wrapper_exit": 0,
     "checks": 9
+  },
+  "hosted_verification": {
+    "conclusion": "success",
+    "script_controls": 9,
+    "jobs": 6,
+    "tested_commit": "1f065527f9fa584dc52a79399f0a36e40ed3c321",
+    "independent_maintainer_acceptance": false,
+    "selected_source_files_per_job": 68,
+    "snapshot": "docs/evidence/github-ci-39248905440.json",
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440",
+    "sqlite_input_hashes_matching_local": 96
   }
 }

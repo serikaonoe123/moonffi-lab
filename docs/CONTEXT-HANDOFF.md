@@ -2,15 +2,21 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-19（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
-## 最新阶段：真实社区 SQLite 接入，本地通过，云端待验收
+## 最新阶段：真实社区 SQLite 接入，六项 CI 通过，2026-10-19
 
-新增 examples/sqlite-lab 和 verify-sqlite，只用 core/runner，固定上游提交 1405639063c52b1474b2622d4c5b5e36110aa74c、ZIP 大小/SHA 及 49 个 Git blob。上游原样源码、脚本不执行；async 声明 0.22.4，明确 workspace 成员选 0.22.5，清单未改。48+8 单测、1,024 修整子集、256 纯 walk、32 native 单测 walk、32+64 隔离场景及重放/边界通过，记录 results/sqlite-external-accepted-20261019。没有发现未知缺陷或注入上游 mutant，不宣称 SQLite ASan/堆泄漏/并发覆盖。详见 [接入记录](SQLITE-INTEGRATION.md)。
+最终运行代码提交 `1f065527f9fa584dc52a79399f0a36e40ed3c321` 已推送，[Actions 39248905440](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440) 六项全部通过并核对全部产物，见 [接入记录](SQLITE-INTEGRATION.md)、[本地快照](evidence/sqlite-external-20261019.json)及[云端快照](evidence/github-ci-39248905440.json)。六次官方锁定工具链安装、68 个关键文件逐任务匹配 Git 导出，驱动按 LF/CRLF 校验；既有 69+6 单测、704 生成场景、128 历史输入、189 次缩减通过，全部输入/结果字节和结构计数与旧基准一致，63 组重复、214 真子集及正确实现重放通过。此后只做文档收尾，不改变已测试脚本。
 
-首次 47/48：上游持久化测试依赖模块目录的 _build；仅创建普通空测试目录后原测试通过。verify-clean / verify-sqlite 另修复缺失环境变量被恢复为空字符串的问题，用 NullString 保留真正缺失；九项新控制通过。早期 absent 控制实际准备为空字符串，旧记录未覆盖或删除，后续结论已更正。六项 CI 中新增 sqlite，并执行九项边界控制；初始实现 0d2ea85、来源 tree 字段更正 5e5347c 已推送；两轮 SQLite 断言通过但预期非零 native 状态泄漏到 CI 外层，故任务失败，九项 CI 控制未执行。修正为仅在全部断言通过后归零；按 CI 包装本地复验 48+8 单测、96 场景及九项控制通过，记录 results/sqlite-ci-exit-accepted-20261019、results/script-controls-ci-exit-20261019。另 clean-sdk-absent-success 验证成功路径恢复真正缺失的 TEMP/TMP。退出修复 be3ec51 已推送；第三轮 39248320859 主验收成功，九项控制默认找 checkout 根缓存而失败。控制新增显式 OfflineDependencySource，workflow 使用 results/ci/workspace/.mooncakes；无根缓存的新目录九项控制和 CI 包装退出 0 已通过，记录 results/script-controls-fresh-checkout-fixed-20261019（首次新目录漏复制清单的准备失败保留）。下一步提交依赖路径修复并审计最终六项 CI，不将本地通过当作云端成功。
+新增 examples/sqlite-lab、verify-sqlite 和 verify-script-controls，仅用 core/runner，固定社区 sqlite3 提交 1405639063c52b1474b2622d4c5b5e36110aa74c、ZIP 大小/SHA 及 49 个 Git blob；上游源码保持原样，不执行上游脚本。tree 字段笔误已按官方 Git commit API 更正为 b948e0cfbe8e909efba2fe34a11ccf628e6708b2。async 声明 0.22.4，显式 workspace 源码成员选 0.22.5，不改上游清单。48+8 单测、1,024 修整子集、256 纯 walk、32 native 单测 walk、32+64 隔离场景、两份重放及边界通过；96 个输入与本地逐字节一致，49 blob 构建前后一致。没有发现未知缺陷或注入上游 mutant，不宣称 SQLite ASan/堆泄漏/并发覆盖，也不将托管 runner 等同独立维护者使用验收。
+
+本地首次 47/48 上游测试：持久化单测依赖模块目录的 _build，仅创建普通空测试目录后原测试通过。verify-clean/verify-sqlite 修复缺失环境变量被恢复为空字符串，NullString 保留真正缺失；旧 absent 控制实际准备为空值，结论已更正且旧日志保留。九项存在/缺失/空值、归档大小/哈希及已有输出控制本地和最终 CI 均通过；成功路径另由 results/sqlite-clean-sdk-absent-success-20261019 验证 SDK 后 TEMP/TMP 仍真正缺失。
+
+首两轮 CI 39247453969/39247655451：SQLite 断言通过，预期拒绝的 native 非零状态泄漏到外层而任务失败，九项控制未执行。be3ec51 修复仅在全部断言通过后归零。第三轮 39248320859 主验收成功，控制默认查 checkout 根缓存而失败；最终显式传入 results/ci/workspace/.mooncakes，无根缓存新目录回归和最终 CI 均通过。三次失败快照与日志均保留；首次新目录漏复制清单的准备失败也未覆盖。记录目录：results/sqlite-external-accepted-20261019、results/sqlite-ci-exit-accepted-20261019、results/script-controls-fresh-checkout-fixed-20261019、results/github-ci-39248905440。下载及审计均通过正式审批，没有越过安全拒绝、修改 ACL/完整性/TLS 或上传第三方工具包。
+
+下一阶段是独立使用者按文档复现，以及 v0.1 范围冻结和发布准备。当前没有发布 registry 包或 Release，没有向上游发送消息；这些动作仍需对应授权。公开自写源码/文档推送授权继续有效，禁止绕过安全审查。
 
 ## 最新阶段：本机 MSVC D8050 恢复，2026-10-19
 
-工作区内 moon 与自写诊断程序均带 Low 完整性标签，诊断令牌 RID=4096；系统临时目录没有 Low 标签。最小同命令在原 TEMP/TMP 下 D8050/退出 2，仅把临时目录设到工作区后退出 0，令牌仍为 Low。没有修改 ACL/标签/安全策略，没有移动已锁定程序或改锁。新增 `scripts/verify-clean.ps1 -WorkspaceTemp`，使用项目内新 `<Out>/temp`，finally 恢复调用进程 TEMP/TMP 和目录；成功及失败报告记录临时路径。通过 69 主模块单测、完整 behavior（21 个 Int64 探针、1701 缩减/预算执行及 36 独立对照）、6 SDK 单测和完整独立消费者验收，以及五项环境恢复/拒绝控制。见 [本机记录](LOCAL-WINDOWS-TEMP.md)和[快照](evidence/local-msvc-temp-20261019.json)。本轮未重跑本机 ASan/benchmark/generation，不扩展结论。
+工作区内 moon 与自写诊断程序均带 Low 完整性标签，诊断令牌 RID=4096；系统临时目录没有 Low 标签。最小同命令在原 TEMP/TMP 下 D8050/退出 2，仅把临时目录设到工作区后退出 0，令牌仍为 Low。没有修改 ACL/标签/安全策略，没有移动已锁定程序或改锁。新增 `scripts/verify-clean.ps1 -WorkspaceTemp`，使用项目内新 `<Out>/temp`，finally 恢复调用进程 TEMP/TMP 和目录；成功及失败报告记录临时路径。通过 69 主模块单测、完整 behavior（21 个 Int64 探针、1701 缩减/预算执行及 36 独立对照）、6 SDK 单测和完整独立消费者验收，以及当时五项环境恢复/拒绝控制（其中 absent 实为空值，真正缺失的修复见最新阶段）。见 [本机记录](LOCAL-WINDOWS-TEMP.md)和[快照](evidence/local-msvc-temp-20261019.json)。本轮未重跑本机 ASan/benchmark/generation，不扩展结论。
 
 最终新选项入口记录在 `results/local-msvc-workspace-final-20261019`，驱动运行前后哈希一致；选项独立 SDK 与恢复控制在 `results/local-msvc-temp-option-sdk-20261019` 和 `results/local-msvc-temp-controls-20261019`。验证导出源码为 c53a019，本轮驱动变更单独记录 SHA。首次根目录验证扫描了 results 中缺文件的历史部分源码快照，失败记录在 `results/local-msvc-recovery-20261019`，未删除快照。优先使用 `verify-clean -WorkspaceTemp` 导出指定提交，避免诊断目录被视为产品包。首轮外层手动设置 TEMP 的通过记录在 `results/local-msvc-clean-recovery-20261019`；该轮驱动文件中途被编辑，结束时读取的 driver_sha256 不能单独证明实际加载版本，最终另跑固定驱动验证，没有覆盖初次记录。
 
