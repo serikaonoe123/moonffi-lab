@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-19",
+  "assessment_commit": "00466bfe1ec47f8e6c47c1b081caf9ed92ee03cc",
+  "state": "plan_only_pending_native_toolchain_redistribution_evidence",
+  "repository": {
+    "name": "serikaonoe123/moonffi-lab",
+    "public": true,
+    "viewer_permission": "ADMIN",
+    "existing_release_count": 0,
+    "immutability_setting": "not_queried_or_changed"
+  },
+  "lock_sha256": "5A9008CC7EA40DE44E0A47F8EA72DB4F344040A4601A52774493FF1F9DFEFB7F",
+  "archives": [
+    {
+      "file": "moonbit-windows-x86_64.zip",
+      "kind": "toolchain",
+      "local_path": "results\\toolchain-research-20261017\\moonbit-windows-x86_64.zip",
+      "bytes": 91640641,
+      "sha256": "6E3EF6CB96AA5086D122183972687F79FC912F80652000907D96EE6AD967E3BF",
+      "matches_existing_lock": true,
+      "archive_entries": 253,
+      "license_name_matches": [
+        {
+          "path": "share/why3/LICENSE",
+          "bytes": 27899,
+          "sha256": "4B9EB976AECD9DE79A0AFF3A3BFEA7134E8F4874D36B0783110C13BA837A8858"
+        }
+      ]
+    },
+    {
+      "file": "core-latest.zip",
+      "kind": "core",
+      "local_path": "results\\toolchain-research-20261017\\core-latest.zip",
+      "bytes": 2529648,
+      "sha256": "05556B27B156348950EA88AE6838032C8B478AE532B18B3929387D1DA4C18D55",
+      "matches_existing_lock": true,
+      "archive_entries": 1303,
+      "license_name_matches": [
+        {
+          "path": "core/licenserc.toml",
+          "bytes": 1684,
+          "sha256": "93D84C5A0D221D3908B31D7772DD25E372CBA3D2D408FE0BDE3B45720CD68309"
+        },
+        {
+          "path": "core/NOTICE",
+          "bytes": 7710,
+          "sha256": "047A7CD5E93C10A8A753B7F152C371EF309B523C4D9B945EC5776321E7E602FB"
+        },
+        {
+          "path": "core/LICENSE",
+          "bytes": 11367,
+          "sha256": "86460C45017FFACB9AA9E18850FA9FDB036339DC8851125465F4A3F3442FC894"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/moonbitlang/moonbit-compiler/main/LICENSE.TXT",
+      "scope": "Current source-repository license; applicability and corresponding source for the pinned native bundle not established"
+    },
+    {
+      "url": "https://github.com/moonbitlang/moonbit-compiler",
+      "scope": "Current repository describes Wasm-source availability; not proof for the whole pinned Windows distribution"
+    },
+    {
+      "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases",
+      "scope": "Conditional storage option, not evidence that this repository has it enabled"
+    },
+    {
+      "url": "https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases",
+      "scope": "Release assets support binary files; each pinned archive is below documented 2 GiB limit"
+    }
+  ],
+  "decision": {
+    "lock_changed": false,
+    "installer_changed": false,
+    "workflow_changed": false,
+    "archives_uploaded": false,
+    "releases_created": false,
+    "settings_changed": false,
+    "upstream_contacted": false
+  },
+  "unresolved": [
+    "Whole pinned Windows bundle redistribution terms and applicable component/source obligations",
+    "User approval for exact archive destination and public release, after license evidence is sufficient",
+    "Repository release immutability availability/configuration before any publication"
+  ],
+  "approval_review": {
+    "first_documentation_commit": "review_deadline_expired_command_not_executed",
+    "reported_to_user": true,
+    "reviewer_allows_one_same_channel_retry": true,
+    "bypass_attempted": false
+  }
+}
