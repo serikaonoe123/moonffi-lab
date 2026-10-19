@@ -27,8 +27,8 @@ impl @lab.Adapter for Oracle with fn repair(self, trace) {
 impl @lab.Adapter for Oracle with fn validate(self, trace) {
   for step in trace.steps {
     if !["arm", "noise", "fail"].contains(step.op) { return Some("unknown oracle operation") }
-    if (["numeric", "chain", "repair-shift", "argument-error", "coupled", "integer-threshold"].contains(self.mode) && step.op == "fail") ||
-      (self.mode == "coupled" && step.op == "arm") {
+    if (["numeric", "chain", "repair-shift", "argument-error", "coupled", "integer-threshold", "duplicate", "duplicate-error", "duplicate-coupled"].contains(self.mode) && step.op == "fail") ||
+      (["coupled", "duplicate-coupled"].contains(self.mode) && step.op == "arm") {
       if numeric_args(step) is None { return Some("oracle requires numeric payload") }
       continue
     }
@@ -43,18 +43,19 @@ impl @lab.Adapter for Oracle with fn validate(self, trace) {
 impl @lab.Adapter for Oracle with fn execute(self, step) {
   if step.op == "arm" {
     self.armed = true
-    if self.mode == "coupled" { self.arm_value = numeric_args(step).unwrap().value }
+    if ["coupled", "duplicate-coupled"].contains(self.mode) { self.arm_value = numeric_args(step).unwrap().value }
   }
   if step.op == "noise" { self.blocker = true }
   if step.op != "fail" || !self.armed { return None }
-  if self.mode == "numeric" && numeric_args(step) is Some(args) && args.value == 1 { return None }
+  if ["numeric", "duplicate"].contains(self.mode) && numeric_args(step) is Some(args) && args.value == 1 { return None }
+  if self.mode == "duplicate-error" && numeric_args(step).unwrap().value == 1 { exit_process(0) }
   if self.mode == "integer-threshold" {
     let args = numeric_args(step).unwrap()
     let wide = args.value.to_int64()
     let magnitude = if wide < 0L { -wide } else { wide }
     if magnitude < args.guard_value.to_int64() { return None }
   }
-  if self.mode == "coupled" {
+  if ["coupled", "duplicate-coupled"].contains(self.mode) {
     let value = numeric_args(step).unwrap().value
     if (value != 0 && (!self.blocker || self.arm_value == 0)) ||
       (value == 0 && self.blocker && self.arm_value == 0) { return None }
@@ -70,6 +71,9 @@ impl @lab.Adapter for Oracle with fn execute(self, step) {
 impl @lab.Adapter for Oracle with fn teardown(_) { None }
 ///|
 impl @lab.Adapter for Oracle with fn shrink_arguments(self, step) {
+  if ["duplicate", "duplicate-error", "duplicate-coupled"].contains(self.mode) {
+    return duplicate_candidates(self.mode, step)
+  }
   if self.mode == "coupled" && (step.op == "arm" || step.op == "fail") {
     let args = numeric_args(step).unwrap()
     if args.value == 0 { return [] }
@@ -107,6 +111,10 @@ extern "C" fn exit_process(code : Int) -> Unit = "exit"
 async fn main {
   let code = try {
     let arguments = @env.args()
+    if arguments.length() == 3 && arguments[1] == "--check-duplicates" {
+      check_duplicate_reduction(arguments[0], arguments[2])
+      exit_process(0)
+    }
     if (arguments.length() == 3 || arguments.length() == 5) && arguments[1] == "--check-arguments" {
       check_argument_reduction(arguments[0], arguments[2])
       if arguments.length() == 5 { check_binding_arguments(arguments[3], arguments[4], arguments[2] + "/bindings") }

@@ -138,6 +138,10 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
         while index < best.steps.length() && self.executions() - initial_count < budget - 3 && @async.now() < deadline {
           let step = best.steps[index]
           let mut proposals_complete = true
+          // Reuse only conclusive results for identical encodings in this
+          // step's current scan. A changed trace needs fresh observations;
+          // worker/protocol errors must not suppress later duplicate attempts.
+          let conclusive_arguments : Map[String, Bool] = Map([])
           for candidate_step in adapter.shrink_arguments(step) {
             if self.executions() - initial_count >= budget - 3 || @async.now() >= deadline {
               proposals_complete = false
@@ -152,12 +156,17 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
               continue
             }
             if !@lab.arguments_simpler(candidate_step.args, step.args) { continue }
+            let argument_key = candidate_step.args.stringify()
+            if conclusive_arguments.contains(argument_key) { continue }
             let steps = best.steps.copy()
             steps[index] = candidate_step
             let prepared = prepare_candidate(adapter, best.with_steps(steps), strategy)
             let candidate = prepared.candidate
             if prepared.error is None && candidate.steps.contains(candidate_step) {
               let check = self.run(adapter, candidate, timeout_ms=self.remaining_timeout(deadline))
+              if check.outcome == Pass || check.outcome == PropertyFailure {
+                conclusive_arguments[argument_key] = true
+              }
               if check.outcome == PropertyFailure && check.fingerprint == fingerprint {
                 accepted_candidates += 1
                 self.record_reduction("arguments", "accepted", candidate, Some(check), "same failure fingerprint", removed=prepared.removed)

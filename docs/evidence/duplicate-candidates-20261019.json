@@ -1,0 +1,253 @@
+{
+  "date": "2026-10-19",
+  "timezone": "Asia/Shanghai",
+  "base_commit": "02b21aea4f5878302a504b6cdb631b89299ade7c",
+  "status": "local_validation_passed",
+  "implementation": "Reuse conclusive results for byte-identical JSON argument encodings within one step scan; reset on trace changes; retain duplicate attempts after inconclusive results.",
+  "checks": {
+    "toolchain_identity": "passed",
+    "static_check": "passed",
+    "native_build": "passed",
+    "unit_tests": {
+      "status": "passed",
+      "count": 64,
+      "log": "results/duplicate-permission-20261019/tests.log",
+      "integrated_log": "results/verify-duplicate-candidates-20261019/tests.log"
+    },
+    "duplicate_probe": {
+      "status": "passed",
+      "scenarios": 9,
+      "worker_executions": 116.0,
+      "direct_and_integrated_summaries_identical": true,
+      "summaries": [
+        {
+          "mode": "duplicate",
+          "strategy": "plain",
+          "executions": 10,
+          "argument_executions": 2,
+          "value": 0,
+          "inconclusive_candidates": 0,
+          "arm_contexts": [],
+          "confirmed": true,
+          "complete": true
+        },
+        {
+          "mode": "duplicate-error",
+          "strategy": "plain",
+          "executions": 10,
+          "argument_executions": 2,
+          "value": 9,
+          "inconclusive_candidates": 2,
+          "arm_contexts": [],
+          "confirmed": true,
+          "complete": true
+        },
+        {
+          "mode": "duplicate-coupled",
+          "strategy": "plain",
+          "executions": 14,
+          "argument_executions": 4,
+          "value": 0,
+          "inconclusive_candidates": 0,
+          "arm_contexts": [
+            "3:9",
+            "3:0",
+            "2:0"
+          ],
+          "confirmed": true,
+          "complete": true
+        },
+        {
+          "mode": "duplicate",
+          "strategy": "dependency",
+          "executions": 12,
+          "argument_executions": 2,
+          "value": 0,
+          "inconclusive_candidates": 0,
+          "arm_contexts": [],
+          "confirmed": true,
+          "complete": true
+        },
+        {
+          "mode": "duplicate-error",
+          "strategy": "dependency",
+          "executions": 12,
+          "argument_executions": 2,
+          "value": 9,
+          "inconclusive_candidates": 2,
+          "arm_contexts": [],
+          "confirmed": true,
+          "complete": true
+        },
+        {
+          "mode": "duplicate-coupled",
+          "strategy": "dependency",
+          "executions": 17,
+          "argument_executions": 4,
+          "value": 0,
+          "inconclusive_candidates": 0,
+          "arm_contexts": [
+            "3:9",
+            "3:0",
+            "2:0"
+          ],
+          "confirmed": true,
+          "complete": true
+        },
+        {
+          "mode": "duplicate",
+          "strategy": "state",
+          "executions": 12,
+          "argument_executions": 2,
+          "value": 0,
+          "inconclusive_candidates": 0,
+          "arm_contexts": [],
+          "confirmed": true,
+          "complete": true
+        },
+        {
+          "mode": "duplicate-error",
+          "strategy": "state",
+          "executions": 12,
+          "argument_executions": 2,
+          "value": 9,
+          "inconclusive_candidates": 2,
+          "arm_contexts": [],
+          "confirmed": true,
+          "complete": true
+        },
+        {
+          "mode": "duplicate-coupled",
+          "strategy": "state",
+          "executions": 17,
+          "argument_executions": 4,
+          "value": 0,
+          "inconclusive_candidates": 0,
+          "arm_contexts": [
+            "3:9",
+            "3:0",
+            "2:0"
+          ],
+          "confirmed": true,
+          "complete": true
+        }
+      ]
+    },
+    "behavior": {
+      "status": "passed",
+      "evidence": "results/verify-duplicate-candidates-20261019/verification.json",
+      "facts_count": 15
+    },
+    "sdk": {
+      "status": "passed",
+      "unit_tests": 6,
+      "original_steps": 32,
+      "reduced_steps": 2,
+      "executions": 29,
+      "proper_subsets_checked": 3,
+      "corrected_replay": "Pass",
+      "dependency_mode": "explicit-local-source-cache",
+      "evidence": "results/sdk-duplicate-candidates-20261019/verification.json"
+    },
+    "benchmark": {
+      "status": "passed",
+      "repetitions": 1,
+      "measurements": 63,
+      "complete_searches": 63,
+      "actual_proper_subsets_checked": 214.0,
+      "comparison": {
+        "baseline": "results/benchmark-binding-arguments-20261018",
+        "current": "results/benchmark-duplicate-candidates-20261019",
+        "rows": 63,
+        "identical_input_and_reduced_hashes": true,
+        "identical_results": true,
+        "baseline_workers": 1937.0,
+        "current_workers": 1937.0,
+        "count_changes": [],
+        "argument_progress_differences": [],
+        "repetitions": 1,
+        "actual_proper_subsets_checked": 214.0
+      },
+      "evidence": "results/benchmark-duplicate-candidates-20261019/verification.json"
+    },
+    "ci": "not_run"
+  },
+  "initial_attempt": {
+    "checks": {
+      "toolchain_identity": "passed",
+      "static_check": "passed",
+      "native_build": "passed",
+      "initial_unit_tests": {
+        "status": "failed_before_completion",
+        "executable": "core.whitebox_test.exe",
+        "reported_child_exit_code": 99,
+        "assertion_result": null
+      },
+      "detailed_core_tests": "cancelled_without_result",
+      "individual_core_test": "cancelled_without_result",
+      "duplicate_probe": {
+        "status": "cancelled_without_result",
+        "output_directory_created": false,
+        "planned_scenarios": 9
+      },
+      "behavior": "not_run",
+      "sdk": "not_run",
+      "benchmark": "not_run",
+      "ci": "not_run"
+    },
+    "permission_denial": {
+      "action": "Get-CimInstance Win32_Process",
+      "reported_message": "Access denied",
+      "reported_to_user": true,
+      "escalated": false,
+      "alternate_process_query_attempted": false,
+      "relationship_to_test_failures": "unknown"
+    },
+    "build_log": "results/duplicate-candidates-20261019/build.log",
+    "observations": "results/duplicate-candidates-20261019/initial-observations.txt",
+    "note": "Initial exit 99 and cancelled executions remain recorded; later success does not rewrite them as passed. The underlying cause is not established."
+  },
+  "permission_resolution": {
+    "user_explicitly_authorized_permission_requests": true,
+    "user_explicitly_prohibited_safety_review_bypass": true,
+    "approved_same_read_only_process_query": "passed; no matching processes",
+    "native_validation_used_formally_approved_execution": true,
+    "new_safety_review_rejection": false,
+    "security_settings_modified": false,
+    "prior_thread_safety_flag_considered_cleared": false
+  },
+  "source_manifest": [
+    {
+      "path": "runner/shrink.mbt",
+      "sha256": "01c7841e97e783fe831f1015c9ac7647ede458bc47dcaa0ed3328415036a6e76"
+    },
+    {
+      "path": "cmd/reducer-probe/main.mbt",
+      "sha256": "4af1501269c65bd0356ab99d4f7df351a48c4aa55a2c0e6b800fa55bf5e78d6c"
+    },
+    {
+      "path": "cmd/reducer-probe/argument_checks.mbt",
+      "sha256": "8b5a769e44e5ea8e30753ebfe49ba56fcef37b1663d3cd5877803d2bbb832a46"
+    },
+    {
+      "path": "cmd/reducer-probe/duplicate_checks.mbt",
+      "sha256": "2a50638e3bef93e993487c0a11bc175506ea7d45c53c7b4935f3fe1518526d20"
+    }
+  ],
+  "reducer_executable_sha256": "c8e8541cd24652ef387cd60549055818a666e23fa4d471f78f8a0b9d553d64fc",
+  "validation_scope": "One local Windows/MSVC environment. Explicit cached async sources for SDK. One corpus repetition, no timing acceleration or repeated-run stability claim. CI and publication are recorded separately from this local validation snapshot.",
+  "publication_state_at_local_validation": {
+    "committed": false,
+    "pushed": false,
+    "ci": "not_run"
+  },
+  "publication_authorization": {
+    "observed_on": "2026-10-19",
+    "repository": "serikaonoe123/moonffi-lab",
+    "github_is_private": false,
+    "visibility_changed_by_agent": false,
+    "user_explicitly_authorized_public_push_and_ci": true,
+    "authorization_text": "允许推送到当前公开仓库",
+    "safety_review_bypass_authorized": false
+  }
+}
