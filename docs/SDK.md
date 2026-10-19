@@ -52,7 +52,7 @@ members = ["moonffi-lab", "my-counter"]
 
 `cmd/main` 显式导入 `moonbitlang/async`、`runner`、counter 包和 env；`async fn main` 需要 async 包导入。入口调用公共 `runner.cli(args, factory, generator, generators~)`，捕获顶层错误并以 2 退出。
 
-默认 `counter-contract-1` 在 CLI 的步数预算内生成固定契约场景，确保人工 error 模式被观察。可选 `walk` 对应 `counter-walk-1`：最多一个存活计数器，按状态选择合法操作，不附加固定触发后缀。生成结果在两个模式下步骤相同；未知模式由适配器拒绝。生成器回调没有 FFI。
+默认 `counter-contract-1` 在 CLI 的步数预算内生成固定契约场景，确保人工 error 模式被观察。可选 `walk` 当前对应 `counter-walk-2`：最多一个存活计数器，按状态选择合法操作，不附加固定触发后缀。0.10.16 标准库更正随机混合算法，因此此独立示例提高生成器版本，不把新 seed 流标成旧版；已保存的 `counter-walk-1` 输入仍按具体步骤重放。生成结果在两个模式下步骤相同；未知模式由适配器拒绝。生成器回调没有 FFI。
 
 运行、保存失败、缩减、重放及切换正确实现的完整命令见 [可执行示例](../examples/adapter-starter/README.md)。缺陷执行、确认失败的缩减和缺陷重放退出 1，正确实现退出 0；参数/无效输入退出 2。`confirmed` 与 `deletion_minimal` 含义不同，不能仅凭退出 1 宣称最小。
 

@@ -2,6 +2,6 @@ import {
   "serikaonoe123/moonffi-lab/core" @lab,
   "serikaonoe123/moonffi-lab/vendor/eigen-binding" @binding,
   "moonbitlang/core/json",
-  "moonbitlang/core/quickcheck/splitmix",
+  "serikaonoe123/moonffi-lab/fixtures/random" @splitmix,
 }
 pkgtype(kind: "library")

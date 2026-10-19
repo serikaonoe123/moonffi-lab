@@ -45,5 +45,5 @@ pub fn generate_walk(seed : UInt64, mode : String, steps : Int) -> @lab.Trace {
     }
     operations.push(operation)
   }
-  trace(seed, mode, "counter-walk-1", operations)
+  trace(seed, mode, "counter-walk-2", operations)
 }

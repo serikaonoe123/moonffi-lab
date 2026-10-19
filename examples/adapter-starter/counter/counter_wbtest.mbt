@@ -155,6 +155,7 @@ test "correct native walks and labelled error fixture clean up deterministically
 ///|
 test "registered walk is reproducible, mode-independent and bounded" {
   let input = generate_walk(42UL, "correct", 64)
+  assert_eq(input.generator_version, "counter-walk-2")
   assert_true(input == generate_walk(42UL, "correct", 64))
   assert_true(input.steps == generate_walk(42UL, "error", 64).steps)
   assert_true(input.steps != generate_walk(43UL, "correct", 64).steps)

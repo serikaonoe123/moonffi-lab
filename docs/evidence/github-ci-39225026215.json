@@ -1,0 +1,251 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-19",
+  "tested_commit": "3b7e0d473bb60ac784a629e694121108a221aaca",
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39225026215",
+  "conclusion": "failure",
+  "jobs": [
+    {
+      "name": "native (generation)",
+      "conclusion": "failure",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39225026215/job/117969093689"
+    },
+    {
+      "name": "native (asan)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39225026215/job/117969093900"
+    },
+    {
+      "name": "native (benchmark)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39225026215/job/117969093902"
+    },
+    {
+      "name": "native (behavior)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39225026215/job/117969094027"
+    },
+    {
+      "name": "native (sdk)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39225026215/job/117969094123"
+    }
+  ],
+  "online_bootstraps": [
+    {
+      "suite": "behavior",
+      "report": {
+        "state": "passed",
+        "completed_at": "2026-10-19T16:45:41.7849993+08:00",
+        "destination": "D:\\a\\_temp\\moonffi-locked-toolchain",
+        "source_mode": "official-downloads",
+        "lock_sha256": "3BDEED5E80B2F485E93E6B79F27AC91F188B725071C6EF985FB043957DB02B51",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\moonbit-windows-x86_64.zip",
+            "bytes": 90915394,
+            "sha256": "653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\core-latest.zip",
+            "bytes": 2606935,
+            "sha256": "D58CAF5EE6E2A95D8785ADF7D90FD68DD9366D174DF1DFAA36646DD6B47C5663"
+          }
+        ],
+        "upstream_installer_executed": false,
+        "bundled_core": true,
+        "environment_restored": true,
+        "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+      }
+    },
+    {
+      "suite": "asan",
+      "report": {
+        "state": "passed",
+        "completed_at": "2026-10-19T16:45:50.0597265+08:00",
+        "destination": "D:\\a\\_temp\\moonffi-locked-toolchain",
+        "source_mode": "official-downloads",
+        "lock_sha256": "3BDEED5E80B2F485E93E6B79F27AC91F188B725071C6EF985FB043957DB02B51",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\moonbit-windows-x86_64.zip",
+            "bytes": 90915394,
+            "sha256": "653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\core-latest.zip",
+            "bytes": 2606935,
+            "sha256": "D58CAF5EE6E2A95D8785ADF7D90FD68DD9366D174DF1DFAA36646DD6B47C5663"
+          }
+        ],
+        "upstream_installer_executed": false,
+        "bundled_core": true,
+        "environment_restored": true,
+        "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+      }
+    },
+    {
+      "suite": "benchmark",
+      "report": {
+        "state": "passed",
+        "completed_at": "2026-10-19T16:45:43.9101734+08:00",
+        "destination": "D:\\a\\_temp\\moonffi-locked-toolchain",
+        "source_mode": "official-downloads",
+        "lock_sha256": "3BDEED5E80B2F485E93E6B79F27AC91F188B725071C6EF985FB043957DB02B51",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\moonbit-windows-x86_64.zip",
+            "bytes": 90915394,
+            "sha256": "653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\core-latest.zip",
+            "bytes": 2606935,
+            "sha256": "D58CAF5EE6E2A95D8785ADF7D90FD68DD9366D174DF1DFAA36646DD6B47C5663"
+          }
+        ],
+        "upstream_installer_executed": false,
+        "bundled_core": true,
+        "environment_restored": true,
+        "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+      }
+    },
+    {
+      "suite": "generation",
+      "report": {
+        "state": "passed",
+        "completed_at": "2026-10-19T16:45:51.0066938+08:00",
+        "destination": "D:\\a\\_temp\\moonffi-locked-toolchain",
+        "source_mode": "official-downloads",
+        "lock_sha256": "3BDEED5E80B2F485E93E6B79F27AC91F188B725071C6EF985FB043957DB02B51",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\moonbit-windows-x86_64.zip",
+            "bytes": 90915394,
+            "sha256": "653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\core-latest.zip",
+            "bytes": 2606935,
+            "sha256": "D58CAF5EE6E2A95D8785ADF7D90FD68DD9366D174DF1DFAA36646DD6B47C5663"
+          }
+        ],
+        "upstream_installer_executed": false,
+        "bundled_core": true,
+        "environment_restored": true,
+        "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+      }
+    },
+    {
+      "suite": "sdk",
+      "report": {
+        "state": "passed",
+        "completed_at": "2026-10-19T16:45:40.3699628+08:00",
+        "destination": "D:\\a\\_temp\\moonffi-locked-toolchain",
+        "source_mode": "official-downloads",
+        "lock_sha256": "3BDEED5E80B2F485E93E6B79F27AC91F188B725071C6EF985FB043957DB02B51",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\moonbit-windows-x86_64.zip",
+            "bytes": 90915394,
+            "sha256": "653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\core-latest.zip",
+            "bytes": 2606935,
+            "sha256": "D58CAF5EE6E2A95D8785ADF7D90FD68DD9366D174DF1DFAA36646DD6B47C5663"
+          }
+        ],
+        "upstream_installer_executed": false,
+        "bundled_core": true,
+        "environment_restored": true,
+        "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+      }
+    }
+  ],
+  "failure": {
+    "state": "failed",
+    "stage": "generation",
+    "error": "Legacy generator bytes changed: default seed 17"
+  },
+  "failure_detail": {
+    "state": "failed",
+    "stage": "run/default",
+    "error": "Legacy generator bytes changed: default seed 17"
+  },
+  "first_changed_case": {
+    "generator_version": "eigen-1",
+    "seed": "17",
+    "old_input_sha256": "9E43CB274242D47A979C0EB6DB5E71792CE38005BD0FAD731FCCB0600F2658D8",
+    "new_input_sha256": "AD0129D4DB175CCC53E6A433CFD098084D3ECDA19F92342BA5D405292B320260",
+    "old_initial_matrix": [
+      6,
+      -4,
+      -1
+    ],
+    "new_initial_matrix": [
+      -9,
+      4,
+      7
+    ],
+    "different_property": "steps",
+    "legacy_checksum_assertion_preserved": true
+  },
+  "root_unit_tests": 68,
+  "sdk_unit_tests": 6,
+  "benchmark": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 21,
+    "cases": 21,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 3,
+    "measurements": 189,
+    "complete_searches": 189,
+    "repeatable_case_strategies": 63,
+    "case_strategy_groups": 63,
+    "actual_proper_subsets_checked": 290.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-19T16:49:02.9924374+08:00",
+    "executable_sha256": "B0B28140967E1BF1559E96CE4BC9F68ECBFF3E40F18EED0E16FF7A19A965C529",
+    "protocol_sha256": "A65ABA027B8F78D2EFBBE007FBFD3701F52D2B05C80ABFD08A186EF5A2CB2453"
+  },
+  "proposed_fix": "Freeze original core 0.10.15 fixture RNG formulas for Buffer/Eigen existing generator versions; bump independent SDK walk version for upstream RNG changes",
+  "raw_evidence_directory": "results/github-ci-39225026215",
+  "scope": "Four suites passed and all five original-content checks accepted the new official archives. Generation failed on real saved seed data differences; no all-suite success claimed."
+}

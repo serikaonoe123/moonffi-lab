@@ -1,0 +1,14 @@
+This package adapts the RandomState seed mixing, gamma generation and bounded
+word consumption from moonbitlang/core 0.10.15+943464bfa,
+quickcheck/splitmix/random.mbt.
+Copyright 2026 International Digital Economy Academy.
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+Modified 2026-10-19 for MoonFFI Lab: retain only the fixture constructor and
+bounded UInt API, rename/internalize helpers, and freeze the historical formulas
+so existing Buffer/Eigen generator versions keep their original seed streams.
+These formulas intentionally retain behavior changed by upstream 0.10.16 and
+are not advertised as the corrected general-purpose SplitMix algorithm.
+
+Original core archive SHA-256:
+05556B27B156348950EA88AE6838032C8B478AE532B18B3929387D1DA4C18D55

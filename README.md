@@ -28,6 +28,8 @@ Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY
 
 用户随后允许使用新工具链，当前正评估官方 0.10.16 内容并更新锁定身份，取代之前保留旧锁的决定。仍保留固定哈希及执行前校验，旧失败运行不改写；本次候选进展见 [验证记录](docs/VALIDATION.md)。
 
+[首轮新工具链 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39225026215)在线安装及四项业务套件通过，generation 发现标准库随机算法变化破坏旧 seed 输入字节。现正为原 Buffer/Eigen 生成器固定历史随机流并保留旧哈希检查；SDK walk 明确升级版本。修复后的完整云端结果待核对。
+
 Buffer 新增 `--generator stateful`，按当前句柄、共享引用和长度选择合法的随机操作，覆盖扩缩容与边界数据；原默认生成器保留固定契约回归。运行 `scripts/verify-generation.ps1` 可复现两种生成器的操作覆盖与人工缺陷观测，方法、结果及限制见 [生成实验](docs/GENERATION-STUDY.md)。
 
 ## 一次完整演示

@@ -6,6 +6,12 @@
 
 首次静态检查因新工具链缺 registry 索引失败，更新该安装的索引后通过。native 单测在编译 async 的 C 文件时遇 MSVC D8050，未执行测试断言；初始化开发环境、显式选择原 cl.exe 和官方 C 后端兼容模式均未解决。直接单文件 async 编译及最小路径/工作目录/窗口模式对照成功，原因未定。原始日志保留在 `results/toolchain-upgrade-20261019`。本机后续 build/behavior/SDK 未写成通过，完整五项云端结果待对应新提交核对。
 
+首轮升级提交 `3b7e0d4` 的 [Actions 39225026215](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39225026215) 五次在线安装通过，behavior/ASan/benchmark/SDK 四项通过（68+6 单测）。generation 在 Eigen default seed 17 的历史输入 SHA 检查失败，初始矩阵从 `[6,-4,-1]` 变为 `[-9,4,7]`；benchmark 虽全部完成，但语料随机流变化后真子集计数为 290，不沿用旧版 214 的结论。失败证据见 [首轮快照](evidence/github-ci-39225026215.json)。
+
+对照原始 core 归档与新源码，确认 SplitMix 的首轮混合移位及 gamma 混合/位计数公式发生变化。新增独立 `fixtures/random`，按 Apache 2.0 保留来源、LICENSE 和 NOTICE，固定 0.10.15 的历史公式及采样消耗顺序，只供 Buffer/Eigen 现有生成器版本使用；不修改上游标准库或删除旧输入 SHA 检查。旧 seed-17 输入独立锚点单测在新 wasm-gc 通过，native 静态检查通过；本轮完整 native 单测预期新增为 69 项，仍待对应新提交云端验收。独立 SDK 示例继续使用新标准库，将 walk 生成器标为 `counter-walk-2`，旧保存输入仍按步骤重放。
+
+本地后续核心包与全新导出源码也遇 C 编译 D8050，影响不只限于 async；与云端四项成功并列保留，不推断系统安全策略因果。另修正 PATH 同时存在两个 moon 时的工具链发现：选择实际优先的第一个应用，双安装路径身份校验通过。GitHub CLI 拒绝直接输出含终端控制字符的原始日志后停止该方式，没有打开允许控制字符的选项，改下载标准产物并清理文本控制字符后检查。
+
 ## 64 位整数候选：2026-10-19，本地通过，云端安装受阻
 
 公开的 `core.shrink_int64(Int64)` 提供最多 64 个确定性、唯一、严格减小绝对值的候选，保留非零值的符号并包含向零邻值，覆盖最小负数。32 位函数和参数排序规则不变。Int64 默认 JSON 字符串与显式精确数字的区别见 [适配器约定](ADAPTERS.md)。

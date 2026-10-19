@@ -13,7 +13,7 @@ try {
   $expected = Get-Content -LiteralPath $LockFile -Raw | ConvertFrom-Json
   Assert-ToolchainIdentityLock $expected
   if (-not $ToolchainRoot) {
-    $activeMoon = (Get-Command moon -CommandType Application -ErrorAction Stop).Source
+    $activeMoon = (Get-Command moon -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
     $ToolchainRoot = Split-Path -Parent (Split-Path -Parent $activeMoon)
   }
   $ToolchainRoot = (Resolve-Path -LiteralPath $ToolchainRoot).Path
