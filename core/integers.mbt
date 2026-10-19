@@ -15,3 +15,19 @@ pub fn shrink_int(value : Int) -> Array[Int] {
   }
   candidates
 }
+
+///| The signed 64-bit counterpart of shrink_int, with at most 64 candidates.
+/// Same-sign division/subtraction handles Int64's minimum without abs or
+/// negation overflow. This generates values only: Int64's default ToJson uses
+/// strings, so adapters needing equal-width numeric descent must explicitly
+/// preserve decimal JSON number tokens rather than round through Double.
+pub fn shrink_int64(value : Int64) -> Array[Int64] {
+  if value == 0L { return [] }
+  let candidates = [0L]
+  let mut distance = value / 2L
+  while distance != 0L {
+    candidates.push(value - distance)
+    distance = distance / 2L
+  }
+  candidates
+}

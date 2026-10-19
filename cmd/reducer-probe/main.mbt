@@ -27,6 +27,10 @@ impl @lab.Adapter for Oracle with fn repair(self, trace) {
 impl @lab.Adapter for Oracle with fn validate(self, trace) {
   for step in trace.steps {
     if !["arm", "noise", "fail"].contains(step.op) { return Some("unknown oracle operation") }
+    if ["integer64-threshold", "integer64-pass"].contains(self.mode) && step.op == "fail" {
+      if wide_args(step) is None { return Some("oracle requires exact Int64 numeric payload") }
+      continue
+    }
     if (["numeric", "chain", "repair-shift", "argument-error", "coupled", "integer-threshold", "duplicate", "duplicate-error", "duplicate-coupled"].contains(self.mode) && step.op == "fail") ||
       (["coupled", "duplicate-coupled"].contains(self.mode) && step.op == "arm") {
       if numeric_args(step) is None { return Some("oracle requires numeric payload") }
@@ -47,6 +51,11 @@ impl @lab.Adapter for Oracle with fn execute(self, step) {
   }
   if step.op == "noise" { self.blocker = true }
   if step.op != "fail" || !self.armed { return None }
+  if self.mode == "integer64-pass" { return None }
+  if self.mode == "integer64-threshold" {
+    let (value, boundary) = wide_args(step).unwrap()
+    if (boundary < 0L && value > boundary) || (boundary > 0L && value < boundary) { return None }
+  }
   if ["numeric", "duplicate"].contains(self.mode) && numeric_args(step) is Some(args) && args.value == 1 { return None }
   if self.mode == "duplicate-error" && numeric_args(step).unwrap().value == 1 { exit_process(0) }
   if self.mode == "integer-threshold" {
@@ -80,6 +89,10 @@ impl @lab.Adapter for Oracle with fn shrink_arguments(self, step) {
     return [{ ..step, args: { ..args, value: 0 }.to_json() }]
   }
   if step.op != "fail" { return [] }
+  if self.mode == "integer64-threshold" {
+    let (value, boundary) = wide_args(step).unwrap()
+    return @lab.shrink_int64(value).map(smaller => { ..step, args: wide_payload(smaller, boundary) })
+  }
   if self.mode == "integer-threshold" {
     let args = numeric_args(step).unwrap()
     return @lab.shrink_int(args.value).map(value => { ..step, args: { ..args, value }.to_json() })
@@ -111,6 +124,10 @@ extern "C" fn exit_process(code : Int) -> Unit = "exit"
 async fn main {
   let code = try {
     let arguments = @env.args()
+    if arguments.length() == 3 && arguments[1] == "--check-int64" {
+      check_wide_reduction(arguments[0], arguments[2])
+      exit_process(0)
+    }
     if arguments.length() == 3 && arguments[1] == "--check-duplicates" {
       check_duplicate_reduction(arguments[0], arguments[2])
       exit_process(0)

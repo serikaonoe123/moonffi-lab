@@ -106,4 +106,5 @@ async fn check_argument_reduction(executable : String, output : String) -> Unit 
   check_integer_reduction(executable, output + "/integers")
   check_dependency_scaling(output + "/dependencies")
   check_duplicate_reduction(executable, output + "/duplicates")
+  check_wide_reduction(executable, output + "/integers64")
 }

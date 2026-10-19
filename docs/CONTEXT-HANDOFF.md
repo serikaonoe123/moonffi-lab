@@ -2,6 +2,16 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-19（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
+## 最新阶段：64 位整数候选，2026-10-19
+
+从干净的 `252e269` 开始，新增公开纯函数 `core.shrink_int64(Int64) -> Array[Int64]`：先零，再逐步靠近原值，最多 64 个唯一且绝对值严格下降的候选，包含向零邻值。支持 Int64 最小值，不对它取绝对值或取负。原 `shrink_int`、JSON 参数排序、runner 和原生 fixture 没有改变。当前工具链的标准 Int64 ToJson 是字符串；适配器若需要等宽数值下降，须显式保存精确十进制 JSON 数字，并从保留的文本解码，见 ADAPTERS。
+
+新增四项 MoonBit 单测：16,769 个小范围单调阈值组合、完整 64 位边界及最小负数、32 位兼容样例、超过 Double 精度的相邻整数和字符串编码边界。68/68 主模块单测、静态检查、原生构建、完整 behavior 和 6/6 SDK 单测及外部接入通过。首次静态检查因测试误用了工具链没有的 Array.find 失败，已改为显式枚举后通过；初次日志保留在 `results/int64-candidates-20261019/check.log`，没有写成初次成功。
+
+新增合成阈值进程探针 `cmd/reducer-probe/integer64_checks.mbt`，接入既有 `--check-arguments`，也提供 `--check-int64 DIR`。三策略共 18 次完整缩减及三次六执行预算检查，缩减/预算部分共 1,701 次工作进程，另有 36 次独立重放/通过对照。正负 200 到 73、正负 2^53+1 到 2^53，以及 Int64 两端到向零邻值均按预期；保存的 18 份反例保留精确的未加引号数字。预算结果仍保持初值并标为搜索未完成。这些是合成阈值 oracle，对照的是引擎的数值生成、保存及重放能力。
+
+本地记录 `results/verify-int64-candidates-20261019`、`results/sdk-int64-candidates-20261019`；固定语料一轮 63 次缩减、214 真子集及正确实现重放通过，输入/结果哈希、结构计数及参数进度与上一轮逐项相同，工作进程仍为 1,937 次，见 `results/benchmark-int64-candidates-20261019` 与 `results/int64-candidates-20261019/corpus-comparison.json`。本地快照 `docs/evidence/int64-candidates-20261019.json`。本轮对应提交的 CI 须按新运行实际核对，不能沿用下方上一轮成功。没有新增受版本控制的 PowerShell 源码，权限及公开推送授权沿用下方记录，仍禁止绕过安全审查。
+
 ## 最新阶段：重复参数候选，2026-10-19
 
 本轮从干净的 `02b21ae` 开始，在 runner 的每个步骤、每次参数扫描内缓存 JSON 编码完全相同且已有 Pass/PropertyFailure 的候选，避免重复执行消耗预算。缓存不跨步骤或接受后的轨迹变化；超时/协议等未决结果与无效候选不缓存。保持报告格式，查看过的重复项仍计入 candidates_checked，不创建虚假的进程日志。没有修改适配器、原生 fixture 或 PowerShell 源码。
