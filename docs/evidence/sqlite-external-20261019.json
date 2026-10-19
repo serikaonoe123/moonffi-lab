@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-19T11:48:33.8570002+00:00",
+  "recorded_at": "2026-10-19T19:48:33.8570002+08:00",
   "state": "local-passed-cloud-pending",
   "local": {
     "state": "passed",
@@ -192,9 +192,10 @@
       "path": "examples/sqlite-lab/upstream-files.json"
     },
     {
-      "sha256": "8F5EFAAA5A9FE17F9BA09B02DE381B160A2676F316A9113B7C07E079344704B3",
+      "sha256": "3034E592B65F7B1D190138F3E83E28EDE89C8B0094A357AAEA51CF490CC5D40D",
       "path": "examples/sqlite-lab/upstream.json"
     }
   ],
-  "limits": "Same host, no unknown upstream defect, no SQLite ASan or heap-leak claim. No release published."
+  "limits": "Same host, no unknown upstream defect, no SQLite ASan or heap-leak claim. No release published.",
+  "provenance_correction": "After local validation, unused upstream.json git_tree corrected from the commit ID to the tree ID confirmed by the official Git commit API. Archive size/SHA, 49 blob entries and executable source unchanged; final commit requires hosted validation."
 }
