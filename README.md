@@ -6,13 +6,14 @@
 
 ## 准备和验证
 
-当前候选工具链：moon 0.1.20261016、moonc 0.10.16；依赖锁定 `moonbitlang/async@0.22.5`。归档身份、隔离安装、静态检查及 11 项安装边界检查通过，本机 native 测试在 MSVC D8050 编译错误处受阻，五项云端验收待核对。此前通过的版本为 moon 0.1.20261012、moonc 0.10.15。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools。
+已通过云端验收的工具链：moon 0.1.20261016、moonc 0.10.16；依赖锁定 `moonbitlang/async@0.22.5`。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools。本机隔离安装、静态检查和安装边界检查通过，native 编译仍有 MSVC D8050，详见 [验证记录](docs/VALIDATION.md)。
 
 需要安装当前锁定工具链时，可运行 `scripts/install-toolchain.ps1`，按固定 SHA-256 在新目录安装工具包和标准库，支持保留归档后的离线重装。使用方法及滚动下载地址的可用性限制见 [工具链内容锁定](docs/TOOLCHAIN-LOCK.md)。
 
 ```powershell
 Set-Location D:\moonbit\moonffi-lab
 $PSVersionTable.PSVersion # Major 应为 7；从开始菜单打开 PowerShell 7
+& .\scripts\assert-toolchain.ps1 # 先按工具链内容锁定指南选择当前安装
 moon update
 moon check --target native --deny-warn
 moon test --target native --deny-warn -j 1
@@ -22,13 +23,9 @@ moon build --target native
 
 `verify.ps1` 创建新的 `results/verify-<随机ID>`，检查源码快照完整性，运行单测、两个适配器的正常场景、三类缺陷的缩减和修复后重放、独立子集校验、崩溃/超时及缩减器边界测试。失败时保留已有日志，不自动删除任何输出。若执行被权限或安全策略拦截，停止对应操作并检查原始报错。
 
-Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[最近一次通过的 MoonBit 云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39210490957)的 behavior、ASan、benchmark、generation、sdk 五项已通过，测试提交为 `0869321`。缩减器会跳过同一步骤同一扫描内已有明确结果的重复参数候选，超时和协议错误仍独立执行。64 主模块/6 SDK 单测、九组新探针及 189 次固定语料缩减通过，63/63 组重复一致；原始失败与后续授权验证均保留，见 [验证记录](docs/VALIDATION.md)和[该轮云端证据](docs/evidence/github-ci-39210490957.json)。
+Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[最新云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279)已通过提交 `4106122` 的 behavior、ASan、benchmark、generation、sdk 五项，并下载核对全部产物：69 主模块/6 SDK 单测、21 组 Int64 探针、704 个生成场景、128 份历史 Eigen 输入及 189 次固定语料缩减通过，63/63 组重复一致，214 个真子集和全部正确实现重放通过。44 个关键源文件逐任务对照 Git 归档，见 [云端证据](docs/evidence/github-ci-39233803279.json)。
 
-当前 Int64 候选实现 `e7dd774` 已通过本地 68 主模块/6 SDK 单测、21 组阈值探针及固定语料检查。[本轮 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39216392303)五项均在工具链归档身份校验阶段失败，尚未执行云端业务测试。官方滚动地址的当前校验值已与锁定值不同；按用户决定保留原工具链锁，记录阻塞，不升级或放宽校验，见 [失败证据](docs/evidence/github-ci-39216392303.json)。
-
-用户随后允许使用新工具链，当前正评估官方 0.10.16 内容并更新锁定身份，取代之前保留旧锁的决定。仍保留固定哈希及执行前校验，旧失败运行不改写；本次候选进展见 [验证记录](docs/VALIDATION.md)。
-
-[首轮新工具链 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39225026215)在线安装及四项业务套件通过，generation 发现标准库随机算法变化破坏旧 seed 输入字节。现正为原 Buffer/Eigen 生成器固定历史随机流并保留旧哈希检查；SDK walk 明确升级版本。修复后的完整云端结果待核对。
+本次升级先遇旧锁归档变化，再发现新标准库的随机算法变化；全部失败证据保留在 [验证记录](docs/VALIDATION.md)。Buffer/Eigen 原生成器版本使用固定历史随机流，保留旧输入 SHA 检查；独立 SDK 的新随机流明确标为 `counter-walk-2`。工具链仍按固定内容身份检查，不自动接受任意 latest 归档。
 
 Buffer 新增 `--generator stateful`，按当前句柄、共享引用和长度选择合法的随机操作，覆盖扩缩容与边界数据；原默认生成器保留固定契约回归。运行 `scripts/verify-generation.ps1` 可复现两种生成器的操作覆盖与人工缺陷观测，方法、结果及限制见 [生成实验](docs/GENERATION-STUDY.md)。
 

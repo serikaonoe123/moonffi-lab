@@ -2,7 +2,7 @@
 
 仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发会分别运行 behavior、ASan、benchmark、generation、sdk 五个任务。generation 验证 Buffer 的 512 个人工 fixture 场景，以及真实 Eigen 绑定的 192 个正确场景、保存输入重放、旧输入哈希和 CLI 边界；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减，保存通过输入及预算终止结果，并在全部计时结束后核验。sdk 在另一个工作区中用公开 core/runner 编译独立消费者，验证完整失败与缩减流程。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单。归档不含工作目录或二进制。
 
-最新的工具链内容锁定和输入顺序修正版 `2b7f92c`，在 [Actions run 39015558264](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39015558264) 通过五项。已下载核对五次在线安装、11 项工具链边界、43 主模块/5 SDK 单测、704 场景、189 次完整缩减和 214 个真子集；189 行输入/结果的字节哈希及结构指标与算术基准 `39013008257` 全部一致。见 [云端快照](evidence/github-ci-39015558264.json)。
+最新验证提交 `4106122` 使用固定内容的官方 0.10.16 工具链，在 [Actions run 39233803279](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279) 通过五项，全部产物已下载核对。五次在线安装、11 项工具链边界、69 主模块/6 SDK 单测、704 场景、128 份历史 Eigen 输入、189 次完整缩减和 214 个真子集通过；44 个关键源文件逐任务匹配 Git 导出，189 行输入/结果哈希及结构计数与旧 Int64 本地基准一致。见 [云端快照](evidence/github-ci-39233803279.json)。本机的 MSVC D8050 编译失败记录独立保留于 [验证记录](VALIDATION.md)。
 
 ## 版本与安装
 

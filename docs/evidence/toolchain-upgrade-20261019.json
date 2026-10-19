@@ -2,7 +2,7 @@
   "schema": 1,
   "observed_on": "2026-10-19",
   "source_parent_commit": "e5bb27a60ffca5a1f3b503eb9855710ee2a1c6bd",
-  "state": "isolated_installation_and_static_checks_passed_native_compilation_blocked",
+  "state": "hosted_upgrade_validated_local_native_compilation_still_blocked",
   "user_decision": "也不用保持旧锁，有新的可以使用新的",
   "previous_lock_decision_superseded": true,
   "lock": {
@@ -258,7 +258,7 @@
   "native_build": "not_run_after_tests_failed",
   "local_behavior": "not_run",
   "local_sdk": "not_run",
-  "hosted_ci": "first_run_39225026215_four_suites_passed_generation_failed_on_changed_historical_seed_stream",
+  "hosted_ci": "39233803279_all_five_passed_and_artifacts_audited",
   "msvc_diagnostics": {
     "normal_and_extended_output_paths": [
       {
@@ -349,7 +349,8 @@
     "duplicate_moon_PATH_discovery": "fixed_and_default_identity_check_passed",
     "fixture_random_anchor_wasm_gc": "1_passed",
     "fixed_fixture_random_native_static_check": "passed",
-    "native_tests_after_rng_fix": "pending_new_cloud_commit",
+    "native_tests_after_rng_fix": "69 root and 6 SDK tests passed in hosted native CI; local native D8050 unresolved",
     "github_raw_log_guard": "refused_terminal_escape_output_no_allow_flag_used_safe_artifact_read_instead"
-  }
+  },
+  "hosted_validation_snapshot": "docs/evidence/github-ci-39233803279.json"
 }
