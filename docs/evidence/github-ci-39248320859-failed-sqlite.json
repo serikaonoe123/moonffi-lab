@@ -124,7 +124,6 @@
   "artifact_download": {
     "state": "passed",
     "records": [
-      {},
       {
         "artifact_id": 12184421861,
         "name": "windows-native-sqlite-39248320859",
@@ -138,7 +137,11 @@
         "credentials_forwarded_to_artifact_host": false,
         "zip_paths_checked": true
       }
-    ]
+    ],
+    "raw_output_records": 2,
+    "empty_return_objects_omitted": 1,
+    "retained_zip_hashes_rechecked": true,
+    "raw_record_preserved": "results/github-ci-39248320859/https-download-verification.json"
   },
   "cause": "The SQLite validation step succeeded. Script controls failed because their default checkout-root .mooncakes did not exist; the actual cache was under the exported workspace. No full script-control success is claimed.",
   "raw_evidence_directory": "results/github-ci-39248320859"

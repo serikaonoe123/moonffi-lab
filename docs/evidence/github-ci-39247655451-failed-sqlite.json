@@ -123,7 +123,6 @@
   "artifact_download": {
     "state": "passed",
     "records": [
-      {},
       {
         "artifact_id": 12183858273,
         "name": "windows-native-sqlite-39247655451",
@@ -137,7 +136,11 @@
         "credentials_forwarded_to_artifact_host": false,
         "zip_paths_checked": true
       }
-    ]
+    ],
+    "raw_output_records": 2,
+    "empty_return_objects_omitted": 1,
+    "retained_zip_hashes_rechecked": true,
+    "raw_record_preserved": "results/github-ci-39247655451/https-download-verification.json"
   },
   "cause": "Expected rejection native status escaped to the GitHub PowerShell wrapper after assertions passed. The job failed and the following script-control step was skipped; this run is not a complete successful validation.",
   "raw_evidence_directory": "results/github-ci-39247655451"
