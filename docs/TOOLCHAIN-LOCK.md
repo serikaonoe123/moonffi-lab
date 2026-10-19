@@ -4,6 +4,12 @@
 
 这是**内容锁定**。来源仍是官方 `latest` URL，不能保证未来继续提供这份内容；变化时安装会失败，不自动接受新版本。历史版本地址本轮没有取得成功响应，没有把猜测的日期或版本 URL 写入配置。保留的原始归档可以通过 `-ArchiveDirectory` 离线重装；仓库和 CI 诊断产物不包含这两个归档。
 
+## 2026-10-19：滚动下载内容变化，CI 阻塞
+
+Int64 实现提交 `e7dd774` 的 [Actions 39216392303](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39216392303) 五项均在 `verify-archives` 拒绝 Windows 工具包，接受归档数为零，未解包或执行下载工具，尚未开始云端业务验收。只读取得的当前[官方归档校验文件](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256)为 `653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F`，已与下表原锁不同；失败报告没有提供 CI 实际拒绝内容的摘要或字节数，不将其版本或身份视为已确认。
+
+保留的原始本地归档仍匹配原锁，本轮本地验证使用原工具链。用户明确选择“保留当前锁，记录 CI 阻塞”：不修改锁定值、安装校验或 CI 配置，不升级。失败证据见 [快照](evidence/github-ci-39216392303.json)，此前通过的云端运行仅作为历史记录。
+
 ## 固定内容与来源
 
 | 内容 | 字节数 / 文件数 | SHA-256 |
@@ -12,7 +18,7 @@
 | core zip | 2,529,648 字节 | `05556B27B156348950EA88AE6838032C8B478AE532B18B3929387D1DA4C18D55` |
 | core 源码树 | 1,201 文件 | `6D80301068B8870D314E8AAFCC9ADCD439162E93AD9D59E150FF2DDDA890C49B` |
 
-Windows zip 的摘要已与[官方归档校验文件](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256)核对。三个工具的摘要与[官方二进制清单](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.sha256)及原有安装均一致。core 地址来自[官方安装脚本](https://cli.moonbitlang.com/install/powershell.ps1)；本轮未取得 core 的单独官方校验文件，配置采用 HTTPS 下载后实测的归档摘要。core 版本 `0.10.15+943464bfa`、全部源码的整体摘要也与原有安装一致。官方校验方法见[下载说明](https://www.moonbitlang.com/download/#verifying-binaries)。
+2026-10-17 锁定时，Windows zip 的摘要已与[官方归档校验文件](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256)核对。三个工具的摘要与当时的[官方二进制清单](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.sha256)及原有安装均一致。core 地址来自[官方安装脚本](https://cli.moonbitlang.com/install/powershell.ps1)；锁定时未取得 core 的单独官方校验文件，配置采用 HTTPS 下载后实测的归档摘要。core 版本 `0.10.15+943464bfa`、全部源码的整体摘要也与原有安装一致。官方校验方法见[下载说明](https://www.moonbitlang.com/download/#verifying-binaries)。
 
 源码树摘要按相对路径作 ordinal 排序，将每个文件的“路径 + TAB + 大写 SHA256 + LF”以 UTF-8 编码后再取 SHA256；包括隐藏源码文件，排除 core 根目录的 `_build/` 与 `.mooncakes/`。先核对工具二进制，再执行版本查询；解包后和 bundle 后均核对版本、三个工具及 core 源码身份。生成的 core bundle 从这些输入重新构建，不承诺其逐字节相同。
 

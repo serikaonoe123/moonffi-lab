@@ -22,7 +22,9 @@ moon build --target native
 
 `verify.ps1` 创建新的 `results/verify-<随机ID>`，检查源码快照完整性，运行单测、两个适配器的正常场景、三类缺陷的缩减和修复后重放、独立子集校验、崩溃/超时及缩减器边界测试。失败时保留已有日志，不自动删除任何输出。若执行被权限或安全策略拦截，停止对应操作并检查原始报错。
 
-Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[最新 MoonBit 云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39210490957)的 behavior、ASan、benchmark、generation、sdk 五项已通过，测试提交为 `0869321`。缩减器会跳过同一步骤同一扫描内已有明确结果的重复参数候选，超时和协议错误仍独立执行。64 主模块/6 SDK 单测、九组新探针及 189 次固定语料缩减通过，63/63 组重复一致；原始失败与后续授权验证均保留，见 [验证记录](docs/VALIDATION.md)和[本轮云端证据](docs/evidence/github-ci-39210490957.json)。
+Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[最近一次通过的 MoonBit 云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39210490957)的 behavior、ASan、benchmark、generation、sdk 五项已通过，测试提交为 `0869321`。缩减器会跳过同一步骤同一扫描内已有明确结果的重复参数候选，超时和协议错误仍独立执行。64 主模块/6 SDK 单测、九组新探针及 189 次固定语料缩减通过，63/63 组重复一致；原始失败与后续授权验证均保留，见 [验证记录](docs/VALIDATION.md)和[该轮云端证据](docs/evidence/github-ci-39210490957.json)。
+
+当前 Int64 候选实现 `e7dd774` 已通过本地 68 主模块/6 SDK 单测、21 组阈值探针及固定语料检查。[本轮 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39216392303)五项均在工具链归档身份校验阶段失败，尚未执行云端业务测试。官方滚动地址的当前校验值已与锁定值不同；按用户决定保留原工具链锁，记录阻塞，不升级或放宽校验，见 [失败证据](docs/evidence/github-ci-39216392303.json)。
 
 Buffer 新增 `--generator stateful`，按当前句柄、共享引用和长度选择合法的随机操作，覆盖扩缩容与边界数据；原默认生成器保留固定契约回归。运行 `scripts/verify-generation.ps1` 可复现两种生成器的操作覆盖与人工缺陷观测，方法、结果及限制见 [生成实验](docs/GENERATION-STUDY.md)。
 

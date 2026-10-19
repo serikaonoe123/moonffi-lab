@@ -10,7 +10,11 @@
 
 新增合成阈值进程探针 `cmd/reducer-probe/integer64_checks.mbt`，接入既有 `--check-arguments`，也提供 `--check-int64 DIR`。三策略共 18 次完整缩减及三次六执行预算检查，缩减/预算部分共 1,701 次工作进程，另有 36 次独立重放/通过对照。正负 200 到 73、正负 2^53+1 到 2^53，以及 Int64 两端到向零邻值均按预期；保存的 18 份反例保留精确的未加引号数字。预算结果仍保持初值并标为搜索未完成。这些是合成阈值 oracle，对照的是引擎的数值生成、保存及重放能力。
 
-本地记录 `results/verify-int64-candidates-20261019`、`results/sdk-int64-candidates-20261019`；固定语料一轮 63 次缩减、214 真子集及正确实现重放通过，输入/结果哈希、结构计数及参数进度与上一轮逐项相同，工作进程仍为 1,937 次，见 `results/benchmark-int64-candidates-20261019` 与 `results/int64-candidates-20261019/corpus-comparison.json`。本地快照 `docs/evidence/int64-candidates-20261019.json`。本轮对应提交的 CI 须按新运行实际核对，不能沿用下方上一轮成功。没有新增受版本控制的 PowerShell 源码，权限及公开推送授权沿用下方记录，仍禁止绕过安全审查。
+本地记录 `results/verify-int64-candidates-20261019`、`results/sdk-int64-candidates-20261019`；固定语料一轮 63 次缩减、214 真子集及正确实现重放通过，输入/结果哈希、结构计数及参数进度与上一轮逐项相同，工作进程仍为 1,937 次，见 `results/benchmark-int64-candidates-20261019` 与 `results/int64-candidates-20261019/corpus-comparison.json`。本地快照 `docs/evidence/int64-candidates-20261019.json`。没有新增受版本控制的 PowerShell 源码，权限及公开推送授权沿用下方记录，仍禁止绕过安全审查。
+
+实现提交 `e7dd7743f1cb1df4cf579a307b31d5fbcb4b79e1` 已推送。[Actions 39216392303](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39216392303) 五项均在工具链安装的 `verify-archives` 阶段因 `moonbit-windows-x86_64.zip` 身份不符失败，接受归档数为零，未解包或执行下载的工具，未运行云端业务测试或源码导出核对。下方历史成功不能代替本轮验收。五份失败报告和日志保留于 `results/github-ci-39216392303`，见 [失败快照](evidence/github-ci-39216392303.json)。
+
+用户明确选择“保留当前锁，记录 CI 阻塞”。`toolchain.json`、安装脚本及 CI 配置保持原样，不升级或放宽校验；后续不自动改变这一决定。2026-10-19 只读取得的官方滚动归档校验值为 `653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F`，与原锁不同；保留的原始归档仍匹配原锁。CI 失败报告没有记录实际拒绝内容的 SHA-256/字节数，不能据此证明其具体版本或与当前官方清单相同。未再次尝试历史下载地址，未重跑覆盖失败结果，也未执行被拒绝的归档。
 
 ## 最新阶段：重复参数候选，2026-10-19
 

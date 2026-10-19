@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-19",
+  "state": "failed_before_project_verification",
+  "feature_commit": "e7dd7743f1cb1df4cf579a307b31d5fbcb4b79e1",
+  "source_commit": "e7dd7743f1cb1df4cf579a307b31d5fbcb4b79e1",
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39216392303",
+  "conclusion": "failure",
+  "jobs": [
+    {
+      "name": "native (generation)",
+      "conclusion": "failure",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39216392303/job/117941139652",
+      "startedAt": "2026-10-19T07:30:15Z",
+      "completedAt": "2026-10-19T07:30:32Z"
+    },
+    {
+      "name": "native (sdk)",
+      "conclusion": "failure",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39216392303/job/117941139867",
+      "startedAt": "2026-10-19T07:30:17Z",
+      "completedAt": "2026-10-19T07:30:39Z"
+    },
+    {
+      "name": "native (benchmark)",
+      "conclusion": "failure",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39216392303/job/117941139900",
+      "startedAt": "2026-10-19T07:30:17Z",
+      "completedAt": "2026-10-19T07:30:34Z"
+    },
+    {
+      "name": "native (behavior)",
+      "conclusion": "failure",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39216392303/job/117941139982",
+      "startedAt": "2026-10-19T07:30:17Z",
+      "completedAt": "2026-10-19T07:30:45Z"
+    },
+    {
+      "name": "native (asan)",
+      "conclusion": "failure",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39216392303/job/117941140007",
+      "startedAt": "2026-10-19T07:30:16Z",
+      "completedAt": "2026-10-19T07:30:32Z"
+    }
+  ],
+  "failed_step": "Install content-locked MoonBit in a fresh directory",
+  "failure_stage": "verify-archives",
+  "bootstrap_failures": [
+    {
+      "suite": "behavior",
+      "state": "failed",
+      "stage": "verify-archives",
+      "error": "Locked archive content mismatch: moonbit-windows-x86_64.zip",
+      "accepted_archives": 0
+    },
+    {
+      "suite": "asan",
+      "state": "failed",
+      "stage": "verify-archives",
+      "error": "Locked archive content mismatch: moonbit-windows-x86_64.zip",
+      "accepted_archives": 0
+    },
+    {
+      "suite": "benchmark",
+      "state": "failed",
+      "stage": "verify-archives",
+      "error": "Locked archive content mismatch: moonbit-windows-x86_64.zip",
+      "accepted_archives": 0
+    },
+    {
+      "suite": "generation",
+      "state": "failed",
+      "stage": "verify-archives",
+      "error": "Locked archive content mismatch: moonbit-windows-x86_64.zip",
+      "accepted_archives": 0
+    },
+    {
+      "suite": "sdk",
+      "state": "failed",
+      "stage": "verify-archives",
+      "error": "Locked archive content mismatch: moonbit-windows-x86_64.zip",
+      "accepted_archives": 0
+    }
+  ],
+  "project_verification_executed": false,
+  "uploaded_bootstrap_verification_reports": 0,
+  "archive_extraction_reached": false,
+  "downloaded_tool_execution_reached": false,
+  "lock_sha256": "5A9008CC7EA40DE44E0A47F8EA72DB4F344040A4601A52774493FF1F9DFEFB7F",
+  "expected_toolchain_archive": {
+    "kind": "toolchain",
+    "file": "moonbit-windows-x86_64.zip",
+    "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+    "sha256": "6E3EF6CB96AA5086D122183972687F79FC912F80652000907D96EE6AD967E3BF",
+    "bytes": 91640641,
+    "upstream_checksum_url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256"
+  },
+  "official_metadata": {
+    "checksum_url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256",
+    "archive_sha256_at_observation": "653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F",
+    "differs_from_lock": true,
+    "retained_text": "results/github-ci-39216392303/upstream-metadata/archive.sha256",
+    "installer_text_only": "results/github-ci-39216392303/upstream-metadata/installer.ps1.txt"
+  },
+  "actual_ci_download_identity": {
+    "sha256": null,
+    "bytes": null,
+    "reason": "Failure reports do not record the rejected bytes and diagnostics do not upload archive files. The observed official checksum does not prove the identity of the exact CI response."
+  },
+  "retained_original_archive": {
+    "path": "results/toolchain-research-20261017/moonbit-windows-x86_64.zip",
+    "sha256": "6E3EF6CB96AA5086D122183972687F79FC912F80652000907D96EE6AD967E3BF",
+    "bytes": 91640641,
+    "matches_lock": true
+  },
+  "decision": {
+    "user_choice": "保留当前锁，记录 CI 阻塞",
+    "toolchain_upgraded": false,
+    "lock_changed": false,
+    "verification_weakened": false,
+    "rejected_archives_executed": false,
+    "failed_ci_rerun_to_overwrite_results": false
+  },
+  "local_validation_snapshot": "docs/evidence/int64-candidates-20261019.json",
+  "raw_evidence_directory": "results/github-ci-39216392303",
+  "failed_logs_sha256": "D76A3043CFD830946F36343CCA759ACED96A30D83325121BEA72A6E68BAA2B6A",
+  "scope": "CI installation failed closed on archive identity. No hosted project test or source-export audit is claimed. Local tests used the original content-pinned installation; prior successful runs remain historical."
+}
