@@ -8,9 +8,11 @@
 
 新增 `cmd/reducer-probe/duplicate_checks.mbt`，由原有参数检查入口调用，也可单独使用 `--check-duplicates DIR`。九组进程探针在授权执行环境全部通过，共 116 次工作进程。重复通过候选只执行一次，三策略均在不超过 12 次总执行内将 9 缩到 0，并保留三次最终确认；重复协议错误各自保留两条未决记录；相同 arm 参数在三个不同轨迹上下文中重新执行，且不影响另一操作的相同参数。独立入口与完整验收内的九组摘要一致。
 
-工具链内容校验、静态检查和原生构建通过。受限入口首次根模块单测在 core.whitebox_test.exe 退出 99 后终止，无断言结果；详细核心测试、单个核心测试和定向探针没有返回结果，均已取消，原因未确定。原始构建日志和观察记录保留在 `results/duplicate-candidates-20261019`。用户随后明确授权按正式审批提权；在批准的本机环境中，同一组源码的 64/64 主模块单测、完整 behavior、6/6 SDK 单测及外部接入通过。记录在 `results/duplicate-permission-20261019`、`results/verify-duplicate-candidates-20261019`、`results/sdk-duplicate-candidates-20261019`。状态快照 `docs/evidence/duplicate-candidates-20261019.json` 同时保留初次失败和后续通过证据。本轮对应提交的云端结果待实际运行核对，不能沿用下方上一版本的云端成功。
+工具链内容校验、静态检查和原生构建通过。受限入口首次根模块单测在 core.whitebox_test.exe 退出 99 后终止，无断言结果；详细核心测试、单个核心测试和定向探针没有返回结果，均已取消，原因未确定。原始构建日志和观察记录保留在 `results/duplicate-candidates-20261019`。用户随后明确授权按正式审批提权；在批准的本机环境中，同一组源码的 64/64 主模块单测、完整 behavior、6/6 SDK 单测及外部接入通过。记录在 `results/duplicate-permission-20261019`、`results/verify-duplicate-candidates-20261019`、`results/sdk-duplicate-candidates-20261019`。状态快照 `docs/evidence/duplicate-candidates-20261019.json` 同时保留初次失败和后续通过证据。实现提交 `0869321c0f8eab9816509c41c61f7c83f8649e92` 已推送；对应 Actions `39210490957` 的五项 CI 已全部通过并下载核对，见下段新证据，不沿用上一版本的云端成功。
 
 固定语料一轮 63 次缩减、214 个真子集和正确实现重放通过。相对于 `results/benchmark-binding-arguments-20261018`，63 行输入/结果哈希、性质指纹、步数、结构计数及参数进度全部一致，工作进程仍为 1,937 次；不宣称该固定语料获得加速或重复实验一致性。记录 `results/benchmark-duplicate-candidates-20261019`，逐行对照 `results/duplicate-permission-20261019/corpus-comparison.json`。本轮节约重复候选预算的效果来自新增定向探针，而非固定语料。
+
+实现提交 `0869321` 的 [Actions 39210490957](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39210490957) behavior、ASan、benchmark、generation、sdk 五项通过。34 个关键源文件逐任务核对 Git 归档；64+6 单测、九组新探针的 116 次工作进程及既有 Buffer/Eigen 探针通过，新探针摘要与本地逐字节一致。189 次完整缩减的输入/结果哈希、结构计数、参数进度与本地对应记录一致，63/63 组重复一致，214 个真子集及 189 次正确实现重放通过；704 个生成场景、ASan 控制和锁定工具链检查通过。原始产物 `results/github-ci-39210490957`，快照 `docs/evidence/github-ci-39210490957.json`。本轮没有增加受版本控制的 PowerShell 源码；九组探针表明重复候选预算得到保留，不宣称固定语料整体加速。
 
 用户要求遇安全审查先报告，不越权限。Win32_Process 只读查询初次返回“拒绝访问”后已立即报告并停止，没有改用其他进程查询入口。用户随后明确允许申请必要权限，同时禁止绕过安全审查。正式提权审批通过后，同一只读查询成功，未发现残留的 MoonBit 编译或测试进程；后续测试均经正式审批执行，没有新的审查拒绝。未修改执行策略、安全设置或系统权限。此前聊天的安全审查拦截保持记录，不作为已解除处理；后续如出现明确权限/安全拒绝，应停止对应操作并向用户报告。
 
