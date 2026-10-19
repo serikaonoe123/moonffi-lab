@@ -173,6 +173,9 @@ try {
     scope='Unchanged pinned community binding consumed through public core/runner. Synchronous in-memory SELECT/bind/reset/step/read and explicit lifecycle contracts only; no unknown defect, heap-leak proof, concurrency coverage or SQLite ASan coverage claimed.'
   } | ConvertTo-Json -Depth 6 | Set-Content (Join-Path $Out 'verification.json') -Encoding utf8
   Write-Host "External SQLite verification passed. Evidence: $Out"
+  # The final native command intentionally rejects existing output. Once all
+  # assertions pass, prevent that expected nonzero code escaping to pwsh CI.
+  $global:LASTEXITCODE = 0
 } catch {
   [ordered]@{state='failed';stage=$stage;error=$_.Exception.Message} | ConvertTo-Json | Set-Content (Join-Path $Out 'failure.json') -Encoding utf8
   throw

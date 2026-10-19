@@ -197,5 +197,172 @@
     }
   ],
   "limits": "Same host, no unknown upstream defect, no SQLite ASan or heap-leak claim. No release published.",
-  "provenance_correction": "After local validation, unused upstream.json git_tree corrected from the commit ID to the tree ID confirmed by the official Git commit API. Archive size/SHA, 49 blob entries and executable source unchanged; final commit requires hosted validation."
+  "provenance_correction": "After local validation, unused upstream.json git_tree corrected from the commit ID to the tree ID confirmed by the official Git commit API. Archive size/SHA, 49 blob entries and executable source unchanged; final commit requires hosted validation.",
+  "ci_wrapper_fix_verification": {
+    "state": "passed",
+    "completed_at": "2026-10-19T19:55:45.8668163+08:00",
+    "consumer_module": "moonffi-example/sqlite-lab",
+    "upstream_module": "moonbit-community/sqlite3",
+    "upstream_commit": "1405639063c52b1474b2622d4c5b5e36110aa74c",
+    "upstream_archive_mode": "explicit-local-source-archive",
+    "upstream_archive_bytes": 2619220,
+    "upstream_archive_sha256": "F877BA0001D7051E72543F01DC43E5B73EFC0A32FB459E787F57A0B79ED8B9A1",
+    "upstream_git_blobs_checked_before_and_after": 49,
+    "upstream_source_modified": false,
+    "upstream_scripts_executed": false,
+    "sqlite_version": "3.49.1",
+    "upstream_persistence_fixture": "Empty module-local _build directory created before unchanged upstream tests",
+    "declared_upstream_async_version": "0.22.4",
+    "resolved_workspace_async_version": "0.22.5",
+    "dependency_mode": "explicit-local-source-cache",
+    "dependency_source": "D:\\moonbit\\moonffi-lab\\.mooncakes",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "source_manifest_sha256": "9A8EFD17E66EE71CEA33A59749BFA06B333B0BBCDFEE64310D8A7DDF3353FA73",
+    "upstream_unit_tests": 48,
+    "adapter_unit_tests": 8,
+    "repair_subsets": 1024,
+    "pure_generated_walks": 256,
+    "native_unit_walks": 32,
+    "contract_cases": 32,
+    "walk_cases": 64,
+    "operation_kinds": [
+      "bind_int",
+      "bind_text",
+      "busy_close",
+      "close",
+      "finalize",
+      "open",
+      "prepare",
+      "read",
+      "reset",
+      "step"
+    ],
+    "saved_replays": 2,
+    "separate_process_determinism": true,
+    "passing_shrink_stop_reason": "unsupported_outcome",
+    "passing_shrink_claimed_failure": false,
+    "invalid_preflight_rejected": true,
+    "output_reuse_rejected": true,
+    "executable_sha256": "702038B60421F6781A522134D8BDC29CCB3C073E70F4D6B602F3D408AB28E910",
+    "temporary_directory": "D:\\moonbit\\moonffi-lab\\results\\sqlite-ci-exit-accepted-20261019\\temp",
+    "async_fd_leak_check": "1",
+    "unknown_defects_found": 0,
+    "artificial_target_mutants_used": false,
+    "independent_environment": false,
+    "scope": "Unchanged pinned community binding consumed through public core/runner. Synchronous in-memory SELECT/bind/reset/step/read and explicit lifecycle contracts only; no unknown defect, heap-leak proof, concurrency coverage or SQLite ASan coverage claimed."
+  },
+  "ci_wrapper_exit": {
+    "driver_sha256": "FA36A4ED304DC65479C1014DC4E231575C95265F504783A62739F5E6D88FAED9",
+    "final_native_exit_code": 0,
+    "github_pwsh_wrapper_exit": 0,
+    "state": "passed"
+  },
+  "final_script_controls": {
+    "state": "passed",
+    "checks": [
+      {
+        "name": "clean-present",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "export-commit"
+      },
+      {
+        "name": "sqlite-present",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "clean-absent",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "export-commit"
+      },
+      {
+        "name": "sqlite-absent",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "clean-empty",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "export-commit"
+      },
+      {
+        "name": "sqlite-empty",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "sqlite-wrong-hash",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "sqlite-existing-output",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": ""
+      },
+      {
+        "name": "clean-existing-output",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": ""
+      }
+    ],
+    "original_archive_preserved": true,
+    "environment_states": [
+      "present",
+      "absent",
+      "empty"
+    ],
+    "source_not_extracted_on_archive_rejection": true,
+    "existing_evidence_preserved": true,
+    "drivers": [
+      {
+        "sha256": "D7450A16AD2BC289591B3853642A3D581A4ED50F89EE17CF38FE994B1BA89586",
+        "path": "scripts/verify-clean.ps1"
+      },
+      {
+        "sha256": "FA36A4ED304DC65479C1014DC4E231575C95265F504783A62739F5E6D88FAED9",
+        "path": "scripts/verify-sqlite.ps1"
+      }
+    ]
+  },
+  "clean_sdk_absent_success": {
+    "location_restored": true,
+    "driver_sha256": "D7450A16AD2BC289591B3853642A3D581A4ED50F89EE17CF38FE994B1BA89586",
+    "state": "passed",
+    "driver_unchanged": true,
+    "caller_temp_and_tmp_genuinely_absent_before_and_after": true
+  },
+  "failed_ci_runs": [
+    {
+      "commit": "0d2ea85",
+      "reason": "SQLite assertions passed; expected negative command native status escaped to CI wrapper; control step skipped",
+      "run": "39247453969"
+    },
+    {
+      "commit": "5e5347c",
+      "reason": "Unchanged validation wrapper, SQLite job failed; final run status retained separately",
+      "run": "39247655451"
+    }
+  ]
 }

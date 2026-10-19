@@ -67,6 +67,8 @@ try {
   [ordered]@{state='passed';checks=$checks.ToArray();original_archive_preserved=$true;environment_states=@('present','absent','empty');source_not_extracted_on_archive_rejection=$true;existing_evidence_preserved=$true;drivers=@('verify-clean.ps1','verify-sqlite.ps1') | ForEach-Object {@{path="scripts/$_";sha256=(Get-FileHash (Join-Path $project "scripts/$_")).Hash}}} |
     ConvertTo-Json -Depth 6 | Set-Content (Join-Path $Out 'verification.json')
   Write-Host "Script rejection and environment controls passed: $($checks.Count)."
+  # Expected native failures are evidence, not this successful script's status.
+  $global:LASTEXITCODE = 0
 } finally {
   foreach ($name in $names) { Set-ProcessValue $name $original[$name] }
   Set-Location -LiteralPath $originalLocation
