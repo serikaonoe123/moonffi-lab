@@ -8,6 +8,8 @@
 
 用户随后明确允许使用新工具链，当前锁定并已在云端验收 moon 0.1.20261016 (1af328f)、moonc v0.10.16+b1a0e846e，取代保留旧锁的决定。只在新的 `results/toolchain-upgrade-20261019/installed` 安装，保留原安装与旧失败证据。当前工具包和三个关键二进制已核对[官方归档清单](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256)及[二进制清单](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.sha256)；core 仍来自官方 HTTPS，摘要为下载后实测，版本与新编译器一致，不声称取得了 core 的独立官方校验文件。
 
+这里的 0.10.16 来自实际编译器版本输出，不是从 moonbit-docs 仓库的标签推定，也不据此宣称最新正式发行版。项目版本 0.1.0、moon 构建版本 0.1.20261016 与 moonc 版本各自独立，复现以内容锁和实际回报为准。
+
 | 当前内容 | 字节数 / 文件数 | SHA-256 |
 |---|---:|---|
 | Windows x64 zip | 90,915,394 字节 | `653EBF0A3B2683048FAA8AD79B7B7D0721BF78726BF1A7E58678E9740B0D430F` |
@@ -66,7 +68,7 @@ moon update
 
 `scripts/verify-toolchain.ps1` 在给定安装和本地归档上进行 11 项检查：正确安装、第二份归档损坏后仍不解包、离线缺失不回退网络、越界归档路径、不安全 URL、缺失二进制摘要、版本漂移、执行前发现二进制漂移、版本不变的 core 源码漂移、已有安装及已有证据保留。探针仅在新结果目录中制造错误输入，最后检查进程环境恢复。
 
-CI 五项 suite 均先创建内容锁定的独立工具链，behavior 任务额外运行上述边界检查；诊断只上传 JSON 和日志，不上传下载归档、工具目录或边界测试的复制二进制。整体工程、原生内存及 SDK 验收仍按 [复现指南](REPRODUCIBILITY.md) 执行。
+CI 当前六项 suite 均先创建内容锁定的独立工具链，behavior 任务额外运行上述边界检查；诊断只上传 JSON 和日志，不上传下载归档、工具目录或边界测试的复制二进制。整体工程、原生内存及 SDK 验收仍按 [复现指南](REPRODUCIBILITY.md) 执行。
 
 [Actions run 39014758043](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39014758043) 对 `00712a7` 的五项验收通过；五份产物已下载核对，均从官方在线取得同一份锁定内容，bundle 前后 core 身份一致。11 边界、43 主模块/5 SDK 单测、704 场景、189 次完整缩减、63 组重复一致和 214 个真子集通过，见 [云端快照](evidence/github-ci-39014758043.json)。
 

@@ -1,6 +1,14 @@
 # 接续工作摘要
 
-来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-19（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
+来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-20（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
+
+## 最新阶段：v0.1 范围冻结与源码候选准备，2026-10-20
+
+从干净且已同步的 ea652c7 开始，不改变 core/runner/fixture 或现有工具链锁。新增冻结清单、发布说明草稿、独立使用者复现入口和反馈模板，修正 README/复现指南的旧五项 CI 入口，并明确 0.10.16 来自编译器自报而非文档仓库标签。新增 prepare-release 只在本地导出已提交源码，逐文件比对 Git blob/SHA，保留来源和许可，不下载/构建/打标签/发布。候选始终 prepared-not-published、publish_ready=false；无独立使用者反馈，registry/Release/上游消息仍未执行或授权。
+
+新增 verify-release-preparation：两份完整源码 ZIP/清单一致、已有输出保留、缺失提交和缺失冻结清单拒绝；sdk CI 任务增加这些控制，仅上传清单/日志，不上传 ZIP。运行代码基线仍是 1f065527 / 39248905440，准备器拒绝原生代码或既有验证脚本相对基线漂移。源码 ZIP 用于审阅，完整 verify-clean 仍依赖 Git checkout。
+
+预提交原始归档检查发现 Windows Git 会转换换行，导致 .gitattributes 与 Git blob 不符；失败保留 results/release-precommit-archive-20261020。改为仅本次 Git archive 指定 core.autocrlf=false/core.eol=lf 后，旧提交全部 491 文件匹配，并按预期因未提交范围清单而拒绝，记录 results/release-precommit-exact-20261020。下一步提交候选后运行完整准备控制，再推送和审计其自身六项 CI；目前未将新准备控制写成已通过。
 
 ## 最新阶段：真实社区 SQLite 接入，六项 CI 通过，2026-10-19
 

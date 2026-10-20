@@ -1,6 +1,8 @@
 # Windows 自动验收与源码复现
 
-仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发会分别运行 behavior、ASan、benchmark、generation、sdk 五个任务。generation 验证 Buffer 的 512 个人工 fixture 场景，以及真实 Eigen 绑定的 192 个正确场景、保存输入重放、旧输入哈希和 CLI 边界；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减，保存通过输入及预算终止结果，并在全部计时结束后核验。sdk 在另一个工作区中用公开 core/runner 编译独立消费者，验证完整失败与缩减流程。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单。归档不含工作目录或二进制。
+仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发分别运行 behavior、ASan、benchmark、generation、sdk、sqlite 六个任务。generation 验证 Buffer 的 512 个人工 fixture 场景，以及真实 Eigen 绑定的 192 个正确场景、保存输入重放、旧输入哈希和 CLI 边界；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减。sdk 在另一个工作区中用公开 core/runner 编译教学消费者；sqlite 以原样社区绑定源码验收 48+8 单测、96 场景和九项脚本控制。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单，不上传工作目录或二进制。首次使用请先看 [独立复现入口](INDEPENDENT-REPRODUCTION.md)。
+
+当前已核对的运行代码基线为 `1f065527` 的 [Actions 39248905440](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440)：六项通过，68 个关键文件逐任务匹配提交归档，96 份 SQLite 输入与本地字节一致，189 次缩减与旧基准一致，见 [快照](evidence/github-ci-39248905440.json)。后续候选仍须按自身提交核对 CI。sdk 任务新增 [本地源码准备控制](RELEASE-PLAN.md)，只上传清单/日志，不上传源码 ZIP；冻结清单与发布说明不表示已发布。
 
 工具链升级提交 `4106122` 使用固定内容的官方 0.10.16 工具链，在 [Actions run 39233803279](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279) 通过五项，全部产物已下载核对。五次在线安装、11 项工具链边界、69 主模块/6 SDK 单测、704 场景、128 份历史 Eigen 输入、189 次完整缩减和 214 个真子集通过；44 个关键源文件逐任务匹配 Git 导出，189 行输入/结果哈希及结构计数与旧 Int64 本地基准一致。见 [云端快照](evidence/github-ci-39233803279.json)。本机后续通过工作区临时目录恢复 native behavior/SDK 验收，原 D8050 失败仍保留，见 [解决记录](LOCAL-WINDOWS-TEMP.md)。
 
@@ -18,7 +20,7 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 
 ```powershell
 & .\scripts\assert-toolchain.ps1
-& .\scripts\verify-clean.ps1 -Suite behavior,asan,benchmark,generation,sdk
+& .\scripts\verify-clean.ps1 -Suite behavior,asan,benchmark,generation,sdk,sqlite
 ```
 
 该脚本默认导出 HEAD，可用 `-Ref <commit>` 指定另一个包含复现工具的提交。未提交修改不进入导出的源码。脚本使用 `git archive` 导出，在新目录解包，并要求没有 `.git`、`.mooncakes`、`_build` 或旧 `results`。它记录 commit、归档哈希和逐文件源码哈希，再更新 registry、恢复声明的依赖并构建。每个 suite 的输出在源码目录外，便于保留完整诊断。
@@ -26,7 +28,7 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 已有同版本依赖源码且需要离线复验时，可明确指定来源：
 
 ```powershell
-& .\scripts\verify-clean.ps1 -Suite behavior,asan,benchmark,generation,sdk `
+& .\scripts\verify-clean.ps1 -Suite behavior,asan,benchmark,generation,sdk,sqlite `
   -OfflineDependencySource .\.mooncakes
 ```
 
@@ -42,10 +44,10 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
 
 - `source.tar`、`source-manifest.json`：实际测试的提交及文件内容。
 - `toolchain.json`、`dependency-manifest.json`：实际工具版本、二进制与依赖哈希。
-- `behavior/`、`asan/`、`benchmark/`、`generation/`、`sdk/`：所选 suite 的完整证据。
+- `behavior/`、`asan/`、`benchmark/`、`generation/`、`sdk/`、`sqlite/`：所选 suite 的完整证据。
 - `verification.json`：只有全部所选任务成功才产生；出错则保存 `failure.json` 和阶段，保留已有文件。
 
-CI 另保存 `bootstrap` 的归档摘要、前后工具链检查和 core bundle 日志；behavior 任务保存 11 项工具链边界检查。下载的归档、工具链目录及故意损坏的测试二进制不上传到诊断产物。
+CI 另保存 `bootstrap` 的归档摘要、前后工具链检查和 core bundle 日志；behavior 任务保存 11 项工具链边界检查；sqlite 任务保存九项环境/源码拒绝控制；sdk 任务保存源码候选准备控制。下载的归档、工具链目录、源码 ZIP 及故意损坏的测试二进制不上传到诊断产物。
 
 `fresh_project_build=true` 只说明没有复制项目构建产物。脚本的 `independent_environment=false` 始终表示它自身不能证明主机、标准库或 registry 全局缓存是全新的；CI runner 的独立性须由云端执行记录补充。输出目录不可复用，不自动删除任何证据。
 

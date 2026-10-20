@@ -4,9 +4,11 @@
 
 目前提供 Windows/MSVC 的 **behavior** 模式及单独构建的 ASan stub profile。Buffer fixture 的三种行为缺陷为人工注入；专用崩溃和超时探针用于验证控制器。Eigen 使用有来源和哈希记录的真实绑定快照。
 
+首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。项目正准备实验性 v0.1.0 源码候选，支持范围、候选包和未完成项见 [发布准备](docs/RELEASE-PLAN.md)；目前未发布 registry 包或 GitHub Release。
+
 ## 准备和验证
 
-已通过云端验收的工具链：moon 0.1.20261016、moonc 0.10.16；依赖锁定 `moonbitlang/async@0.22.5`。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools。本机通过工作区临时目录配置恢复 native 编译，69 主模块/6 SDK 单测及完整 behavior、SDK 验收通过，详见 [本机 D8050 解决记录](docs/LOCAL-WINDOWS-TEMP.md)。
+已通过云端验收的工具链实际自报：moon 0.1.20261016、moonc `v0.10.16+b1a0e846e (2026-10-16)`；依赖锁定 `moonbitlang/async@0.22.5`。这标识官方 latest 包中已验收的编译器，不等同于文档仓库标签或“最新正式版”。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools；完整环境控制入口使用 PowerShell 7.5+。本机 native 恢复记录见 [D8050 解决记录](docs/LOCAL-WINDOWS-TEMP.md)。
 
 需要安装当前锁定工具链时，可运行 `scripts/install-toolchain.ps1`，按固定 SHA-256 在新目录安装工具包和标准库，支持保留归档后的离线重装。使用方法及滚动下载地址的可用性限制见 [工具链内容锁定](docs/TOOLCHAIN-LOCK.md)。
 
@@ -25,7 +27,7 @@ moon build --target native
 
 工作区中的工具带低完整性标签、系统临时目录不可写时，可运行 `& .\scripts\verify-clean.ps1 -WorkspaceTemp -Suite behavior,sdk -OfflineDependencySource .\.mooncakes`。它只在本轮输出目录内放置临时文件，结束后恢复进程环境，并用 Git 导出的源码避免扫描 `results` 中的历史快照；没有依赖源码缓存时省略离线参数。详见 [复现与权限边界](docs/LOCAL-WINDOWS-TEMP.md)。
 
-Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线依赖源码复用会明确标记。[最新云端验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39239977335)已通过临时目录修复提交 `b43aad6` 的 behavior、ASan、benchmark、generation、sdk 五项，并下载核对全部产物：69 主模块/6 SDK 单测、21 组 Int64 探针、704 个生成场景、128 份历史 Eigen 输入及 189 次固定语料缩减通过，63/63 组重复一致，214 个真子集和全部正确实现重放通过。53 个关键文件逐任务对照 Git 归档，五次默认临时目录流程保持不变；见 [云端证据](docs/evidence/github-ci-39239977335.json)。新选项本身的本地验收见前述本机记录。
+Windows CI 和指定提交的源码复现见 [复现指南](docs/REPRODUCIBILITY.md)。`scripts/verify-clean.ps1` 从 Git 导出新源码目录，记录工具链与文件哈希，再执行所选验收；离线来源会明确标记。[已核对云端基线](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440)通过提交 `1f065527` 的 behavior、ASan、benchmark、generation、sdk、sqlite 六项：69+6+48+8 单测、704 个 Buffer/Eigen 生成场景、96 个 SQLite 场景、128 份历史输入及 189 次缩减通过。68 个关键文件逐任务匹配提交归档，96 份 SQLite 输入与本地字节一致，既有缩减基准不变；见 [云端证据](docs/evidence/github-ci-39248905440.json)。后续候选仍按自身提交验收。
 
 本次升级先遇旧锁归档变化，再发现新标准库的随机算法变化；全部失败证据保留在 [验证记录](docs/VALIDATION.md)。Buffer/Eigen 原生成器版本使用固定历史随机流，保留旧输入 SHA 检查；独立 SDK 的新随机流明确标为 `counter-walk-2`。工具链仍按固定内容身份检查，不自动接受任意 latest 归档。
 

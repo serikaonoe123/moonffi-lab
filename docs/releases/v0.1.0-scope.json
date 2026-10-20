@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "version": "0.1.0",
+  "module": "serikaonoe123/moonffi-lab",
+  "status": "experimental-source-candidate",
+  "public_engine_packages": ["core", "runner"],
+  "validated_platform": "Windows x64 native / MSVC",
+  "trace_schema": 1,
+  "baseline_evidence": "docs/evidence/github-ci-39248905440.json",
+  "baseline_tested_commit": "1f065527f9fa584dc52a79399f0a36e40ed3c321",
+  "required_suites": ["behavior", "asan", "benchmark", "generation", "sdk", "sqlite"],
+  "required_notices": [
+    "LICENSE",
+    "fixtures/random/LICENSE",
+    "fixtures/random/NOTICE",
+    "vendor/eigen-binding/LICENSE",
+    "vendor/eigen-binding/SNAPSHOT.md",
+    "vendor/eigen-binding/manifest.json",
+    "vendor/eigen-binding/third_party/eigen/SOURCE.txt",
+    "vendor/eigen-binding/third_party/eigen/COPYING.MPL2"
+  ],
+  "pending": ["independent-user-reproduction", "explicit-publication-approval"],
+  "claims": {
+    "unknown_upstream_defects_found": 0,
+    "registry_package_published": false,
+    "release_published": false,
+    "sqlite_asan_coverage": false,
+    "heap_leak_proof": false,
+    "cross_platform_validation": false
+  }
+}

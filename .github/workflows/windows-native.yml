@@ -24,6 +24,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          # Source preparation compares the candidate with its recorded ancestor.
+          fetch-depth: ${{ matrix.suite == 'sdk' && '0' || '1' }}
       - name: Install content-locked MoonBit in a fresh directory
         run: |
           $ErrorActionPreference = 'Stop'
@@ -40,6 +42,10 @@ jobs:
           LAB_SUITE: ${{ matrix.suite }}
         run: |
           & ./scripts/verify-clean.ps1 -Suite $env:LAB_SUITE -Out results/ci
+      - name: Verify local source candidate preparation
+        if: matrix.suite == 'sdk'
+        run: |
+          & ./scripts/verify-release-preparation.ps1 -Out results/release-checks
       - name: Verify source rejection and caller environment restoration
         if: matrix.suite == 'sqlite'
         run: |
@@ -58,6 +64,11 @@ jobs:
             results/toolchain-checks/*-output/*.json
             results/script-controls/**/*.json
             results/script-controls/**/*.log
+            results/release-checks/verification.json
+            results/release-checks/failure.json
+            results/release-checks/*.log
+            results/release-checks/a/candidate.json
+            results/release-checks/a/source-manifest.json
             results/ci/**/*.json
             results/ci/**/*.jsonl
             results/ci/**/*.log
