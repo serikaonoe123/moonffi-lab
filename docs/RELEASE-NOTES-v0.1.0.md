@@ -8,6 +8,8 @@ MoonFFI Lab 用 MoonBit 为原生绑定生成有状态调用序列，在独立�
 
 已有运行基线是 [提交 1f065527 的六项 Windows CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440)：69 主模块、6 SDK、48 上游 SQLite、8 SQLite 适配测试，96 SQLite 隔离场景，704 Buffer/Eigen 生成场景及 189 次固定缩减验证通过，产物已核对。该记录只覆盖其自身提交；新候选的 CI 须另行记录。
 
+本轮源码候选代码 `23893d5bb3a231a21df10db506d8da821a7e984d` 的 [六项 CI 39361478378](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378) 也已全部通过并核对产物，另包括四项源码准备控制：498 份源码清单与本地一致，已有输出及缺失提交/清单被拒绝，候选保持未发布。189 次既有缩减的输入、结果字节和结构计数与原基准一致。独立使用者反馈仍待完成。
+
 运行需要 Windows x64、MSVC C++ 工作负载和 Windows SDK。完整复现入口使用 PowerShell 7.5+。工具链按归档/二进制/core 源码摘要锁定，编译器实际自报 `v0.10.16+b1a0e846e (2026-10-16)`；这是验收所用官方 latest 包的身份，不据此声称对应最新正式发行标签。
 
 范围限制：仅 Windows native 完整验收；公开 API 属实验性源码接口，未发布 registry SDK。确认失败不等于全局最短或同底层根因，删除最小不等于参数最小；仅符合指纹要求的性质失败自动缩减。ASan 只覆盖记录中的 C/C++ 单元，不覆盖 SQLite、整个运行时或全部原生分配，显式关闭不等于堆泄漏证明。

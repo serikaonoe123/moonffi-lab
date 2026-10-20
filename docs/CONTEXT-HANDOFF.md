@@ -2,13 +2,17 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-20（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
-## 最新阶段：v0.1 范围冻结与源码候选准备，2026-10-20
+## 最新阶段：v0.1 源码候选准备完成，六项 CI 通过，2026-10-20
 
-从干净且已同步的 ea652c7 开始，不改变 core/runner/fixture 或现有工具链锁。新增冻结清单、发布说明草稿、独立使用者复现入口和反馈模板，修正 README/复现指南的旧五项 CI 入口，并明确 0.10.16 来自编译器自报而非文档仓库标签。新增 prepare-release 只在本地导出已提交源码，逐文件比对 Git blob/SHA，保留来源和许可，不下载/构建/打标签/发布。候选始终 prepared-not-published、publish_ready=false；无独立使用者反馈，registry/Release/上游消息仍未执行或授权。
+从 ea652c7 开始，不改 core/runner/fixture、既有验证脚本或工具链锁。候选代码提交 `23893d5bb3a231a21df10db506d8da821a7e984d` 已推送，[Actions 39361478378](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378) 六项全部通过且产物核对完成；见 [发布准备](RELEASE-PLAN.md)、[本地准备快照](evidence/release-preparation-20261020.json)和[新云端快照](evidence/github-ci-39361478378.json)。75 个关键文件逐任务匹配提交归档，全部 498 份候选源文件的 Git blob/字节/SHA 与本地清单一致。既有 69+6+48+8 单测、704+96 场景、128 历史输入、189 次缩减、63 组重复与 214 真子集通过；输入/结果字节和结构计数与旧基准一致。新下载助手丢弃异步 CopyTo 返回值，本轮原始下载记录恰为六份具名记录，大小/SHA 已重新核对。后续只做文档收尾，运行代码保持该提交。
 
-新增 verify-release-preparation：两份完整源码 ZIP/清单一致、已有输出保留、缺失提交和缺失冻结清单拒绝；sdk CI 任务增加这些控制，仅上传清单/日志，不上传 ZIP。运行代码基线仍是 1f065527 / 39248905440，准备器拒绝原生代码或既有验证脚本相对基线漂移。源码 ZIP 用于审阅，完整 verify-clean 仍依赖 Git checkout。
+新增范围清单、发布说明草稿、独立使用者复现入口及反馈模板。README/复现指南纳入六项任务，明确 moonc 0.10.16 为实际自报，非文档 tag 或最新正式发行声明。源码 ZIP 用于审阅，完整 verify-clean 仍需 Git checkout；当前不提供解压后无 Git 的完整验收模式。复现入口已指向本轮确切候选代码 SHA，源码/许可来源保留。
 
-预提交原始归档检查发现 Windows Git 会转换换行，导致 .gitattributes 与 Git blob 不符；失败保留 results/release-precommit-archive-20261020。改为仅本次 Git archive 指定 core.autocrlf=false/core.eol=lf 后，旧提交全部 491 文件匹配，并按预期因未提交范围清单而拒绝，记录 results/release-precommit-exact-20261020。下一步提交候选后运行完整准备控制，再推送和审计其自身六项 CI；目前未将新准备控制写成已通过。
+prepare-release 只本地导出已提交源码，逐文件核对 Git blob/SHA，保留来源和许可，拒绝运行代码/既有验证脚本相对旧 CI 基线漂移；不下载/构建/打标签/发布。candidate.json 始终 prepared-not-published、publish_ready=false，显式区分已记录旧运行基线 1f065527 和候选自己的 CI。verify-release-preparation 四项控制（两份完整 ZIP/清单一致、已有输出、缺失提交、缺失冻结清单）本地和云端通过。sdk 任务因基线祖先比较 fetch-depth=0，其余仍浅克隆，persist-credentials=false 不变；CI 只上传准备清单/日志，不上传源码 ZIP/工具包。
+
+预提交归档曾受 Windows Git 换行转换影响而与 .gitattributes Git blob 不符；失败保留 results/release-precommit-archive-20261020。仅本次归档命令指定 core.autocrlf=false/core.eol=lf 后，旧提交全部 491 文件匹配，并因未提交清单按预期拒绝，记录 results/release-precommit-exact-20261020。先前未推送的本地 2f27580 因补齐 sdk 历史配置修订为 23893d5，未改远端历史。最终完整本地控制在 results/release-preparation-final-20261020，a/source.zip 约 1.55 MB、498 文件，SHA 为 EEA70786A734B8CDBD25FFD096AB607A9D2B282C43CDA78C8C3027F69D656E38；a/candidate.json 与 a/source-manifest.json 可供审阅。托管 runner 的清单逐文件匹配，不声称不同 Git 版本产生相同 ZIP 压缩字节。云端原始记录在 results/github-ci-39361478378，审计脚本 results/inspect-release-ci-20261020.ps1。
+
+尚待独立使用者按文档提供真实反馈，以及用户明确授权具体发布目标/附件。目前未发布 registry 包或 GitHub Release、未打发布 tag、未联系上游，候选不冒充正式发布。公开自写源码/文档推送授权继续有效；拒绝安全审查时须立即报告并停止对应动作，不修改安全设置或绕过限制。当前没有待运行的原生测试。
 
 ## 最新阶段：真实社区 SQLite 接入，六项 CI 通过，2026-10-19
 

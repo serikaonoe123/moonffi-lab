@@ -1,0 +1,104 @@
+{
+  "observed_on": "2026-10-20",
+  "state": "prepared-not-published",
+  "tested_code_commit": "23893d5bb3a231a21df10db506d8da821a7e984d",
+  "local_controls": {
+    "state": "passed",
+    "source_commit": "23893d5bb3a231a21df10db506d8da821a7e984d",
+    "checks": [
+      {
+        "name": "two-complete-source-archives",
+        "matched_git_blobs": 498,
+        "deterministic_zip": true,
+        "deterministic_manifest": true
+      },
+      {
+        "name": "existing-output",
+        "expected_failure": true,
+        "stage": ""
+      },
+      {
+        "name": "missing-commit",
+        "expected_failure": true,
+        "stage": "resolve-commit"
+      },
+      {
+        "name": "missing-frozen-scope",
+        "expected_failure": true,
+        "stage": "scope-and-evidence"
+      }
+    ],
+    "preparer_sha256": "5D3C6B2DC584DB72C72580E1DA94C814E49CEBC8421283BAD701808B3924A076",
+    "source_files_checked": 498,
+    "archive_sha256": "EEA70786A734B8CDBD25FFD096AB607A9D2B282C43CDA78C8C3027F69D656E38",
+    "published": false
+  },
+  "local_candidate": {
+    "state": "prepared-not-published",
+    "source_commit": "23893d5bb3a231a21df10db506d8da821a7e984d",
+    "source_tree": "be6692e18151f8a15938bc0c8ee4d16bdd151a25",
+    "version": "0.1.0",
+    "archive": "source.zip",
+    "archive_sha256": "EEA70786A734B8CDBD25FFD096AB607A9D2B282C43CDA78C8C3027F69D656E38",
+    "archive_bytes": 1550203,
+    "source_files": 498,
+    "all_git_blobs_matched": true,
+    "source_manifest_sha256": "19A236CABF25AA98806A542AA511A1A5D5E0468E25551CFDED6B5C0818C5CFF6",
+    "source_scope_sha256": "DA03DA72BEB8F8AAE6066C8635B6A550A7882E2768B767F6A5389E29F5F91444",
+    "preparer_sha256": "5D3C6B2DC584DB72C72580E1DA94C814E49CEBC8421283BAD701808B3924A076",
+    "baseline_tested_commit": "1f065527f9fa584dc52a79399f0a36e40ed3c321",
+    "baseline_run": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440",
+    "runtime_diff_from_baseline": [],
+    "other_changed_paths": [
+      ".github/workflows/windows-native.yml",
+      "README.md",
+      "docs/CONTEXT-HANDOFF.md",
+      "docs/INDEPENDENT-REPRODUCTION.md",
+      "docs/RELEASE-NOTES-v0.1.0.md",
+      "docs/RELEASE-PLAN.md",
+      "docs/REPRODUCIBILITY.md",
+      "docs/SQLITE-INTEGRATION.md",
+      "docs/TOOLCHAIN-LOCK.md",
+      "docs/evidence/github-ci-39247453969-failed-sqlite.json",
+      "docs/evidence/github-ci-39247655451-failed-sqlite.json",
+      "docs/evidence/github-ci-39248320859-failed-sqlite.json",
+      "docs/evidence/github-ci-39248905440.json",
+      "docs/evidence/sqlite-external-20261019.json",
+      "docs/releases/v0.1.0-scope.json",
+      "docs/templates/INDEPENDENT-REPRODUCTION.md",
+      "scripts/prepare-release.ps1",
+      "scripts/verify-release-preparation.ps1"
+    ],
+    "baseline_is_candidate_ci": false,
+    "required_notices": [
+      "LICENSE",
+      "fixtures/random/LICENSE",
+      "fixtures/random/NOTICE",
+      "vendor/eigen-binding/LICENSE",
+      "vendor/eigen-binding/SNAPSHOT.md",
+      "vendor/eigen-binding/manifest.json",
+      "vendor/eigen-binding/third_party/eigen/SOURCE.txt",
+      "vendor/eigen-binding/third_party/eigen/COPYING.MPL2"
+    ],
+    "toolchain": {
+      "moon": "0.1.20261016 (1af328f 2026-10-16)",
+      "moonc": "v0.10.16+b1a0e846e (2026-10-16)",
+      "moonrun": "moonrun 0.1.20261016 (1af328f 2026-10-16)"
+    },
+    "archive_includes": "Tracked project sources and existing third-party source notices only. No toolchain, async cache, downloaded SQLite archive or build outputs.",
+    "pending": [
+      "independent-user-reproduction",
+      "explicit-publication-approval"
+    ],
+    "publish_ready": false,
+    "registry_published": false,
+    "release_published": false,
+    "scope": "Local source preparation only; no builds, tests, downloads, tags, registry publication, GitHub release or upstream communication performed."
+  },
+  "hosted_run": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378",
+  "hosted_conclusion": "success",
+  "hosted_source_files_checked": 498,
+  "independent_user_reproduction": "pending",
+  "publication_approval": "pending",
+  "scope": "Only local source preparation and read-only inspection. No source ZIP, toolchain, registry package or GitHub Release uploaded or published."
+}

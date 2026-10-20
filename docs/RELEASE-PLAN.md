@@ -2,6 +2,8 @@
 
 当前状态：实验性源码候选，尚未发布 registry 包或 GitHub Release。`moon.mod` 中的 0.1.0 是项目自身版本；它与编译器自报的 `v0.10.16+b1a0e846e`、文档仓库标签是不同对象。
 
+本轮候选代码提交 `23893d5bb3a231a21df10db506d8da821a7e984d` 已通过 [六项 CI 39361478378](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378) 及产物核对。四项源码准备控制在本地和云端通过，498 份源码逐文件一致，75 个关键文件逐任务匹配提交归档，原有运行/缩减基准不变。见 [本地准备记录](evidence/release-preparation-20261020.json)与[本轮云端记录](evidence/github-ci-39361478378.json)。后续文档收尾不改变该提交的运行代码。
+
 机器可读范围在 [v0.1.0-scope.json](releases/v0.1.0-scope.json)，面向使用者的说明在 [发布说明草稿](RELEASE-NOTES-v0.1.0.md)。本轮冻结功能范围，后续修复须对应新的提交和验证记录。
 
 ## 纳入范围
@@ -37,8 +39,9 @@
 
 ## 发布前剩余工作
 
-1. 核对候选自身六项 CI 和准备控制的产物，并记录确切提交。
-2. 请独立使用者按 [复现入口](INDEPENDENT-REPRODUCTION.md) 提供 [反馈记录](templates/INDEPENDENT-REPRODUCTION.md)；自动化或托管 runner 不替代真实使用者反馈。
-3. 用户审阅候选清单、许可来源、发布说明和上述未完成项后，再明确授权具体发布目标与附件。GitHub Release 和 registry 发布是不同动作，目前都没有执行。
+候选自身六项 CI、准备控制和产物核对已经完成。尚有两项：
+
+1. 请独立使用者按 [复现入口](INDEPENDENT-REPRODUCTION.md) 提供 [反馈记录](templates/INDEPENDENT-REPRODUCTION.md)；自动化或托管 runner 不替代真实使用者反馈。
+2. 用户审阅候选清单、许可来源、发布说明和上述未完成项后，再明确授权具体发布目标与附件。GitHub Release 和 registry 发布是不同动作，目前都没有执行。
 
 当前无需上传历史工具链镜像或联系上游。官方 latest 地址将来若改变内容，安装应拒绝，按 [工具链锁定](TOOLCHAIN-LOCK.md) 重新评估；不放宽现有校验。候选源码包提供来源和复现入口，不包含一套永久可下载的完整离线工具环境。

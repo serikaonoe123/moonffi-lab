@@ -9,14 +9,15 @@
 ```powershell
 git clone https://github.com/serikaonoe123/moonffi-lab.git
 Set-Location moonffi-lab
-# 这是已完成六项验收的运行代码提交；复现新候选时换成 candidate.json 的完整提交。
-$candidate = '1f065527f9fa584dc52a79399f0a36e40ed3c321'
+# 这是本轮已通过六项验收及源码准备控制的候选代码提交。
+# 审阅其他候选时，改成其 candidate.json 记录的完整提交。
+$candidate = '23893d5bb3a231a21df10db506d8da821a7e984d'
 git checkout --detach $candidate
 git rev-parse HEAD
 git status --short
 ```
 
-旧基线没有本轮新增的 prepare-release 脚本；验证引擎/SQLite 可以用上述基线，准备发布源码包须使用包含冻结清单的新候选。不要用一个提交的报告代表另一个提交已经通过。
+旧运行基线 1f065527 没有本轮新增的 prepare-release 脚本；上面的新候选包含冻结清单和准备脚本。不要用一个提交的报告代表另一个提交已经通过。
 
 ## 安装与完整验收
 

@@ -4,7 +4,7 @@
 
 目前提供 Windows/MSVC 的 **behavior** 模式及单独构建的 ASan stub profile。Buffer fixture 的三种行为缺陷为人工注入；专用崩溃和超时探针用于验证控制器。Eigen 使用有来源和哈希记录的真实绑定快照。
 
-首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。项目正准备实验性 v0.1.0 源码候选，支持范围、候选包和未完成项见 [发布准备](docs/RELEASE-PLAN.md)；目前未发布 registry 包或 GitHub Release。
+首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。实验性 v0.1.0 源码候选及其准备控制已通过 [六项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378)，支持范围、候选包和未完成项见 [发布准备](docs/RELEASE-PLAN.md)；目前未发布 registry 包或 GitHub Release。
 
 ## 准备和验证
 
@@ -13,7 +13,6 @@
 需要安装当前锁定工具链时，可运行 `scripts/install-toolchain.ps1`，按固定 SHA-256 在新目录安装工具包和标准库，支持保留归档后的离线重装。使用方法及滚动下载地址的可用性限制见 [工具链内容锁定](docs/TOOLCHAIN-LOCK.md)。
 
 ```powershell
-Set-Location D:\moonbit\moonffi-lab
 $PSVersionTable.PSVersion # Major 应为 7；从开始菜单打开 PowerShell 7
 & .\scripts\assert-toolchain.ps1 # 先按工具链内容锁定指南选择当前安装
 moon update
