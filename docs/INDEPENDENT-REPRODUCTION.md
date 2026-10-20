@@ -56,4 +56,4 @@ try {
 
 ## 反馈
 
-使用 [复现反馈模板](templates/INDEPENDENT-REPRODUCTION.md) 记录实际提交、环境、结果和卡住的步骤。可以在本地保存，或由你选择是否向仓库提交；本脚本不会自动发消息或上传日志。最有价值的是第一次按入口执行时遇到的文档缺口和原始失败，不必只反馈成功。
+使用 [GitHub 复现反馈表单](https://github.com/serikaonoe123/moonffi-lab/issues/new?template=independent-reproduction.yml) 或 [本地反馈模板](templates/INDEPENDENT-REPRODUCTION.md) 记录实际提交、环境、结果和卡住的步骤。可以在本地保存，或由你选择是否向仓库提交；本脚本不会自动发消息或上传日志。最有价值的是第一次按入口执行时遇到的文档缺口和原始失败，不必只反馈成功。参与过开发/验证时注明，详见 [贡献说明](../CONTRIBUTING.md)。

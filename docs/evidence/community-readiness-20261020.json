@@ -1,0 +1,66 @@
+{
+  "observed_on": "2026-10-20",
+  "state": "proposal-only-awaiting-user-approval",
+  "repository": "serikaonoe123/moonffi-lab",
+  "public": true,
+  "issues_enabled": true,
+  "existing_releases_observed": 0,
+  "existing_tags_observed": 0,
+  "feedback": {
+    "state": "passed",
+    "syntax": "JSON subset of YAML",
+    "fields": 6,
+    "participation_preselected": false,
+    "automatic_assignees": false,
+    "submitted_issue": false,
+    "source_archive_sha256": "EEA70786A734B8CDBD25FFD096AB607A9D2B282C43CDA78C8C3027F69D656E38",
+    "asset_count": 4
+  },
+  "proposal": {
+    "state": "proposal-only-awaiting-user-approval",
+    "repository": "serikaonoe123/moonffi-lab",
+    "visibility": "public",
+    "tag": "v0.1.0-rc.1",
+    "target_commit": "23893d5bb3a231a21df10db506d8da821a7e984d",
+    "title": "MoonFFI Lab v0.1.0-rc.1 (Windows native preview)",
+    "prerelease": true,
+    "make_latest": false,
+    "proposed_remote_effects": [
+      "create previously absent tag at exact target commit",
+      "create public GitHub prerelease",
+      "upload the four named assets"
+    ],
+    "assets": [
+      {
+        "name": "candidate.json",
+        "bytes": 2754,
+        "sha256": "B5F8AE2FE6316858293E01129191DB3580FF9A11198088A80898C77FFA840844"
+      },
+      {
+        "name": "source-manifest.json",
+        "bytes": 123771,
+        "sha256": "19A236CABF25AA98806A542AA511A1A5D5E0468E25551CFDED6B5C0818C5CFF6"
+      },
+      {
+        "name": "source.zip",
+        "bytes": 1550203,
+        "sha256": "EEA70786A734B8CDBD25FFD096AB607A9D2B282C43CDA78C8C3027F69D656E38"
+      },
+      {
+        "sha256": "15B4A9125583AEB61396CE295FCA1100338A16A9ACD139851AE6F1D3F66ED447",
+        "name": "SHA256SUMS",
+        "bytes": 245
+      }
+    ],
+    "source_files": 498,
+    "toolchain_packages_included": false,
+    "existing_third_party_sources_included": "Eigen binding/header snapshot and historical RNG sources with their repository notices",
+    "independent_user_reproduction": "pending",
+    "publication_authorized": false,
+    "published": false,
+    "no_automatic_execution": true,
+    "release_body_sha256": "5F0E3179088661A26DA321125B008E6D639DA7A5606B0388A2802A061EF0C79F"
+  },
+  "raw_evidence_directory": "results/community-readiness-20261020",
+  "scope": "Read-only GitHub metadata, local packaging and feedback-entry preparation. No issue submitted, message sent, tag created, release created or asset uploaded."
+}

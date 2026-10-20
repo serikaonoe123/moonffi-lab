@@ -2,6 +2,16 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-20（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
+## 最新阶段：社区反馈入口与明确预发布草案，2026-10-20
+
+从干净的 710b45f 开始，只新增贡献说明、GitHub 复现反馈表单及预发布草案，不改运行代码、验证脚本、工具链锁或现有 CI workflow。表单采用 JSON（YAML 子集），本地核对六个字段、参与情况不预选、无自动 assignees/labels，未提交 Issue。README 和独立复现入口已链接贡献说明及表单。GitHub 表单语法来自官方文档；本地字段校验不冒称真实外部用户反馈或服务端实际提交验收。
+
+只读查询当前公开 serikaonoe123/moonffi-lab 的 Issues 已启用，标签与 Release 列表当时为空，原记录 results/community-readiness-20261020；未改仓库设置。准备 docs/PRE-RELEASE-PROPOSAL.md 与 docs/evidence/community-readiness-20261020.json：拟议公开 GitHub 预发布 v0.1.0-rc.1，目标固定为已通过六项 CI 的 23893d5bb3a231a21df10db506d8da821a7e984d，不标记 Latest。源码保持既有 498 文件候选，不从当前未提交目录重打包。拟上传 source.zip、candidate.json、source-manifest.json、SHA256SUMS 四附件，正文和每份摘要均已备好。
+
+全部本地审阅文件在 results/community-readiness-20261020/prerelease-proposal：publication-proposal.json、release-body.md、assets/；source.zip SHA 仍为 EEA70786A734B8CDBD25FFD096AB607A9D2B282C43CDA78C8C3027F69D656E38。保留已有 Eigen/历史 RNG 源码及许可，不含编译器工具包、缓存或构建产物。candidate.json 是准备时的不可变快照，publish_ready=false 和独立反馈 pending 未改写；预发布是为收集反馈，不是假称完成正式用户验收。
+
+现有授权仅明确覆盖源码/验证记录推送，尚无创建公开 Release、标签及四附件上传的明确批准；本轮不会执行这些动作，后续须让用户审阅这份具体草案再决定。没有 registry 发布、上游消息或第三方工具包上传。若用户批准，发布前必须重查标签不存在、目标提交及四附件摘要，任何权限/安全拒绝报告后停止，不覆盖同名标签或绕过限制。不要以“继续”默认替代这个待决的具体公开发布授权。
+
 ## 最新阶段：v0.1 源码候选准备完成，六项 CI 通过，2026-10-20
 
 从 ea652c7 开始，不改 core/runner/fixture、既有验证脚本或工具链锁。候选代码提交 `23893d5bb3a231a21df10db506d8da821a7e984d` 已推送，[Actions 39361478378](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378) 六项全部通过且产物核对完成；见 [发布准备](RELEASE-PLAN.md)、[本地准备快照](evidence/release-preparation-20261020.json)和[新云端快照](evidence/github-ci-39361478378.json)。75 个关键文件逐任务匹配提交归档，全部 498 份候选源文件的 Git blob/字节/SHA 与本地清单一致。既有 69+6+48+8 单测、704+96 场景、128 历史输入、189 次缩减、63 组重复与 214 真子集通过；输入/结果字节和结构计数与旧基准一致。新下载助手丢弃异步 CopyTo 返回值，本轮原始下载记录恰为六份具名记录，大小/SHA 已重新核对。后续只做文档收尾，运行代码保持该提交。

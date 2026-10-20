@@ -6,6 +6,8 @@
 
 首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。实验性 v0.1.0 源码候选及其准备控制已通过 [六项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378)，支持范围、候选包和未完成项见 [发布准备](docs/RELEASE-PLAN.md)；目前未发布 registry 包或 GitHub Release。
 
+首次运行失败、文档卡点和成功复现均可通过 [复现反馈表单](https://github.com/serikaonoe123/moonffi-lab/issues/new?template=independent-reproduction.yml) 记录；参与方式见 [贡献说明](CONTRIBUTING.md)。
+
 ## 准备和验证
 
 已通过云端验收的工具链实际自报：moon 0.1.20261016、moonc `v0.10.16+b1a0e846e (2026-10-16)`；依赖锁定 `moonbitlang/async@0.22.5`。这标识官方 latest 包中已验收的编译器，不等同于文档仓库标签或“最新正式版”。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools；完整环境控制入口使用 PowerShell 7.5+。本机 native 恢复记录见 [D8050 解决记录](docs/LOCAL-WINDOWS-TEMP.md)。
