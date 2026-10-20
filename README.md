@@ -4,7 +4,7 @@
 
 目前提供 Windows/MSVC 的 **behavior** 模式及单独构建的 ASan stub profile。Buffer fixture 的三种行为缺陷为人工注入；专用崩溃和超时探针用于验证控制器。Eigen 使用有来源和哈希记录的真实绑定快照。
 
-首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。实验性 v0.1.0 源码候选及其准备控制已通过 [六项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378)，支持范围、候选包和未完成项见 [发布准备](docs/RELEASE-PLAN.md)；目前未发布 registry 包或 GitHub Release。
+首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。[v0.1.0-rc.1 预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)已提供源码及校验清单，对应代码与准备控制已通过 [六项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378)。支持范围和未完成项见 [发布记录](docs/RELEASE-PLAN.md)；独立使用者反馈仍待完成，尚未发布稳定版或 registry 包。
 
 首次运行失败、文档卡点和成功复现均可通过 [复现反馈表单](https://github.com/serikaonoe123/moonffi-lab/issues/new?template=independent-reproduction.yml) 记录；参与方式见 [贡献说明](CONTRIBUTING.md)。
 

@@ -1,6 +1,6 @@
-# v0.1.0-rc.1 预发布草案：等待明确授权
+# v0.1.0-rc.1 预发布草案与执行记录
 
-状态：只准备文件，尚未创建标签、GitHub Release 或上传附件。2026-10-20 的只读查询显示仓库公开、Issue 已启用，当时标签和 Release 列表为空；执行发布前须再次核对，若目标标签已存在则停止，不覆盖。
+当前状态：用户于 2026-10-20 明确回复“发布吧”后，已按下列草案创建 [v0.1.0-rc.1](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)。标签指向下列固定提交，四份附件回下载后的大小与 SHA-256 全部匹配，正文核对一致；见 [发布核验快照](evidence/prerelease-v0.1.0-rc.1-20261020.json)。发布前复查确认标签不存在，没有覆盖标签。以下保留原审阅范围与正文。
 
 ## 拟议的具体动作
 
@@ -39,6 +39,6 @@
 
 独立使用者反馈仍待完成；预发布只用于邀请试用，不能写成已获得独立用户验收或已发现未知缺陷。registry 发布、上游消息和第三方工具包上传不在这份草案的动作清单中。
 
-此前授权覆盖公开源码/验证记录推送，尚未明确覆盖创建公开 Release 与上传附件。只有用户明确批准本草案后，才可执行上述标签、预发布和四附件上传；本地没有自动执行发布的脚本。任何安全审查拒绝仍需报告并停止对应动作。GitHub CLI 的 target/prerelease/latest 语义以[官方 create 文档](https://cli.github.com/manual/gh_release_create)为依据。
+此前公开源码/验证记录推送授权与本次“发布吧”的具体草案批准共同构成执行依据。本次仅创建上述标签、预发布和四附件；后续其他发布不由此自动授权。任何安全审查拒绝仍需报告并停止对应动作。GitHub CLI 的 target/prerelease/latest 语义以[官方 create 文档](https://cli.github.com/manual/gh_release_create)为依据。
 
-本地审阅文件在 `results/community-readiness-20261020/prerelease-proposal/`：publication-proposal.json、release-body.md 和 assets/。仓库中的反馈表单和贡献说明用于等待真实反馈，未自动提交 Issue 或联系其他人。
+本地审阅文件在 `results/community-readiness-20261020/prerelease-proposal/`：publication-proposal.json、release-body.md 和 assets/，保留准备时快照，不改写为事后授权记录。实际执行与回下载核验在 `results/publish-prerelease-20261020/`。仓库中的反馈表单和贡献说明用于等待真实反馈，未自动提交 Issue 或联系其他人。

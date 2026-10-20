@@ -1,6 +1,6 @@
 # v0.1.0 范围与发布准备
 
-当前状态：实验性源码候选，尚未发布 registry 包或 GitHub Release。`moon.mod` 中的 0.1.0 是项目自身版本；它与编译器自报的 `v0.10.16+b1a0e846e`、文档仓库标签是不同对象。
+当前状态：已于 2026-10-20 发布 [v0.1.0-rc.1 实验性源码预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)，尚未发布稳定版或 registry 包。`moon.mod` 中的 0.1.0 是项目自身版本；它与编译器自报的 `v0.10.16+b1a0e846e`、文档仓库标签是不同对象。
 
 本轮候选代码提交 `23893d5bb3a231a21df10db506d8da821a7e984d` 已通过 [六项 CI 39361478378](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378) 及产物核对。四项源码准备控制在本地和云端通过，498 份源码逐文件一致，75 个关键文件逐任务匹配提交归档，原有运行/缩减基准不变。见 [本地准备记录](evidence/release-preparation-20261020.json)与[本轮云端记录](evidence/github-ci-39361478378.json)。后续文档收尾不改变该提交的运行代码。
 
@@ -37,13 +37,15 @@
 
 源码 ZIP 用于审阅和比对；完整验收入口 verify-clean 依赖 Git 对象，请从 Git checkout 选择包中记录的相同提交运行。当前没有提供解压 ZIP 后不依赖 Git 的完整验收模式。
 
-## 发布前剩余工作
+## 预发布记录与稳定版前剩余工作
 
-候选自身六项 CI、准备控制和产物核对已经完成。尚有两项：
+用户明确批准具体草案后，已创建固定指向 23893d5 的预发布标签，上传四份审阅过的附件，不标记 Latest。四份附件回下载后大小/SHA-256、标签目标及发布正文全部匹配，见 [执行记录](PRE-RELEASE-PROPOSAL.md)与[核验快照](evidence/prerelease-v0.1.0-rc.1-20261020.json)。原 candidate.json / publication-proposal.json 保留准备时状态，不作为实时发布状态。
+
+候选自身六项 CI、准备控制和产物核对已经完成。稳定版前仍需：
 
 1. 请独立使用者按 [复现入口](INDEPENDENT-REPRODUCTION.md) 提供 [反馈记录](templates/INDEPENDENT-REPRODUCTION.md)；自动化或托管 runner 不替代真实使用者反馈。
-2. 用户审阅候选清单、许可来源、发布说明和上述未完成项后，再明确授权具体发布目标与附件。GitHub Release 和 registry 发布是不同动作，目前都没有执行。
+2. 根据反馈决定是否修复，变更代码时重新验证对应提交；后续稳定版或 registry 发布须另行明确目标及附件，本次批准仅覆盖 rc.1 草案。
 
-已准备 [v0.1.0-rc.1 公开预发布草案](PRE-RELEASE-PROPOSAL.md)，固定标签目标、正文、四个附件与摘要，可供具体审阅。它沿用已验收的 23893d5 源码候选，独立使用者反馈仍待完成；当前只准备文件，不创建预发布。复现反馈可以通过 [贡献入口](../CONTRIBUTING.md) 手动提交。
+预发布用于收集试用反馈，不表示已获得独立使用者验收或赛事审核通过。复现反馈可以通过 [贡献入口](../CONTRIBUTING.md) 手动提交；十月黑客松申报说明草稿见 [项目说明](HACKATHON-SUBMISSION.md)。
 
 当前无需上传历史工具链镜像或联系上游。官方 latest 地址将来若改变内容，安装应拒绝，按 [工具链锁定](TOOLCHAIN-LOCK.md) 重新评估；不放宽现有校验。候选源码包提供来源和复现入口，不包含一套永久可下载的完整离线工具环境。

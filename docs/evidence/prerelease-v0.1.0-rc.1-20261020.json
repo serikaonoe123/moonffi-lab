@@ -1,0 +1,44 @@
+{
+  "state": "published-and-verified",
+  "repository": "serikaonoe123/moonffi-lab",
+  "release_id": 417968022,
+  "release_url": "https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1",
+  "tag": "v0.1.0-rc.1",
+  "tag_commit": "23893d5bb3a231a21df10db506d8da821a7e984d",
+  "prerelease": true,
+  "draft": false,
+  "make_latest_requested": false,
+  "published_at": "2026-10-20T03:25:06Z",
+  "body_matches_normalized_text": true,
+  "assets": [
+    {
+      "name": "candidate.json",
+      "bytes": 2754,
+      "sha256": "B5F8AE2FE6316858293E01129191DB3580FF9A11198088A80898C77FFA840844",
+      "downloaded_bytes_match": true
+    },
+    {
+      "name": "source-manifest.json",
+      "bytes": 123771,
+      "sha256": "19A236CABF25AA98806A542AA511A1A5D5E0468E25551CFDED6B5C0818C5CFF6",
+      "downloaded_bytes_match": true
+    },
+    {
+      "name": "source.zip",
+      "bytes": 1550203,
+      "sha256": "EEA70786A734B8CDBD25FFD096AB607A9D2B282C43CDA78C8C3027F69D656E38",
+      "downloaded_bytes_match": true
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 245,
+      "sha256": "15B4A9125583AEB61396CE295FCA1100338A16A9ACD139851AE6F1D3F66ED447",
+      "downloaded_bytes_match": true
+    }
+  ],
+  "independent_user_reproduction": "pending",
+  "registry_published_by_this_action": false,
+  "upstream_messages_sent": false,
+  "user_authorization": "发布吧",
+  "raw_evidence_directory": "results/publish-prerelease-20261020"
+}

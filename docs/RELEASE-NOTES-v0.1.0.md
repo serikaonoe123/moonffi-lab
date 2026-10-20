@@ -1,6 +1,6 @@
 # MoonFFI Lab v0.1.0 发布说明草稿
 
-状态：实验性源码候选，未发布。具体候选提交、文件清单和 SHA-256 以本地 `candidate.json` 为准；以下不是已完成的发布公告。
+状态：稳定版 v0.1.0 的说明草稿。2026-10-20 已发布 [v0.1.0-rc.1 源码试用候选](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)，稳定版和 registry 包尚未发布。具体候选提交、文件清单和 SHA-256 见附件；准备时的 `candidate.json` 保持原样，实际发布状态见 [核验记录](evidence/prerelease-v0.1.0-rc.1-20261020.json)。
 
 MoonFFI Lab 用 MoonBit 为原生绑定生成有状态调用序列，在独立进程中保存执行证据，并把可稳定重放的性质失败缩减为更小的具体输入。
 
@@ -8,7 +8,7 @@ MoonFFI Lab 用 MoonBit 为原生绑定生成有状态调用序列，在独立�
 
 已有运行基线是 [提交 1f065527 的六项 Windows CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440)：69 主模块、6 SDK、48 上游 SQLite、8 SQLite 适配测试，96 SQLite 隔离场景，704 Buffer/Eigen 生成场景及 189 次固定缩减验证通过，产物已核对。该记录只覆盖其自身提交；新候选的 CI 须另行记录。
 
-本轮源码候选代码 `23893d5bb3a231a21df10db506d8da821a7e984d` 的 [六项 CI 39361478378](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378) 也已全部通过并核对产物，另包括四项源码准备控制：498 份源码清单与本地一致，已有输出及缺失提交/清单被拒绝，候选保持未发布。189 次既有缩减的输入、结果字节和结构计数与原基准一致。独立使用者反馈仍待完成。
+本轮源码候选代码 `23893d5bb3a231a21df10db506d8da821a7e984d` 的 [六项 CI 39361478378](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378) 也已全部通过并核对产物，另包括四项源码准备控制：498 份源码清单与本地一致，已有输出及缺失提交/清单被拒绝，准备器本身不发布。189 次既有缩减的输入、结果字节和结构计数与原基准一致。独立使用者反馈仍待完成。
 
 运行需要 Windows x64、MSVC C++ 工作负载和 Windows SDK。完整复现入口使用 PowerShell 7.5+。工具链按归档/二进制/core 源码摘要锁定，编译器实际自报 `v0.10.16+b1a0e846e (2026-10-16)`；这是验收所用官方 latest 包的身份，不据此声称对应最新正式发行标签。
 
