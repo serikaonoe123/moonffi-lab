@@ -66,7 +66,7 @@ try {
   Require (($enginePackages.rel | Sort-Object) -join ',' -eq 'core,runner') 'External SDK consumer used private fixtures or commands'
   $stage='test-and-build'
   Invoke-Checked 'moon' @('test','--target','native','--frozen','--deny-warn','-j','1','counter') @(0) (Join-Path $Out 'tests.log')
-  Require ((Get-Content (Join-Path $Out 'tests.log') -Raw).Contains('Total tests: 6, passed: 6, failed: 0.')) 'SDK unit tests incomplete'
+  Require ((Get-Content (Join-Path $Out 'tests.log') -Raw).Contains('Total tests: 7, passed: 7, failed: 0.')) 'SDK unit tests incomplete'
   Invoke-Checked 'moon' @('build','--target','native','--frozen','--deny-warn','cmd/main') @(0) (Join-Path $Out 'build.log')
   $executables=@(Get-ChildItem -LiteralPath (Join-Path $workspace '_build/native/debug/build') -Recurse -File -Filter main.exe)
   Require ($executables.Count -eq 1) 'SDK executable discovery ambiguous'
@@ -116,13 +116,52 @@ try {
   $existing=Join-Path $Out 'replay/case-1/report.json'; $oldHash=(Get-FileHash $existing).Hash
   Invoke-Checked $exe @('replay',$reducedPath,'--out',(Join-Path $Out 'replay')) @(2) (Join-Path $Out 'output-reuse.log')
   Require ((Get-FileHash $existing).Hash -eq $oldHash) 'Existing SDK evidence was changed'
+  $stage='explicit-state-contracts'
+  Invoke-Checked 'moon' @('build','--target','native','--frozen','--deny-warn','cmd/contracts') @(0) (Join-Path $Out 'contracts-build.log')
+  $contractExecutables=@(Get-ChildItem -LiteralPath (Join-Path $workspace '_build/native/debug/build') -Recurse -File -Filter contracts.exe)
+  Require ($contractExecutables.Count -eq 1) 'Contract executable discovery ambiguous'
+  $contractExe=$contractExecutables[0].FullName
+  foreach ($generator in @('default','walk')) {
+    $destination=Join-Path $Out "contracts-$generator"
+    Invoke-Checked $contractExe @('run','--generator',$generator,'--cases','16','--seed','17','--steps','64','--out',$destination) @(0) (Join-Path $Out "contracts-$generator.log")
+    $reports=@(Read-Json (Join-Path $destination 'summary.json'))
+    Require ($reports.Count -eq 16 -and @($reports | Where-Object outcome -ne 'Pass').Count -eq 0) 'Explicit contract correct campaign failed'
+  }
+  $contractError=Join-Path $Out 'contracts-error'
+  Invoke-Checked $contractExe @('run','--mode','error','--steps','32','--out',$contractError) @(1) (Join-Path $Out 'contracts-error.log')
+  $contractInput=Join-Path $contractError 'case-1/case.json'
+  $contractBaseline=Read-Json (Join-Path $contractError 'case-1/report.json')
+  Require ($contractBaseline.outcome -eq 'PropertyFailure' -and $contractBaseline.fingerprint -like 'property:contract-postcondition:reject_add:*') 'Explicit postcondition did not detect error-path corruption'
+  $contractReductions=@(foreach ($strategy in @('plain','dependency','state')) {
+    $destination=Join-Path $Out "contracts-shrink-$strategy"
+    Invoke-Checked $contractExe @('shrink',$contractInput,'--strategy',$strategy,'--budget','200','--out',$destination) @(1) (Join-Path $Out "contracts-shrink-$strategy.log")
+    $result=Read-Json (Join-Path $destination 'reduction.json')
+    Require ($result.confirmed -and $result.deletion_minimal -and $result.reduced_steps -eq 2 -and $result.stop_reason -eq 'search_complete' -and $result.baseline_checks -eq 3 -and $result.final_checks -eq 3 -and $result.baseline.fingerprint -eq $contractBaseline.fingerprint) 'Explicit contract reduction incomplete'
+    $inputFile=Join-Path $destination 'reduced.json'
+    Invoke-Checked $contractExe @('replay',$inputFile,'--out',(Join-Path $Out "contracts-replay-$strategy")) @(1) (Join-Path $Out "contracts-replay-$strategy.log")
+    Invoke-Checked $contractExe @('replay',$inputFile,'--mode','correct','--out',(Join-Path $Out "contracts-fixed-$strategy")) @(0) (Join-Path $Out "contracts-fixed-$strategy.log")
+    [ordered]@{strategy=$strategy;executions=$result.executions;original_steps=$result.original_steps;reduced_steps=$result.reduced_steps;confirmed=$result.confirmed;deletion_minimal=$result.deletion_minimal;independent_replay=$true;corrected_replay='Pass'}
+  })
+  $invalidContract=Read-Json $contractInput
+  $invalidContract.steps[0].defines=@()
+  $invalidContractPath=Join-Path $Out 'contracts-forged.json'
+  $invalidContract | ConvertTo-Json -Depth 20 | Set-Content $invalidContractPath -Encoding utf8
+  Invoke-Checked $contractExe @('replay',$invalidContractPath,'--out',(Join-Path $Out 'contracts-invalid')) @(2) (Join-Path $Out 'contracts-invalid.log')
+  Require ((Read-Json (Join-Path $Out 'contracts-invalid/case-1/report.json')).outcome -eq 'InvalidCase' -and -not (Test-Path (Join-Path $Out 'contracts-invalid/case-1/events.jsonl'))) 'Invalid contract reached native worker'
+  foreach ($copy in @('a','b')) {
+    Invoke-Checked $contractExe @('generate','--generator','walk','--seed','17','--steps','64','--out',(Join-Path $Out "contracts-determinism-$copy")) @(0) (Join-Path $Out "contracts-determinism-$copy.log")
+  }
+  Require ((Get-FileHash (Join-Path $Out 'contracts-determinism-a/case.json')).Hash -eq (Get-FileHash (Join-Path $Out 'contracts-determinism-b/case.json')).Hash) 'Explicit contract generation differs across processes'
+  $contracts=[ordered]@{state='passed';correct_cases=32;step_count_boundary_cases=4;postcondition_failure=$contractBaseline.fingerprint;reductions=$contractReductions;preflight_rejection=$true;separate_process_determinism=$true;executable_sha256=(Get-FileHash $contractExe).Hash}
+  $contracts | ConvertTo-Json -Depth 8 | Set-Content (Join-Path $Out 'contracts-verification.json') -Encoding utf8
   [ordered]@{state='passed';completed_at=[DateTimeOffset]::UtcNow.ToString('o');engine_packages=@($enginePackages.rel | Sort-Object)
     consumer_module='moonffi-example/counter-lab';dependency_mode=$dependencyMode;dependency_source=$OfflineDependencySource
     source_manifest_sha256=(Get-FileHash (Join-Path $Out 'source-manifest.json')).Hash;executable_sha256=(Get-FileHash $exe).Hash
-    unit_tests=6;pure_oracle_traces=768;repair_subsets=128;native_unit_walks=32;correct_contract_cases=8;correct_walk_cases=32
+    unit_tests=7;pure_oracle_traces=768;repair_subsets=128;native_unit_walks=32;correct_contract_cases=8;correct_walk_cases=32
     original_steps=$reduction.original_steps;reduced_steps=$reduction.reduced_steps;fingerprint=$baseline.fingerprint;executions=$reduction.executions
     deletion_minimal=$reduction.deletion_minimal;proper_subsets_checked=3;corrected_replay='Pass';budget_stop_reason=$budget.stop_reason
     preflight_rejection=$true;output_reuse_rejected=$true;separate_process_determinism=$true;toolchain=@(& moon version --all)
+    explicit_state_contracts=$contracts
     independent_environment=$false;scope='Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed.'
   } | ConvertTo-Json -Depth 6 | Set-Content (Join-Path $Out 'verification.json') -Encoding utf8
   Write-Host "External SDK verification passed. Evidence: $Out"

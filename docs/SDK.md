@@ -2,6 +2,8 @@
 
 本轮提供可编译的独立模块 [adapter-starter](../examples/adapter-starter/README.md)，用一个小型 C 计数器展示 SDK 的完整流程。示例只导入公开 `core`/`runner`，不需要修改引擎。当前交付形式是源码工作区，没有发布 Mooncakes 包，也没有将 0.1.0 的接口声明为长期稳定 API。
 
+开发版本新增可选的 [显式状态契约](STATE-CONTRACTS.md)：将初态、命令生成、前置条件、预期状态推进、后置条件和不变量分开，再通过 ContractAdapter 使用原 runner。新的 cmd/contracts 示例复用同一 C 目标；原 cmd/main 接口保留。已发布 rc.1 不包含这些后续开发改动。
+
 ## 1. 建立模块与工作区
 
 仓库中的 `examples/moon.work` 把引擎目录 `..` 和示例 `adapter-starter` 作为成员。示例 `moon.mod` 声明 `serikaonoe123/moonffi-lab@0.1.0` 和 `moonbitlang/async@0.22.5`。本地引擎从工作区源码解析，async 从 registry 或已有工具缓存恢复。[MoonBit 模块文档](https://docs.moonbitlang.com/en/latest/toolchain/moon/module.html)说明了通过 `moon.work` 关联本地模块的方式；本例已用仓库锁定的工具链实际编译验证。

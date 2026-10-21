@@ -1,6 +1,26 @@
 ///| Audit query is a test-only FFI; it does not increment target-call counts.
 extern "C" fn native_calls() -> Int = "starter_counter_calls"
 
+///| Empty/short trajectories and model generation must remain pure, even when
+/// adapter construction and validation are repeated across many fresh states.
+test "explicit contracts generate exact short traces and valid walks without native calls" {
+  let before = native_calls()
+  for count = 0; count <= 3; count = count + 1 {
+    let input = generate_contract(17UL, "correct", count)
+    let adapter = @lab.ContractAdapter::new(CounterContract::new(), ContractCounterTarget::new(input))
+    assert_true(input.steps.length() == count && adapter.validate(input) is None)
+  }
+  for seed = 0UL; seed < 32UL; seed = seed + 1UL {
+    let input = generate_contract_walk(seed, "correct", 128)
+    let adapter = @lab.ContractAdapter::new(CounterContract::new(), ContractCounterTarget::new(input))
+    assert_true(input.steps.length() == 128 && adapter.validate(input) is None)
+    assert_true(input == generate_contract_walk(seed, "correct", 128))
+    let forged = { ..input, environment: { "fixture_mode": "unknown" } }
+    assert_true(adapter.validate(forged) is Some(_))
+  }
+  assert_true(native_calls() == before)
+}
+
 ///| Exercise the public helper from a separate module, keeping operation and
 /// dependency declarations intact. Domain-invalid proposals are still generated
 /// and left to validation; candidate generation must never call the C target.

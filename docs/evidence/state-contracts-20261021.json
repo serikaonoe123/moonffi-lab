@@ -1,0 +1,97 @@
+{
+  "observed_on": "2026-10-21",
+  "state": "local-validated-cloud-pending",
+  "base_commit": "c48a2025f518adda0e98dc36f31078239ef9fa29",
+  "native_unit_tests": 73,
+  "sdk_unit_tests": 7,
+  "explicit_contracts": {
+    "state": "passed",
+    "correct_cases": 32,
+    "step_count_boundary_cases": 4,
+    "postcondition_failure": "property:contract-postcondition:reject_add:s30",
+    "reductions": [
+      {
+        "strategy": "plain",
+        "executions": 28,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "dependency",
+        "executions": 34,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "state",
+        "executions": 35,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      }
+    ],
+    "preflight_rejection": true,
+    "separate_process_determinism": true,
+    "executable_sha256": "409780552FD360359308C8E9138AFE71901997EB48D6C4D1BF556384A0DDB976"
+  },
+  "driver": {
+    "state": "passed",
+    "driver_sha256": "1813A294322A998F8DD77C70C34366C3E76EEBB411EF914B9E26A7EF6555620D",
+    "driver_unchanged": true
+  },
+  "source_identity": [
+    {
+      "path": "core/contracts.mbt",
+      "sha256": "221869B5BCCBE67102822BA4975B2F1FF5016F70F395EE8F79CA7564EFBAC78A",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "core/contracts_wbtest.mbt",
+      "sha256": "79FCCF0C62712269A2FA767D9791F189C3426E0F33F1F3316A52D09265CFDD02",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "examples/adapter-starter/counter/contracts.mbt",
+      "sha256": "FCF06EA20D31DA735F4CC41BE149276D7FF042510A48D113A385D9EAACB9A4E0",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "examples/adapter-starter/counter/counter_wbtest.mbt",
+      "sha256": "FCD5BD0E1B8E9EEA4D178959CDEE888F4920F84DC7444474AEB0FE01329C4C06",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "examples/adapter-starter/cmd/contracts/main.mbt",
+      "sha256": "5EDDF4B493AFCEE8975286EA86EEE2E221E23A14BCF6BC0292D59284F148D474",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "examples/adapter-starter/cmd/contracts/moon.pkg",
+      "sha256": "C37D9690CF3E763F7174EA4E8CFE380A2062EC486C7AD4BB7B458043C7F5BF06",
+      "tested_copy_matched": true
+    }
+  ],
+  "local_evidence": [
+    "results/review-contract-20261021",
+    "results/review-contract-sdk-accepted-20261021"
+  ],
+  "original_adapter_behavior_unchanged": true,
+  "remaining": [
+    "common-ffi-parameter-strategies",
+    "native-error-reduction",
+    "linux-native-verification"
+  ],
+  "new_release_published": false,
+  "reapplication_submitted": false
+}

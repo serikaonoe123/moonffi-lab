@@ -45,7 +45,9 @@ jobs:
       - name: Verify local source candidate preparation
         if: matrix.suite == 'sdk'
         run: |
-          & ./scripts/verify-release-preparation.ps1 -Out results/release-checks
+          # The released rc.1 stays frozen. New development must be rejected by
+          # its old release gate until a new candidate has its own evidence.
+          & ./scripts/verify-release-preparation.ps1 -Ref 23893d5bb3a231a21df10db506d8da821a7e984d -RejectRuntimeRef HEAD -Out results/release-checks
       - name: Verify source rejection and caller environment restoration
         if: matrix.suite == 'sqlite'
         run: |

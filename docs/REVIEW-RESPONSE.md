@@ -1,0 +1,27 @@
+# 十月申报驳回后的补齐与验证
+
+2026-10-21 收到用户提供的组委会驳回通知。首次申报未通过；rc.1 发布和既有 CI 不代表满足本次审核要求。复审须在 2026-10-31 前修改报名表提交，实际结果由组委会决定。用户明确选择按四项要求分阶段补齐并验证，再准备重报。
+
+## 当前基线与目标
+
+| 评审要求 | rc.1 实际能力 | 本轮拟交付与验收 |
+|---|---|---|
+| 完整状态模型及前后置条件 | StateModel.apply 将检查与推进合并，Adapter.execute 自行判断结果 | 独立 initial_state / commands / precondition / next_state / postcondition / invariant 接口；生成、验证、修整共享纯模型；实际工作进程调用目标并检查结果；测试拒绝、错误后状态、清理和缩减重放 |
+| 常见 FFI 参数生成与缩减 | 通用 Int / Int64 缩减，其他由各示例自写 | 有界布尔、整数、浮点、Unicode 文本、字节、数组及可选值策略；明确长度、数值/特殊值、编码及资源句柄边界；确定性、下降性及真实 FFI 消费者验证 |
+| 原生崩溃和 Sanitizer 自动缩减 | 可分类 Crash / ASan MemoryError，但 fingerprint=None，缩减明确拒绝 | 定义保守错误签名，拒绝只有退出码或 ASan 类别的弱匹配；真实 C 崩溃/ASan 示例、三次基线/最终确认、不同错误拒绝、预算与不稳定控制；不宣称同底层根因或全局最小 |
+| Linux native | Windows native 六任务通过 | Linux 独立工具链锁、编译与运行、原生崩溃/ASan 缩减及现有行为回归；保留 CI 与产物证据，不能用配置文件存在代替 Linux 运行成功 |
+
+## 参考框架与实现边界
+
+[Hypothesis 状态测试](https://hypothesis.readthedocs.io/en/latest/stateful.html)提供规则、前置条件、不变量和可复用结果集合；[PropEr proper_statem](https://proper-testing.github.io/apidocs/proper_statem.html)将初态、命令、前置条件、后置条件和状态推进拆开，并在生成和缩减时检查命令合法性。[Hypothesis 参数策略](https://hypothesis.readthedocs.io/en/latest/reference/strategies.html)用于核对参数种类与组合方式。
+
+本项目据此补齐可复用协议和有边界的参数策略，不声称与成熟框架全面等价。并行状态机、任意内存指针生成、任意 SQL、任意外部库的自动建模均不由上述最小交付承诺覆盖。协议与生成/缩减的完整路径须由实例验证，新增接口本身不等于功能完成。
+
+## 分阶段证据
+
+1. 状态契约：本地验收通过。主模块 73 项 native 单测，外部 SDK 7 项单测；新增 C 契约入口 32 个正确场景，三策略均将 32 步人工错误缩至 2 步，独立失败重放及正确实现对照通过；见 [接口说明](STATE-CONTRACTS.md)和[本地快照](evidence/state-contracts-20261021.json)。新提交云端结果须另行记录，不用 rc.1 的旧 CI 代替。
+2. 参数策略：待实现与验证。
+3. 原生错误缩减：待实现与验证。
+4. Linux：待实现与实际运行。
+
+完成四项后才整理新的申报正文，逐条链接实际代码、示例、测试、CI 和限制。未自动修改报名表、联系评审或发布新版本；原 rc.1 标签及附件不改写。任何权限/安全审查拒绝立即报告并停止对应动作，不改变系统安全配置。

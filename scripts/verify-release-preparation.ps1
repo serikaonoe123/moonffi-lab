@@ -1,5 +1,5 @@
 #requires -Version 7.0
-param([string]$Out = '')
+param([string]$Out = '', [string]$Ref = 'HEAD', [string]$RejectRuntimeRef = '')
 $ErrorActionPreference = 'Stop'
 $project = Split-Path -Parent $PSScriptRoot
 if (-not $Out) { $Out = Join-Path $project ('results/release-checks-' + [guid]::NewGuid().ToString('N')) }
@@ -22,7 +22,7 @@ function Rejected([string]$Name,[hashtable]$Arguments,[string]$Stage) {
 }
 try {
   foreach ($label in @('a','b')) {
-    & $driver -Out (Join-Path $Out $label) *> (Join-Path $Out "$label.log")
+    & $driver -Ref $Ref -Out (Join-Path $Out $label) *> (Join-Path $Out "$label.log")
     Require ($LASTEXITCODE -eq 0) 'Successful preparation leaked failure exit status'
   }
   $first = Get-Content (Join-Path $Out 'a/candidate.json') -Raw | ConvertFrom-Json
@@ -35,6 +35,11 @@ try {
   Require ((Get-FileHash (Join-Path $Out 'a/source.zip')).Hash -ceq $hash) 'Existing source archive changed'
   Rejected 'missing-commit' @{Out=(Join-Path $Out 'missing');Ref='missing-release-controls-ref'} 'resolve-commit'
   Rejected 'missing-frozen-scope' @{Out=(Join-Path $Out 'old');Ref=$first.baseline_tested_commit} 'scope-and-evidence'
+  if ($RejectRuntimeRef) {
+    Rejected 'runtime-drift' @{Out=(Join-Path $Out 'runtime-drift');Ref=$RejectRuntimeRef} 'scope-and-evidence'
+    $drift = Get-Content (Join-Path $Out 'runtime-drift/failure.json') -Raw | ConvertFrom-Json
+    Require ($drift.error -like 'Runtime or validation scripts differ*') 'Runtime drift was rejected for the wrong reason'
+  }
   [ordered]@{state='passed';source_commit=$first.source_commit;checks=$checks.ToArray();preparer_sha256=(Get-FileHash $driver).Hash;source_files_checked=$first.source_files;archive_sha256=$first.archive_sha256;published=$false} |
     ConvertTo-Json -Depth 6 | Set-Content (Join-Path $Out 'verification.json') -Encoding utf8
   Write-Host "Release preparation controls passed. Evidence: $Out"

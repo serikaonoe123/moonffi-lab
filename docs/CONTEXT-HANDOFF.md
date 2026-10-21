@@ -2,7 +2,17 @@
 
 来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-20（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
 
-## 最新阶段：rc.1 已发布并回下载核验，2026-10-20
+## 最新阶段：首次申报被驳回，按四项要求补齐，2026-10-21
+
+用户提供组委会驳回：要求完整状态模型/前后置条件、常见 FFI 参数生成缩减、原生崩溃/Sanitizer 自动缩减及 Linux native 验证，2026-10-31 前可改表复审。用户明确选择“按四项要求分阶段补齐并验证，再准备重报”。先前关于可申报的判断过于乐观；不能用 rc.1 或旧 CI 声称已达审核标准。对照官方 Hypothesis/PropEr 文档，新增 [补齐计划](REVIEW-RESPONSE.md)，不发消息或自动重报。
+
+第一阶段新增 core.ContractModel / ContractTarget / ContractAdapter：显式初态、命令、前置条件、预期状态转换、后置条件、不变量；共享模型用于生成、验证和只删修整。原生目标仅在 worker 执行/观察/关闭，teardown 保证检查与清理，原 Adapter 不改。JSON 状态回调要求纯性，有限命令枚举不宣称均匀分布或支持任意符号表达式。C 计数器新增 cmd/contracts 入口及 SDK 验收，复用原 C fixture，人工越界错误由后置条件捕获。
+
+本地 73 主模块 native 单测、7 SDK 单测、32 新正确场景、三策略 32→2 步、三次基线/最终确认、独立错误重放及正确实现对照、无效依赖预拒绝与跨进程生成一致通过；[快照](evidence/state-contracts-20261021.json)。原始记录 results/review-contract-20261021、results/review-contract-sdk-accepted-20261021。最初语法/弃用检查及消费者构造失败分别保留，最终 SDK 驱动运行前后摘要一致。只为进程使用既有 MSVC 环境和工作区临时目录，未改安全设置。
+
+准备发布的旧冻结检查继续验证固定 23893d5；新开发 HEAD 必须被旧范围拒绝，新 CI 添加此负向控制，不把新代码套入旧发布基线。尚未发布新版本、改旧标签或重报。参数策略、原生错误缩减和 Linux 待继续实现，当前第一阶段云端结果另行记录。
+
+## 历史阶段：rc.1 已发布并回下载核验，2026-10-20
 
 用户对具体草案明确回复“发布吧”，已创建 [v0.1.0-rc.1](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)，固定指向已验证提交 23893d5bb3a231a21df10db506d8da821a7e984d。发布前核对公开仓库、远端目标、同名标签/Release 不存在、正文及四附件摘要；正式审批后创建公开预发布，不标记 Latest。标签、正文与四附件回下载大小/SHA 全部一致，见 [快照](evidence/prerelease-v0.1.0-rc.1-20261020.json)；原始证据在 results/publish-prerelease-20261020。未发布 registry 包、稳定版或第三方工具包，未联系上游。原 candidate.json、publication-proposal.json 与旧证据保留准备时状态，不改写历史；以下阶段的“尚未发布/尚待授权”仅指当时。
 
