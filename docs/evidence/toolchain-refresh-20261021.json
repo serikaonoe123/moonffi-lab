@@ -1,0 +1,94 @@
+{
+  "observed_on": "2026-10-21",
+  "state": "local-validated-cloud-pending",
+  "base_implementation_commit": "0eae789b80c20f082b8f80586196a53fc9011996",
+  "lock_sha256": "927955E7F7943BEB30E52DFAA49BA884D4C194B4788B3CBDE13FCF3016878A0C",
+  "components": {
+    "moon": "0.1.20261020 (2284bd2 2026-10-20)",
+    "moonc": "v0.10.16+b1a0e846e (2026-10-16)",
+    "moonrun": "moonrun 0.1.20261020 (2284bd2 2026-10-20)"
+  },
+  "binary_sha256": {
+    "moon": "1FCE94E689BDFFCAC0598E25D8F1CAF3DB0410156C110300F87DFE89F9B5D737",
+    "moonc": "5F0B138A6679D5EF3B6A081AEAE66C8BCE75E0E7BF2ED72AE2B415AD984D33E8",
+    "moonrun": "8EB73236040C504E81151AFC5D46827CCC2DD331B1784DAE47EC674DC67244B9"
+  },
+  "archives": [
+    {
+      "kind": "toolchain",
+      "file": "moonbit-windows-x86_64.zip",
+      "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+      "sha256": "50183A36DACDFB47919DFFA5F06B9340B343506236940832215604E277D3F001",
+      "bytes": 91097881,
+      "upstream_checksum_url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256"
+    },
+    {
+      "kind": "core",
+      "file": "core-latest.zip",
+      "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+      "sha256": "C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC",
+      "bytes": 2606935
+    }
+  ],
+  "core_source_identity": {
+    "files": 1211,
+    "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915"
+  },
+  "compiler_binary_unchanged": true,
+  "core_source_unchanged": true,
+  "boundary_checks": 11,
+  "native_unit_tests": 73,
+  "sdk_unit_tests": 7,
+  "explicit_contracts": {
+    "state": "passed",
+    "correct_cases": 32,
+    "step_count_boundary_cases": 4,
+    "postcondition_failure": "property:contract-postcondition:reject_add:s30",
+    "reductions": [
+      {
+        "strategy": "plain",
+        "executions": 28,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "dependency",
+        "executions": 34,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "state",
+        "executions": 35,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      }
+    ],
+    "preflight_rejection": true,
+    "separate_process_determinism": true,
+    "executable_sha256": "3784423FFFBBB202A7A2DEFC47AD3A3C3E776D5735EA582AC5CAF8E28C3B451E"
+  },
+  "registry_index_first_check": "failed; normal moon update then check and native tests passed",
+  "old_install_preserved": true,
+  "installer_rules_unchanged": true,
+  "linux_archive_only_inspected_not_executed": true,
+  "local_evidence": [
+    "results/toolchain-review-20261021",
+    "results/review-contract-sdk-new-tools-20261021",
+    "results/review-contract-20261021"
+  ],
+  "toolkit_uploaded": false,
+  "new_release_published": false
+}

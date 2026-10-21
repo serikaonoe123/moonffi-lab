@@ -4,7 +4,21 @@
 
 这是**内容锁定**。来源仍是官方 `latest` URL，不能保证未来继续提供这份内容；变化时安装会失败，不自动接受新版本。历史版本地址本轮没有取得成功响应，没有把猜测的日期或版本 URL 写入配置。保留的原始归档可以通过 `-ArchiveDirectory` 离线重装；仓库和 CI 诊断产物不包含这两个归档。
 
-## 当前已验收内容（2026-10-19）
+## 当前开发锁（2026-10-21）
+
+状态契约提交 0eae789 的 [六项 CI 39587481441](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39587481441) 在下载包身份检查阶段全部拒绝，接受归档为零，业务测试未运行；见 [失败快照](evidence/github-ci-39587481441-failed-bootstrap.json)。再次从官方校验清单核对新归档与三个关键二进制，在新目录 results/toolchain-review-20261021/installed-windows 安装；旧安装、旧锁对应的提交和失败证据保留。原安装器和拒绝规则保持不变。
+
+新包的 moon / moonrun 自报 0.1.20261020 (2284bd2)，moonc 仍为 v0.10.16+b1a0e846e。编译器二进制、core 版本和 1,211 份源码树身份与 10 月 19 日安装相同，core ZIP 字节因归档变化而不同；不将构建器升级误写成编译器 0.10.17。core 仍按官方 HTTPS 下载后的实测摘要锁定，没有独立官方 core 校验文件。
+
+| 当前内容 | 字节数 / 文件数 | SHA-256 |
+|---|---:|---|
+| Windows x64 zip | 91,097,881 字节 | `50183A36DACDFB47919DFFA5F06B9340B343506236940832215604E277D3F001` |
+| core zip | 2,606,935 字节 | `C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC` |
+| core 源码树 | 1,211 文件 | `B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915` |
+
+隔离安装及 11 项拒绝边界、73 主模块 native 单测、7 SDK 单测与完整契约验收通过；见 [本地快照](evidence/toolchain-refresh-20261021.json)。新锁的云端结果须另行记录。首次根模块检查因新安装没有 registry 索引而失败，按正常 moon update 恢复索引后重新验证，保留首次日志；依赖版本仍是 async 0.22.5。
+
+## 先前已验收内容（2026-10-19，历史记录）
 
 用户随后明确允许使用新工具链，当前锁定并已在云端验收 moon 0.1.20261016 (1af328f)、moonc v0.10.16+b1a0e846e，取代保留旧锁的决定。只在新的 `results/toolchain-upgrade-20261019/installed` 安装，保留原安装与旧失败证据。当前工具包和三个关键二进制已核对[官方归档清单](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256)及[二进制清单](https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.sha256)；core 仍来自官方 HTTPS，摘要为下载后实测，版本与新编译器一致，不声称取得了 core 的独立官方校验文件。
 

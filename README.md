@@ -10,7 +10,7 @@
 
 ## 准备和验证
 
-已通过云端验收的工具链实际自报：moon 0.1.20261016、moonc `v0.10.16+b1a0e846e (2026-10-16)`；依赖锁定 `moonbitlang/async@0.22.5`。这标识官方 latest 包中已验收的编译器，不等同于文档仓库标签或“最新正式版”。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools；完整环境控制入口使用 PowerShell 7.5+。本机 native 恢复记录见 [D8050 解决记录](docs/LOCAL-WINDOWS-TEMP.md)。
+当前开发锁使用 moon 0.1.20261020、moonc `v0.10.16+b1a0e846e (2026-10-16)`；rc.1 的旧 CI 使用 moon 0.1.20261016。构建器更新时编译器二进制和 core 源码身份保持一致，验证状态见 [工具链记录](docs/TOOLCHAIN-LOCK.md)。依赖锁定 `moonbitlang/async@0.22.5`。版本以实际自报和内容锁为准，不等同于文档仓库标签或“最新正式版”。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools；完整环境控制入口使用 PowerShell 7.5+。本机 native 恢复记录见 [D8050 解决记录](docs/LOCAL-WINDOWS-TEMP.md)。
 
 需要安装当前锁定工具链时，可运行 `scripts/install-toolchain.ps1`，按固定 SHA-256 在新目录安装工具包和标准库，支持保留归档后的离线重装。使用方法及滚动下载地址的可用性限制见 [工具链内容锁定](docs/TOOLCHAIN-LOCK.md)。
 

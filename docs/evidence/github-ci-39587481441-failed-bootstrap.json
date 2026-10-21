@@ -1,0 +1,418 @@
+{
+  "observed_on": "2026-10-21",
+  "run_id": 39587481441,
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39587481441",
+  "tested_commit": "0eae789b80c20f082b8f80586196a53fc9011996",
+  "conclusion": "failure",
+  "jobs": [
+    {
+      "conclusion": "failure",
+      "id": 119179881794,
+      "name": "native (asan)",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "failure",
+          "name": "Install content-locked MoonBit in a fresh directory"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify toolchain rejection boundaries"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Validate an exported commit with fresh dependencies"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify local source candidate preparation"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify source rejection and caller environment restoration"
+        },
+        {
+          "conclusion": "success",
+          "name": "Retain diagnostics on success or failure"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "conclusion": "failure",
+      "id": 119179882051,
+      "name": "native (sdk)",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "failure",
+          "name": "Install content-locked MoonBit in a fresh directory"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify toolchain rejection boundaries"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Validate an exported commit with fresh dependencies"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify local source candidate preparation"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify source rejection and caller environment restoration"
+        },
+        {
+          "conclusion": "success",
+          "name": "Retain diagnostics on success or failure"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "conclusion": "failure",
+      "id": 119179882060,
+      "name": "native (benchmark)",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "failure",
+          "name": "Install content-locked MoonBit in a fresh directory"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify toolchain rejection boundaries"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Validate an exported commit with fresh dependencies"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify local source candidate preparation"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify source rejection and caller environment restoration"
+        },
+        {
+          "conclusion": "success",
+          "name": "Retain diagnostics on success or failure"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "conclusion": "failure",
+      "id": 119179882069,
+      "name": "native (sqlite)",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "failure",
+          "name": "Install content-locked MoonBit in a fresh directory"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify toolchain rejection boundaries"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Validate an exported commit with fresh dependencies"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify local source candidate preparation"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify source rejection and caller environment restoration"
+        },
+        {
+          "conclusion": "success",
+          "name": "Retain diagnostics on success or failure"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "conclusion": "failure",
+      "id": 119179882132,
+      "name": "native (generation)",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "failure",
+          "name": "Install content-locked MoonBit in a fresh directory"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify toolchain rejection boundaries"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Validate an exported commit with fresh dependencies"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify local source candidate preparation"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify source rejection and caller environment restoration"
+        },
+        {
+          "conclusion": "success",
+          "name": "Retain diagnostics on success or failure"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "conclusion": "failure",
+      "id": 119179882406,
+      "name": "native (behavior)",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "failure",
+          "name": "Install content-locked MoonBit in a fresh directory"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify toolchain rejection boundaries"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Validate an exported commit with fresh dependencies"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify local source candidate preparation"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Verify source rejection and caller environment restoration"
+        },
+        {
+          "conclusion": "success",
+          "name": "Retain diagnostics on success or failure"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    }
+  ],
+  "installation_failures": [
+    {
+      "name": "windows-native-asan-39587481441",
+      "stage": "verify-archives",
+      "accepted_archives": 0,
+      "error": "Locked archive content mismatch: moonbit-windows-x86_64.zip",
+      "business_tests_started": false
+    },
+    {
+      "name": "windows-native-behavior-39587481441",
+      "stage": "verify-archives",
+      "accepted_archives": 0,
+      "error": "Locked archive content mismatch: moonbit-windows-x86_64.zip",
+      "business_tests_started": false
+    },
+    {
+      "name": "windows-native-benchmark-39587481441",
+      "stage": "verify-archives",
+      "accepted_archives": 0,
+      "error": "Locked archive content mismatch: moonbit-windows-x86_64.zip",
+      "business_tests_started": false
+    },
+    {
+      "name": "windows-native-generation-39587481441",
+      "stage": "verify-archives",
+      "accepted_archives": 0,
+      "error": "Locked archive content mismatch: moonbit-windows-x86_64.zip",
+      "business_tests_started": false
+    },
+    {
+      "name": "windows-native-sdk-39587481441",
+      "stage": "verify-archives",
+      "accepted_archives": 0,
+      "error": "Locked archive content mismatch: moonbit-windows-x86_64.zip",
+      "business_tests_started": false
+    },
+    {
+      "name": "windows-native-sqlite-39587481441",
+      "stage": "verify-archives",
+      "accepted_archives": 0,
+      "error": "Locked archive content mismatch: moonbit-windows-x86_64.zip",
+      "business_tests_started": false
+    }
+  ],
+  "artifact_downloads": [
+    {
+      "artifact_id": 12340796541,
+      "name": "windows-native-sdk-39587481441",
+      "bytes": 282,
+      "digest": "sha256:244dde14c4f78203696f88c0dda3b7271517ad0ab58c6eb661a58e70f2493366",
+      "entries": 1,
+      "source": "GitHub artifact API redirect",
+      "download_host": "productionresultssa11.blob.core.windows.net",
+      "retained_zip_revalidated": false,
+      "tls_verification": "default",
+      "credentials_forwarded_to_artifact_host": false,
+      "zip_paths_checked": true
+    },
+    {
+      "artifact_id": 12340561648,
+      "name": "windows-native-generation-39587481441",
+      "bytes": 282,
+      "digest": "sha256:3625a89c82f27e43d8bfaa8bd298405ffa053bf71cc7aae00115d6bf10ef070c",
+      "entries": 1,
+      "source": "GitHub artifact API redirect",
+      "download_host": "productionresultssa11.blob.core.windows.net",
+      "retained_zip_revalidated": false,
+      "tls_verification": "default",
+      "credentials_forwarded_to_artifact_host": false,
+      "zip_paths_checked": true
+    },
+    {
+      "artifact_id": 12340172139,
+      "name": "windows-native-asan-39587481441",
+      "bytes": 282,
+      "digest": "sha256:be983f7e7d65968f8407d2066a285ad6e18f0caa0dad41a5cddedd651a4c69a4",
+      "entries": 1,
+      "source": "GitHub artifact API redirect",
+      "download_host": "productionresultssa11.blob.core.windows.net",
+      "retained_zip_revalidated": false,
+      "tls_verification": "default",
+      "credentials_forwarded_to_artifact_host": false,
+      "zip_paths_checked": true
+    },
+    {
+      "artifact_id": 12340076583,
+      "name": "windows-native-sqlite-39587481441",
+      "bytes": 282,
+      "digest": "sha256:244dde14c4f78203696f88c0dda3b7271517ad0ab58c6eb661a58e70f2493366",
+      "entries": 1,
+      "source": "GitHub artifact API redirect",
+      "download_host": "productionresultssa11.blob.core.windows.net",
+      "retained_zip_revalidated": false,
+      "tls_verification": "default",
+      "credentials_forwarded_to_artifact_host": false,
+      "zip_paths_checked": true
+    },
+    {
+      "artifact_id": 12339782060,
+      "name": "windows-native-benchmark-39587481441",
+      "bytes": 282,
+      "digest": "sha256:be983f7e7d65968f8407d2066a285ad6e18f0caa0dad41a5cddedd651a4c69a4",
+      "entries": 1,
+      "source": "GitHub artifact API redirect",
+      "download_host": "productionresultssa11.blob.core.windows.net",
+      "retained_zip_revalidated": false,
+      "tls_verification": "default",
+      "credentials_forwarded_to_artifact_host": false,
+      "zip_paths_checked": true
+    },
+    {
+      "artifact_id": 12339762201,
+      "name": "windows-native-behavior-39587481441",
+      "bytes": 282,
+      "digest": "sha256:244dde14c4f78203696f88c0dda3b7271517ad0ab58c6eb661a58e70f2493366",
+      "entries": 1,
+      "source": "GitHub artifact API redirect",
+      "download_host": "productionresultssa11.blob.core.windows.net",
+      "retained_zip_revalidated": false,
+      "tls_verification": "default",
+      "credentials_forwarded_to_artifact_host": false,
+      "zip_paths_checked": true
+    }
+  ],
+  "business_tests_started": false,
+  "local_stage_one_validation": "passed",
+  "scope": "Official rolling archive changed; installed zero downloaded archives. This CI does not validate the new state-contract code."
+}

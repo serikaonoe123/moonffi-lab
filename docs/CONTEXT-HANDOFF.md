@@ -4,6 +4,10 @@
 
 ## 最新阶段：首次申报被驳回，按四项要求补齐，2026-10-21
 
+第一阶段实现提交 0eae789 已通过正式审批同步到公开仓库，tree/commit SHA 完全一致，force=false。[CI 39587481441](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39587481441) 六项均在 verify-archives 拒绝漂移的官方 Windows 包，accepted_archives=[]，业务测试未运行；六份 ZIP 和失败文件已下载按 GitHub 大小/SHA 核对，见 [失败快照](evidence/github-ci-39587481441-failed-bootstrap.json)。没有绕过拒绝或重新使用不符归档。
+
+从官方重新取得并核验 Windows/Linux 归档及二进制清单，在 results/toolchain-review-20261021 独立安装 Windows 新候选。moon / moonrun 变为 0.1.20261020 (2284bd2)，moonc 仍 v0.10.16+b1a0e846e；编译器二进制和 1211 文件 core 源码树完全一致，core ZIP 仅归档摘要不同。根 toolchain.json 更新新归档及构建器身份，安装器/校验逻辑未放宽。新安装、11 项拒绝边界、73 主模块 native 单测和完整 SDK（7 单测、新契约 32 正确场景及三策略缩减/重放）通过，见 [刷新快照](evidence/toolchain-refresh-20261021.json)。首次根检查缺少 registry 索引，正常 moon update 后恢复，首次日志保留。Linux 包只下载检查了三份二进制 SHA，尚未在 Linux 运行，不冒称完成第四项。
+
 用户提供组委会驳回：要求完整状态模型/前后置条件、常见 FFI 参数生成缩减、原生崩溃/Sanitizer 自动缩减及 Linux native 验证，2026-10-31 前可改表复审。用户明确选择“按四项要求分阶段补齐并验证，再准备重报”。先前关于可申报的判断过于乐观；不能用 rc.1 或旧 CI 声称已达审核标准。对照官方 Hypothesis/PropEr 文档，新增 [补齐计划](REVIEW-RESPONSE.md)，不发消息或自动重报。
 
 第一阶段新增 core.ContractModel / ContractTarget / ContractAdapter：显式初态、命令、前置条件、预期状态转换、后置条件、不变量；共享模型用于生成、验证和只删修整。原生目标仅在 worker 执行/观察/关闭，teardown 保证检查与清理，原 Adapter 不改。JSON 状态回调要求纯性，有限命令枚举不宣称均匀分布或支持任意符号表达式。C 计数器新增 cmd/contracts 入口及 SDK 验收，复用原 C fixture，人工越界错误由后置条件捕获。
