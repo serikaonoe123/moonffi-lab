@@ -1,6 +1,7 @@
 import {
   "serikaonoe123/moonffi-lab/core" @lab,
   "moonbitlang/core/json",
+  "moonbitlang/core/encoding/utf8",
   "moonbitlang/core/quickcheck/splitmix",
 }
 pkgtype(kind: "library")

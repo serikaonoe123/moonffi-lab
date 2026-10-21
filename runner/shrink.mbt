@@ -155,7 +155,7 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
               self.record_reduction("arguments", "invalid", best.with_steps(steps), None, "parameter candidate changed operation identity or dependencies")
               continue
             }
-            if !@lab.arguments_simpler(candidate_step.args, step.args) { continue }
+            if !@lab.ffi_arguments_simpler(candidate_step.args, step.args) { continue }
             let argument_key = candidate_step.args.stringify()
             if conclusive_arguments.contains(argument_key) { continue }
             let steps = best.steps.copy()

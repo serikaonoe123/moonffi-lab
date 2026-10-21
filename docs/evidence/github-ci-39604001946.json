@@ -1,0 +1,999 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-21",
+  "tested_commit": "7778f15757f83383f25e2cf42318b51de85be8f0",
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39604001946",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "native (behavior)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39604001946/job/119235420896",
+      "startedAt": "2026-10-21T12:58:56Z",
+      "completedAt": "2026-10-21T13:02:18Z"
+    },
+    {
+      "name": "native (asan)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39604001946/job/119235420923",
+      "startedAt": "2026-10-21T12:58:56Z",
+      "completedAt": "2026-10-21T13:00:14Z"
+    },
+    {
+      "name": "native (generation)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39604001946/job/119235420956",
+      "startedAt": "2026-10-21T12:58:58Z",
+      "completedAt": "2026-10-21T13:00:52Z"
+    },
+    {
+      "name": "native (sqlite)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39604001946/job/119235420976",
+      "startedAt": "2026-10-21T12:58:57Z",
+      "completedAt": "2026-10-21T13:00:32Z"
+    },
+    {
+      "name": "native (sdk)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39604001946/job/119235421072",
+      "startedAt": "2026-10-21T12:58:57Z",
+      "completedAt": "2026-10-21T13:00:54Z"
+    },
+    {
+      "name": "native (benchmark)",
+      "conclusion": "success",
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39604001946/job/119235421368",
+      "startedAt": "2026-10-21T12:58:57Z",
+      "completedAt": "2026-10-21T13:05:21Z"
+    }
+  ],
+  "checks": {
+    "release_preparation_controls": 5,
+    "release_source_files_matched_local": 498,
+    "preparation_published": false,
+    "sqlite_upstream_unit_tests": 48,
+    "sqlite_adapter_unit_tests": 8,
+    "sqlite_native_campaign_cases": 96,
+    "sqlite_input_hashes_match_local": 96,
+    "sqlite_upstream_blobs_checked_before_and_after": 49,
+    "script_rejection_environment_controls": 9,
+    "online_bootstraps_verified": 6,
+    "archive_pins_per_job": 2,
+    "binary_pins_per_job": 3,
+    "core_source_files": 1211,
+    "boundary_checks": 11,
+    "root_unit_tests": 73,
+    "binding_buffer_reductions": 3,
+    "binding_eigen_process_runs": 36,
+    "binding_buffer_proper_subsets": 45,
+    "integer_candidate_probe_checks": 18,
+    "int64_probe_checks": 21,
+    "int64_complete_reductions": 18,
+    "int64_budget_probes": 3,
+    "int64_independent_replays": 36,
+    "int64_reduction_workers": 1701.0,
+    "int64_summary_matches_local": true,
+    "duplicate_argument_probe_checks": 9,
+    "duplicate_argument_probe_workers": 116,
+    "duplicate_probe_summary_matches_local": true,
+    "numeric_probe_checks": 4,
+    "iterative_probe_checks": 11,
+    "dependency_scaling_samples": 18,
+    "dependency_input_hashes_match_local": 6,
+    "exhaustive_small_traces": 20736,
+    "sdk_unit_tests": 7,
+    "source_archive_equal": true,
+    "selected_exported_source_files_checked_per_job": 80,
+    "buffer_generation_cases": 512,
+    "eigen_generation_cases": 192,
+    "eigen_input_hashes_match_local": 192,
+    "legacy_input_hashes_checked": 128,
+    "complete_reductions": 189,
+    "repeatable_groups": 63,
+    "proper_subsets_checked": 214,
+    "reduction_structural_rows_match_baseline": 189,
+    "reduction_semantic_traces_match_baseline": 189,
+    "frozen_corpus_semantic_cases_match_baseline": 21,
+    "input_hash_different_rows": 0,
+    "reduced_hash_different_rows": 0,
+    "corrected_replays_passed": 189,
+    "diagnostic_binary_files": 0,
+    "baseline_run": "local int64-candidates, one repetition"
+  },
+  "lock_sha256": "43D88490DB61D410B749411FE101663E6171E7A64F3FD691DB083FF0A4E9E44D",
+  "source_verifications": [
+    {
+      "suite": "behavior",
+      "source": {
+        "state": "passed",
+        "completed_at": "2026-10-21T21:01:58.6030842+08:00",
+        "source_commit": "7778f15757f83383f25e2cf42318b51de85be8f0",
+        "archive_sha256": "5535999C5C9AD63E0A06519FC670DF53B6A60F126AB145F51021748F7602EA9F",
+        "driver_sha256": "CD38F315632D77FC8273691736115552CDBD0C39157010F6269C63637810BC90",
+        "source_files": 516,
+        "suites": [
+          "behavior"
+        ],
+        "dependency_mode": "registry",
+        "dependency_source": "",
+        "fresh_project_build": true,
+        "temporary_directory": null,
+        "host_environment": {
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "powershell": "7.6.6",
+          "github_actions": "true",
+          "runner_os": "Windows",
+          "runner_arch": "X64",
+          "image_os": "win25-vs2026",
+          "image_version": "20261007.264.1"
+        },
+        "independent_environment": false,
+        "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+      }
+    },
+    {
+      "suite": "asan",
+      "source": {
+        "state": "passed",
+        "completed_at": "2026-10-21T21:00:08.1217643+08:00",
+        "source_commit": "7778f15757f83383f25e2cf42318b51de85be8f0",
+        "archive_sha256": "5535999C5C9AD63E0A06519FC670DF53B6A60F126AB145F51021748F7602EA9F",
+        "driver_sha256": "CD38F315632D77FC8273691736115552CDBD0C39157010F6269C63637810BC90",
+        "source_files": 516,
+        "suites": [
+          "asan"
+        ],
+        "dependency_mode": "registry",
+        "dependency_source": "",
+        "fresh_project_build": true,
+        "temporary_directory": null,
+        "host_environment": {
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "powershell": "7.6.6",
+          "github_actions": "true",
+          "runner_os": "Windows",
+          "runner_arch": "X64",
+          "image_os": "win25-vs2026",
+          "image_version": "20261007.264.1"
+        },
+        "independent_environment": false,
+        "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+      }
+    },
+    {
+      "suite": "benchmark",
+      "source": {
+        "state": "passed",
+        "completed_at": "2026-10-21T21:04:13.6403735+08:00",
+        "source_commit": "7778f15757f83383f25e2cf42318b51de85be8f0",
+        "archive_sha256": "5535999C5C9AD63E0A06519FC670DF53B6A60F126AB145F51021748F7602EA9F",
+        "driver_sha256": "CD38F315632D77FC8273691736115552CDBD0C39157010F6269C63637810BC90",
+        "source_files": 516,
+        "suites": [
+          "benchmark"
+        ],
+        "dependency_mode": "registry",
+        "dependency_source": "",
+        "fresh_project_build": true,
+        "temporary_directory": null,
+        "host_environment": {
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "powershell": "7.6.6",
+          "github_actions": "true",
+          "runner_os": "Windows",
+          "runner_arch": "X64",
+          "image_os": "win25-vs2026",
+          "image_version": "20261007.264.1"
+        },
+        "independent_environment": false,
+        "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+      }
+    },
+    {
+      "suite": "generation",
+      "source": {
+        "state": "passed",
+        "completed_at": "2026-10-21T21:00:39.4243804+08:00",
+        "source_commit": "7778f15757f83383f25e2cf42318b51de85be8f0",
+        "archive_sha256": "5535999C5C9AD63E0A06519FC670DF53B6A60F126AB145F51021748F7602EA9F",
+        "driver_sha256": "CD38F315632D77FC8273691736115552CDBD0C39157010F6269C63637810BC90",
+        "source_files": 516,
+        "suites": [
+          "generation"
+        ],
+        "dependency_mode": "registry",
+        "dependency_source": "",
+        "fresh_project_build": true,
+        "temporary_directory": null,
+        "host_environment": {
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "powershell": "7.6.7",
+          "github_actions": "true",
+          "runner_os": "Windows",
+          "runner_arch": "X64",
+          "image_os": "win25-vs2026",
+          "image_version": "20261018.275.1"
+        },
+        "independent_environment": false,
+        "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+      }
+    },
+    {
+      "suite": "sdk",
+      "source": {
+        "state": "passed",
+        "completed_at": "2026-10-21T21:00:35.7216218+08:00",
+        "source_commit": "7778f15757f83383f25e2cf42318b51de85be8f0",
+        "archive_sha256": "5535999C5C9AD63E0A06519FC670DF53B6A60F126AB145F51021748F7602EA9F",
+        "driver_sha256": "CD38F315632D77FC8273691736115552CDBD0C39157010F6269C63637810BC90",
+        "source_files": 516,
+        "suites": [
+          "sdk"
+        ],
+        "dependency_mode": "registry",
+        "dependency_source": "",
+        "fresh_project_build": true,
+        "temporary_directory": null,
+        "host_environment": {
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "powershell": "7.6.7",
+          "github_actions": "true",
+          "runner_os": "Windows",
+          "runner_arch": "X64",
+          "image_os": "win25-vs2026",
+          "image_version": "20261018.275.1"
+        },
+        "independent_environment": false,
+        "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+      }
+    },
+    {
+      "suite": "sqlite",
+      "source": {
+        "state": "passed",
+        "completed_at": "2026-10-21T21:00:22.5147604+08:00",
+        "source_commit": "7778f15757f83383f25e2cf42318b51de85be8f0",
+        "archive_sha256": "5535999C5C9AD63E0A06519FC670DF53B6A60F126AB145F51021748F7602EA9F",
+        "driver_sha256": "CD38F315632D77FC8273691736115552CDBD0C39157010F6269C63637810BC90",
+        "source_files": 516,
+        "suites": [
+          "sqlite"
+        ],
+        "dependency_mode": "registry",
+        "dependency_source": "",
+        "fresh_project_build": true,
+        "temporary_directory": null,
+        "host_environment": {
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "powershell": "7.6.6",
+          "github_actions": "true",
+          "runner_os": "Windows",
+          "runner_arch": "X64",
+          "image_os": "win25-vs2026",
+          "image_version": "20261007.264.1"
+        },
+        "independent_environment": false,
+        "scope": "Exported committed source; no project build outputs copied. Host toolchain/core and registry cache are shared; hosted-runner provenance must be inspected separately."
+      }
+    }
+  ],
+  "online_bootstraps": [
+    {
+      "suite": "behavior",
+      "bootstrap": {
+        "state": "passed",
+        "completed_at": "2026-10-21T20:59:15.6441248+08:00",
+        "destination": "D:\\a\\_temp\\moonffi-locked-toolchain",
+        "source_mode": "official-downloads",
+        "lock_sha256": "43D88490DB61D410B749411FE101663E6171E7A64F3FD691DB083FF0A4E9E44D",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\moonbit-windows-x86_64.zip",
+            "bytes": 91097881,
+            "sha256": "50183A36DACDFB47919DFFA5F06B9340B343506236940832215604E277D3F001"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\core-latest.zip",
+            "bytes": 2606935,
+            "sha256": "C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC"
+          }
+        ],
+        "upstream_installer_executed": false,
+        "bundled_core": true,
+        "environment_restored": true,
+        "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+      },
+      "core_identity": {
+        "files": 1211,
+        "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915",
+        "algorithm": "ordinal paths, path TAB uppercase file SHA256 LF, UTF-8; exclude root _build/.mooncakes"
+      }
+    },
+    {
+      "suite": "asan",
+      "bootstrap": {
+        "state": "passed",
+        "completed_at": "2026-10-21T20:59:21.6986004+08:00",
+        "destination": "D:\\a\\_temp\\moonffi-locked-toolchain",
+        "source_mode": "official-downloads",
+        "lock_sha256": "43D88490DB61D410B749411FE101663E6171E7A64F3FD691DB083FF0A4E9E44D",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\moonbit-windows-x86_64.zip",
+            "bytes": 91097881,
+            "sha256": "50183A36DACDFB47919DFFA5F06B9340B343506236940832215604E277D3F001"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\core-latest.zip",
+            "bytes": 2606935,
+            "sha256": "C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC"
+          }
+        ],
+        "upstream_installer_executed": false,
+        "bundled_core": true,
+        "environment_restored": true,
+        "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+      },
+      "core_identity": {
+        "files": 1211,
+        "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915",
+        "algorithm": "ordinal paths, path TAB uppercase file SHA256 LF, UTF-8; exclude root _build/.mooncakes"
+      }
+    },
+    {
+      "suite": "benchmark",
+      "bootstrap": {
+        "state": "passed",
+        "completed_at": "2026-10-21T20:59:20.484419+08:00",
+        "destination": "D:\\a\\_temp\\moonffi-locked-toolchain",
+        "source_mode": "official-downloads",
+        "lock_sha256": "43D88490DB61D410B749411FE101663E6171E7A64F3FD691DB083FF0A4E9E44D",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\moonbit-windows-x86_64.zip",
+            "bytes": 91097881,
+            "sha256": "50183A36DACDFB47919DFFA5F06B9340B343506236940832215604E277D3F001"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\core-latest.zip",
+            "bytes": 2606935,
+            "sha256": "C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC"
+          }
+        ],
+        "upstream_installer_executed": false,
+        "bundled_core": true,
+        "environment_restored": true,
+        "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+      },
+      "core_identity": {
+        "files": 1211,
+        "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915",
+        "algorithm": "ordinal paths, path TAB uppercase file SHA256 LF, UTF-8; exclude root _build/.mooncakes"
+      }
+    },
+    {
+      "suite": "generation",
+      "bootstrap": {
+        "state": "passed",
+        "completed_at": "2026-10-21T20:59:21.6149368+08:00",
+        "destination": "D:\\a\\_temp\\moonffi-locked-toolchain",
+        "source_mode": "official-downloads",
+        "lock_sha256": "43D88490DB61D410B749411FE101663E6171E7A64F3FD691DB083FF0A4E9E44D",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\moonbit-windows-x86_64.zip",
+            "bytes": 91097881,
+            "sha256": "50183A36DACDFB47919DFFA5F06B9340B343506236940832215604E277D3F001"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\core-latest.zip",
+            "bytes": 2606935,
+            "sha256": "C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC"
+          }
+        ],
+        "upstream_installer_executed": false,
+        "bundled_core": true,
+        "environment_restored": true,
+        "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+      },
+      "core_identity": {
+        "files": 1211,
+        "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915",
+        "algorithm": "ordinal paths, path TAB uppercase file SHA256 LF, UTF-8; exclude root _build/.mooncakes"
+      }
+    },
+    {
+      "suite": "sdk",
+      "bootstrap": {
+        "state": "passed",
+        "completed_at": "2026-10-21T20:59:27.0632567+08:00",
+        "destination": "D:\\a\\_temp\\moonffi-locked-toolchain",
+        "source_mode": "official-downloads",
+        "lock_sha256": "43D88490DB61D410B749411FE101663E6171E7A64F3FD691DB083FF0A4E9E44D",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\moonbit-windows-x86_64.zip",
+            "bytes": 91097881,
+            "sha256": "50183A36DACDFB47919DFFA5F06B9340B343506236940832215604E277D3F001"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\core-latest.zip",
+            "bytes": 2606935,
+            "sha256": "C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC"
+          }
+        ],
+        "upstream_installer_executed": false,
+        "bundled_core": true,
+        "environment_restored": true,
+        "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+      },
+      "core_identity": {
+        "files": 1211,
+        "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915",
+        "algorithm": "ordinal paths, path TAB uppercase file SHA256 LF, UTF-8; exclude root _build/.mooncakes"
+      }
+    },
+    {
+      "suite": "sqlite",
+      "bootstrap": {
+        "state": "passed",
+        "completed_at": "2026-10-21T20:59:24.2207122+08:00",
+        "destination": "D:\\a\\_temp\\moonffi-locked-toolchain",
+        "source_mode": "official-downloads",
+        "lock_sha256": "43D88490DB61D410B749411FE101663E6171E7A64F3FD691DB083FF0A4E9E44D",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\moonbit-windows-x86_64.zip",
+            "bytes": 91097881,
+            "sha256": "50183A36DACDFB47919DFFA5F06B9340B343506236940832215604E277D3F001"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+            "path": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\bootstrap\\downloads\\core-latest.zip",
+            "bytes": 2606935,
+            "sha256": "C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC"
+          }
+        ],
+        "upstream_installer_executed": false,
+        "bundled_core": true,
+        "environment_restored": true,
+        "scope": "Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed."
+      },
+      "core_identity": {
+        "files": 1211,
+        "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915",
+        "algorithm": "ordinal paths, path TAB uppercase file SHA256 LF, UTF-8; exclude root _build/.mooncakes"
+      }
+    }
+  ],
+  "boundaries": {
+    "state": "passed",
+    "completed_at": "2026-10-21T20:59:19.4659798+08:00",
+    "checks": [
+      {
+        "name": "valid-isolated-toolchain",
+        "outcome": "passed"
+      },
+      {
+        "name": "corrupt-second-archive-before-extraction",
+        "outcome": "rejected",
+        "message": "Locked archive content mismatch: core-latest.zip"
+      },
+      {
+        "name": "missing-offline-archive-no-network-fallback",
+        "outcome": "rejected",
+        "message": "Missing locked archive: moonbit-windows-x86_64.zip"
+      },
+      {
+        "name": "archive-path-traversal-before-extraction",
+        "outcome": "rejected",
+        "message": "Unsafe archive path: ../escape.txt"
+      },
+      {
+        "name": "non-https-lock-before-download",
+        "outcome": "rejected",
+        "message": "Malformed bootstrap archive entry"
+      },
+      {
+        "name": "missing-binary-pin-before-any-installation",
+        "outcome": "rejected",
+        "message": "Missing version or binary SHA256 pin: moon"
+      },
+      {
+        "name": "version-drift",
+        "outcome": "rejected",
+        "message": "moon: expected 'deliberate-version-drift', got '0.1.20261020 (2284bd2 2026-10-20)'"
+      },
+      {
+        "name": "binary-drift-before-execution",
+        "outcome": "rejected",
+        "message": "moon: binary SHA256 mismatch"
+      },
+      {
+        "name": "core-source-drift-with-unchanged-version",
+        "outcome": "rejected",
+        "message": "core: source tree SHA256 mismatch"
+      },
+      {
+        "name": "existing-installation-preserved",
+        "outcome": "rejected",
+        "message": "Toolchain destination must be new: D:\\a\\_temp\\moonffi-locked-toolchain"
+      },
+      {
+        "name": "existing-evidence-preserved",
+        "outcome": "rejected",
+        "message": "Output must be new: D:\\a\\moonffi-lab\\moonffi-lab\\results\\toolchain-checks"
+      }
+    ],
+    "environment_restored": true,
+    "original_installation_preserved": true
+  },
+  "asan": {
+    "state": "passed",
+    "completed_at": "2026-10-21T21:00:07.6749066+08:00",
+    "profile": "windows-msvc-asan-stubs",
+    "toolchain": [
+      "moon 0.1.20261020 (2284bd2 2026-10-20) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moon.exe",
+      "moonc v0.10.16+b1a0e846e (2026-10-16) \\\\?\\D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonc.exe",
+      "moonrun 0.1.20261020 (2284bd2 2026-10-20) \\\\?\\D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "runtime": "C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\clang_rt.asan_dynamic-x86_64.dll",
+    "runtime_sha256": "7F901A239979C49B36A3B18ECD1843F551F94B5879585BDED41A650C5B71F35F",
+    "canary_runs": 3,
+    "canary_outcome": "MemoryError",
+    "category": "heap-buffer-overflow",
+    "correct_buffer_runs": 10,
+    "correct_eigen_runs": 10,
+    "correct_stateful_buffer_runs": 16,
+    "correct_stateful_eigen_runs": 16,
+    "correct_arithmetic_eigen_runs": 16,
+    "arithmetic_control": "Pass",
+    "resize_alias_control": "Pass",
+    "instrumented_translation_units": [
+      "fixtures/buffer/buffer.c",
+      "vendor/eigen-binding/eigen_shim.cpp (including instantiated Eigen headers)"
+    ],
+    "not_instrumented": [
+      "MoonBit-generated C",
+      "MoonBit runtime",
+      "async dependency C stubs",
+      "other prebuilt/system libraries"
+    ],
+    "dependency_source": "local pinned .mooncakes source cache; no build outputs copied",
+    "buffer_sha256": "F000FF8EBD9C9AE453F913860AFCD7B048281CD1EFAE1F4AD0C6CEB994830F90",
+    "eigen_sha256": "FB311F86D02E85E2F540C2D996FFEF72B5B184475317683876F303C43E27D84F"
+  },
+  "sdk": {
+    "state": "passed",
+    "completed_at": "2026-10-21T21:00:35.6733104+08:00",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "consumer_module": "moonffi-example/counter-lab",
+    "dependency_mode": "registry-or-tool-cache",
+    "dependency_source": "",
+    "source_manifest_sha256": "4183599704D3C8236355D6E941C9A2F438DF64CFEF34078A29DADAB8A596BE23",
+    "executable_sha256": "2100E33D460DB18460056B0F285D2D8E2491186A03BD42AD25023AD143B55E82",
+    "unit_tests": 7,
+    "pure_oracle_traces": 768,
+    "repair_subsets": 128,
+    "native_unit_walks": 32,
+    "correct_contract_cases": 8,
+    "correct_walk_cases": 32,
+    "original_steps": 32,
+    "reduced_steps": 2,
+    "fingerprint": "property:counter-value:s30",
+    "executions": 29,
+    "deletion_minimal": true,
+    "proper_subsets_checked": 3,
+    "corrected_replay": "Pass",
+    "budget_stop_reason": "execution_budget",
+    "preflight_rejection": true,
+    "output_reuse_rejected": true,
+    "separate_process_determinism": true,
+    "toolchain": [
+      "moon 0.1.20261020 (2284bd2 2026-10-20) D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moon.exe",
+      "moonc v0.10.16+b1a0e846e (2026-10-16) \\\\?\\D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonc.exe",
+      "moonrun 0.1.20261020 (2284bd2 2026-10-20) \\\\?\\D:\\a\\_temp\\moonffi-locked-toolchain\\bin\\moonrun.exe",
+      "",
+      "Feature flags enabled: rr_moon_mod,rr_moon_pkg"
+    ],
+    "explicit_state_contracts": {
+      "state": "passed",
+      "correct_cases": 32,
+      "step_count_boundary_cases": 4,
+      "postcondition_failure": "property:contract-postcondition:reject_add:s30",
+      "reductions": [
+        {
+          "strategy": "plain",
+          "executions": 28,
+          "original_steps": 32,
+          "reduced_steps": 2,
+          "confirmed": true,
+          "deletion_minimal": true,
+          "independent_replay": true,
+          "corrected_replay": "Pass"
+        },
+        {
+          "strategy": "dependency",
+          "executions": 34,
+          "original_steps": 32,
+          "reduced_steps": 2,
+          "confirmed": true,
+          "deletion_minimal": true,
+          "independent_replay": true,
+          "corrected_replay": "Pass"
+        },
+        {
+          "strategy": "state",
+          "executions": 35,
+          "original_steps": 32,
+          "reduced_steps": 2,
+          "confirmed": true,
+          "deletion_minimal": true,
+          "independent_replay": true,
+          "corrected_replay": "Pass"
+        }
+      ],
+      "preflight_rejection": true,
+      "separate_process_determinism": true,
+      "executable_sha256": "83AFA62DA6539804712ABDE7F7025DB6471D24FE772CEC7EE30183F4FF196E47"
+    },
+    "independent_environment": false,
+    "scope": "Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed."
+  },
+  "benchmark": {
+    "schema": 2,
+    "state": "passed",
+    "screened_cases": 21,
+    "cases": 21,
+    "passing_inputs": 0,
+    "strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "repetitions": 3,
+    "measurements": 189,
+    "complete_searches": 189,
+    "repeatable_case_strategies": 63,
+    "case_strategy_groups": 63,
+    "actual_proper_subsets_checked": 214.0,
+    "large_state_results": 0,
+    "completed_at": "2026-10-21T21:04:13.6352433+08:00",
+    "executable_sha256": "56757472EC33D753EDAC9D762D1F74859BFE35C3DAF5F9755BAB17729821AB38",
+    "protocol_sha256": "F8D05F12E4DE54D512E67511D66FEC5E2F07D17D08F40FD0BB67B1B0C193BB21"
+  },
+  "sqlite": {
+    "state": "passed",
+    "completed_at": "2026-10-21T21:00:22.4975771+08:00",
+    "consumer_module": "moonffi-example/sqlite-lab",
+    "upstream_module": "moonbit-community/sqlite3",
+    "upstream_commit": "1405639063c52b1474b2622d4c5b5e36110aa74c",
+    "upstream_archive_mode": "official-fixed-commit-download",
+    "upstream_archive_bytes": 2619220,
+    "upstream_archive_sha256": "F877BA0001D7051E72543F01DC43E5B73EFC0A32FB459E787F57A0B79ED8B9A1",
+    "upstream_git_blobs_checked_before_and_after": 49,
+    "upstream_source_modified": false,
+    "upstream_scripts_executed": false,
+    "sqlite_version": "3.49.1",
+    "upstream_persistence_fixture": "Empty module-local _build directory created before unchanged upstream tests",
+    "declared_upstream_async_version": "0.22.4",
+    "resolved_workspace_async_version": "0.22.5",
+    "dependency_mode": "explicit-local-source-cache",
+    "dependency_source": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\ci\\workspace\\.mooncakes",
+    "engine_packages": [
+      "core",
+      "runner"
+    ],
+    "source_manifest_sha256": "92C330DFD0620F76AB5C3547D8E5BB7C7D4E50F95D34AFFB2E59CA060EF2058B",
+    "upstream_unit_tests": 48,
+    "adapter_unit_tests": 8,
+    "repair_subsets": 1024,
+    "pure_generated_walks": 256,
+    "native_unit_walks": 32,
+    "contract_cases": 32,
+    "walk_cases": 64,
+    "operation_kinds": [
+      "bind_int",
+      "bind_text",
+      "busy_close",
+      "close",
+      "finalize",
+      "open",
+      "prepare",
+      "read",
+      "reset",
+      "step"
+    ],
+    "saved_replays": 2,
+    "separate_process_determinism": true,
+    "passing_shrink_stop_reason": "unsupported_outcome",
+    "passing_shrink_claimed_failure": false,
+    "invalid_preflight_rejected": true,
+    "output_reuse_rejected": true,
+    "executable_sha256": "4476293B7398E270E99B19C0EBD894DC14F47ED02A13134135B53D24930EE36C",
+    "temporary_directory": "D:\\a\\moonffi-lab\\moonffi-lab\\results\\ci\\sqlite\\temp",
+    "async_fd_leak_check": "1",
+    "unknown_defects_found": 0,
+    "artificial_target_mutants_used": false,
+    "independent_environment": false,
+    "scope": "Unchanged pinned community binding consumed through public core/runner. Synchronous in-memory SELECT/bind/reset/step/read and explicit lifecycle contracts only; no unknown defect, heap-leak proof, concurrency coverage or SQLite ASan coverage claimed."
+  },
+  "script_controls": {
+    "state": "passed",
+    "checks": [
+      {
+        "name": "clean-present",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "export-commit"
+      },
+      {
+        "name": "sqlite-present",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "clean-absent",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "export-commit"
+      },
+      {
+        "name": "sqlite-absent",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "clean-empty",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "export-commit"
+      },
+      {
+        "name": "sqlite-empty",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "sqlite-wrong-hash",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": "upstream-archive"
+      },
+      {
+        "name": "sqlite-existing-output",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": ""
+      },
+      {
+        "name": "clean-existing-output",
+        "expected_failure": true,
+        "environment_restored": true,
+        "location_restored": true,
+        "stage": ""
+      }
+    ],
+    "original_archive_preserved": true,
+    "environment_states": [
+      "present",
+      "absent",
+      "empty"
+    ],
+    "source_not_extracted_on_archive_rejection": true,
+    "existing_evidence_preserved": true,
+    "drivers": [
+      {
+        "sha256": "CD38F315632D77FC8273691736115552CDBD0C39157010F6269C63637810BC90",
+        "path": "scripts/verify-clean.ps1"
+      },
+      {
+        "sha256": "39C1ADC33D025B7C85CE856770A3B564250BBE15247293E5DB0241E71E97A2BE",
+        "path": "scripts/verify-sqlite.ps1"
+      }
+    ]
+  },
+  "release_candidate": {
+    "state": "prepared-not-published",
+    "source_commit": "23893d5bb3a231a21df10db506d8da821a7e984d",
+    "source_tree": "be6692e18151f8a15938bc0c8ee4d16bdd151a25",
+    "version": "0.1.0",
+    "archive": "source.zip",
+    "archive_sha256": "C8334EBA46AAD39E1B6A0A6A7509E194E1BB0EF3FF14FD2E3282BE731AAF431F",
+    "archive_bytes": 1550203,
+    "source_files": 498,
+    "all_git_blobs_matched": true,
+    "source_manifest_sha256": "19A236CABF25AA98806A542AA511A1A5D5E0468E25551CFDED6B5C0818C5CFF6",
+    "source_scope_sha256": "DA03DA72BEB8F8AAE6066C8635B6A550A7882E2768B767F6A5389E29F5F91444",
+    "preparer_sha256": "5BB6AE12F2556A76C1A799FA1AC708A0C6A74CEE43548887926D7E12B172F6F6",
+    "baseline_tested_commit": "1f065527f9fa584dc52a79399f0a36e40ed3c321",
+    "baseline_run": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440",
+    "runtime_diff_from_baseline": [],
+    "other_changed_paths": [
+      ".github/workflows/windows-native.yml",
+      "README.md",
+      "docs/CONTEXT-HANDOFF.md",
+      "docs/INDEPENDENT-REPRODUCTION.md",
+      "docs/RELEASE-NOTES-v0.1.0.md",
+      "docs/RELEASE-PLAN.md",
+      "docs/REPRODUCIBILITY.md",
+      "docs/SQLITE-INTEGRATION.md",
+      "docs/TOOLCHAIN-LOCK.md",
+      "docs/evidence/github-ci-39247453969-failed-sqlite.json",
+      "docs/evidence/github-ci-39247655451-failed-sqlite.json",
+      "docs/evidence/github-ci-39248320859-failed-sqlite.json",
+      "docs/evidence/github-ci-39248905440.json",
+      "docs/evidence/sqlite-external-20261019.json",
+      "docs/releases/v0.1.0-scope.json",
+      "docs/templates/INDEPENDENT-REPRODUCTION.md",
+      "scripts/prepare-release.ps1",
+      "scripts/verify-release-preparation.ps1"
+    ],
+    "baseline_is_candidate_ci": false,
+    "required_notices": [
+      "LICENSE",
+      "fixtures/random/LICENSE",
+      "fixtures/random/NOTICE",
+      "vendor/eigen-binding/LICENSE",
+      "vendor/eigen-binding/SNAPSHOT.md",
+      "vendor/eigen-binding/manifest.json",
+      "vendor/eigen-binding/third_party/eigen/SOURCE.txt",
+      "vendor/eigen-binding/third_party/eigen/COPYING.MPL2"
+    ],
+    "toolchain": {
+      "moon": "0.1.20261016 (1af328f 2026-10-16)",
+      "moonc": "v0.10.16+b1a0e846e (2026-10-16)",
+      "moonrun": "moonrun 0.1.20261016 (1af328f 2026-10-16)"
+    },
+    "archive_includes": "Tracked project sources and existing third-party source notices only. No toolchain, async cache, downloaded SQLite archive or build outputs.",
+    "pending": [
+      "independent-user-reproduction",
+      "explicit-publication-approval"
+    ],
+    "publish_ready": false,
+    "registry_published": false,
+    "release_published": false,
+    "scope": "Local source preparation only; no builds, tests, downloads, tags, registry publication, GitHub release or upstream communication performed."
+  },
+  "release_preparation": {
+    "state": "passed",
+    "source_commit": "23893d5bb3a231a21df10db506d8da821a7e984d",
+    "checks": [
+      {
+        "name": "two-complete-source-archives",
+        "matched_git_blobs": 498,
+        "deterministic_zip": true,
+        "deterministic_manifest": true
+      },
+      {
+        "name": "existing-output",
+        "expected_failure": true,
+        "stage": ""
+      },
+      {
+        "name": "missing-commit",
+        "expected_failure": true,
+        "stage": "resolve-commit"
+      },
+      {
+        "name": "missing-frozen-scope",
+        "expected_failure": true,
+        "stage": "scope-and-evidence"
+      },
+      {
+        "name": "runtime-drift",
+        "expected_failure": true,
+        "stage": "scope-and-evidence"
+      }
+    ],
+    "preparer_sha256": "5BB6AE12F2556A76C1A799FA1AC708A0C6A74CEE43548887926D7E12B172F6F6",
+    "source_files_checked": 498,
+    "archive_sha256": "C8334EBA46AAD39E1B6A0A6A7509E194E1BB0EF3FF14FD2E3282BE731AAF431F",
+    "published": false
+  },
+  "raw_evidence_directory": "results/github-ci-39604001946",
+  "hash_comparison_note": "All 189 hosted measurements match the corresponding one of 63 local Int64-candidate measurements; three hosted repetitions agree. The old engine is a separate comparison.",
+  "source_identity_reference": "Selected file byte hashes checked against a local Git archive of the tested commit; raw workflow line endings can differ from working-tree text.",
+  "scope": "Fresh hosted installation of content-pinned official archives and exported project checks. Rolling URL availability, MSVC/SDK/runner/actions/registry immutability or hermetic/bit-reproducible builds are not claimed. ASan scope remains the recorded C/C++ units.",
+  "explicit_state_contracts": {
+    "state": "passed",
+    "correct_cases": 32,
+    "step_count_boundary_cases": 4,
+    "postcondition_failure": "property:contract-postcondition:reject_add:s30",
+    "reductions": [
+      {
+        "strategy": "plain",
+        "executions": 28,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "dependency",
+        "executions": 34,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "state",
+        "executions": 35,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      }
+    ],
+    "preflight_rejection": true,
+    "separate_process_determinism": true,
+    "executable_sha256": "83AFA62DA6539804712ABDE7F7025DB6471D24FE772CEC7EE30183F4FF196E47"
+  },
+  "released_tag": "v0.1.0-rc.1",
+  "new_release_published_by_this_validation": false
+}

@@ -16,7 +16,7 @@
 | core zip | 2,606,935 字节 | `C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC` |
 | core 源码树 | 1,211 文件 | `B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915` |
 
-隔离安装及 11 项拒绝边界、73 主模块 native 单测、7 SDK 单测与完整契约验收通过；见 [本地快照](evidence/toolchain-refresh-20261021.json)。新锁的云端结果须另行记录。首次根模块检查因新安装没有 registry 索引而失败，按正常 moon update 恢复索引后重新验证，保留首次日志；依赖版本仍是 async 0.22.5。
+隔离安装及 11 项拒绝边界、73 主模块 native 单测、7 SDK 单测与完整契约验收通过；见 [本地快照](evidence/toolchain-refresh-20261021.json)。新锁提交 7778f157 的 [六项 CI 39604001946](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39604001946) 全部成功且产物核对完成，见 [云端快照](evidence/github-ci-39604001946.json)。首次根模块检查因新安装没有 registry 索引而失败，按正常 moon update 恢复索引后重新验证，保留首次日志；依赖版本仍是 async 0.22.5。
 
 ## 先前已验收内容（2026-10-19，历史记录）
 

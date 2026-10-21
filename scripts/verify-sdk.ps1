@@ -154,6 +154,65 @@ try {
   Require ((Get-FileHash (Join-Path $Out 'contracts-determinism-a/case.json')).Hash -eq (Get-FileHash (Join-Path $Out 'contracts-determinism-b/case.json')).Hash) 'Explicit contract generation differs across processes'
   $contracts=[ordered]@{state='passed';correct_cases=32;step_count_boundary_cases=4;postcondition_failure=$contractBaseline.fingerprint;reductions=$contractReductions;preflight_rejection=$true;separate_process_determinism=$true;executable_sha256=(Get-FileHash $contractExe).Hash}
   $contracts | ConvertTo-Json -Depth 8 | Set-Content (Join-Path $Out 'contracts-verification.json') -Encoding utf8
+  $stage='typed-ffi-parameters'
+  Invoke-Checked 'moon' @('build','--target','native','--frozen','--deny-warn','cmd/parameters') @(0) (Join-Path $Out 'parameters-build.log')
+  $parameterExecutables=@(Get-ChildItem -LiteralPath (Join-Path $workspace '_build/native/debug/build') -Recurse -File -Filter parameters.exe)
+  Require ($parameterExecutables.Count -eq 1) 'Parameter executable discovery ambiguous'
+  $parameterExe=$parameterExecutables[0].FullName
+  $parameterCorrect=Join-Path $Out 'parameters-correct'
+  Invoke-Checked $parameterExe @('run','--generator','walk','--cases','16','--seed','17','--steps','64','--out',$parameterCorrect) @(0) (Join-Path $Out 'parameters-correct.log')
+  $parameterReports=@(Read-Json (Join-Path $parameterCorrect 'summary.json'))
+  Require ($parameterReports.Count -eq 16 -and @($parameterReports | Where-Object outcome -ne 'Pass').Count -eq 0) 'Typed FFI correct campaign failed'
+  $parameterCoverage=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+  foreach ($index in 1..16) {
+    $parameterCase=Read-Json (Join-Path $parameterCorrect "case-$index/case.json")
+    foreach ($operation in $parameterCase.steps) { [void]$parameterCoverage.Add($operation.op) }
+  }
+  Require ((@($parameterCoverage | Sort-Object) -join ',') -eq 'array,bool,bytes,f64,i32,i64,optional,text,u32,u64') 'Typed FFI campaign missed a parameter family'
+  $parameterError=Join-Path $Out 'parameters-error'
+  Invoke-Checked $parameterExe @('run','--mode','error','--steps','32','--out',$parameterError) @(1) (Join-Path $Out 'parameters-error.log')
+  $parameterInput=Join-Path $parameterError 'case-1/case.json'
+  $parameterBaseline=Read-Json (Join-Path $parameterError 'case-1/report.json')
+  Require ($parameterBaseline.outcome -eq 'PropertyFailure' -and $parameterBaseline.fingerprint -like 'property:contract-postcondition:text:*') 'C NUL truncation was not detected'
+  $boundarySamples=@(
+    @{op='bool';args=$false},@{op='bool';args=$true},
+    @{op='i32';args=[int]::MinValue},@{op='i32';args=[int]::MaxValue},
+    @{op='i64';args=[long]::MinValue},@{op='i64';args=[long]::MaxValue},
+    @{op='u32';args=[uint32]::MaxValue},@{op='u64';args=[uint64]::MaxValue},
+    @{op='text';args=@{'$ffi_text'=('😀中文'+[char]0)}},@{op='bytes';args=@{'$ffi_bytes'=@(0,255,1,0)}},
+    @{op='array';args=@(-64,0,64)},@{op='array';args=@()},
+    @{op='optional';args=$null},@{op='optional';args=[long]::MinValue}
+  )
+  foreach ($bits in @('0','9223372036854775808','1','9223372036854775809','9218868437227405311','9218868437227405312','18442240474082181120','9221120237041090561','9221120237041090562')) {
+    $boundarySamples+=@{op='f64';args=@{'$ffi_f64'=$bits}}
+  }
+  $boundaryTrace=Read-Json $parameterInput
+  $boundaryTrace.environment.fixture_mode='correct'
+  $boundaryTrace.generator_version='ffi-parameters-explicit-boundaries-1'
+  $ordinal=0
+  $boundaryTrace.steps=@(foreach ($sample in $boundarySamples) {
+    [ordered]@{id="boundary-$ordinal";op=$sample.op;args=$sample.args;defines=@();uses=@();releases=@()}
+    $ordinal++
+  })
+  $boundaryPath=Join-Path $Out 'parameters-boundaries.json'
+  $boundaryTrace | ConvertTo-Json -Depth 20 | Set-Content $boundaryPath -Encoding utf8
+  Invoke-Checked $parameterExe @('replay',$boundaryPath,'--out',(Join-Path $Out 'parameters-boundaries')) @(0) (Join-Path $Out 'parameters-boundaries.log')
+  $boundaryReport=Read-Json (Join-Path $Out 'parameters-boundaries/case-1/report.json')
+  Require ($boundaryReport.outcome -eq 'Pass' -and $boundaryReport.executed -eq 23) 'C ABI explicit boundary cases incomplete'
+  $parameterReductions=@(foreach ($strategy in @('plain','dependency','state')) {
+    $destination=Join-Path $Out "parameters-shrink-$strategy"
+    Invoke-Checked $parameterExe @('shrink',$parameterInput,'--strategy',$strategy,'--budget','200','--out',$destination) @(1) (Join-Path $Out "parameters-shrink-$strategy.log")
+    $result=Read-Json (Join-Path $destination 'reduction.json')
+    $finalInput=Read-Json (Join-Path $destination 'reduced.json')
+    Require ($result.confirmed -and $result.deletion_minimal -and $result.stop_reason -eq 'search_complete' -and $result.reduced_steps -eq 1 -and $result.argument_search.complete -and $result.baseline_checks -eq 3 -and $result.final_checks -eq 3) 'Typed FFI reduction incomplete'
+    Require ($finalInput.steps[0].args.'$ffi_text' -ceq [string][char]0) 'Typed text did not reduce to embedded NUL'
+    $saved=Join-Path $destination 'reduced.json'
+    Invoke-Checked $parameterExe @('replay',$saved,'--out',(Join-Path $Out "parameters-replay-$strategy")) @(1) (Join-Path $Out "parameters-replay-$strategy.log")
+    Invoke-Checked $parameterExe @('replay',$saved,'--mode','correct','--out',(Join-Path $Out "parameters-fixed-$strategy")) @(0) (Join-Path $Out "parameters-fixed-$strategy.log")
+    [ordered]@{strategy=$strategy;executions=$result.executions;original_steps=$result.original_steps;reduced_steps=$result.reduced_steps;embedded_nul_only=$true;confirmed=$true;deletion_minimal=$true;independent_replay=$true;corrected_replay='Pass'}
+  })
+  $parameters=[ordered]@{state='passed';correct_cases=16;native_operations=1024;explicit_boundary_operations=23;families=@($parameterCoverage | Sort-Object);reductions=$parameterReductions;executable_sha256=(Get-FileHash $parameterExe).Hash;scope='Bounded typed values through real C calls. Array ABI checked by weighted checksum; optional scalar maps to a C NULL/local pointer, not arbitrary pointer generation.'}
+  $parameters | ConvertTo-Json -Depth 8 | Set-Content (Join-Path $Out 'parameters-verification.json') -Encoding utf8
   [ordered]@{state='passed';completed_at=[DateTimeOffset]::UtcNow.ToString('o');engine_packages=@($enginePackages.rel | Sort-Object)
     consumer_module='moonffi-example/counter-lab';dependency_mode=$dependencyMode;dependency_source=$OfflineDependencySource
     source_manifest_sha256=(Get-FileHash (Join-Path $Out 'source-manifest.json')).Hash;executable_sha256=(Get-FileHash $exe).Hash
@@ -162,6 +221,7 @@ try {
     deletion_minimal=$reduction.deletion_minimal;proper_subsets_checked=3;corrected_replay='Pass';budget_stop_reason=$budget.stop_reason
     preflight_rejection=$true;output_reuse_rejected=$true;separate_process_determinism=$true;toolchain=@(& moon version --all)
     explicit_state_contracts=$contracts
+    typed_ffi_parameters=$parameters
     independent_environment=$false;scope='Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed.'
   } | ConvertTo-Json -Depth 6 | Set-Content (Join-Path $Out 'verification.json') -Encoding utf8
   Write-Host "External SDK verification passed. Evidence: $Out"

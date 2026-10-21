@@ -89,7 +89,7 @@ pub fn Trace::encode(self : Trace) -> String {
 
 ///|
 pub fn decode_trace(text : String) -> Trace raise {
-  @json.from_json(@json.parse(text))
+  @json.from_json(@json.parse(text, preserve_number_repr=true))
 }
 
 ///| Validate handle and step identities independently of adapter semantics.

@@ -1,0 +1,180 @@
+{
+  "observed_on": "2026-10-21",
+  "state": "local-validated-cloud-pending",
+  "base_commit": "7778f15757f83383f25e2cf42318b51de85be8f0",
+  "native_unit_tests": 78,
+  "sdk_unit_tests": 7,
+  "pure_core_tests": 39,
+  "ffi_parameters": {
+    "state": "passed",
+    "correct_cases": 16,
+    "native_operations": 1024,
+    "explicit_boundary_operations": 23,
+    "families": [
+      "array",
+      "bool",
+      "bytes",
+      "f64",
+      "i32",
+      "i64",
+      "optional",
+      "text",
+      "u32",
+      "u64"
+    ],
+    "reductions": [
+      {
+        "strategy": "plain",
+        "executions": 28,
+        "original_steps": 32,
+        "reduced_steps": 1,
+        "embedded_nul_only": true,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "dependency",
+        "executions": 28,
+        "original_steps": 32,
+        "reduced_steps": 1,
+        "embedded_nul_only": true,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "state",
+        "executions": 28,
+        "original_steps": 32,
+        "reduced_steps": 1,
+        "embedded_nul_only": true,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      }
+    ],
+    "executable_sha256": "0FC86AB4879CDDB9A826121BE94EBABDF839B176696D0196355D49C49F1935FF",
+    "scope": "Bounded typed values through real C calls. Array ABI checked by weighted checksum; optional scalar maps to a C NULL/local pointer, not arbitrary pointer generation."
+  },
+  "state_contract_regression": {
+    "state": "passed",
+    "correct_cases": 32,
+    "step_count_boundary_cases": 4,
+    "postcondition_failure": "property:contract-postcondition:reject_add:s30",
+    "reductions": [
+      {
+        "strategy": "plain",
+        "executions": 28,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "dependency",
+        "executions": 34,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      },
+      {
+        "strategy": "state",
+        "executions": 35,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "confirmed": true,
+        "deletion_minimal": true,
+        "independent_replay": true,
+        "corrected_replay": "Pass"
+      }
+    ],
+    "preflight_rejection": true,
+    "separate_process_determinism": true,
+    "executable_sha256": "6413F24AAEFB5E61F3337D67AAABCE3D6CD0795B5D8163ED75C042EED3402B6F"
+  },
+  "driver": {
+    "state": "passed",
+    "driver_sha256": "51968830A6C23A55275034AE8898CDF09AD61430A27B38594D73F835D650ED19",
+    "driver_unchanged": true
+  },
+  "source_identity": [
+    {
+      "path": "core/moon.pkg",
+      "sha256": "5E5764A7F030E86F04F24C37DFF1C7C0EEC8D4236B293108A376134A46FB4D46",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "core/types.mbt",
+      "sha256": "009345EFB42644AFE9760A22577476DDE096306F9642DFC539AB496CCA209E4B",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "core/strategies.mbt",
+      "sha256": "2BC36CE4994B52082324667153407E80F675646465339E1AF1794C743EEB2FEC",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "core/ffi_order.mbt",
+      "sha256": "FFA03ABC88A30630A80127F0CD6E9D4B7A0AB4DD642B2C51F2F7CF4156330B32",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "core/strategies_wbtest.mbt",
+      "sha256": "1706AE28B8B46D21843BB8B0ACDEC1A8F8FA65C8B7FE58A86C6EF863635FA1E1",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "runner/shrink.mbt",
+      "sha256": "5ACC6C7ED78929E8FC7A377AFDFD292EE860E11E1FAB6935649FB74E9AA051C3",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "examples/adapter-starter/counter/moon.pkg",
+      "sha256": "4DF74072F90A0A8C6BDFA068882905D9CE6DC7B0DFA93950CFC5E2FB37A22E44",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "examples/adapter-starter/counter/counter.c",
+      "sha256": "0D99D5EF321286C9AD56AEBB9FEF73706416D0FD3D85C0AFA8828187A31C4E97",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "examples/adapter-starter/counter/parameters.mbt",
+      "sha256": "010F4CA740240BF898597977EEB60C185399A4D7B824D7BCC30455BFEB870951",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "examples/adapter-starter/cmd/parameters/moon.pkg",
+      "sha256": "C37D9690CF3E763F7174EA4E8CFE380A2062EC486C7AD4BB7B458043C7F5BF06",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "examples/adapter-starter/cmd/parameters/main.mbt",
+      "sha256": "0182E501C96DDEF3889E375ABFB326203FECA8558DAF18AA049F9B81891761C5",
+      "tested_copy_matched": true
+    }
+  ],
+  "full_behavior_regression": "passed before extra Unicode rejection/number-preservation assertions; legacy decoder and typed order unchanged afterwards",
+  "latest_native_boundary_tests": "passed",
+  "earlier_behavior_strategy_and_test_source_retained": "results/argument-strategies-20261021/first-behavior-source",
+  "raw_evidence": [
+    "results/argument-strategies-20261021",
+    "results/argument-strategies-sdk-distinct-abi-20261021"
+  ],
+  "remaining": [
+    "native-error-reduction",
+    "linux-native-verification"
+  ],
+  "unknown_upstream_defects_found": 0,
+  "new_release_published": false,
+  "reapplication_submitted": false
+}

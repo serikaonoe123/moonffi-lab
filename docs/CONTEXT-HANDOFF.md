@@ -1,6 +1,16 @@
 # 接续工作摘要
 
-来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-20（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
+来源聊天：`codex://threads/01a14797-c8a1-7730-86c8-978e53a1924d`。整理日期：2026-10-21（Asia/Shanghai）。此文件保存接续所需信息；不改变原聊天历史。
+
+## 最新阶段：有界参数策略完成本地验收，2026-10-21
+
+第一阶段及新锁的提交 7778f15757f83383f25e2cf42318b51de85be8f0 已通过 [CI 39604001946](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39604001946) 六项及全部产物核对。80 个关键文件逐任务匹配 Git 导出，73+7 单测、状态契约 32 正确场景/三策略、189 次原有缩减的字节与结构、63 组重复、214 真子集、SQLite 96 场景和 49 上游 blob、11 安装拒绝与五项发布准备控制通过。原始 results/github-ci-39604001946，见 [快照](evidence/github-ci-39604001946.json)。本地审计两次先后因扩展 Windows 路径和未上传的嵌套 failure.json 假设失败；保留 first/second-audit-failure 与 partial-inspection，最终按确切绝对二进制路径、已上传拒绝日志/控制汇总验证，全部断言后才写最终 inspection。
+
+第二阶段新增 ArgumentStrategy：有界 bool、Int32/Int64、UInt32/UInt64、位保真 Float64、Unicode 标量文本、字节、数组及可空联合；最大四层/4096 值、128 个域内去重下降候选。Float64/text/bytes 用明确标签；可空联合不区分多层 Option 构造器。ffi_arguments_simpler 对类型语义作分量比较，避免 true/false 拼写长度回环，数值旧顺序保留。decode_trace 保留数字原文，拒绝宽整数前先被小数/Double 舍入；非规范整数旧输入可能因此被拒绝，已记录限制。见 [策略说明](ARGUMENT-STRATEGIES.md)。
+
+新增 cmd/parameters 真实 C 消费者，不触及私有 fixture，分别走 int32_t/uint32_t/int64_t/uint64_t、Double 位、UTF-8/字节拷贝、数组加权和、NULL/本地标量指针包装。78 主模块 native 单测、7 SDK 单测，16 场景/1024 次 C 操作、23 显式极值/浮点/Unicode/NUL/空数组边界、三策略 32→1 步且仅保留 NUL、独立失败重放及正确实现对照通过。[快照](evidence/argument-strategies-20261021.json)。最终完整 SDK 在 results/argument-strategies-sdk-distinct-abi-20261021，驱动运行前后不变。早期 32 位域曾走 64 位回显，最终改独立 ABI 并完整复验；首次语法/纯测试/末尾测试标签错误日志均保留。
+
+原 behavior 回归在 results/argument-strategies-20261021/behavior 通过（包含 78 单测及全部旧控制）。额外 Unicode 拒绝与数字原文断言随后通过最新 native 单测 native-tests-final-fixed.log；先前策略/测试源码保留 first-behavior-source，最终 SDK 与根当前源码逐文件核对。阶段二云端结果待另行记录。下一步仍为原生崩溃/ASan 自动缩减，再做 Linux native；已有未纳入产品的 C 证据原型仅在 results/native_guard-prototype-20261021.c，没有执行或声称通过。用户已授权四项分阶段推进和现有公开源码推送，遇安全拒绝立即报告停止，不自动发消息、重报或发布新版本。
 
 ## 最新阶段：首次申报被驳回，按四项要求补齐，2026-10-21
 
