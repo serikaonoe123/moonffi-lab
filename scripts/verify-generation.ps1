@@ -7,12 +7,13 @@ param(
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $false
 $projectRoot = Split-Path -Parent $PSScriptRoot
+. (Join-Path $PSScriptRoot 'executable-common.ps1')
 Set-Location -LiteralPath $projectRoot
 if (-not $Out) { $Out = Join-Path $projectRoot ('results/generation-' + [guid]::NewGuid().ToString('N')) }
 if (Test-Path -LiteralPath $Out) { throw "Output must be new: $Out" }
 New-Item -ItemType Directory -Path $Out | Out-Null
 $Out = (Resolve-Path -LiteralPath $Out).Path
-$buffer = Join-Path $projectRoot '_build/native/debug/build/cmd/buffer-lab/buffer-lab.exe'
+$buffer = Find-LabExecutable $projectRoot 'buffer-lab'
 $stage = 'setup'
 function Require([bool]$Condition, [string]$Message) { if (-not $Condition) { throw $Message } }
 function Read-Json([string]$Path) { Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json }

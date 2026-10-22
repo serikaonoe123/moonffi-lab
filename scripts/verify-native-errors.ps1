@@ -8,7 +8,7 @@ if (Test-Path -LiteralPath $Out) { throw "Output must be new: $Out" }
 New-Item -ItemType Directory -Path $Out | Out-Null
 $savedLocation = Get-Location
 $saved = @{}
-foreach ($name in @('PATH','TEMP','TMP','ASAN_OPTIONS','ASAN_VCASAN_DEBUGGING')) { $saved[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
+foreach ($name in @('PATH','MOON_HOME','TEMP','TMP','ASAN_OPTIONS','ASAN_VCASAN_DEBUGGING')) { $saved[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 $stage = 'setup'
 function Require([bool]$Value, [string]$Message) { if (-not $Value) { throw $Message } }
 function Run([string]$Exe, [string[]]$Arguments, [string]$Log) {
@@ -42,6 +42,8 @@ try {
   Require ($env:OS -eq 'Windows_NT') 'This profile requires Windows x64/MSVC; use verify-linux.py on Linux.'
   Set-Location -LiteralPath $project
   & (Join-Path $PSScriptRoot 'assert-toolchain.ps1') -Out (Join-Path $Out 'toolchain.json')
+  $verifiedToolchain = (Read-Json (Join-Path $Out 'toolchain.json')).toolchain_root
+  $env:MOON_HOME = $verifiedToolchain
   $config = Read-Json (Join-Path $project 'toolchain.json')
   $dependency = Get-Content -LiteralPath (Join-Path $project '.mooncakes/moonbitlang/async/moon.mod') -Raw
   Require ($dependency -match ('(?m)^version\s*=\s*"' + [regex]::Escape($config.async_version) + '"\s*$')) 'Pinned async sources required'
@@ -57,7 +59,7 @@ try {
   Require ([bool]$runtimeDirectory) 'MSVC ASan runtime unavailable'
   New-Item -ItemType Directory -Path (Join-Path $Out 'temp') | Out-Null
   $env:TEMP = Join-Path $Out 'temp'; $env:TMP = $env:TEMP
-  $env:PATH = $runtimeDirectory + ';' + $saved['PATH']
+  $env:PATH = (Join-Path $verifiedToolchain 'bin') + ';' + $runtimeDirectory + ';' + $saved['PATH']
   $env:ASAN_OPTIONS = 'halt_on_error=1:abort_on_error=1'
   $env:ASAN_VCASAN_DEBUGGING = '0'
   $profiles = @()
@@ -66,6 +68,12 @@ try {
     $profile = Join-Path $Out $mode
     $workspace = Join-Path $profile 'workspace'
     Prepare $workspace
+    # Explicit workspace membership resolves async source without a registry index.
+    'members = [".", ".mooncakes/moonbitlang/async"]' | Set-Content -LiteralPath (Join-Path $workspace 'moon.work') -Encoding utf8
+    $dependencyManifest = @(Get-ChildItem -LiteralPath (Join-Path $workspace '.mooncakes') -Recurse -File | Sort-Object FullName | ForEach-Object {
+      [ordered]@{path=$_.FullName.Substring($workspace.Length + 1).Replace('\','/');sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}
+    })
+    $dependencyManifest | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $profile 'dependency-manifest.json') -Encoding utf8
     if ($mode -eq 'asan') {
       $path = Join-Path $workspace 'fixtures/native-errors/moon.pkg'
       $text = [IO.File]::ReadAllText($path).Replace('options("native-stub": ["faults.c"])', 'options("native-stub": ["faults.c"], link: { "native": { "stub-cc-flags": "/fsanitize=address", }, })')
@@ -82,12 +90,18 @@ try {
     $manifest | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $profile 'source-manifest.json') -Encoding utf8
     Set-Location -LiteralPath $workspace
     $stage = "build/$mode"
+    Run 'moon' @('tree','--json') (Join-Path $profile 'module-tree.json')
+    $resolved = @((Read-Json (Join-Path $profile 'module-tree.json')).modules | Where-Object name -eq 'moonbitlang/async')
+    Require ($resolved.Count -eq 1 -and $resolved[0].source.kind -eq 'local' -and $resolved[0].source.path -eq (Join-Path $workspace '.mooncakes/moonbitlang/async')) 'async must resolve to the copied local source'
     if ($mode -eq 'crash') {
       Run 'moon' @('check','--target','native','--deny-warn','--frozen') (Join-Path $profile 'check.log')
-      Run 'moon' @('test','--target','native','--deny-warn','--frozen','-j','1') (Join-Path $profile 'tests.log')
+      Run 'moon' @('test','--target','native','--deny-warn','--frozen','-j','1','--package','serikaonoe123/moonffi-lab') (Join-Path $profile 'tests.log')
+      Require ((Get-Content -LiteralPath (Join-Path $profile 'tests.log') -Raw).Contains('Total tests: 49, passed: 49, failed: 0.')) 'Focused native unit tests incomplete'
     }
     Run 'moon' @('build','--target','native','--deny-warn','--frozen','cmd/native-errors') (Join-Path $profile 'build.log')
-    $exe = Join-Path $workspace '_build/native/debug/build/cmd/native-errors/native-errors.exe'
+    $executables = @(Get-ChildItem -LiteralPath (Join-Path $workspace '_build/native/debug/build') -Recurse -File -Filter native-errors.exe)
+    Require ($executables.Count -eq 1) 'Native executable discovery ambiguous'
+    $exe = $executables[0].FullName
     $before = (Get-FileHash -LiteralPath $exe).Hash
     $stage = "execute/$mode"
     Run $exe @('--self-check',$mode,(Join-Path $profile 'checks')) (Join-Path $profile 'checks.log')
@@ -95,6 +109,7 @@ try {
     Require ($checks.state -eq 'passed' -and $checks.mode -eq $mode -and @($checks.checks | Where-Object strategy).Count -eq 3) 'Missing native checks'
     Require ($before -ceq (Get-FileHash -LiteralPath $exe).Hash) 'Executable changed during validation'
     foreach ($entry in $manifest) { Require ($entry.sha256 -ceq (Get-FileHash -LiteralPath (Join-Path $workspace $entry.path)).Hash) "Tested source changed during validation: $($entry.path)" }
+    foreach ($entry in $dependencyManifest) { Require ($entry.sha256 -ceq (Get-FileHash -LiteralPath (Join-Path $workspace $entry.path)).Hash) "Dependency source changed: $($entry.path)" }
     $profiles += [ordered]@{mode=$mode;executable_sha256=$before;checks=$checks;instrumented=$(if ($mode -eq 'asan') {@('fixtures/native-errors/faults.c')} else {@()})}
     Set-Location -LiteralPath $project
   }

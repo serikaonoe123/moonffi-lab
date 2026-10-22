@@ -62,3 +62,17 @@ sdk suite 的内部工作区仅包含引擎的 core/runner 与外部消费者。
 随后 [Actions run 38997018833](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38997018833) 在相同镜像和 PowerShell 版本上通过提交 `ee6bb3a` 的四项验收，新增 generation，32 单测与 512 场景均通过；四份产物的源码归档哈希一致，依赖恢复与版本闸门通过。见 [状态探索版本云端快照](evidence/github-ci-38997018833.json)。该提交的 benchmark 为九例单轮，后续 21 例三轮版本需按其自身提交的运行记录判断。
 
 早期本地安装器下载曾被套接字权限拒绝，经批准的诊断请求又遇到传输 EOF；这些历史失败保留，云端安装成功不改变其记录。本轮下载在保持 TLS 校验的 Git/OpenSSL curl 下成功，固定内容已核对；latest 地址本身仍非不可变来源。已验证范围须按实际提交和运行判断。
+
+## 2026-10-22 环境复现补充约定
+
+每次验收指定完整 Git SHA，由 `verify-clean.ps1 -Ref <SHA>` 导出提交，禁止复制项目构建产物。输出必须是新目录；保留源码归档及 SHA256、源码/依赖清单、模块解析树、工具链身份、宿主信息、原始日志和失败记录。成功只适用于报告中的提交、平台和实际执行的 suite。
+
+Windows 使用 PowerShell 7、MSVC x64 开发环境和项目内容锁定的 MoonBit 工具链。用 `install-toolchain.ps1` 在新目录从锁定归档安装；该安装目录不复制用户注册表。在同一 PowerShell 进程导入 Visual Studio DevShell 并运行 `Enter-VsDevShell -VsInstallPath <VS目录> -SkipAutomaticLocation -DevCmdArguments '-arch=x64 -host_arch=x64'`；只在子 `cmd /c` 中调用 vcvars 并打印 set 不会配置父 PowerShell。
+
+把新安装的 `bin` 放到当前进程 PATH 前部。验收脚本核对三个二进制、版本及 core 源码，然后把报告中的工具链根绑定为后续命令的 `MOON_HOME`，结束时恢复原进程变量。MSVC、Windows SDK、ASan runtime 和宿主仍是单独记录的环境输入；这不是逐字节可复现构建承诺。
+
+默认依赖模式运行 `moon update`，要求网络可用，并核对 async 为 0.22.5。离线模式 `-OfflineDependencySource <含moonbitlang/async的目录>` 只复制源码，过滤构建产物；用生成的 `moon.work` 明确绑定本地 async 模块，不依赖手工复制用户 registry。专项 native-errors 同样采用本地源码成员，核对解析路径和依赖清单。版本号不替代内容身份：以该次保存的依赖逐文件 SHA256 清单为准。
+
+完整 Windows 验收包含 `behavior,asan,benchmark,generation,sdk,sqlite,native-errors` 七个入口。六项既有回归和新增专项分开保留结果。SQLite 上游归档仍按既有锁定来源下载并校验。Linux 由 Ubuntu 24.04 Actions 独立安装 Linux 内容锁定工具链，普通回归后运行 `verify-linux-native-errors.py`；仅在临时副本适配编译参数，保留变更前后哈希。ASan 仅覆盖明确列出的 C translation unit，不宣称全部生成代码或依赖都被插桩。
+
+安全审查拒绝时停止被拒绝的动作，保留和报告原因；不通过关闭检查、改执行渠道或改模型继续该动作。编译、测试及身份校验失败属于待修正的验收失败，须保留原始失败并用新目录重新验收。

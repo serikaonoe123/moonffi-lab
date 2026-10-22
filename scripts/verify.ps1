@@ -2,6 +2,7 @@ param([string]$Out = '')
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $false
 $projectRoot = Split-Path -Parent $PSScriptRoot
+. (Join-Path $PSScriptRoot 'executable-common.ps1')
 Set-Location -LiteralPath $projectRoot
 if (-not $Out) { $Out = Join-Path $projectRoot ('results/verify-' + [guid]::NewGuid().ToString('N')) }
 if (Test-Path -LiteralPath $Out) { throw "Output must be new: $Out" }
@@ -26,11 +27,11 @@ foreach ($entry in (Read-Json (Join-Path $snapshot 'manifest.json'))) {
   Check ($hash -eq $entry.sha256) "Snapshot hash mismatch: $($entry.path)"
 }
 Invoke-Tool 'moon' @('check','--target','native','--deny-warn') 0 (Join-Path $Out 'check.log')
-Invoke-Tool 'moon' @('test','--target','native','--deny-warn','-j','1') 0 (Join-Path $Out 'tests.log')
+Invoke-Tool 'moon' @('test','--target','native','--deny-warn','-j','1','--package','serikaonoe123/moonffi-lab') 0 (Join-Path $Out 'tests.log')
 Invoke-Tool 'moon' @('build','--target','native') 0 (Join-Path $Out 'build.log')
-$buffer = Join-Path $projectRoot '_build/native/debug/build/cmd/buffer-lab/buffer-lab.exe'
-$eigen = Join-Path $projectRoot '_build/native/debug/build/cmd/eigen-lab/eigen-lab.exe'
-$oracle = Join-Path $projectRoot '_build/native/debug/build/cmd/reducer-probe/reducer-probe.exe'
+$buffer = Find-LabExecutable $projectRoot 'buffer-lab'
+$eigen = Find-LabExecutable $projectRoot 'eigen-lab'
+$oracle = Find-LabExecutable $projectRoot 'reducer-probe'
 Invoke-Tool $oracle @('--check-arguments',(Join-Path $Out 'numeric-arguments'),$buffer,$eigen) 0 (Join-Path $Out 'numeric-arguments.log')
 $facts = [System.Collections.Generic.List[object]]::new()
 foreach ($kind in @('buffer','eigen')) {
@@ -151,6 +152,7 @@ Invoke-Tool $buffer @('run','--out',(Join-Path $Out 'buffer-correct')) 2 (Join-P
 Check ((Get-FileHash -LiteralPath $oldReport).Hash -eq $oldHash) 'Old evidence changed'
 
 $verification = [ordered]@{
+  state = 'passed'
   completed_at = [DateTimeOffset]::UtcNow.ToString('o')
   platform = [System.Runtime.InteropServices.RuntimeInformation]::OSDescription
   toolchain = @(& moon version --all)
