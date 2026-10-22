@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import platform
+import re
 import shutil
 import stat
 import subprocess
@@ -80,6 +81,13 @@ def source_identity(root):
              if p.is_file() and p.relative_to(root).parts[0] not in ('_build', '.mooncakes')}
     text = ''.join(f'{name}\t{files[name]}\n' for name in sorted(files))
     return {'files': len(files), 'sha256': hashlib.sha256(text.encode()).hexdigest().upper()}
+
+
+def check_file_manifest(root, entries):
+    for entry in entries:
+        expected = entry['sha256']
+        if not re.fullmatch(r'[0-9a-fA-F]{64}', expected) or sha(root / archive_path(entry['path'])) != expected.upper():
+            raise ValueError(f'Source snapshot differs: {entry["path"]}')
 
 
 def run(args, cwd, env, log):

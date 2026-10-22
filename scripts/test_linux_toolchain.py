@@ -8,7 +8,7 @@ import tempfile
 import unittest
 import zipfile
 
-from linux_toolchain import archive_path, extract, install, sha, source_identity
+from linux_toolchain import archive_path, check_file_manifest, extract, install, prepare_executables, sha, source_identity
 
 
 class ArchiveTests(unittest.TestCase):
@@ -100,6 +100,24 @@ class ArchiveTests(unittest.TestCase):
         self.assertEqual(source_identity(core), original)
         (core / 'source.mbt').write_text('changed source')
         self.assertNotEqual(source_identity(core), original)
+
+    def test_manifest_hex_case_preserves_byte_identity(self):
+        (self.root / 'source').write_bytes(b'unchanged')
+        digest = sha(self.root / 'source')
+        for expected in (digest, digest.lower()):
+            check_file_manifest(self.root, [{'path': 'source', 'sha256': expected}])
+        (self.root / 'source').write_bytes(b'changed')
+        with self.assertRaises(ValueError):
+            check_file_manifest(self.root, [{'path': 'source', 'sha256': digest.lower()}])
+
+    def test_executable_modes_require_matching_binary_content(self):
+        (self.root / 'bin').mkdir()
+        tool = self.root / 'bin/moon'
+        tool.write_bytes(b'not executed')
+        before = tool.stat().st_mode
+        with self.assertRaises(ValueError):
+            prepare_executables(self.root, {'components': {'moon': 'example'}, 'binary_sha256': {'moon': '0'*64}})
+        self.assertEqual(tool.stat().st_mode, before)
 
 
 if __name__ == '__main__':

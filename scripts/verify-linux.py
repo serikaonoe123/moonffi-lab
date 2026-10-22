@@ -8,7 +8,7 @@ import re
 import shutil
 import subprocess
 
-from linux_toolchain import extract, read_json, run, sha, verify, write_json
+from linux_toolchain import check_file_manifest, extract, read_json, run, sha, verify, write_json
 
 
 def require(value, message):
@@ -162,9 +162,8 @@ def main():
         original = manifest(workspace)
         write_json(out / 'source-manifest.json', original)
         # The reviewed third-party snapshot is checked before compiler-only adaptation.
-        for entry in read_json(workspace / 'vendor/eigen-binding/manifest.json'):
-            require(sha(workspace / 'vendor/eigen-binding' / entry['path']) == entry['sha256'],
-                    f'Vendor snapshot differs: {entry["path"]}')
+        check_file_manifest(workspace / 'vendor/eigen-binding',
+                            read_json(workspace / 'vendor/eigen-binding/manifest.json'))
         stage = 'compiler-profile'
         adaptations = linux_profile(workspace)
         write_json(out / 'compiler-profile.json', adaptations)
