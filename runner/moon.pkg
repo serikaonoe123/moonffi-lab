@@ -8,3 +8,4 @@ import {
   "moonbitlang/core/env",
 }
 pkgtype(kind: "library")
+options("native-stub": ["native_guard.c"])

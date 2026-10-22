@@ -77,11 +77,10 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
   let mut argument_complete = false
   let mut argument_inconclusive = 0
   let mut stop_reason = "unsupported_outcome"
-  let reason = if baseline.outcome != PropertyFailure || baseline.fingerprint is None {
+  let reason = if !reducible(baseline) {
     if @async.now() >= deadline { stop_reason = "wall_budget" }
-    "unsupported: reliable property fingerprint required"
+    "unsupported: reliable failure fingerprint required"
   } else {
-    let fingerprint = baseline.fingerprint
     let mut stable = true
     for _i = 0; _i < 2; _i = _i + 1 {
       if self.executions() - initial_count >= budget || @async.now() - started >= wall_ms.to_int64() {
@@ -91,7 +90,7 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
       let check = self.run(adapter, best, timeout_ms=self.remaining_timeout(deadline))
       baseline_checks += 1
       self.record_reduction("baseline", "observed", best, Some(check), "")
-      if check.outcome != PropertyFailure || check.fingerprint != fingerprint { stable = false; break }
+      if !same_failure(baseline, check) { stable = false; break }
     }
     if !stable {
       stop_reason = if @async.now() >= deadline { "wall_budget" } else { "unstable_baseline" }
@@ -107,7 +106,7 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
           let candidate = prepared.candidate
           if candidate.steps.length() < best.steps.length() && prepared.error is None {
             let check = self.run(adapter, candidate, timeout_ms=self.remaining_timeout(deadline))
-            if check.outcome == PropertyFailure && check.fingerprint == fingerprint {
+            if same_failure(baseline, check) {
               accepted_candidates += 1
               self.record_reduction("delete_block", "accepted", candidate, Some(check), "same failure fingerprint", removed=prepared.removed)
               best = candidate
@@ -164,10 +163,10 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
             let candidate = prepared.candidate
             if prepared.error is None && candidate.steps.contains(candidate_step) {
               let check = self.run(adapter, candidate, timeout_ms=self.remaining_timeout(deadline))
-              if check.outcome == Pass || check.outcome == PropertyFailure {
+              if check.outcome == Pass || reducible(check) {
                 conclusive_arguments[argument_key] = true
               }
-              if check.outcome == PropertyFailure && check.fingerprint == fingerprint {
+              if same_failure(baseline, check) {
                 accepted_candidates += 1
                 self.record_reduction("arguments", "accepted", candidate, Some(check), "same failure fingerprint", removed=prepared.removed)
                 best = candidate
@@ -175,7 +174,7 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
                 break
               } else {
                 rejected_candidates += 1
-                if check.outcome != Pass && check.outcome != PropertyFailure { argument_inconclusive += 1 }
+                if check.outcome != Pass && !reducible(check) { argument_inconclusive += 1 }
                 self.record_reduction("arguments", "rejected", candidate, Some(check), "failure fingerprint not preserved", removed=prepared.removed)
               }
             } else {
@@ -206,7 +205,7 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
           neighborhood_checked += 1
           if prepared.error is None {
             let check = self.run(adapter, candidate, timeout_ms=self.remaining_timeout(deadline))
-            if check.outcome == PropertyFailure && check.fingerprint == fingerprint {
+            if same_failure(baseline, check) {
               accepted_candidates += 1
               self.record_reduction("delete_single", "accepted", candidate, Some(check), "same failure fingerprint", removed=prepared.removed)
               best = candidate
@@ -214,7 +213,7 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
               break
             } else {
               rejected_candidates += 1
-              if check.outcome != Pass && check.outcome != PropertyFailure { inconclusive_neighbors += 1 }
+              if check.outcome != Pass && !reducible(check) { inconclusive_neighbors += 1 }
               self.record_reduction("delete_single", "rejected", candidate, Some(check), "failure fingerprint not preserved", removed=prepared.removed)
             }
           } else {
@@ -242,7 +241,7 @@ pub async fn[A : @lab.Adapter] Controller::shrink(self : Controller, adapter : A
       while final_checks < 3 && self.executions() - initial_count < budget && @async.now() - started < wall_ms.to_int64() {
         let check = self.run(adapter, best, timeout_ms=self.remaining_timeout(deadline))
         self.record_reduction("confirmation", "observed", best, Some(check), "")
-        if check.outcome != PropertyFailure || check.fingerprint != fingerprint { break }
+        if !same_failure(baseline, check) { break }
         final_checks += 1
       }
       confirmed = final_checks == 3

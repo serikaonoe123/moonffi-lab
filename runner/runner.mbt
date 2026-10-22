@@ -10,12 +10,14 @@ pub struct Controller {
   executable : String
   output : String
   timeout_ms : Int
+  native_errors : Bool
+  mut native_image : Bytes?
   mut count : Int
 }
 
 ///|
-pub fn Controller::new(executable : String, output : String, timeout_ms~ : Int = 3000) -> Controller {
-  { executable, output, timeout_ms, count: 0 }
+pub fn Controller::new(executable : String, output : String, timeout_ms~ : Int = 3000, native_errors~ : Bool = false) -> Controller {
+  { executable, output, timeout_ms, native_errors, native_image: None, count: 0 }
 }
 
 ///|
@@ -135,6 +137,14 @@ pub async fn[A : @lab.Adapter] Controller::run(self : Controller, adapter : A, t
 
 ///|
 async fn Controller::launch(self : Controller, trace : @lab.Trace, directory : String, started : Int64, timeout_ms : Int) -> @lab.Report {
+  // Native sites are meaningful only for this exact executable during this
+  // controller's lifetime. Compare all bytes, including after execution.
+  if self.native_errors {
+    let image = @fs.read_file(self.executable).binary()
+    if self.native_image is Some(expected) {
+      if image != expected { return make_report(SetupError, "native executable changed", None, None, 0, 0L, None) }
+    } else { self.native_image = Some(image) }
+  }
   let stdout = @process.redirect_to_file(directory + "/stdout.log", create_mode=CreateNew)
   defer stdout.close()
   let stderr = @process.redirect_to_file(directory + "/stderr.log", create_mode=CreateNew)
@@ -150,6 +160,9 @@ async fn Controller::launch(self : Controller, trace : @lab.Trace, directory : S
     error => return make_report(SetupError, error.to_string(), None, None, 0, @async.now() - started, None)
   }
   let elapsed = @async.now() - started
+  if self.native_errors && Some(@fs.read_file(self.executable).binary()) != self.native_image {
+    return make_report(SetupError, "native executable changed during execution", status, None, 0, elapsed, None)
+  }
   let event_text = if @fs.exists(directory + "/events.jsonl") {
     @fs.read_file(directory + "/events.jsonl").text()
   } else { "" }
@@ -168,13 +181,15 @@ async fn Controller::launch(self : Controller, trace : @lab.Trace, directory : S
   if code != 0 {
     let stderr_text = @fs.read_file(directory + "/stderr.log").text()
     if asan_category(stderr_text) is Some(category) {
-      return make_report(MemoryError, "AddressSanitizer reported \{category}; see stderr.log; automatic same-root-cause reduction is not supported", Some(code), last, executed, elapsed, None)
+      let fingerprint = if self.native_errors { asan_fingerprint(stderr_text) } else { None }
+      return make_report(MemoryError, "AddressSanitizer reported \{category}; signature denotes observed frames, not root cause", Some(code), last, executed, elapsed, fingerprint)
     }
     if code == -1073741515 && events.is_empty() {
       return make_report(SetupError, "Windows could not load a required DLL; check the profile runtime and PATH", Some(code), last, executed, elapsed, None)
     }
     let outcome : @lab.Outcome = if code == 2 { HarnessError } else { Crash }
-    return make_report(outcome, "worker exited abnormally; raw exit is not a root-cause fingerprint", Some(code), last, executed, elapsed, None)
+    let fingerprint = if self.native_errors && outcome == Crash { crash_fingerprint(stderr_text, code) } else { None }
+    return make_report(outcome, "worker exited abnormally; any native signature is scoped to this controller's unchanged executable", Some(code), last, executed, elapsed, fingerprint)
   }
   guard @fs.exists(directory + "/result.json") else {
     return make_report(HarnessError, "exit 0 without completion evidence", Some(code), last, executed, elapsed, None)

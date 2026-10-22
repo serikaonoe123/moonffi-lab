@@ -1,7 +1,7 @@
 param(
   [string]$Out = '',
   [string]$Ref = 'HEAD',
-  [ValidateSet('behavior','asan','benchmark','generation','sdk','sqlite')][string[]]$Suite = @('behavior'),
+  [ValidateSet('behavior','asan','benchmark','generation','sdk','sqlite','native-errors')][string[]]$Suite = @('behavior'),
   [string]$OfflineDependencySource = '',
   [switch]$WorkspaceTemp
 )
@@ -90,6 +90,7 @@ try {
     switch ($selectedSuite) {
       'behavior' { & (Join-Path $workspace 'scripts/verify.ps1') -Out $suiteOutput }
       'asan' { & (Join-Path $workspace 'scripts/verify-asan.ps1') -Out $suiteOutput }
+      'native-errors' { & (Join-Path $workspace 'scripts/verify-native-errors.ps1') -Out $suiteOutput }
       'benchmark' {
         Invoke-Logged 'moon' @('build','--target','native','--frozen') (Join-Path $Out 'benchmark-build.log')
         & (Join-Path $workspace 'scripts/benchmark-reduction.ps1') -Out $suiteOutput

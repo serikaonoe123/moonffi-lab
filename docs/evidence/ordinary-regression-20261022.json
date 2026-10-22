@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-22",
+  "state": "ordinary-local-regression-passed",
+  "base_commit": "18cc2953dc8ce6f868f04583ff897715757d378e",
+  "native_unit_tests": 81,
+  "correct_buffer_cases": 10,
+  "correct_eigen_cases": 10,
+  "source_inputs_checked_before_and_after": 393,
+  "source_manifest_sha256": "2ED239DFB5C6F20BDF2D4E779997809A844B26F0CC0DFBCF97652C819A270094",
+  "toolchain_report_sha256": "55FBCF35E111E9A88358A6AC6C1594F7E4DF26C01F7BFE1B9655586FCCCDF414",
+  "raw_evidence_directory": "results/ordinary-regression-20261022",
+  "fault_scenarios_run": false,
+  "asan_run": false,
+  "full_six_suite_acceptance": false,
+  "scope": "Ordinary unit tests and 20 correct Buffer/Eigen scenarios only; fault scenarios and ASan were not run; not the full six-suite acceptance"
+}
