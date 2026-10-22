@@ -2,9 +2,11 @@
 
 本入口验证 Linux x86_64 的构建、普通单测、正确场景及独立 SDK 参数 ABI。原生故障/ASan 缩减、完整六项 Windows 验收的跨平台等价性不在本入口的成功结论中。
 
+2026-10-22，提交 `7ccd5d67fbecf8d94c3b5477a01f17f34dc3065b` 的 [Linux CI 39709396891](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39709396891) 通过并完成产物核对：[证据](evidence/linux-ordinary-20261022.json)记录 78+7 单测、212 个项目正确场景、88 个外部 SDK 正确场景、1024 次类型参数操作及 23 项 ABI 边界。531 个导出项目文件匹配指定提交，519 个 SDK 源码输入匹配项目及依赖清单。
+
 ## 工具链
 
-`toolchain-linux.json` 独立锁定 Linux 工具包、三个工具二进制及 core 源码身份。保留归档的内容检查已完成；Linux 实际自报版本与运行结果仍须由本平台验证。
+`toolchain-linux.json` 独立锁定 Linux 工具包、三个工具二进制及 core 源码身份。上述 CI 实际核对了归档、三个二进制、自报版本及 1,211 个 core 源文件；core bundling 前后身份一致。每个后续提交仍须自己的实际运行记录。
 
 ```sh
 python3 scripts/linux_toolchain.py --destination /absolute/new/toolchain --out results/linux-bootstrap

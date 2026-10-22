@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-22",
+  "state": "ordinary-linux-validated",
+  "tested_commit": "7ccd5d67fbecf8d94c3b5477a01f17f34dc3065b",
+  "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39709396891",
+  "conclusion": "success",
+  "source_files_matched_git_archive": 531,
+  "sdk_source_files_matched": 519,
+  "root_unit_tests": 78,
+  "sdk_unit_tests": 7,
+  "correct_project_cases": 212,
+  "correct_sdk_cases": 88,
+  "typed_parameter_operations": 1024,
+  "explicit_abi_boundaries": 23,
+  "project_campaigns": [
+    {
+      "label": "buffer-correct",
+      "cases": 10
+    },
+    {
+      "label": "buffer-stateful",
+      "cases": 64
+    },
+    {
+      "label": "eigen-correct",
+      "cases": 10
+    },
+    {
+      "label": "eigen-stateful",
+      "cases": 64
+    },
+    {
+      "label": "eigen-arithmetic",
+      "cases": 64
+    }
+  ],
+  "toolchain_archive_pins_verified": 2,
+  "toolchain_binary_pins_verified": 3,
+  "core_source_identity": {
+    "files": 1211,
+    "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915"
+  },
+  "compiler_profile": [
+    {
+      "path": "vendor/eigen-binding/moon.pkg",
+      "before_sha256": "B225BB1FC94B1705A95210B647C5B41BA7C85793FAF27BF216E7055268415BCC",
+      "after_sha256": "2D7795F2C71E16FAE42FA2F794C356FFCA19488846E0BBD6075E5E78871D3168"
+    },
+    {
+      "path": "fixtures/eigen/moon.pkg",
+      "before_sha256": "104BB105FB85648C587A0973FB8B0000A1761B9254AE85EDBF1AC7D04D8E2835",
+      "after_sha256": "72C2DB315183A51320533E565CE0F4622E9FD927C51E685C8148F45FAD13FFB5"
+    },
+    {
+      "path": "cmd/eigen-lab/moon.pkg",
+      "before_sha256": "7F6BE5299ED5692EAD881BF5D2409C8217E77FDA7D9883F85C101FB346CE9CDA",
+      "after_sha256": "55F73667B7CAA4B27842C484B9C282D734868FD18E883022250F6293306B5D2A"
+    },
+    {
+      "path": "cmd/reducer-probe/moon.pkg",
+      "before_sha256": "DF8CFE89CA09CD37AD2EB9A63FEC421F8EA3C22D0C783F281E7D74BC396FCBC0",
+      "after_sha256": "5BAC3A365587D88FD79A285471E63DC453E1530E4AFF61F18A3A560CE00B1E3D"
+    }
+  ],
+  "fault_scenarios_run": false,
+  "asan_run": false,
+  "full_six_suite_acceptance": false,
+  "failed_predecessors": [
+    {
+      "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39708775452",
+      "stage": "toolchain executable modes",
+      "cause": "Official archive tools lacked executable bits; installation step corrected to match official Unix installer."
+    },
+    {
+      "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39709158577",
+      "stage": "vendor manifest verification",
+      "cause": "Hex digest text comparison was case sensitive; corrected without changing source bytes or hash pins."
+    }
+  ],
+  "raw_evidence_directory": "results/linux-ci-39709396891",
+  "host": {
+    "os": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+    "github_actions": "true"
+  },
+  "scope": "Ordinary Linux builds, native unit tests, correct campaigns and external SDK ABI only; no native error/ASan reduction or complete Windows-suite equivalence claimed."
+}
