@@ -31,3 +31,16 @@ python3 scripts/verify-linux.py --toolchain /absolute/new/toolchain --out result
 python3 scripts/test_linux_toolchain.py
 python3 scripts/linux_toolchain.py --inspect-only --archive-directory /absolute/archive-directory --destination /absolute/new/inspection --out results/linux-inspection
 ```
+
+## 只读产物审计
+
+下载已有 CI 产物后，可独立核对运行状态、工具链内容锁、项目及 SDK 源码、编译配置、原始测试报告、正确场景和 ABI 边界：
+
+```sh
+mkdir -p results
+gh run view 39709396891 --repo serikaonoe123/moonffi-lab --json headSha,status,conclusion,url > results/linux-run-metadata.json
+gh run download 39709396891 --repo serikaonoe123/moonffi-lab --dir results/linux-artifacts
+python3 scripts/audit-linux-ordinary.py --artifact-root results/linux-artifacts/linux-ordinary-39709396891 --run-metadata results/linux-run-metadata.json --out results/linux-audit/inspection.json
+```
+
+审计输出和参考源码目录必须是新路径。审计器只读取证据并导出指定 Git 提交，不启动测试程序。Windows 上导出时显式使用 LF 配置，导入目录的原始字节仍由 `-text` 属性保留；编译配置适配单独核对，不放宽源码哈希比较。复核及拒绝不完整/被改动证据的检查见 [审计工具证据](evidence/linux-audit-tool-20261022.json)。CI 产物按保留期过期后，需使用已下载的原始副本。

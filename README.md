@@ -70,7 +70,7 @@ Eigen 支持 `--generator stateful` 的六操作探索，以及 `--generator ari
 | 2 | 参数、无效案例、启动或协议错误 |
 | 3 | 超时，或缩减未获得稳定确认 |
 
-单次 Crash 的原始退出码会保存；它不提供同根因指纹，当前不会自动缩减。报告不把崩溃归因为某种内存错误。
+已提交基线保存单次 Crash 的原始退出码，不自动缩减原生错误。原生错误缩减仍处于本地实验阶段，尚未完成可提交代码的完整验收。报告不把普通崩溃归因为某种内存错误。
 
 缩减额外保存：
 
@@ -102,6 +102,6 @@ Eigen 支持 `--generator stateful` 的六操作探索，以及 `--generator ari
 
 状态修整使用 MoonBit 增量依赖索引，避免反复验证全部前缀；结构和模型都接受一步后才提交依赖变化。拒绝后的状态保持约定及复杂度范围见 [适配器指南](docs/ADAPTERS.md)。
 
-当前限制：只有 Windows native 完整验证；ASan 仅插桩 Buffer C fixture 和 Eigen C++ shim（含其模板实例），MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
+当前限制：完整六项验收仍限 Windows native；[Linux 普通 native 与 SDK ABI](docs/LINUX-ORDINARY.md)已实际通过并核对产物，但尚未运行 Linux 故障/ASan 缩减和完整回归。ASan 仅插桩 Buffer C fixture 和 Eigen C++ shim（含其模板实例），MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
 
 旧 Eigen 绑定属于既有成果，新增引擎、适配器和验收脚本属于本项目工作。来源和许可见 [快照记录](vendor/eigen-binding/SNAPSHOT.md)。本项目 MIT；导入源码保留原有许可。

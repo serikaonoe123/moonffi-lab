@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-22",
+  "state": "read-only-artifact-audit-validated",
+  "positive_recheck": {
+    "state": "passed",
+    "tested_commit": "7ccd5d67fbecf8d94c3b5477a01f17f34dc3065b",
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39709396891",
+    "source_files_checked": 531,
+    "sdk_source_files_checked": 519,
+    "root_unit_tests": 78,
+    "sdk_unit_tests": 7,
+    "correct_project_cases": 212,
+    "correct_sdk_cases": 88,
+    "typed_parameter_operations": 1024,
+    "explicit_abi_boundaries": 23,
+    "audit_driver_sha256": "599606DFD6D76D9370EF9D55FC1CC5D5BB25F1C32CF978C3C0EC68131BA569BD",
+    "test_processes_launched": false,
+    "scope": "Read-only artifact audit and Git source export; no native tests or profile reruns."
+  },
+  "rejection_controls": {
+    "state": "passed",
+    "controls": [
+      {
+        "control": "failed_run_refused",
+        "passed": true
+      },
+      {
+        "control": "changed-source-manifest",
+        "passed": true
+      },
+      {
+        "control": "changed-abi-boundary",
+        "passed": true
+      }
+    ],
+    "test_processes_launched": false,
+    "original_artifacts_modified": false
+  },
+  "scope": "Audit-tool verification only; original CI results remain attached to tested commit 7ccd5d67fbecf8d94c3b5477a01f17f34dc3065b. No native test or ASan processes were launched."
+}
