@@ -16,6 +16,7 @@ pub async fn[A : @lab.Adapter] cli(
   make_adapter : (@lab.Trace) -> A,
   generate : (UInt64, String, Int) -> @lab.Trace,
   generators~ : Map[String, (UInt64, String, Int) -> @lab.Trace] = Map([]),
+  native_errors~ : Bool = false,
 ) -> Int {
   if arguments.length() < 2 || arguments[1] == "--help" {
     println("MoonFFI Lab\n  run [--seed N] [--cases N] [--steps N] [--mode MODE] [--generator NAME] [--out DIR]\n  generate [same options except --cases]\n  replay CASE.json [--mode MODE] [--out DIR]\n  shrink CASE.json [--budget N] [--wall-ms N] [--strategy plain|dependency|state] [--out DIR]\n  all execution commands accept --timeout-ms N\nGenerator default is the deterministic contract suite; additional names are adapter-defined.\nAn output directory must be new; it contains complete evidence.")
@@ -24,6 +25,7 @@ pub async fn[A : @lab.Adapter] cli(
   if arguments[1] == "--worker" {
     if arguments.length() != 4 { fail("invalid worker invocation") }
     let trace = read_trace(arguments[2])
+    if native_errors { enable_native_crash_evidence() }
     worker(make_adapter(trace), trace, arguments[3])
     return 0
   }
@@ -45,7 +47,7 @@ pub async fn[A : @lab.Adapter] cli(
   let output = option(options, "--out", "results/run-" + @env.now().to_string())
   if @fs.exists(output) { fail("output already exists; choose a new directory: \{output}") }
   let timeout_ms = bounded_int(options, "--timeout-ms", "3000", 10, 60000)
-  let controller = Controller::new(arguments[0], output, timeout_ms~)
+  let controller = Controller::new(arguments[0], output, timeout_ms~, native_errors~)
   if has_input {
     if options.contains("--generator") { fail("--generator is only for run/generate; replay uses the saved concrete steps") }
     let original = read_trace(arguments[2])

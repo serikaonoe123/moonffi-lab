@@ -2,6 +2,7 @@ param([string]$Out = '')
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $false
 $projectRoot = Split-Path -Parent $PSScriptRoot
+. (Join-Path $PSScriptRoot 'executable-common.ps1')
 if (-not $Out) { $Out = Join-Path $projectRoot ('results/asan-' + [guid]::NewGuid().ToString('N')) }
 $Out = [System.IO.Path]::GetFullPath($Out)
 if (Test-Path -LiteralPath $Out) { throw "Output must be new: $Out" }
@@ -49,6 +50,7 @@ try {
   })
   $sourceManifest | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $Out 'source-manifest.json') -Encoding utf8
   Copy-Item -LiteralPath (Join-Path $projectRoot '.mooncakes') -Destination $workspace -Recurse
+  'members = [".", ".mooncakes/moonbitlang/async"]' | Set-Content -LiteralPath (Join-Path $workspace 'moon.work') -Encoding utf8
 
   # Only the isolated copy changes. Actual detector effectiveness is checked by
   # the canary below, rather than trusting this build marker or linked symbols.
@@ -79,8 +81,8 @@ try {
   Set-Location -LiteralPath $workspace
   $stage = 'build'
   Invoke-Checked 'moon' @('build','--target','native','--frozen','cmd/buffer-lab','cmd/eigen-lab') 0 (Join-Path $Out 'build.log')
-  $buffer = Join-Path $workspace '_build/native/debug/build/cmd/buffer-lab/buffer-lab.exe'
-  $eigen = Join-Path $workspace '_build/native/debug/build/cmd/eigen-lab/eigen-lab.exe'
+  $buffer = Find-LabExecutable $workspace 'buffer-lab'
+  $eigen = Find-LabExecutable $workspace 'eigen-lab'
 
   $stage = 'positive-canary'
   $canaryDir = Join-Path $Out 'canary'

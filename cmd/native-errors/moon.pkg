@@ -1,0 +1,10 @@
+import {
+  "serikaonoe123/moonffi-lab/core" @lab,
+  "serikaonoe123/moonffi-lab/runner",
+  "serikaonoe123/moonffi-lab/fixtures/native-errors" @faults,
+  "moonbitlang/async",
+  "moonbitlang/async/fs",
+  "moonbitlang/core/env",
+  "moonbitlang/core/string",
+}
+options("is-main": true)

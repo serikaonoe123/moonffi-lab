@@ -2,7 +2,7 @@ name: Windows native validation
 
 on:
   push:
-    branches: [main]
+    branches: [main, codex/native-errors-local-review]
   pull_request:
   workflow_dispatch:
 
@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: [behavior, asan, benchmark, generation, sdk, sqlite]
+        suite: [behavior, asan, benchmark, generation, sdk, sqlite, native-errors]
     defaults:
       run:
         shell: pwsh

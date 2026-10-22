@@ -1,0 +1,218 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-21",
+  "state": "local-windows-validated-cloud-linux-pending",
+  "base_commit": "18cc2953dc8ce6f868f04583ff897715757d378e",
+  "compile_fix": "Give heterogeneous verification object explicit Json type before stringify",
+  "focused_native_unit_tests": 49,
+  "focused_suite_scope": "core, runner and owned-native-errors fixture/command only; not full existing fixture regression",
+  "reductions": [
+    {
+      "mode": "crash",
+      "strategy": "plain",
+      "original_steps": 32,
+      "reduced_steps": 2,
+      "executions": 33,
+      "confirmed": true,
+      "deletion_minimal": true,
+      "baseline_checks": 3,
+      "final_checks": 3,
+      "stop_reason": "search_complete",
+      "fingerprint": "native-site-v1:windows:-1073741819:1:0x11e9b0",
+      "different_site_fingerprint": "native-site-v1:windows:-1073741819:1:0x11e9d0",
+      "independent_replay": "Crash",
+      "corrected_replay": "Pass"
+    },
+    {
+      "mode": "crash",
+      "strategy": "dependency",
+      "original_steps": 32,
+      "reduced_steps": 2,
+      "executions": 39,
+      "confirmed": true,
+      "deletion_minimal": true,
+      "baseline_checks": 3,
+      "final_checks": 3,
+      "stop_reason": "search_complete",
+      "fingerprint": "native-site-v1:windows:-1073741819:1:0x11e9b0",
+      "different_site_fingerprint": "native-site-v1:windows:-1073741819:1:0x11e9d0",
+      "independent_replay": "Crash",
+      "corrected_replay": "Pass"
+    },
+    {
+      "mode": "crash",
+      "strategy": "state",
+      "original_steps": 32,
+      "reduced_steps": 2,
+      "executions": 39,
+      "confirmed": true,
+      "deletion_minimal": true,
+      "baseline_checks": 3,
+      "final_checks": 3,
+      "stop_reason": "search_complete",
+      "fingerprint": "native-site-v1:windows:-1073741819:1:0x11e9b0",
+      "different_site_fingerprint": "native-site-v1:windows:-1073741819:1:0x11e9d0",
+      "independent_replay": "Crash",
+      "corrected_replay": "Pass"
+    },
+    {
+      "mode": "asan",
+      "strategy": "plain",
+      "original_steps": 32,
+      "reduced_steps": 2,
+      "executions": 33,
+      "confirmed": true,
+      "deletion_minimal": true,
+      "baseline_checks": 3,
+      "final_checks": 3,
+      "stop_reason": "search_complete",
+      "fingerprint": "asan-frames-v1:heap-buffer-overflow:[\"memory_a D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:21\",\"lab_owned_native_fault D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:34\"]",
+      "different_site_fingerprint": "asan-frames-v1:heap-buffer-overflow:[\"memory_b D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:27\",\"lab_owned_native_fault D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:35\"]",
+      "independent_replay": "MemoryError",
+      "corrected_replay": "Pass"
+    },
+    {
+      "mode": "asan",
+      "strategy": "dependency",
+      "original_steps": 32,
+      "reduced_steps": 2,
+      "executions": 39,
+      "confirmed": true,
+      "deletion_minimal": true,
+      "baseline_checks": 3,
+      "final_checks": 3,
+      "stop_reason": "search_complete",
+      "fingerprint": "asan-frames-v1:heap-buffer-overflow:[\"memory_a D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:21\",\"lab_owned_native_fault D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:34\"]",
+      "different_site_fingerprint": "asan-frames-v1:heap-buffer-overflow:[\"memory_b D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:27\",\"lab_owned_native_fault D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:35\"]",
+      "independent_replay": "MemoryError",
+      "corrected_replay": "Pass"
+    },
+    {
+      "mode": "asan",
+      "strategy": "state",
+      "original_steps": 32,
+      "reduced_steps": 2,
+      "executions": 39,
+      "confirmed": true,
+      "deletion_minimal": true,
+      "baseline_checks": 3,
+      "final_checks": 3,
+      "stop_reason": "search_complete",
+      "fingerprint": "asan-frames-v1:heap-buffer-overflow:[\"memory_a D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:21\",\"lab_owned_native_fault D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:34\"]",
+      "different_site_fingerprint": "asan-frames-v1:heap-buffer-overflow:[\"memory_b D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:27\",\"lab_owned_native_fault D:\\\\moonbit\\\\moonffi-lab\\\\results\\\\native-errors-asan-retry-20261021\\\\workspace\\\\fixtures\\\\native-errors\\\\faults.c:35\"]",
+      "independent_replay": "MemoryError",
+      "corrected_replay": "Pass"
+    }
+  ],
+  "controls": [
+    {
+      "control": "flaky-baseline",
+      "confirmed": false,
+      "stop_reason": "unstable_baseline",
+      "executions": 2
+    },
+    {
+      "control": "flaky-final",
+      "confirmed": false,
+      "stop_reason": "unstable_final",
+      "executions": 4
+    },
+    {
+      "control": "weak",
+      "confirmed": false,
+      "stop_reason": "unsupported_outcome",
+      "executions": 1
+    },
+    {
+      "control": "budget",
+      "confirmed": true,
+      "stop_reason": "execution_budget",
+      "executions": 6
+    },
+    {
+      "control": "disabled",
+      "confirmed": false,
+      "stop_reason": "unsupported_outcome",
+      "executions": 1
+    }
+  ],
+  "source_identity": [
+    {
+      "path": "runner/cli.mbt",
+      "sha256": "8E6E6EC1A96955BE07D957B10D8A19C090336383A7733B5EDC3B65AF8584E2D2",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "runner/moon.pkg",
+      "sha256": "20B4ED4232A830DF21D6A469B12156E84DB2731FDBAFE881ADEC432480A34817",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "runner/runner.mbt",
+      "sha256": "9DEEAC91759BCB6FDF3DAB64F7729AB48968AF175F3BBACB0A0FFED9E6711F50",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "runner/shrink.mbt",
+      "sha256": "756A951FED9810861FD348A6B040922C2E60AF7CA7D67A343165CF0E27321857",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "runner/native_errors.mbt",
+      "sha256": "2F1FFB8A1F3995D4C6217D5053AAE578E134809071DE31F88E399869B6E99E86",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "runner/native_errors_wbtest.mbt",
+      "sha256": "FFC43465636A706D1BA4CBF264C3E1A0EDF5EFFEE33C7270612321AED46DDA22",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "runner/native_guard.c",
+      "sha256": "56102A1718A649C4C0BF70CC44C759844A5CBAB2205EB88F7C4A005A4CABB931",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "fixtures/native-errors/adapter.mbt",
+      "sha256": "696325116719AF09AAB810D84932052F8F02A6CB0F4DFB78627CCF4C2555B74E",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "fixtures/native-errors/faults.c",
+      "sha256": "C54233BEC8364F1E4DCBBDA8674960C65E09712E135BD5A229A994BD09E2AB2B",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "fixtures/native-errors/moon.pkg",
+      "sha256": "DF75672D7FBBE7E0C992E6743414B0DE0980C019DB22B65A990E95644FA508FD",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "cmd/native-errors/main.mbt",
+      "sha256": "7281207571EBBB73C187C1C53C9367F5F655971659C27E9E1A673D9A31FB0F32",
+      "tested_copy_matched": true
+    },
+    {
+      "path": "cmd/native-errors/moon.pkg",
+      "sha256": "C47C380C5B05F39204397D1922A0FF6CF8E277886591D0F252967659D3344A9C",
+      "tested_copy_matched": true
+    }
+  ],
+  "toolchain_evidence": "results/native-errors-dev-20261021/toolchain-current-retry.json",
+  "crash_executable_sha256": "FE48143244AA463152AC3EE48A43A2FC0B888BC6D36CC85CB3EB8C24DC89996F",
+  "asan_profile": {
+    "state": "passed",
+    "executable_sha256": "80E0DA40875B7420186086F4B014742D9CE41A35F58D56EE1667C15FD890E456",
+    "runtime": "E:\\VSBuildTools\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\clang_rt.asan_dynamic-x86_64.dll",
+    "runtime_sha256": "7F901A239979C49B36A3B18ECD1843F551F94B5879585BDED41A650C5B71F35F",
+    "instrumented": [
+      "fixtures/native-errors/faults.c"
+    ],
+    "scope": "Owned intentional C faults in disposable local workers; no external target; MoonBit and runtime not ASan instrumented."
+  },
+  "raw_evidence": [
+    "results/native-errors-dev-20261021",
+    "results/native-errors-asan-retry-20261021"
+  ],
+  "scope": "Intentionally faulty project-owned local C fixtures in disposable workers. Signatures describe observed sites/frames within an unchanged executable, not the same root cause or a global minimum. ASan instruments faults.c only. Full regression, cloud and Linux validation pending."
+}

@@ -7,12 +7,13 @@ param(
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $false
 $projectRoot = Split-Path -Parent $PSScriptRoot
+. (Join-Path $PSScriptRoot 'executable-common.ps1')
 Set-Location -LiteralPath $projectRoot
 if (-not $Out) { $Out = Join-Path $projectRoot ('results/eigen-generation-' + [guid]::NewGuid().ToString('N')) }
 if (Test-Path -LiteralPath $Out) { throw "Output must be new: $Out" }
 New-Item -ItemType Directory -Path $Out | Out-Null
 $Out = (Resolve-Path -LiteralPath $Out).Path
-$eigen = Join-Path $projectRoot '_build/native/debug/build/cmd/eigen-lab/eigen-lab.exe'
+$eigen = Find-LabExecutable $projectRoot 'eigen-lab'
 $stage = 'setup'
 function Require([bool]$Condition, [string]$Message) { if (-not $Condition) { throw $Message } }
 function Read-Json([string]$Path) { Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json }

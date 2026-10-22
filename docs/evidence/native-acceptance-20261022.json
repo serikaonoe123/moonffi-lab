@@ -1,0 +1,522 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-22",
+  "state": "passed",
+  "tested_commit": "520cf68738a6693ca348b7af509b4d9bfaf5780f",
+  "windows": {
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261",
+    "jobs": [
+      {
+        "name": "native (sqlite)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261/job/119622878345"
+      },
+      {
+        "name": "native (benchmark)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261/job/119622878568"
+      },
+      {
+        "name": "native (generation)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261/job/119622878576"
+      },
+      {
+        "name": "native (sdk)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261/job/119622878577"
+      },
+      {
+        "name": "native (native-errors)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261/job/119622878639"
+      },
+      {
+        "name": "native (asan)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261/job/119622878660"
+      },
+      {
+        "name": "native (behavior)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261/job/119622878704"
+      }
+    ],
+    "artifacts": [
+      {
+        "name": "windows-native-sqlite-39717451261",
+        "bytes": 385328,
+        "digest": "sha256:1875b23417ba68b7d298d2d362e0675848799ff9137e63ecef4140a958cef725"
+      },
+      {
+        "name": "windows-native-sdk-39717451261",
+        "bytes": 913098,
+        "digest": "sha256:27c78fc01bd65291b84d324e3b033505a8f2ef7f014337ff87b7a1c0575656dd"
+      },
+      {
+        "name": "windows-native-behavior-39717451261",
+        "bytes": 8114293,
+        "digest": "sha256:5c2350169bdc3b038235dd266a22910a985bc14df156190e424f78c6b60de022"
+      },
+      {
+        "name": "windows-native-asan-39717451261",
+        "bytes": 336632,
+        "digest": "sha256:2f49422f96c91bfa1522f3ff67828b4794e751eabb62ba93b6ec1b87d7aaf433"
+      },
+      {
+        "name": "windows-native-native-errors-39717451261",
+        "bytes": 744195,
+        "digest": "sha256:2ccf2a28b6e91d5101493efe9b3ca270a915e74bbf9a1b254a1dca17ca26b1ec"
+      },
+      {
+        "name": "windows-native-benchmark-39717451261",
+        "bytes": 18447426,
+        "digest": "sha256:96c1b656530ce8473b0bcba3d31c9e3b4cf76eb155c543a29cd6229311f8c746"
+      },
+      {
+        "name": "windows-native-generation-39717451261",
+        "bytes": 2967482,
+        "digest": "sha256:be98c525eb7bbb4e443d209a1850bf1dfab59c082dd8ed92860deba9d605c529"
+      }
+    ],
+    "source_files_matched_per_suite": {
+      "behavior": 550,
+      "asan": 550,
+      "benchmark": 550,
+      "generation": 550,
+      "sdk": 550,
+      "sqlite": 550,
+      "native-errors": 550
+    },
+    "root_unit_tests": 81,
+    "sdk_unit_tests": 7,
+    "benchmark_measurements": 189,
+    "benchmark_structural_and_reduced_bytes_match_39609263290": true,
+    "typed_parameter_operations": 1024,
+    "explicit_abi_boundaries": 23,
+    "native_errors": {
+      "state": "passed",
+      "reductions": [
+        {
+          "mode": "crash",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        }
+      ],
+      "raw_candidate_executions": 222,
+      "raw_independent_replay_reports": 18,
+      "crash_controls": 5,
+      "asan_controls": 0,
+      "scope": "Read-only raw evidence audit; not a second test execution."
+    },
+    "sdk_source_files_matched": 45,
+    "asan_raw_canaries": 3,
+    "asan_correct_campaign_cases": 68,
+    "generation_cases": 704,
+    "sqlite_unit_tests": [
+      48,
+      8
+    ],
+    "sqlite_campaign_cases": 96,
+    "controls": {
+      "toolchain-checks": 11,
+      "script-controls": 9,
+      "release-checks": 5
+    }
+  },
+  "linux": {
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451254",
+    "artifacts": [
+      {
+        "name": "linux-native-errors-39717451254",
+        "bytes": 1764318,
+        "digest": "sha256:2f6e8117d39dec47cd9beab56147684bcf1b3c5fb14704618c3c73dfda84c187"
+      }
+    ],
+    "ordinary": {
+      "state": "passed",
+      "tested_commit": "520cf68738a6693ca348b7af509b4d9bfaf5780f",
+      "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451254",
+      "source_files_checked": 550,
+      "sdk_source_files_checked": 522,
+      "root_unit_tests": 81,
+      "sdk_unit_tests": 7,
+      "correct_project_cases": 212,
+      "correct_sdk_cases": 88,
+      "typed_parameter_operations": 1024,
+      "explicit_abi_boundaries": 23,
+      "audit_driver_sha256": "599606DFD6D76D9370EF9D55FC1CC5D5BB25F1C32CF978C3C0EC68131BA569BD",
+      "test_processes_launched": false,
+      "scope": "Read-only artifact audit and Git source export; no native tests or profile reruns."
+    },
+    "native_errors": {
+      "state": "passed",
+      "reductions": [
+        {
+          "mode": "crash",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        }
+      ],
+      "raw_candidate_executions": 222,
+      "raw_independent_replay_reports": 18,
+      "crash_controls": 5,
+      "asan_controls": 0,
+      "scope": "Read-only raw evidence audit; not a second test execution."
+    },
+    "native_profile_source_files": {
+      "crash": 35,
+      "asan": 35
+    },
+    "native_dependency_source_files": {
+      "crash": 478,
+      "asan": 478
+    },
+    "scope": "Linux x86_64 Ubuntu hosted runner: ordinary native regression and owned crash/ASan reduction. Full seven Windows suites are separately audited; Linux does not claim their exact coverage."
+  },
+  "local_fixed_commit": {
+    "tested_commit": "41ff7e5ecce683530ab7f11e147e6edd81a6bbbf",
+    "state": "passed",
+    "suites": [
+      "behavior",
+      "asan",
+      "benchmark",
+      "generation",
+      "sdk",
+      "sqlite",
+      "native-errors"
+    ],
+    "source_files": 550,
+    "dependency_mode": "explicit-local-workspace-source",
+    "registry_directory_absent_after_run": true,
+    "fresh_toolchain_bootstrap": "passed",
+    "bootstrap_source_mode": "explicit-local-archives",
+    "source_archive_sha256": "E8733FE416296FFD7666AACADCB6DCBA22DABBC7BF0DF95C426849464B317D74",
+    "native_errors": {
+      "state": "passed",
+      "reductions": [
+        {
+          "mode": "crash",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        }
+      ],
+      "raw_candidate_executions": 222,
+      "raw_independent_replay_reports": 18,
+      "crash_controls": 5,
+      "asan_controls": 0,
+      "scope": "Read-only raw evidence audit; not a second test execution."
+    },
+    "scope": "Earlier Windows-compatible fixture revision, separate from final 520cf68 cloud acceptance; explicit local async source, no user registry copied."
+  },
+  "regression_summary": {
+    "windows_root_unit_tests": 81,
+    "sdk_unit_tests": 7,
+    "sqlite_unit_tests": [
+      48,
+      8
+    ],
+    "generation_cases": 704,
+    "asan_positive_canaries": 3,
+    "asan_correct_campaign_cases": 68,
+    "benchmark_complete_reductions": 189,
+    "benchmark_repeatable_groups": 63,
+    "benchmark_proper_subsets": 214,
+    "benchmark_concrete_outputs_and_structure_match_run": 39609263290,
+    "typed_parameter_operations": 1024,
+    "explicit_abi_boundaries": 23,
+    "windows_native_error_reductions": 6,
+    "linux_native_error_reductions": 6,
+    "native_steps_before_after": [
+      32,
+      2
+    ],
+    "native_raw_candidate_executions_each_platform": 222
+  },
+  "retained_failures": [
+    {
+      "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717207239",
+      "tested_commit": "41ff7e5ecce683530ab7f11e147e6edd81a6bbbf",
+      "stage": "Linux crash self-check",
+      "observed": "Intentional crash fixture returned Pass, so reduction refused unsupported outcome.",
+      "correction": "Read the null address through a volatile runtime variable to retain distinct fault sites; successful revision reports signal 11 and distinct relative PCs.",
+      "artifacts": [
+        {
+          "name": "linux-native-errors-39717207239",
+          "bytes": 1126388,
+          "digest": "sha256:4794573763b45e12779660643d2c949a307ad7efc53c2936621659e00e51fb5f"
+        }
+      ]
+    }
+  ],
+  "audit_sources": [
+    {
+      "path": "results/audit-native-acceptance-20261022.py",
+      "sha256": "7F4556B036748D93ADC348B1B7671514416213D7F29E3958A9A0F0F1AE27326D"
+    },
+    {
+      "path": "results/audit-windows-acceptance-20261022.py",
+      "sha256": "4EF0ACD41C4DA9BBE21053F2E24F73E8F50304D087C44CB84D7463039BF6B41C"
+    },
+    {
+      "path": "results/audit-linux-acceptance-20261022.py",
+      "sha256": "A39FD67ED0242D2C94AAC6485EF301687E5F4E659399CC635108BBFBAEA54CE2"
+    },
+    {
+      "path": "scripts/audit-linux-ordinary.py",
+      "sha256": "599606DFD6D76D9370EF9D55FC1CC5D5BB25F1C32CF978C3C0EC68131BA569BD"
+    }
+  ],
+  "raw_evidence": [
+    "results/ci-39717451261",
+    "results/ci-39717451254",
+    "results/ci-39717207239",
+    "results/acceptance-fixed-41ff7e5-20261022",
+    "results/acceptance-20261022-bootstrap"
+  ],
+  "limitations": [
+    "Owned intentional fault fixtures, not unknown upstream defects.",
+    "Signatures identify observed sites within an unchanged executable, not root cause or global minimum.",
+    "Five instability/weak-evidence/budget/disabled controls run only in crash profile, not ASan.",
+    "Native error ASan instrumentation covers faults.c only; Windows ordinary ASan covers Buffer C/Eigen shim, not all generated C/runtime/dependencies.",
+    "Linux coverage is ordinary native/SDK plus owned fault reduction, not exact equivalence to seven Windows suites.",
+    "Validation does not publish a release, registry package, or submission update."
+  ]
+}

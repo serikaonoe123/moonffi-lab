@@ -1,6 +1,6 @@
 # Windows 自动验收与源码复现
 
-仓库提供 `.github/workflows/windows-native.yml`。push 到 main、pull request 和手动触发分别运行 behavior、ASan、benchmark、generation、sdk、sqlite 六个任务。generation 验证 Buffer 的 512 个人工 fixture 场景，以及真实 Eigen 绑定的 192 个正确场景、保存输入重放、旧输入哈希和 CLI 边界；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减。sdk 在另一个工作区中用公开 core/runner 编译教学消费者；sqlite 以原样社区绑定源码验收 48+8 单测、96 场景和九项脚本控制。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单，不上传工作目录或二进制。首次使用请先看 [独立复现入口](INDEPENDENT-REPRODUCTION.md)。
+仓库提供 `.github/workflows/windows-native.yml`。push 到 main 或当前 native 验收分支、pull request 和手动触发分别运行 behavior、ASan、benchmark、generation、sdk、sqlite、native-errors 七个任务。generation 验证 Buffer 的 512 个人工 fixture 场景，以及真实 Eigen 绑定的 192 个正确场景、保存输入重放、旧输入哈希和 CLI 边界；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减。sdk 在另一个工作区中用公开 core/runner 编译教学消费者；sqlite 以原样社区绑定源码验收 48+8 单测、96 场景和九项脚本控制。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单，不上传工作目录或二进制。首次使用请先看 [独立复现入口](INDEPENDENT-REPRODUCTION.md)。
 
 当前已核对的运行代码基线为 `1f065527` 的 [Actions 39248905440](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440)：六项通过，68 个关键文件逐任务匹配提交归档，96 份 SQLite 输入与本地字节一致，189 次缩减与旧基准一致，见 [快照](evidence/github-ci-39248905440.json)。后续候选仍须按自身提交核对 CI。sdk 任务新增 [本地源码准备控制](RELEASE-PLAN.md)，只上传清单/日志，不上传源码 ZIP；冻结清单与发布说明不表示已发布。
 
@@ -32,7 +32,7 @@ Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定
   -OfflineDependencySource .\.mooncakes
 ```
 
-离线模式仅复制指定 async 模块的源码，排除构建目录和编译产物，校验版本并生成依赖文件哈希。源码检查使用 `--frozen`。结果标记 `dependency_mode=explicit-local-source-cache`，不能把这种运行写成从 registry 重新下载、全新安装工具链或独立机器验证。
+离线模式仅复制指定 async 模块的源码，排除构建目录和编译产物，校验版本并生成依赖文件哈希。源码检查使用 `--frozen`，并用生成的 moon.work 将 async 明确绑定为本地成员。当前结果标记 `dependency_mode=explicit-local-workspace-source`，不能把这种运行写成从 registry 重新下载、全新安装工具链或独立机器验证。
 
 工作区内工具以低完整性运行、不能写系统临时目录时，在上述命令中加入 `-WorkspaceTemp`。它创建 `<Out>/temp` 并只为本轮设置进程 `TEMP/TMP`，结束或失败后恢复原值；输出目录必须在项目内。验证 JSON 的 `temporary_directory` 记录实际路径，未开启时为 null。该选项不更改完整性标签、ACL、身份或系统配置，详细对照和验收见 [本机临时目录说明](LOCAL-WINDOWS-TEMP.md)。
 
@@ -62,3 +62,19 @@ sdk suite 的内部工作区仅包含引擎的 core/runner 与外部消费者。
 随后 [Actions run 38997018833](https://github.com/serikaonoe123/moonffi-lab/actions/runs/38997018833) 在相同镜像和 PowerShell 版本上通过提交 `ee6bb3a` 的四项验收，新增 generation，32 单测与 512 场景均通过；四份产物的源码归档哈希一致，依赖恢复与版本闸门通过。见 [状态探索版本云端快照](evidence/github-ci-38997018833.json)。该提交的 benchmark 为九例单轮，后续 21 例三轮版本需按其自身提交的运行记录判断。
 
 早期本地安装器下载曾被套接字权限拒绝，经批准的诊断请求又遇到传输 EOF；这些历史失败保留，云端安装成功不改变其记录。本轮下载在保持 TLS 校验的 Git/OpenSSL curl 下成功，固定内容已核对；latest 地址本身仍非不可变来源。已验证范围须按实际提交和运行判断。
+
+## 2026-10-22 环境复现补充约定
+
+每次验收指定完整 Git SHA，由 `verify-clean.ps1 -Ref <SHA>` 导出提交，禁止复制项目构建产物。输出必须是新目录；保留源码归档及 SHA256、源码/依赖清单、模块解析树、工具链身份、宿主信息、原始日志和失败记录。成功只适用于报告中的提交、平台和实际执行的 suite。
+
+Windows 使用 PowerShell 7、MSVC x64 开发环境和项目内容锁定的 MoonBit 工具链。用 `install-toolchain.ps1` 在新目录从锁定归档安装；该安装目录不复制用户注册表。在同一 PowerShell 进程导入 Visual Studio DevShell 并运行 `Enter-VsDevShell -VsInstallPath <VS目录> -SkipAutomaticLocation -DevCmdArguments '-arch=x64 -host_arch=x64'`；只在子 `cmd /c` 中调用 vcvars 并打印 set 不会配置父 PowerShell。
+
+把新安装的 `bin` 放到当前进程 PATH 前部。验收脚本核对三个二进制、版本及 core 源码，然后把报告中的工具链根绑定为后续命令的 `MOON_HOME`，结束时恢复原进程变量。MSVC、Windows SDK、ASan runtime 和宿主仍是单独记录的环境输入；这不是逐字节可复现构建承诺。
+
+默认依赖模式运行 `moon update`，要求网络可用，并核对 async 为 0.22.5。离线模式 `-OfflineDependencySource <含moonbitlang/async的目录>` 只复制源码，过滤构建产物；用生成的 `moon.work` 明确绑定本地 async 模块，不依赖手工复制用户 registry。专项 native-errors 同样采用本地源码成员，核对解析路径和依赖清单。版本号不替代内容身份：以该次保存的依赖逐文件 SHA256 清单为准。
+
+完整 Windows 验收包含 `behavior,asan,benchmark,generation,sdk,sqlite,native-errors` 七个入口。六项既有回归和新增专项分开保留结果。SQLite 上游归档仍按既有锁定来源下载并校验。Linux 由 Ubuntu 24.04 Actions 独立安装 Linux 内容锁定工具链，普通回归后运行 `verify-linux-native-errors.py`；仅在临时副本适配编译参数，保留变更前后哈希。ASan 仅覆盖明确列出的 C translation unit，不宣称全部生成代码或依赖都被插桩。
+
+编译、测试及身份校验失败均保留原始记录，修正后用新目录重新验收。
+
+提交 `520cf68738a6693ca348b7af509b4d9bfaf5780f` 的 Windows 七项云端回归及 Linux 普通/原生错误专项已通过并核对产物，见 [统一验收快照](evidence/native-acceptance-20261022.json)。本机另从 `41ff7e5` 干净导出完成七项回归；新工具链安装的 registry 目录在运行后仍不存在，依赖通过显式本地工作区成员解析。该本机记录与最终提交的独立云端记录分开保存。

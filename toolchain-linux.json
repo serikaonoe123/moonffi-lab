@@ -1,0 +1,40 @@
+{
+  "bootstrap": {
+    "schema": 1,
+    "platform": "linux-x86_64",
+    "source_mode": "official-rolling-urls-with-fixed-content-hashes",
+    "archives": [
+      {
+        "file": "moonbit-linux-x86_64.tar.gz",
+        "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-linux-x86_64.tar.gz",
+        "sha256": "84AE424CD31BC485D2CF4D3736534E52F2F265CEAFB562A187B9AB26D9566212",
+        "bytes": 99270556,
+        "kind": "toolchain",
+        "upstream_checksum_url": "https://cli.moonbitlang.com/binaries/latest/moonbit-linux-x86_64.tar.gz.sha256"
+      },
+      {
+        "kind": "core",
+        "file": "core-latest.zip",
+        "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+        "sha256": "C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC",
+        "bytes": 2606935
+      }
+    ]
+  },
+  "components": {
+    "moon": "0.1.20261020 (2284bd2 2026-10-20)",
+    "moonc": "v0.10.16+b1a0e846e (2026-10-16)",
+    "moonrun": "moonrun 0.1.20261020 (2284bd2 2026-10-20)"
+  },
+  "binary_sha256": {
+    "moon": "12F0AEA51FE72F0A44F973663B3C657D721326724C715124832541FCA3217978",
+    "moonrun": "9DA3A5012D78529442B0D4F386ED2B3EE9F65D8DAC9275230069E93EE55320B3",
+    "moonc": "30AE083A1E3A99EB1C82A0EDB281F3F1DE58BFBC0B05796F1970550E3BC83434"
+  },
+  "core_version": "0.10.16+b1a0e846e",
+  "core_source_identity": {
+    "files": 1211,
+    "sha256": "B26E8FD3F8F9E5CDA9FE2A352A5D795870E416F133B7A3ED4001DBF2B81AD915"
+  },
+  "async_version": "0.22.5"
+}
