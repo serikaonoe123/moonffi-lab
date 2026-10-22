@@ -69,6 +69,13 @@ def copy_source(source, target):
         '*.exe', '*.obj', '*.pdb', '*.mi', '*.core', '*.o', '*.a', '*.dll', '*.lib'))
 
 
+def executable(build_root, name):
+    found = [path for path in build_root.rglob('*')
+             if path.name in (name, name + '.exe') and path.is_file() and os.access(path, os.X_OK)]
+    require(len(found) == 1, f'Executable discovery ambiguous: {name}: {[str(x) for x in found]}')
+    return found[0]
+
+
 def sdk(workspace, out, env):
     out.mkdir()
     root = out / 'workspace'
@@ -95,9 +102,7 @@ def sdk(workspace, out, env):
          'cmd/main', 'cmd/contracts', 'cmd/parameters'], consumer, env, out / 'build.log')
     commands = {}
     for name in ('main', 'contracts', 'parameters'):
-        found = [p for p in (root / '_build/native/debug/build').rglob(name) if p.is_file()]
-        require(len(found) == 1, f'SDK executable ambiguous: {name}')
-        commands[name] = found[0]
+        commands[name] = executable(root / '_build/native/debug/build', name)
     campaigns = [campaign(commands['main'], out, 'counter-correct', 8, env),
                  campaign(commands['main'], out, 'counter-walk', 32, env, 'walk'),
                  campaign(commands['contracts'], out, 'contracts-correct', 32, env),
@@ -177,7 +182,7 @@ def main():
         stage = 'correct-campaigns'
         run(['moon','build','--target','native','--deny-warn','--frozen','cmd/buffer-lab','cmd/eigen-lab'],
             workspace, env, out / 'build.log')
-        commands = {name: workspace / f'_build/native/debug/build/cmd/{name}-lab/{name}-lab' for name in ('buffer','eigen')}
+        commands = {name: executable(workspace / '_build/native/debug/build', name + '-lab') for name in ('buffer','eigen')}
         campaigns = []
         for name in ('buffer','eigen'):
             campaigns.append(campaign(commands[name], out, f'{name}-correct', 10, env))

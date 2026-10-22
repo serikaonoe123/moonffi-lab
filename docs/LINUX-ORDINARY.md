@@ -13,6 +13,8 @@ python3 scripts/verify-linux.py --toolchain /absolute/new/toolchain --out result
 
 需要 Linux x86_64、Python 3.11+、Git、GCC/G++ 及网络连接。默认仅下载锁中列出的官方归档；任何大小、哈希、二进制、core 或版本不匹配均停止，不执行上游安装脚本，不接受自动漂移。已保留匹配归档时，可给安装器添加 `--archive-directory /absolute/archive-directory`，证据明确标记离线来源。
 
+官方归档中的工具文件不带执行位。内容核验后，安装器按[官方 Unix 安装步骤](https://cli.moonbitlang.com/install/unix.sh)仅为新安装目录的 `bin/*` 普通文件与 `bin/internal/tcc` 补充当前用户执行位，单独记录变更；不修改已有安装或系统目录。
+
 ## 构建与证据
 
 驱动从指定 Git 提交导出源码，在副本中将四个 Eigen 相关包的编译/链接参数适配为 GCC/G++，并记录每个配置改动前后的哈希。先核对导入快照，C/C++ 源文件保持字节一致。[Moon 包配置说明](https://docs.moonbitlang.com/en/latest/toolchain/moon/package.html)说明了 native 编译器及链接参数。

@@ -88,6 +88,23 @@ def run(args, cwd, env, log):
                        stderr=subprocess.STDOUT, check=True, timeout=900)
 
 
+def prepare_executables(root, lock):
+    # Official archives store tools without executable bits. The official unix
+    # installer adds them to bin/* and bin/internal/tcc after extraction.
+    if {name: sha(root / 'bin' / name) for name in lock['components']} != lock['binary_sha256']:
+        raise ValueError('Tool content differs; executable modes were not changed')
+    records = []
+    paths = [path for path in (root / 'bin').iterdir() if path.is_file()]
+    if (root / 'bin/internal/tcc').is_file():
+        paths.append(root / 'bin/internal/tcc')
+    for path in sorted(paths):
+        before = stat.S_IMODE(path.stat().st_mode)
+        path.chmod(before | stat.S_IXUSR)
+        records.append({'path': path.relative_to(root).as_posix(),
+                        'before': oct(before), 'after': oct(stat.S_IMODE(path.stat().st_mode))})
+    return records
+
+
 def verify(root, lock, env, out):
     binaries = {name: sha(root / 'bin' / name) for name in lock['components']}
     if binaries != lock['binary_sha256']:
@@ -152,6 +169,9 @@ def install(lock_path, destination, out, archive_directory=None, inspect_only=Fa
         else:
             env = {**os.environ, 'MOON_HOME': str(destination),
                    'PATH': str(destination / 'bin') + os.pathsep + os.environ['PATH']}
+            stage = 'executable-modes'
+            modes = prepare_executables(destination, lock)
+            write_json(out / 'executable-modes.json', modes)
             stage = 'verify-before-bundle'
             verify(destination, lock, env, out / 'before-bundle.json')
             shutil.copy2(destination / 'bin/moon', destination / 'bin/moonx')
