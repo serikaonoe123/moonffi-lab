@@ -44,3 +44,7 @@ python3 scripts/audit-linux-ordinary.py --artifact-root results/linux-artifacts/
 ```
 
 审计输出和参考源码目录必须是新路径。审计器只读取证据并导出指定 Git 提交，不启动测试程序。Windows 上导出时显式使用 LF 配置，导入目录的原始字节仍由 `-text` 属性保留；编译配置适配单独核对，不放宽源码哈希比较。复核及拒绝不完整/被改动证据的检查见 [审计工具证据](evidence/linux-audit-tool-20261022.json)。CI 产物按保留期过期后，需使用已下载的原始副本。
+
+## 后续故障专项
+
+提交 `520cf68` 的普通 native 回归已更新为 81+7 单测，并在同一独立 Linux runner 上完成 crash/ASan 各三策略 32→2 步缩减。见 [专项说明](NATIVE-ERRORS.md)和[统一证据](evidence/native-acceptance-20261022.json)。本页较早 7ccd5d6 的记录仍保持普通回归范围。

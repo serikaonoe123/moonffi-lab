@@ -1,4 +1,4 @@
-# 能力补齐与验收计划
+# 能力补齐与验收记录
 
 按完整状态契约、常见 FFI 参数策略、原生错误缩减和 Linux native 四项能力分阶段补齐并验证。历史 rc.1 发布和既有 CI 只证明各自提交及记录范围。
 
@@ -22,7 +22,7 @@
 1. 状态契约：本地验收通过。主模块 73 项 native 单测，外部 SDK 7 项单测；新增 C 契约入口 32 个正确场景，三策略均将 32 步人工错误缩至 2 步，独立失败重放及正确实现对照通过；见 [接口说明](STATE-CONTRACTS.md)和[本地快照](evidence/state-contracts-20261021.json)。新提交云端结果须另行记录，不用 rc.1 的旧 CI 代替。
    第一轮云端 39587481441 六项均在安装阶段因滚动归档身份变化被拒绝，未跑业务测试，失败产物全部核对；[新工具链构建器锁](TOOLCHAIN-LOCK.md)保持编译器和 core 身份不变。提交 7778f157 的 [六项 CI 39604001946](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39604001946) 全部通过且产物核对完成：[快照](evidence/github-ci-39604001946.json)记录 80 个关键文件逐任务匹配、73+7 单测、新契约、189 次既有缩减与字节/结构基准一致，以及五项发布边界控制。
 2. 参数策略：本地与云端验收通过。新增十类有界域和公共类型顺序，78 项主模块 native 单测、7 项 SDK 单测通过；C 消费者通过 1024 次操作、独立 32/64 位 ABI 的 23 项显式边界、三策略 NUL 缩减及独立重放。见 [接口与限制](ARGUMENT-STRATEGIES.md)及[本地快照](evidence/argument-strategies-20261021.json)。提交 `18cc2953dc8ce6f868f04583ff897715757d378e` 的 [六项 Windows CI 39609263290](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39609263290) 全部成功且产物审计通过：[云端快照](evidence/github-ci-39609263290.json)记录六份归档的 GitHub 摘要及大小核验、逐任务源码和工具链身份匹配、16 份参数输入与本地字节一致、23 项 ABI 边界、三策略 32→1 步 NUL 缩减及独立失败/正确对照重放。189 次既有缩减的结构、输入与结果字节均匹配基准。
-3. 原生错误缩减：仍处于本地实验阶段，尚未完成可提交代码的完整回归、云端及 Linux 专项验收，不计为已完成。已提交基线仍保留默认拒绝原生错误自动缩减的行为。
-4. Linux：普通 native 构建、单测、正确场景和外部 SDK ABI 已实际验收。[CI 39709396891](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39709396891) 在提交 `7ccd5d67fbecf8d94c3b5477a01f17f34dc3065b` 通过并完成产物核对：78+7 单测、212 个项目正确场景、88 个 SDK 正确场景、1024 次类型参数操作和 23 项 ABI 边界。531 个项目文件和 519 个 SDK 源码输入身份匹配；见 [说明](LINUX-ORDINARY.md)及[证据](evidence/linux-ordinary-20261022.json)。原生错误/ASan 缩减和完整回归仍未完成，不计四项全部达标。
+3. 原生错误缩减：提交 `520cf68` 已通过 Windows 七项回归及 Linux crash/ASan 专项。每个平台六次三策略缩减均为 32→2 步，基线/最终三次确认、独立同位置重放、不同位置区分和正确实现对照通过；222 次原始候选执行和 18 份独立对照报告已逐项核对。五项控制仅覆盖 crash 档，签名不承诺同根因或全局最小。见 [统一验收证据](evidence/native-acceptance-20261022.json)。
+4. Linux：普通 native 构建、单测、正确场景和外部 SDK ABI 已实际验收。[CI 39709396891](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39709396891) 在提交 `7ccd5d67fbecf8d94c3b5477a01f17f34dc3065b` 通过并完成产物核对：78+7 单测、212 个项目正确场景、88 个 SDK 正确场景、1024 次类型参数操作和 23 项 ABI 边界。531 个项目文件和 519 个 SDK 源码输入身份匹配；见 [说明](LINUX-ORDINARY.md)及[证据](evidence/linux-ordinary-20261022.json)。后续提交 `520cf68` 又通过 [Linux CI 39717451254](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451254)，新增崩溃/ASan 缩减，普通单测更新为 81+7，源码 550 个文件与 SDK 522 个输入身份匹配。相同提交的 [Windows 七项 CI 39717451261](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261) 完整通过；189 次旧缩减结构和具体结果字节保持一致。Linux 不声明与七个 Windows suite 完全等价。
 
-完成四项后更新项目说明，逐条链接实际代码、示例、测试、CI 和限制。原 rc.1 标签及附件保持历史记录，不用于证明后续代码。
+四项补齐的既定验收已完成，项目说明已更新并链接实际代码、示例、测试、CI 和限制。原 rc.1 标签及附件保持历史记录，不用于证明后续代码。

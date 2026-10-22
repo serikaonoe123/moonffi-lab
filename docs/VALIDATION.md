@@ -1,5 +1,14 @@
 # 缩减器验证记录
 
+## 原生错误与完整回归：2026-10-22
+
+提交 `520cf68738a6693ca348b7af509b4d9bfaf5780f` 的 [Windows 七项 CI 39717451261](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261) 和 [Linux CI 39717451254](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451254) 全部成功并完成产物核对；见 [统一快照](evidence/native-acceptance-20261022.json)。Windows 每任务 550 个源码输入匹配指定提交，七份归档摘要/大小、两个安装归档、三个工具和 core 身份均匹配。81 主模块、7 SDK、48+8 SQLite 单测、704 场景、ASan 三次 canary 与 68 个正确场景通过。189 次完整缩减、63 组重复、214 个真子集通过，结构计数和具体缩减结果字节与 CI 39609263290 相同。
+
+Windows 与 Linux 分别完成 crash/ASan 两档、各三策略的 32→2 步专项缩减；每个平台 222 次原始候选执行、18 份独立对照报告、基线/最终各三次确认与五项 crash 控制已核对。Linux 普通回归为 81+7 单测、212 项目及 88 SDK 正确场景、1024 类型参数操作及 23 ABI 边界；550 个项目文件、522 个 SDK 输入、专项每档 35 个输入和 478 个 async 源码身份匹配。Linux 不声明与 Windows 七项 suite 完全等价。
+
+复现脚本绑定已核对的 MOON_HOME/PATH，以显式本地工作区成员解析 async，保存清单和解析树；本机从 `41ff7e5` 干净导出也完成七项回归，新工具链 registry 目录在结束后仍不存在。该本机较早 fixture 提交与最终 `520cf68` 云端验收分开记录。首轮 Linux 39717207239 因人工故障未崩溃而按预期拒绝缩减，失败归档保留；运行时 volatile 地址修订后通过，不删除历史失败。ASan 专项只插桩自有 faults.c，五项不稳定等控制只覆盖 crash 档；完整限制见 [协议说明](NATIVE-ERRORS.md)。
+
+
 ## Linux 普通 native 与 SDK ABI：2026-10-22
 
 提交 `7ccd5d67fbecf8d94c3b5477a01f17f34dc3065b` 的 [CI 39709396891](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39709396891) 成功且产物核对通过。Linux 独立锁的两个归档、三个工具二进制、实际版本及 core 的 1,211 个源文件身份一致；531 个导出项目文件匹配提交，519 个 SDK 源码输入匹配项目与依赖。78 项主模块和 7 项 SDK 单测、212 个项目正确场景及 88 个 SDK 正确场景通过，包括 1024 次类型参数操作与 23 项显式 ABI 边界。四个 Eigen 包的编译/链接配置只在副本中适配并记录前后身份，C/C++ 源码未修改。见 [范围说明](LINUX-ORDINARY.md)和[证据](evidence/linux-ordinary-20261022.json)。

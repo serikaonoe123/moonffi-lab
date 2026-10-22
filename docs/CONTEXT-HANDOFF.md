@@ -8,11 +8,11 @@
 - 有界 FFI 参数策略：十类参数、实际 C ABI 消费、参数缩减和重放；见 [说明](ARGUMENT-STRATEGIES.md)与 [CI 证据](evidence/github-ci-39609263290.json)。
 - Linux 普通 native：78+7 单测、212 个项目正确场景、88 个 SDK 正确场景、1024 次参数操作与 23 项 ABI 边界；见 [范围说明](LINUX-ORDINARY.md)与 [CI 证据](evidence/linux-ordinary-20261022.json)。
 
-## 待完成
+## 本轮补齐验收
 
-1. 原生错误验证脚本与 CI、完整回归及云端产物核对。
-2. Linux 原生错误/ASan 缩减及完整行为回归；普通构建、单测和正确场景已独立验收。
-3. 验收完成后更新项目说明与支持范围。
+提交 `520cf68` 的 Windows 七项回归、Linux 普通 native/SDK 及原生崩溃/ASan 三策略缩减均已通过，并完成归档摘要、源码和原始报告核对。两个平台的六次专项缩减各为 32→2 步；见 [统一证据](evidence/native-acceptance-20261022.json)、[原生错误范围](NATIVE-ERRORS.md)与[环境复现约定](REPRODUCIBILITY.md)。本机 `41ff7e5` 另有干净导出的七项回归记录。
+
+上述四项能力补齐的既定验收已完成。Linux 未声明与 Windows 七个 suite 全面等价，ASan 全程序覆盖、ASan 档五项控制、独立使用者反馈和新版本发布不在本次成功范围。
 
 ## 来源与限制
 
