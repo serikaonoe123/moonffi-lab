@@ -10,4 +10,4 @@
 
 代码变更先说明具体触发条件、修复后的行为和验证范围。涉及资源/状态模型时补能区分旧行为和新行为的验证；生成规则、编码或语义变化须审视 adapter_version / generator_version 及历史输入重放。运行入口见 [复现指南](docs/REPRODUCIBILITY.md)。
 
-项目当前以 Windows native 和 [v0.1 范围](docs/RELEASE-PLAN.md) 为准。公开发布、registry 包和向上游发送消息由维护者另行决定，提交反馈不会自动触发这些动作。
+当前源码的 Windows/Linux 已验证范围见[复审说明](docs/HACKATHON-SUBMISSION.md)与[固定提交证据](docs/evidence/main-acceptance-20261022.json)；[历史 v0.1 候选范围](docs/RELEASE-PLAN.md)仍按其冻结记录解释。公开发布、registry 包和向上游发送消息由维护者另行决定，提交反馈不会自动触发这些动作。

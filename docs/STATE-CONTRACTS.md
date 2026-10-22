@@ -1,6 +1,6 @@
 # 显式状态契约
 
-2026-10-21 的开发版本在原 Adapter / StateModel 之外增加可选 ContractModel、ContractTarget 和 ContractAdapter。旧适配器的接口及失败指纹保持原样。此文档描述开发中的接口，不把 rc.1 附件当作含有新接口的版本。
+2026-10-21 的开发版本在原 Adapter / StateModel 之外增加可选 ContractModel、ContractTarget 和 ContractAdapter。旧适配器的接口及失败指纹保持原样。当前接口及实例已纳入固定提交验收，见[证据](evidence/main-acceptance-20261022.json)；rc.1 附件不包含新接口。
 
 ## 模型与目标
 

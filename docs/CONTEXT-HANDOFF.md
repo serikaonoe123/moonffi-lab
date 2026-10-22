@@ -10,6 +10,8 @@
 
 ## 本轮补齐验收
 
+当前主分支验收提交为 `7d2716d`：[Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586714)及[Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586758)全部成功并核对产物，见[当前快照](evidence/main-acceptance-20261022.json)。[新版项目说明](HACKATHON-SUBMISSION.md)、[功能对照](FRAMEWORK-COMPARISON.md)和[表单填写材料](RESUBMISSION-TEXT.md)已准备；实际报名表尚未由本工具提交。
+
 提交 `520cf68` 的 Windows 七项回归、Linux 普通 native/SDK 及原生崩溃/ASan 三策略缩减均已通过，并完成归档摘要、源码和原始报告核对。两个平台的六次专项缩减各为 32→2 步；见 [统一证据](evidence/native-acceptance-20261022.json)、[原生错误范围](NATIVE-ERRORS.md)与[环境复现约定](REPRODUCIBILITY.md)。本机 `41ff7e5` 另有干净导出的七项回归记录。
 
 上述四项能力补齐的既定验收已完成。Linux 未声明与 Windows 七个 suite 全面等价，ASan 全程序覆盖、ASan 档五项控制、独立使用者反馈和新版本发布不在本次成功范围。

@@ -1,15 +1,13 @@
-# MoonFFI Lab：十月黑客松项目说明草稿
+# MoonFFI Lab：十月黑客松复审项目说明
 
-状态更新（2026-10-21）：用户告知首次申报被驳回。以下保留 rc.1 时的说明草稿，不能直接当作已满足复审要求的新材料；四项补齐与实际证据见 [复审工作记录](REVIEW-RESPONSE.md)。本工具没有代用户提交表单；参赛者与队伍信息由本人确认。
+更新：2026-10-22。验收代码固定为 [`7d2716dd345224402437466f41ee9a34564749cf`](https://github.com/serikaonoe123/moonffi-lab/tree/7d2716dd345224402437466f41ee9a34564749cf)。本说明对应四项补齐后的源码，历史 rc.1 附件不包含这些新增能力。
 
-**项目与问题。** MoonFFI Lab 是以 MoonBit 实现的原生绑定测试与反例缩减工具。C/C++ 绑定的生命周期、共享引用、错误后状态常需一串调用才会出错；仅保存随机 seed 或最后一条日志，难以交付可靠复现。
+**项目与问题。** MoonFFI Lab 以 MoonBit 实现原生 C/C++ 绑定的有状态测试、失败重放和轨迹缩减。绑定中的生命周期、共享引用和错误后状态，常需一串调用才能触发问题。工具保存具体操作及参数，在独立工作进程调用目标，再缩减为可交付的复现输入。核心模型与缩减调度由 MoonBit 实现；C/C++ 用于目标绑定及明确标注的测试 fixture。
 
-**本期工作。** core/runner 提供可复用适配协议、具体轨迹保存、独立工作进程、异常与超时分类、三种缩减策略、状态修整、参数缩减、预算与重复确认。独立 C 计数器演示如何接入；未经修改的社区 SQLite 绑定用于验证公共接口能够支持真实消费者。核心调度、模型和缩减逻辑可从 [core](../core) / [runner](../runner) 审阅。
+**针对反馈完成的工作。** 新增显式初态、命令候选、前置条件、状态推进、后置条件及不变量接口，生成、验证、修整共享纯模型，实际返回值和目标观察值在执行阶段核对。参数策略覆盖布尔、32/64 位有/无符号整数、精确位模式浮点、Unicode 文本、字节、数组和可空值，并经真实 C ABI 消费者验证。原生错误缩减采用显式启用的崩溃位置或 ASan 调用帧签名，要求基线/最终各三次确认及相同失败；另补充 Linux x86_64 的独立安装、构建、单测、SDK 和原生故障专项。[逐项回应](REVIEW-RESPONSE.md)与[成熟框架功能对照](FRAMEWORK-COMPARISON.md)说明对应实现和边界。
 
-**可验收成果。** [公开仓库](https://github.com/serikaonoe123/moonffi-lab)保留提交与失败修复记录；[rc.1 预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)固定代码提交 `23893d5bb3a231a21df10db506d8da821a7e984d`。该提交[六项 Windows CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378)通过并核对产物，涵盖主模块、SDK、SQLite 测试，704 个 Buffer/Eigen 场景、96 个 SQLite 场景及 189 次固定缩减。按[复现入口](INDEPENDENT-REPRODUCTION.md)从 Git checkout 运行；环境为 Windows x64、MSVC、PowerShell 7.5+ 和内容锁定的 MoonBit 工具链。
+**可核对成果。** 同一提交的 [Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586714) 和 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586758) 均成功，归档摘要、源码输入与原始报告已核对。Windows 通过 81 项主模块、7 项 SDK、48+8 项 SQLite 单测、704 个生成场景及 189 次既有缩减。Linux 通过 81+7 项单测、212 个项目及 88 个 SDK 正确场景。两个平台各完成 crash/ASan 两档、三策略的 32→2 步缩减，并核对独立重放、不同位置和正确实现对照。计数、原始产物摘要及限制见[当前提交验收快照](evidence/main-acceptance-20261022.json)；从 Git checkout 按[独立复现入口](INDEPENDENT-REPRODUCTION.md)执行。
 
-**来源与贡献边界。** 自写代码为 MIT；Eigen 绑定/头文件和历史随机流保留原来源及许可，SQLite 使用固定的社区源码。既有 Eigen 材料不计为本期原创移植量，新增价值是通用测试、缩减引擎和接入验证，不能将同一工作重复或拆分申报。来源细节见[范围清单](RELEASE-PLAN.md)及[SQLite 记录](SQLITE-INTEGRATION.md)。
+**定位与范围。** 本项目参考 Hypothesis、PropEr 的状态建模与值策略设计，交付面向原生绑定的串行、有界测试工具。接入者仍需编写适配器、模型及性质；不承诺任意库自动建模、完整符号返回值模型、并行状态机或与成熟框架全面等价。错误签名描述同一未变二进制中的观测位置，不证明同根因或全局最小。故障缩减的实证使用自有人工故障；未声称发现未知上游缺陷。ASan 仅插桩文档列出的 C/C++ 单元，五项不稳定等控制只覆盖 crash 档；Linux 不声称与 Windows 七项 suite 全面等价。
 
-**限制与后续。** Buffer/计数器缺陷为人工示例，尚未发现未知上游缺陷；当前完整验证限 Windows native，ASan 仅覆盖记录中的 Buffer/Eigen C/C++ 单元。独立使用者反馈待完成，后续据反馈完善接入体验。开发使用 AI 辅助；参赛者需自行审阅并能说明设计、测试及这些限制。
-
-报名依据：[官方十月赛事页面](https://moonbitlang.github.io/Hackathon2026/)及[官方页面源文案](https://github.com/moonbitlang/Hackathon2026/blob/main/src/App.tsx)。截至查阅日，页面要求参赛信息、公开仓库及一页说明，报名与验收截止 2026-10-31。页面列出的语言、运行测试、实质工作、许可和 AI 理解要求已有项目材料可对照；队伍信息、报名次数、入群及实际审核状态未核实。正式章程与报名表的飞书内容本次未能读取，不能宣称已核对所有字段或已满足全部资格条件。
+**来源、贡献与后续。** 自写代码为 MIT；既有 Eigen 绑定、头文件及历史随机流保留来源与许可，社区 SQLite 固定源码保持原样。上述旧材料不计为本期原创移植量，本期新增为通用协议、策略、错误缩减及跨平台接入验证。开发使用 AI 辅助，参赛者需理解并能说明设计与测试。独立使用者反馈、新版本包与正式复审结果尚未作为已完成成果；本说明不代替实际报名表提交。历史草稿可从 [rc.1 阶段记录](https://github.com/serikaonoe123/moonffi-lab/blob/7d2716dd345224402437466f41ee9a34564749cf/docs/HACKATHON-SUBMISSION.md)查阅。

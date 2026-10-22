@@ -26,6 +26,8 @@
 
 ## 已验证范围
 
+主分支提交 `7d2716dd345224402437466f41ee9a34564749cf` 的 [Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586714)和 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586758)同样全部成功并完成产物核对，见[当前快照](evidence/main-acceptance-20261022.json)。以下保留早期验收及修复过程。
+
 提交 `520cf68738a6693ca348b7af509b4d9bfaf5780f` 已完成 [Windows 七项 CI 39717451261](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261) 和 [Linux CI 39717451254](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451254)，全部产物已下载并按 GitHub 归档摘要、指定提交源码和原始报告核对。结构化计数、归档身份和限制见 [统一验收证据](evidence/native-acceptance-20261022.json)。环境准备见 [复现约定](REPRODUCIBILITY.md)。
 
 两个平台分别通过 49 项专项单测；crash/ASan 各三策略均从 32 步缩到 2 步，基线/最终各三次确认、独立同位置重放、不同位置区分和正确实现对照通过。每个平台核对六次缩减、222 次原始候选执行和 18 份独立对照报告。五项不稳定/弱证据/预算/默认关闭控制只覆盖 crash 档。
