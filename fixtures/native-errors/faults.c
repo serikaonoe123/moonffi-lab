@@ -8,11 +8,14 @@
 #else
 #define NOINLINE __attribute__((noinline))
 #endif
+/* Read the address at runtime: a compiler may discard a call whose only
+ * effect is a compile-time undefined null access. Keep two distinct sites. */
+static volatile uintptr_t fault_address = 0;
 static NOINLINE void crash_a(void) {
-  volatile uint8_t *p = (volatile uint8_t *)(uintptr_t)0; *p = 1;
+  volatile uint8_t *p = (volatile uint8_t *)fault_address; *p = 1;
 }
 static NOINLINE void crash_b(void) {
-  volatile uint8_t *p = (volatile uint8_t *)(uintptr_t)0; *p = 2;
+  volatile uint8_t *p = (volatile uint8_t *)fault_address; *p = 2;
 }
 static volatile int outside = 8;
 static NOINLINE void memory_a(void) {

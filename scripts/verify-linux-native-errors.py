@@ -99,7 +99,7 @@ def main():
                     workspace, env, profile / 'tests.log')
                 require('Total tests: 49, passed: 49, failed: 0.' in (profile / 'tests.log').read_text(),
                         'Focused native unit tests incomplete')
-            run(['moon', 'build', '--target', 'native', '--deny-warn', '--frozen', 'cmd/native-errors'],
+            run(['moon', 'build', '--verbose', '--target', 'native', '--deny-warn', '--frozen', 'cmd/native-errors'],
                 workspace, env, profile / 'build.log')
             executable = ordinary.executable(workspace / '_build/native/debug/build', 'native-errors')
             binary = sha(executable)
