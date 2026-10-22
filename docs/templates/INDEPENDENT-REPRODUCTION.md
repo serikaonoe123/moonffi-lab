@@ -4,16 +4,17 @@
 
 - 实际完整提交 SHA：
 - 是否参与过该提交开发：
-- Windows 版本 / x64：
-- PowerShell、MSVC、Windows SDK 版本：
+- 操作系统 / 架构（Windows x64 或 Linux x86_64）：
+- Windows：PowerShell、MSVC、Windows SDK 版本；Linux：发行版、Python、GCC/G++ 版本：
 - 安装方式：官方在线 / 明确的匹配归档 / 已有安装（写明来源）
 - async 来源：本次 registry 下载 / 工具或源码缓存 / 未恢复成功
 - 实际 moon / moonc / moonrun 版本与工具链摘要结果：
 - 首次执行的命令与工作目录：
 - 顶层验证：通过 / 失败 / 未完成；失败阶段：
-- behavior / asan / benchmark / generation / sdk / sqlite：逐项填写
-- 九项脚本控制：通过 / 失败 / 未执行
-- 如使用新候选，源码准备控制：通过 / 失败 / 未执行
+- Windows behavior / asan / benchmark / generation / sdk / sqlite / native-errors：逐项填写
+- Linux ordinary / native-errors：逐项填写，未执行项写明
+- Windows 九项脚本控制：通过 / 失败 / 未执行
+- 历史 rc.1 源码准备控制（未执行可跳过）：通过 / 失败 / 未执行
 - 输出目录及相关 verification.json / failure.json / 原始日志位置：
 - 是否遇到权限或安全审查拒绝（原文与已停止的动作）：
 - 文档中第一个无法独立完成的步骤：

@@ -2,7 +2,9 @@ name: Linux native error acceptance
 
 on:
   push:
-    branches: [codex/native-errors-local-review]
+    branches: [main, codex/native-errors-local-review]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
