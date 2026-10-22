@@ -11,3 +11,4 @@
 *.ilk
 *.exe
 pkg.generated.mbti
+__pycache__/
