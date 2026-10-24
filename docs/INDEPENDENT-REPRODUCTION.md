@@ -11,13 +11,13 @@ git clone https://github.com/serikaonoe123/moonffi-lab.git
 Set-Location moonffi-lab
 # 这是原生错误/Linux 补齐合并后的固定源码提交。
 # 复现其他提交时，填写该提交完整 SHA，并另行记录其实际结果。
-$candidate = '3767f61a37a45d78e1cee8d10a49ade8113af45f'
+$candidate = '7d2716dd345224402437466f41ee9a34564749cf'
 git checkout --detach $candidate
 git rev-parse HEAD
 git status --short
 ```
 
-此提交已合入状态契约、类型参数策略及原生错误/Linux 验收。历史 rc.1 对应 `23893d5bb3a231a21df10db506d8da821a7e984d`，仍按其六项 suite 复现；新提交使用下面七项入口。旧冻结发布清单和 prepare-release 仍绑定 rc.1，不表示已为新代码生成、批准或发布新的候选包。不要用一个提交的报告代表另一个提交已经通过。
+此提交已合入状态契约、类型参数策略及原生错误/Linux 验收，且 Windows/Linux CI 产物已按同一提交核对，见 [验收快照](evidence/main-acceptance-20261022.json)。历史 rc.1 对应 `23893d5bb3a231a21df10db506d8da821a7e984d`，仍按其六项 suite 复现；新提交使用下面七项入口。旧冻结发布清单和 prepare-release 仍绑定 rc.1，不表示已为新代码生成、批准或发布新的候选包。不要用一个提交的报告代表另一个提交已经通过。
 
 ## 安装与完整验收
 
@@ -56,13 +56,13 @@ try {
 
 ## Linux 环境与专项验收
 
-已有云端验证使用 Ubuntu 24.04 x86_64、Python 3.12 和 GCC/G++；其他发行版或工具组合须按实际结果记录。下面只运行 Linux 普通 native/SDK 和自有故障专项，不表示与七个 Windows suite 覆盖完全等价。源码 checkout 同样固定为 `3767f61a37a45d78e1cee8d10a49ade8113af45f`，在仓库根目录执行；各输出和安装目录必须尚不存在。
+已有云端验证使用 Ubuntu 24.04 x86_64、Python 3.12 和 GCC/G++；其他发行版或工具组合须按实际结果记录。下面只运行 Linux 普通 native/SDK 和自有故障专项，不表示与七个 Windows suite 覆盖完全等价。源码 checkout 同样固定为 `7d2716dd345224402437466f41ee9a34564749cf`，在仓库根目录执行；各输出和安装目录必须尚不存在。
 
 ```bash
 python3 scripts/test_linux_toolchain.py
 python3 scripts/linux_toolchain.py --destination "$PWD/results/repro-linux-toolchain" --out results/repro-linux-bootstrap
-python3 scripts/verify-linux.py --toolchain "$PWD/results/repro-linux-toolchain" --ref 3767f61a37a45d78e1cee8d10a49ade8113af45f --out results/repro-linux-ordinary
-python3 scripts/verify-linux-native-errors.py --toolchain "$PWD/results/repro-linux-toolchain" --ref 3767f61a37a45d78e1cee8d10a49ade8113af45f --dependency-source results/repro-linux-ordinary/workspace/.mooncakes/moonbitlang/async --out results/repro-linux-native-errors
+python3 scripts/verify-linux.py --toolchain "$PWD/results/repro-linux-toolchain" --ref 7d2716dd345224402437466f41ee9a34564749cf --out results/repro-linux-ordinary
+python3 scripts/verify-linux-native-errors.py --toolchain "$PWD/results/repro-linux-toolchain" --ref 7d2716dd345224402437466f41ee9a34564749cf --dependency-source results/repro-linux-ordinary/workspace/.mooncakes/moonbitlang/async --out results/repro-linux-native-errors
 ```
 
 核对 bootstrap、ordinary 和 native-errors 各自的 verification.json；失败时保留 failure.json 和原始日志。工具链内容校验、async 实际来源、临时编译参数变更和源码清单须保留。原生错误专项的 crash/ASan 各有三策略 32→2 步缩减、同位置重放、不同位置及正确实现对照；五项不稳定等控制只覆盖 crash 档，ASan 只插桩 faults.c。详见 [协议与限制](NATIVE-ERRORS.md)。

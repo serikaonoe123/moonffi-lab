@@ -107,6 +107,8 @@ try {
     Run $exe @('--self-check',$mode,(Join-Path $profile 'checks')) (Join-Path $profile 'checks.log')
     $checks = Read-Json (Join-Path $profile 'checks/verification.json')
     Require ($checks.state -eq 'passed' -and $checks.mode -eq $mode -and @($checks.checks | Where-Object strategy).Count -eq 3) 'Missing native checks'
+    $controls = @($checks.checks | Where-Object control)
+    Require ($controls.Count -eq 5 -and (($controls.control | Sort-Object) -join ',') -ceq 'budget,disabled,flaky-baseline,flaky-final,weak') 'Missing or duplicate native controls'
     Require ($before -ceq (Get-FileHash -LiteralPath $exe).Hash) 'Executable changed during validation'
     foreach ($entry in $manifest) { Require ($entry.sha256 -ceq (Get-FileHash -LiteralPath (Join-Path $workspace $entry.path)).Hash) "Tested source changed during validation: $($entry.path)" }
     foreach ($entry in $dependencyManifest) { Require ($entry.sha256 -ceq (Get-FileHash -LiteralPath (Join-Path $workspace $entry.path)).Hash) "Dependency source changed: $($entry.path)" }
@@ -114,7 +116,7 @@ try {
     Set-Location -LiteralPath $project
   }
   $runtime = Join-Path $runtimeDirectory 'clang_rt.asan_dynamic-x86_64.dll'
-  [ordered]@{state='passed';profiles=$profiles;runtime_sha256=(Get-FileHash -LiteralPath $runtime).Hash;driver_sha256=(Get-FileHash -LiteralPath $PSCommandPath).Hash;scope='Owned intentional C faults only; source cache reused without build outputs. ASan instruments faults.c, not MoonBit C/runtime/dependencies. Signatures identify observed sites within an unchanged executable, not root cause or global minimum.'} | ConvertTo-Json -Depth 22 | Set-Content -LiteralPath (Join-Path $Out 'verification.json') -Encoding utf8
+  [ordered]@{state='passed';profiles=$profiles;runtime_sha256=(Get-FileHash -LiteralPath $runtime).Hash;driver_sha256=(Get-FileHash -LiteralPath $PSCommandPath).Hash;scope='Owned intentional C faults and five controls per profile; ASan weak evidence is a synthetic incomplete diagnostic, not an actual detection. Source cache reused without build outputs. ASan instruments faults.c, not MoonBit C/runtime/dependencies. Signatures identify observed sites within an unchanged executable, not root cause or global minimum.'} | ConvertTo-Json -Depth 22 | Set-Content -LiteralPath (Join-Path $Out 'verification.json') -Encoding utf8
   Write-Host "Native crash and ASan reduction checks passed: $Out"
 } catch {
   [ordered]@{state='failed';stage=$stage;error=$_.Exception.Message} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $Out 'failure.json') -Encoding utf8

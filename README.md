@@ -2,7 +2,7 @@
 
 用 MoonBit 为原生 C/C++ 绑定生成有状态调用序列，在独立进程执行，保存失败证据，并缩减成可重放的案例。
 
-目前提供 Windows/MSVC 的 **behavior** 模式及单独构建的 ASan stub profile。Buffer fixture 的三种行为缺陷为人工注入；专用崩溃和超时探针用于验证控制器。Eigen 使用有来源和哈希记录的真实绑定快照。
+目前已验证 Windows x64/MSVC 的七项 native suite，以及 Linux x86_64 的普通 native、SDK 和原生崩溃/ASan 错误缩减。两平台的验证范围并不完全相同。Buffer fixture 的三种行为缺陷为人工注入；专用崩溃和超时探针用于验证控制器。Eigen 使用有来源和哈希记录的真实绑定快照。
 
 首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。 本轮四项补齐的[复审项目说明](docs/HACKATHON-SUBMISSION.md)、[成熟框架功能对照](docs/FRAMEWORK-COMPARISON.md)及[可复制报名补充材料](docs/RESUBMISSION-TEXT.md)已按固定提交整理。[v0.1.0-rc.1 预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)已提供源码及校验清单，对应代码与准备控制已通过 [六项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378)。支持范围和未完成项见 [发布记录](docs/RELEASE-PLAN.md)；独立使用者反馈仍待完成，尚未发布稳定版或 registry 包。
 
@@ -102,6 +102,6 @@ Eigen 支持 `--generator stateful` 的六操作探索，以及 `--generator ari
 
 状态修整使用 MoonBit 增量依赖索引，避免反复验证全部前缀；结构和模型都接受一步后才提交依赖变化。拒绝后的状态保持约定及复杂度范围见 [适配器指南](docs/ADAPTERS.md)。
 
-当前验收：提交 `520cf68` 的 Windows 七项回归及 Linux 普通 native、SDK ABI、人工故障/ASan 缩减均通过并核对产物，见 [证据](docs/evidence/native-acceptance-20261022.json)。Linux 不宣称与 Windows 七项 suite 完全等价。当前限制：ASan 仅插桩 Buffer C fixture、Eigen C++ shim（含其模板实例）及原生错误专项的 faults.c，MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
+当前代码验收基线：提交 `7d2716d` 的 [Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586714) 及 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586758) 均通过并核对产物，见 [固定提交证据](docs/evidence/main-acceptance-20261022.json)。后续仅文档变更不作为新的执行记录；运行代码变更须重新验收。Linux 不宣称与 Windows 七项 suite 完全等价。当前限制：ASan 仅插桩 Buffer C fixture、Eigen C++ shim（含其模板实例）及原生错误专项的 faults.c，MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
 
 旧 Eigen 绑定属于既有成果，新增引擎、适配器和验收脚本属于本项目工作。来源和许可见 [快照记录](vendor/eigen-binding/SNAPSHOT.md)。本项目 MIT；导入源码保留原有许可。

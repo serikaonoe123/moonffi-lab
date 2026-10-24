@@ -1,5 +1,7 @@
 # v0.1.0 范围与发布准备
 
+> 本页记录已发布 rc.1 的冻结范围与准备流程。当前主分支的代码验收基线为 `7d2716d`，包含后续状态契约、参数策略、原生错误缩减和 Linux 验证，见 [当前证据](evidence/main-acceptance-20261022.json)及 [复现入口](INDEPENDENT-REPRODUCTION.md)。这些新增能力尚未据此发布新版本；下文旧候选的范围和证据保持原义。
+
 当前状态：已于 2026-10-20 发布 [v0.1.0-rc.1 实验性源码预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)，尚未发布稳定版或 registry 包。`moon.mod` 中的 0.1.0 是项目自身版本；它与编译器自报的 `v0.10.16+b1a0e846e`、文档仓库标签是不同对象。
 
 本轮候选代码提交 `23893d5bb3a231a21df10db506d8da821a7e984d` 已通过 [六项 CI 39361478378](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378) 及产物核对。四项源码准备控制在本地和云端通过，498 份源码逐文件一致，75 个关键文件逐任务匹配提交归档，原有运行/缩减基准不变。见 [本地准备记录](evidence/release-preparation-20261020.json)与[本轮云端记录](evidence/github-ci-39361478378.json)。后续文档收尾不改变该提交的运行代码。

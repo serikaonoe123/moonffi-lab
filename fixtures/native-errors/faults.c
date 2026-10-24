@@ -1,6 +1,7 @@
 /* Owned, intentional fault fixtures for isolated process reduction tests.
  * Never called in a controller. These are not defects in an external library. */
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <moonbit.h>
 #ifdef _WIN32
@@ -37,6 +38,13 @@ MOONBIT_FFI_EXPORT void lab_owned_native_fault(int32_t mode) {
     case 3: memory_a(); break;
     case 4: memory_b(); break;
     case 5: exit(7); break;
+    /* Deliberately synthetic, incomplete diagnostic: classification alone
+     * must not supply a reducible ASan fingerprint without stack frames. */
+    case 6:
+      fputs("ERROR: AddressSanitizer: heap-buffer-overflow\n"
+            "SUMMARY: AddressSanitizer: heap-buffer-overflow\n", stderr);
+      exit(7);
+      break;
     default: break;
   }
 }
