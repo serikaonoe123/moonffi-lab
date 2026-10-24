@@ -2,15 +2,19 @@
 
 本页保留公开的技术进度；开发过程交接记录留在本地，不作为产品文档。
 
+## 当前 main 状态（2026-10-24）
+
+PR #5 已合并为 `f464479`，MoonBit 0.10.17 的合并后 [Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662)及 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560654)均成功，八份产物及原始结果核对完成，见 [main 验收记录](evidence/main-toolchain-acceptance-20261024.json)。合并后复跑核对这项工作已完成。独立使用者反馈和后续版本发布仍单独跟踪；下文较早提交及证据保留各自日期和范围。
+
 ## 已验收
 
 - 状态契约：独立初态、命令、前置条件、状态推进、后置条件和不变量接口；见 [说明](STATE-CONTRACTS.md)与 [CI 证据](evidence/github-ci-39604001946.json)。
 - 有界 FFI 参数策略：十类参数、实际 C ABI 消费、参数缩减和重放；见 [说明](ARGUMENT-STRATEGIES.md)与 [CI 证据](evidence/github-ci-39609263290.json)。
 - Linux 普通 native：78+7 单测、212 个项目正确场景、88 个 SDK 正确场景、1024 次参数操作与 23 项 ABI 边界；见 [范围说明](LINUX-ORDINARY.md)与 [CI 证据](evidence/linux-ordinary-20261022.json)。
 
-## 本轮补齐验收
+## 四项补齐验收（2026-10-22 历史记录）
 
-当前主分支验收提交为 `7d2716d`：[Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586714)及[Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586758)全部成功并核对产物，见[当前快照](evidence/main-acceptance-20261022.json)。[新版项目说明](HACKATHON-SUBMISSION.md)、[功能对照](FRAMEWORK-COMPARISON.md)和[表单填写材料](RESUBMISSION-TEXT.md)已准备；实际报名表尚未由本工具提交。
+当时的主分支验收提交为 `7d2716d`：[Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586714)及[Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586758)全部成功并核对产物，见[当时快照](evidence/main-acceptance-20261022.json)。[新版项目说明](HACKATHON-SUBMISSION.md)、[功能对照](FRAMEWORK-COMPARISON.md)和[表单填写材料](RESUBMISSION-TEXT.md)已准备；实际报名表尚未由本工具提交。
 
 提交 `520cf68` 的 Windows 七项回归、Linux 普通 native/SDK 及原生崩溃/ASan 三策略缩减均已通过，并完成归档摘要、源码和原始报告核对。两个平台的六次专项缩减各为 32→2 步；见 [统一证据](evidence/native-acceptance-20261022.json)、[原生错误范围](NATIVE-ERRORS.md)与[环境复现约定](REPRODUCIBILITY.md)。本机 `41ff7e5` 另有干净导出的七项回归记录。
 
