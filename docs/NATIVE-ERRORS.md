@@ -14,7 +14,7 @@
 & ./scripts/verify-native-errors.ps1
 ```
 
-脚本在新结果目录分别创建普通与 ASan 源码副本，记录源码、工具链、运行时和二进制身份。普通副本运行专项单测。两个 profile 均对项目自有、明确标注的人工故障进行三策略缩减，并检查不同故障位置和正确实现对照。另有不稳定基线、最终确认不稳定、弱证据、预算和默认关闭五项控制，当前只在 crash 档运行；ASan 档尚未覆盖这些控制。ASan 仅插桩 `fixtures/native-errors/faults.c`，不覆盖 MoonBit 生成 C、运行时或 async stubs。
+脚本在新结果目录分别创建普通与 ASan 源码副本，记录源码、工具链、运行时和二进制身份。普通副本运行专项单测。两个 profile 均对项目自有、明确标注的人工故障进行三策略缩减，并检查不同故障位置和正确实现对照。不稳定基线、最终确认不稳定、弱证据、预算和默认关闭五项控制现在分别在 crash 和 ASan 两档运行。ASan 的弱证据控制使用明确标注的合成残缺诊断（类别头和摘要、无调用帧），不是实际 ASan 检测；其余 ASan 控制使用插桩后的人工故障。验收同时检查结果类别，避免误把普通崩溃当作 ASan 控制通过。ASan 仅插桩 `fixtures/native-errors/faults.c`，不覆盖 MoonBit 生成 C、运行时或 async stubs。
 
 从指定 Git 提交导出并验收：
 
@@ -23,6 +23,12 @@
 ```
 
 成功报告在新目录的 `verification.json`，每个 profile 的 `checks/` 保留输入、原始 stderr、候选报告、缩减日志及重放。失败不会清理已有记录。该专项不替代六项既有行为/ASan/benchmark/generation/SDK/SQLite 回归。
+
+## 维护增量（2026-10-24）
+
+维护提交 `2b29c6a73c1e61c19daec52f95b172312cd78d73` 已从 Git 导出源码完成本地 Windows 七项验收：81 项主模块、7 项 SDK、48+8 项 SQLite 单测、189 次缩减基准（非计时字段与既有记录一致），以及两档各三策略的 32→2 步专项缩减、两档各五项控制。工具链/脚本/发布边界另通过 11/9/5 项检查。SQLite 使用同一导出源码和显式缓存归档单独运行；这是复用已核验工具链与源码缓存的本机验证。
+
+上述早期维护提交的 Windows/Linux CI 在工具链归档内容校验阶段退出，接受归档数为零，见 [早期维护记录](evidence/maintenance-20261024.json)。随后候选 `33bbfea` 改用与原锁完全一致的官方固定版本归档，在源码树一致的 PR 合成合并提交 `fee7f97` 通过 Windows 七项及 Linux 验收；两平台的 crash/ASan 各五项控制均已执行，并核对原始报告，见 [云端验收记录](evidence/maintenance-hosted-20261024.json)。历史快照保持原义，归档、二进制及 core 内容摘要未修改，来源说明见 [工具链内容锁](TOOLCHAIN-LOCK.md)。
 
 ## 已验证范围
 

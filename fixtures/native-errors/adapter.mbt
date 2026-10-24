@@ -32,11 +32,12 @@ pub impl @lab.Adapter for Target with fn execute(self, step) {
   if step.op != "fault" { return None }
   let value : Int = try { @json.from_json(step.args) } catch { _ => 0 }
   if self.mode == "correct" ||
-    (self.mode == "flaky-baseline" && self.ordinal == 2) ||
-    (self.mode == "flaky-final" && self.ordinal > 3) { return None }
-  let kind = if self.mode == "weak" { 5 }
+    ((self.mode == "flaky-baseline" || self.mode == "asan-flaky-baseline") && self.ordinal == 2) ||
+    ((self.mode == "flaky-final" || self.mode == "asan-flaky-final") && self.ordinal > 3) { return None }
+  let kind = if self.mode == "asan-weak" { 6 }
+    else if self.mode == "weak" { 5 }
     else if self.mode == "asan-b" || (self.mode == "asan" && value == 0) { 4 }
-    else if self.mode == "asan" { 3 }
+    else if self.mode == "asan" || self.mode == "asan-flaky-baseline" || self.mode == "asan-flaky-final" { 3 }
     else if self.mode == "crash-b" || value == 0 { 2 }
     else { 1 }
   native_fault(kind)

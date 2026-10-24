@@ -1,0 +1,225 @@
+{
+  "schema": 1,
+  "state": "local-windows-passed-cloud-bootstrap-rejected",
+  "observed_on": "2026-10-24",
+  "tested_commit": "2b29c6a73c1e61c19daec52f95b172312cd78d73",
+  "pull_request": "https://github.com/serikaonoe123/moonffi-lab/pull/4",
+  "local_windows": {
+    "state": "passed",
+    "fresh_committed_source_export": true,
+    "source_files": 554,
+    "source_archive_sha256": "D3BE749F5FFDFF45269623031AECA158B09311B362A7CCE6588BCBB2B05E13A4",
+    "dependency_mode": "explicit-local-workspace-source",
+    "reused_content_verified_toolchain": true,
+    "independent_environment": false,
+    "suites": {
+      "behavior": {
+        "path": "results/native-controls-fixed-2b29c6a-20261024/behavior/verification.json",
+        "sha256": "BF46E3728DBF890FA6BE293B51DC5D796F13C1AFDE58543A8B38AF499C1AF9F4"
+      },
+      "asan": {
+        "path": "results/native-controls-fixed-2b29c6a-20261024/asan/verification.json",
+        "sha256": "E5F27DB7DF2611163CF38340CF856629C8C1B753F9B2A3D12CCA873B8E2648FF"
+      },
+      "benchmark": {
+        "path": "results/native-controls-fixed-2b29c6a-20261024/benchmark/verification.json",
+        "sha256": "0F37319CEC0FFB2163FA9EA05EF0DCBD80770285855BD90A80AC0E75EE9A957B"
+      },
+      "generation": {
+        "path": "results/native-controls-fixed-2b29c6a-20261024/generation/verification.json",
+        "sha256": "83AF2C1524A093BC21CD10910101456D09866D95E98096396AB9C8990AA16B95"
+      },
+      "sdk": {
+        "path": "results/native-controls-fixed-2b29c6a-20261024/sdk/verification.json",
+        "sha256": "C90288EE84098D1C9DE255B7BDA84E8D9ECDC304E295C6A0C125E0B76CF951E1"
+      },
+      "native-errors": {
+        "path": "results/native-controls-fixed-2b29c6a-20261024/native-errors/verification.json",
+        "sha256": "F18BE0F11AC0403C58E7ABC9CACBE4F71F9ACFF1865BEF6A8E225031DB9208F9"
+      },
+      "sqlite": {
+        "path": "results/native-controls-sqlite-2b29c6a-20261024/verification.json",
+        "sha256": "79E2DEFF0FCDC96B454007E107629AC84F208911A22537461EFD694D940A6844"
+      }
+    },
+    "sqlite_committed_engine_and_consumer_files_matched": 40,
+    "root_unit_tests": 81,
+    "sdk_unit_tests": 7,
+    "sqlite_unit_tests": [
+      48,
+      8
+    ],
+    "benchmark_measurements": 189,
+    "repeatable_case_strategies": 63,
+    "proper_subsets_checked": 214,
+    "benchmark_non_timing_fields_match_previous": true,
+    "native_profiles": [
+      {
+        "mode": "crash",
+        "reductions": 3,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "controls": [
+          {
+            "name": "flaky-baseline",
+            "outcome": "Crash",
+            "stop_reason": "unstable_baseline",
+            "confirmed": false
+          },
+          {
+            "name": "flaky-final",
+            "outcome": "Crash",
+            "stop_reason": "unstable_final",
+            "confirmed": false
+          },
+          {
+            "name": "weak",
+            "outcome": "Crash",
+            "stop_reason": "unsupported_outcome",
+            "confirmed": false
+          },
+          {
+            "name": "budget",
+            "outcome": "Crash",
+            "stop_reason": "execution_budget",
+            "confirmed": true
+          },
+          {
+            "name": "disabled",
+            "outcome": "Crash",
+            "stop_reason": "unsupported_outcome",
+            "confirmed": false
+          }
+        ]
+      },
+      {
+        "mode": "asan",
+        "reductions": 3,
+        "original_steps": 32,
+        "reduced_steps": 2,
+        "controls": [
+          {
+            "name": "flaky-baseline",
+            "outcome": "MemoryError",
+            "stop_reason": "unstable_baseline",
+            "confirmed": false
+          },
+          {
+            "name": "flaky-final",
+            "outcome": "MemoryError",
+            "stop_reason": "unstable_final",
+            "confirmed": false
+          },
+          {
+            "name": "weak",
+            "outcome": "MemoryError",
+            "stop_reason": "unsupported_outcome",
+            "confirmed": false
+          },
+          {
+            "name": "budget",
+            "outcome": "MemoryError",
+            "stop_reason": "execution_budget",
+            "confirmed": true
+          },
+          {
+            "name": "disabled",
+            "outcome": "MemoryError",
+            "stop_reason": "unsupported_outcome",
+            "confirmed": false
+          }
+        ]
+      }
+    ],
+    "additional_gates": {
+      "toolchain": {
+        "path": "results/native-controls-toolchain-gates-20261024/verification.json",
+        "sha256": "3620E35DABF559CCD44CADD2DCD5C153763CB2BCAE5460FF561DD92CC6E9CC70",
+        "checks": 11
+      },
+      "script": {
+        "path": "results/native-controls-script-gates-20261024/verification.json",
+        "sha256": "04827F08E77FFD03ADF1709FCC964589893472E2158C84455CD6652A3AE9ADFA",
+        "checks": 9
+      },
+      "release": {
+        "path": "results/native-controls-release-gate-20261024/verification.json",
+        "sha256": "BD7F808271EA9181A07CAE0154EEE1DE9BB38FD5DBF544CFC1C92B4464E0EED5",
+        "checks": 5
+      }
+    }
+  },
+  "cloud_runs": [
+    {
+      "platform": "windows",
+      "run_id": 40052187741,
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187741",
+      "conclusion": "failure",
+      "business_tests_executed": false,
+      "failure_reports": [
+        {
+          "sha256": "89A3A498013E2A88C46A71CF2A8A6A3DD03F5EE0706F85080009097AD5AA0F8E",
+          "stage": "verify-archives",
+          "accepted_archives": 0
+        },
+        {
+          "sha256": "89A3A498013E2A88C46A71CF2A8A6A3DD03F5EE0706F85080009097AD5AA0F8E",
+          "stage": "verify-archives",
+          "accepted_archives": 0
+        },
+        {
+          "sha256": "89A3A498013E2A88C46A71CF2A8A6A3DD03F5EE0706F85080009097AD5AA0F8E",
+          "stage": "verify-archives",
+          "accepted_archives": 0
+        },
+        {
+          "sha256": "89A3A498013E2A88C46A71CF2A8A6A3DD03F5EE0706F85080009097AD5AA0F8E",
+          "stage": "verify-archives",
+          "accepted_archives": 0
+        },
+        {
+          "sha256": "89A3A498013E2A88C46A71CF2A8A6A3DD03F5EE0706F85080009097AD5AA0F8E",
+          "stage": "verify-archives",
+          "accepted_archives": 0
+        },
+        {
+          "sha256": "89A3A498013E2A88C46A71CF2A8A6A3DD03F5EE0706F85080009097AD5AA0F8E",
+          "stage": "verify-archives",
+          "accepted_archives": 0
+        },
+        {
+          "sha256": "89A3A498013E2A88C46A71CF2A8A6A3DD03F5EE0706F85080009097AD5AA0F8E",
+          "stage": "verify-archives",
+          "accepted_archives": 0
+        }
+      ]
+    },
+    {
+      "platform": "linux",
+      "run_id": 40052187610,
+      "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187610",
+      "conclusion": "failure",
+      "business_tests_executed": false,
+      "failure_reports": [
+        {
+          "sha256": "040D49CC036932B023193787D26DF5580B1FF6AF4060F96CE4A44F3CA1B6D0AE",
+          "stage": "archives",
+          "accepted_archives": 0
+        }
+      ]
+    }
+  ],
+  "hosted_acceptance_complete": false,
+  "linux_new_controls_executed": false,
+  "locks_modified": false,
+  "limits": [
+    "ASan weak evidence is an explicitly synthetic incomplete diagnostic; it is not an actual sanitizer detection.",
+    "Other native failure cases use owned intentional fixtures, not unknown upstream defects.",
+    "ASan instruments only declared C/C++ units, not all generated C, runtime or dependencies.",
+    "The Windows suites used an existing content-verified toolchain and explicit dependency/upstream source caches.",
+    "SQLite ran separately with the supported offline archive option; its 40 committed engine/consumer source files match the same exported commit.",
+    "Cloud failures occurred before accepting toolchain archives; the incoming archive versions are not established by these reports.",
+    "No new Linux native acceptance, full hosted acceptance, release publication or independent-user feedback is claimed."
+  ],
+  "raw_evidence_policy": "Raw local reports and original CI bootstrap failures are retained locally. Historical acceptance snapshots and content locks remain unchanged."
+}

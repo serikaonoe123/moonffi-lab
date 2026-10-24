@@ -2,7 +2,7 @@
 
 用 MoonBit 为原生 C/C++ 绑定生成有状态调用序列，在独立进程执行，保存失败证据，并缩减成可重放的案例。
 
-目前提供 Windows/MSVC 的 **behavior** 模式及单独构建的 ASan stub profile。Buffer fixture 的三种行为缺陷为人工注入；专用崩溃和超时探针用于验证控制器。Eigen 使用有来源和哈希记录的真实绑定快照。
+目前已验证 Windows x64/MSVC 的七项 native suite，以及 Linux x86_64 的普通 native、SDK 和原生崩溃/ASan 错误缩减。两平台的验证范围并不完全相同。Buffer fixture 的三种行为缺陷为人工注入；专用崩溃和超时探针用于验证控制器。Eigen 使用有来源和哈希记录的真实绑定快照。
 
 首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。 本轮四项补齐的[复审项目说明](docs/HACKATHON-SUBMISSION.md)、[成熟框架功能对照](docs/FRAMEWORK-COMPARISON.md)及[可复制报名补充材料](docs/RESUBMISSION-TEXT.md)已按固定提交整理。[v0.1.0-rc.1 预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)已提供源码及校验清单，对应代码与准备控制已通过 [六项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378)。支持范围和未完成项见 [发布记录](docs/RELEASE-PLAN.md)；独立使用者反馈仍待完成，尚未发布稳定版或 registry 包。
 
@@ -10,9 +10,11 @@
 
 ## 准备和验证
 
+**安装来源（2026-10-24）**：已切换到官方 `0.10.16+b1a0e846e` 固定版本地址，Windows/Linux/core 三份归档均与原内容锁一致；Windows 全新在线安装及 11 项边界检查通过。Windows 七项及 Linux 云端验收均通过并核对产物，见 [来源核对](docs/evidence/toolchain-source-recovery-20261024.json) 和 [验收记录](docs/evidence/maintenance-hosted-20261024.json)。
+
 当前开发锁使用 moon 0.1.20261020、moonc `v0.10.16+b1a0e846e (2026-10-16)`；rc.1 的旧 CI 使用 moon 0.1.20261016。构建器更新时编译器二进制和 core 源码身份保持一致，验证状态见 [工具链记录](docs/TOOLCHAIN-LOCK.md)。依赖锁定 `moonbitlang/async@0.22.5`。版本以实际自报和内容锁为准，不等同于文档仓库标签或“最新正式版”。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools；完整环境控制入口使用 PowerShell 7.5+。本机 native 恢复记录见 [D8050 解决记录](docs/LOCAL-WINDOWS-TEMP.md)。
 
-需要安装当前锁定工具链时，可运行 `scripts/install-toolchain.ps1`，按固定 SHA-256 在新目录安装工具包和标准库，支持保留归档后的离线重装。使用方法及滚动下载地址的可用性限制见 [工具链内容锁定](docs/TOOLCHAIN-LOCK.md)。
+需要安装当前锁定工具链时，可运行 `scripts/install-toolchain.ps1`，按固定 SHA-256 在新目录安装工具包和标准库，支持保留归档后的离线重装。使用方法及固定版本地址的可用性限制见 [工具链内容锁定](docs/TOOLCHAIN-LOCK.md)。
 
 ```powershell
 $PSVersionTable.PSVersion # Major 应为 7；从开始菜单打开 PowerShell 7
@@ -102,6 +104,6 @@ Eigen 支持 `--generator stateful` 的六操作探索，以及 `--generator ari
 
 状态修整使用 MoonBit 增量依赖索引，避免反复验证全部前缀；结构和模型都接受一步后才提交依赖变化。拒绝后的状态保持约定及复杂度范围见 [适配器指南](docs/ADAPTERS.md)。
 
-当前验收：提交 `520cf68` 的 Windows 七项回归及 Linux 普通 native、SDK ABI、人工故障/ASan 缩减均通过并核对产物，见 [证据](docs/evidence/native-acceptance-20261022.json)。Linux 不宣称与 Windows 七项 suite 完全等价。当前限制：ASan 仅插桩 Buffer C fixture、Eigen C++ shim（含其模板实例）及原生错误专项的 faults.c，MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
+当前维护候选 `33bbfea` 已在 PR 合成合并提交 `fee7f97`（完整源码树一致）通过 [Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40054024435) 及 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40054024444)，产物已核对，见 [固定提交证据](docs/evidence/maintenance-hosted-20261024.json)。后续仅文档变更不作为新的执行记录；运行代码变更须重新验收。Linux 不宣称与 Windows 七项 suite 完全等价。当前限制：ASan 仅插桩 Buffer C fixture、Eigen C++ shim（含其模板实例）及原生错误专项的 faults.c，MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
 
 旧 Eigen 绑定属于既有成果，新增引擎、适配器和验收脚本属于本项目工作。来源和许可见 [快照记录](vendor/eigen-binding/SNAPSHOT.md)。本项目 MIT；导入源码保留原有许可。

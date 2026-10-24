@@ -1,8 +1,10 @@
 # 工具链归档内容锁定
 
+**固定来源恢复（2026-10-24）**：已找到官方 `0.10.16+b1a0e846e` 目录，Windows/Linux 工具包与 core ZIP 的实际下载大小和 SHA-256 均与原锁完全一致；无需升级工具链或修改摘要。Windows 全新在线安装、版本/二进制/core 检查及 11 项边界通过，见 [来源核对记录](evidence/toolchain-source-recovery-20261024.json)。修复候选 `33bbfea` 已在源码树一致的 PR 合成合并提交 `fee7f97` 通过 Windows 七项及 Linux 云端验收，并核对八份产物，见 [云端记录](evidence/maintenance-hosted-20261024.json)。先前 [Windows](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187741) 和 [Linux](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187610) 滚动地址拒绝记录保持原义，均未接受下载归档。
+
 2026-10-17 将 CI 的“下载并执行滚动安装器，再检查版本”改为项目内安装脚本：按 `toolchain.json` 的固定字节数与 SHA-256 核验 Windows x64 工具包和 core 归档，全部通过后才解包和运行工具。安装到新目录，不覆盖用户已有安装，不改全局 PATH 或执行策略；成功与失败都恢复调用进程的 PATH、MOON_HOME 和工作目录。
 
-这是**内容锁定**。来源仍是官方 `latest` URL，不能保证未来继续提供这份内容；变化时安装会失败，不自动接受新版本。历史版本地址本轮没有取得成功响应，没有把猜测的日期或版本 URL 写入配置。保留的原始归档可以通过 `-ArchiveDirectory` 离线重装；仓库和 CI 诊断产物不包含这两个归档。
+这是**内容锁定**，当前来源已使用实际核验过的官方版本目录；其中 `+` 按官方安装器规则编码为 `%2B`。仍不承诺永久可下载或供应商签名验证；内容变化时安装会失败。为兼容既有离线缓存，core 的本地文件名仍为 `core-latest.zip`，下载 URL 已固定版本。保留归档可通过 `-ArchiveDirectory` 离线重装；仓库和 CI 诊断产物不分发工具包。
 
 ## 当前开发锁（2026-10-21）
 

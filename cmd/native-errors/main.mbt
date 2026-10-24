@@ -3,6 +3,7 @@ extern "C" fn exit_process(code : Int) -> Unit = "exit"
 
 ///| Execute actual disposable native workers; every assertion keeps its logs.
 async fn check_native(executable : String, output : String, mode : String) -> Unit {
+  assert_true(mode == "crash" || mode == "asan")
   @fs.mkdir(output, recursive=true, allow_exist=false)
   let trace = @faults.generate(0UL, mode, 32)
   @fs.write_file(output + "/input.json", trace.encode())
@@ -32,25 +33,29 @@ async fn check_native(executable : String, output : String, mode : String) -> Un
     checks.push({ "strategy": strategy, "reduction": result.to_json(), "replay": replayed.to_json(),
       "different_site": other.to_json(), "correct": correct.to_json() })
   }
-  if mode == "crash" {
-    for label in ["flaky-baseline", "flaky-final", "weak"] {
-      let input = @faults.generate(0UL, label, 32)
-      let controller = @runner.Controller::new(executable, output + "/" + label, native_errors=true)
-      let result = controller.shrink(@faults.Target::new(label), input, budget=6)
-      let expected = if label == "flaky-baseline" { "unstable_baseline" }
-        else if label == "flaky-final" { "unstable_final" } else { "unsupported_outcome" }
-      assert_true(!result.confirmed && result.stop_reason == expected)
-      checks.push({ "control": label, "result": result.to_json() })
-    }
-    let controller = @runner.Controller::new(executable, output + "/budget", native_errors=true)
-    let limited = controller.shrink(@faults.Target::new(mode), trace, budget=6)
-    assert_true(limited.executions == 6 && limited.confirmed && limited.stop_reason == "execution_budget" && !limited.deletion_minimal)
-    checks.push({ "control": "budget", "result": limited.to_json() })
-    let legacy = @runner.Controller::new(executable, output + "/disabled")
-    let disabled = legacy.shrink(@faults.Target::new(mode), trace)
-    assert_true(!disabled.confirmed && disabled.stop_reason == "unsupported_outcome")
-    checks.push({ "control": "disabled", "result": disabled.to_json() })
+  let expected_outcome : @lab.Outcome = if mode == "asan" { MemoryError } else { Crash }
+  for label in ["flaky-baseline", "flaky-final", "weak"] {
+    let fixture_mode = if mode == "asan" { "asan-" + label } else { label }
+    let input = @faults.generate(0UL, fixture_mode, 32)
+    let controller = @runner.Controller::new(executable, output + "/" + label, native_errors=true, timeout_ms=10000)
+    let result = controller.shrink(@faults.Target::new(fixture_mode), input, budget=6)
+    let expected = if label == "flaky-baseline" { "unstable_baseline" }
+      else if label == "flaky-final" { "unstable_final" } else { "unsupported_outcome" }
+    assert_true(!result.confirmed && result.stop_reason == expected)
+    assert_true(result.baseline.outcome == expected_outcome)
+    assert_true((result.baseline.fingerprint is None) == (label == "weak"))
+    checks.push({ "control": label, "result": result.to_json() })
   }
+  let controller = @runner.Controller::new(executable, output + "/budget", native_errors=true, timeout_ms=10000)
+  let limited = controller.shrink(@faults.Target::new(mode), trace, budget=6)
+  assert_true(limited.executions == 6 && limited.confirmed && limited.stop_reason == "execution_budget" && !limited.deletion_minimal)
+  assert_true(limited.baseline.outcome == expected_outcome && limited.baseline.fingerprint is Some(_))
+  checks.push({ "control": "budget", "result": limited.to_json() })
+  let legacy = @runner.Controller::new(executable, output + "/disabled", timeout_ms=10000)
+  let disabled = legacy.shrink(@faults.Target::new(mode), trace)
+  assert_true(!disabled.confirmed && disabled.stop_reason == "unsupported_outcome")
+  assert_true(disabled.baseline.outcome == expected_outcome && disabled.baseline.fingerprint is None)
+  checks.push({ "control": "disabled", "result": disabled.to_json() })
   let verification : Json = { "state": "passed", "mode": mode, "checks": checks }
   @fs.write_file(output + "/verification.json", verification.stringify(indent=2))
 }

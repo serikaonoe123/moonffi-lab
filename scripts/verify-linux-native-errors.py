@@ -109,6 +109,10 @@ def main():
             strategies = [c for c in checks['checks'] if 'strategy' in c]
             require(checks['state'] == 'passed' and checks['mode'] == mode and len(strategies) == 3,
                     'Missing strategy checks')
+            controls = [c for c in checks['checks'] if 'control' in c]
+            require(len(controls) == 5 and sorted(c['control'] for c in controls)
+                    == ['budget', 'disabled', 'flaky-baseline', 'flaky-final', 'weak'],
+                    'Missing or duplicate native controls')
             for check in strategies:
                 reduction = check['reduction']
                 require(reduction['confirmed'] and reduction['deletion_minimal']
@@ -127,7 +131,8 @@ def main():
             'state': 'passed', 'source_commit': commit, 'driver_sha256': sha(__file__),
             'source_archive_sha256': sha(out / 'source.tar'), 'profiles': profiles,
             'host': platform.platform(), 'github_actions': os.getenv('GITHUB_ACTIONS'),
-            'scope': 'Owned intentional C faults, three strategies per profile, crash-only five controls; '
+            'scope': 'Owned intentional C faults, three strategies and five controls per profile; '
+                     'ASan weak evidence uses a synthetic incomplete diagnostic, not an actual detection. '
                      'ASan instruments faults.c only. Same-site identity is scoped to an unchanged binary.'})
         print(f'Linux native error reduction passed: {commit}')
     except Exception as error:

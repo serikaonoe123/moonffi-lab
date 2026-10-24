@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "state": "original-archive-bytes-confirmed-at-official-versioned-urls",
+  "observed_on": "2026-10-24",
+  "version_directory": "0.10.16+b1a0e846e",
+  "discovery": "Official installer supports a version argument and percent-encodes the plus sign. The matching directory was verified by actual downloads, not assumed from an HTTP response alone.",
+  "archives": [
+    {
+      "file": "moonbit-windows-x86_64.zip",
+      "url": "https://cli.moonbitlang.com/binaries/0.10.16%2Bb1a0e846e/moonbit-windows-x86_64.zip",
+      "bytes": 91097881,
+      "sha256": "50183A36DACDFB47919DFFA5F06B9340B343506236940832215604E277D3F001",
+      "matches_original_lock": true
+    },
+    {
+      "file": "core-latest.zip",
+      "url": "https://cli.moonbitlang.com/cores/core-0.10.16%2Bb1a0e846e.zip",
+      "bytes": 2606935,
+      "sha256": "C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC",
+      "matches_original_lock": true
+    },
+    {
+      "file": "moonbit-linux-x86_64.tar.gz",
+      "url": "https://cli.moonbitlang.com/binaries/0.10.16%2Bb1a0e846e/moonbit-linux-x86_64.tar.gz",
+      "bytes": 99270556,
+      "sha256": "84AE424CD31BC485D2CF4D3736534E52F2F265CEAFB562A187B9AB26D9566212",
+      "matches_original_lock": true
+    }
+  ],
+  "archive_hashes_and_sizes_changed": false,
+  "binary_hashes_and_versions_changed": false,
+  "core_source_identity_changed": false,
+  "async_version_changed": false,
+  "native_execution_claimed_by_this_record": false,
+  "limits": [
+    "This record proves download identity only; hosted build/test execution requires separate acceptance.",
+    "No permanent availability or vendor signature verification is claimed.",
+    "No third-party archive mirror or redistribution is introduced."
+  ],
+  "windows_fresh_online_installation": {
+    "state": "passed",
+    "verification_sha256": "8D84DA325F99F839A437FA09B9AA49EAE3C897DAF24F33CC8155FD5180E47D91",
+    "boundary_checks": 11
+  },
+  "offline_installer_unit_tests": {
+    "tests": 10,
+    "state": "passed",
+    "initial_attempt": "Sandbox temporary directory was not writable; the same command passed through the normal approved escalation."
+  }
+}
