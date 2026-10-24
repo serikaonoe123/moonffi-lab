@@ -2,20 +2,20 @@
   "bootstrap": {
     "schema": 1,
     "platform": "windows-x86_64",
-    "source_mode": "official-rolling-urls-with-fixed-content-hashes",
+    "source_mode": "official-versioned-urls-with-fixed-content-hashes",
     "archives": [
       {
         "kind": "toolchain",
         "file": "moonbit-windows-x86_64.zip",
-        "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+        "url": "https://cli.moonbitlang.com/binaries/0.10.16%2Bb1a0e846e/moonbit-windows-x86_64.zip",
         "sha256": "50183A36DACDFB47919DFFA5F06B9340B343506236940832215604E277D3F001",
         "bytes": 91097881,
-        "upstream_checksum_url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip.sha256"
+        "upstream_checksum_url": "https://cli.moonbitlang.com/binaries/0.10.16%2Bb1a0e846e/moonbit-windows-x86_64.zip.sha256"
       },
       {
         "kind": "core",
         "file": "core-latest.zip",
-        "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+        "url": "https://cli.moonbitlang.com/cores/core-0.10.16%2Bb1a0e846e.zip",
         "sha256": "C9C1FA97797BDACCB51AC5632581DC76C5D03B1DCE8309323137F021982E5EAC",
         "bytes": 2606935
       }

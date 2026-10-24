@@ -1,6 +1,6 @@
 # 独立使用者复现入口
 
-**安装提示（2026-10-24）**：官方滚动归档当前不匹配固定内容锁，Windows/Linux 的全新在线安装受阻。若持有完全匹配的归档，可显式选择离线安装；当前失败、允许的恢复方式和范围见 [工具链状态](TOOLCHAIN-LOCK.md)。
+**安装来源（2026-10-24）**：下载已切换到与原锁内容完全一致的官方固定版本地址；Windows 全新在线安装通过。源码/归档身份、先前失败及云端复核状态见 [工具链状态](TOOLCHAIN-LOCK.md)。已有匹配归档仍可显式离线安装。
 
 这份入口供未参与开发的人在自己的 Windows x64 或 Linux x86_64 环境中复现。此前的本机或托管 runner 成功不算独立使用者反馈。请记录你实际选择的提交、安装来源和输出；失败也保留原始结果。
 
@@ -31,7 +31,7 @@ $toolchain = Join-Path $project 'results/repro-toolchain'
 & ./scripts/install-toolchain.ps1 -Destination $toolchain -Out results/repro-bootstrap
 ```
 
-安装器先验证所有内容，再解包和运行。若官方 latest 内容已变化，失败就是有效结果；不要修改摘要继续。已有两份完全匹配的官方归档时，可按 [离线安装说明](TOOLCHAIN-LOCK.md) 明确指定 `-ArchiveDirectory`，在反馈中注明来源。这些工具包不随项目源码分发。
+安装器先验证所有内容，再解包和运行。若来源不再提供锁定内容，失败就是有效结果；不要修改摘要继续。已有两份完全匹配的官方归档时，可按 [离线安装说明](TOOLCHAIN-LOCK.md) 明确指定 `-ArchiveDirectory`，在反馈中注明来源。这些工具包不随项目源码分发。
 
 ```powershell
 $savedPath = $env:PATH

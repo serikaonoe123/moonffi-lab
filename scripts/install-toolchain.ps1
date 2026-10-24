@@ -80,7 +80,7 @@ try {
     state='passed';completed_at=[DateTimeOffset]::UtcNow.ToString('o');destination=$Destination
     source_mode=$mode;lock_sha256=(Get-FileHash -LiteralPath $LockFile).Hash;archives=$accepted.ToArray()
     upstream_installer_executed=$false;bundled_core=$true;environment_restored=$true
-    scope='Archive bytes, three tool binaries and core source are pinned. Official URLs are rolling and may stop serving these bytes; retained local archives support offline installation. No global PATH or existing installation is changed.'
+    scope='Archive bytes, three tool binaries and core source are pinned. Official versioned URLs may become unavailable; retained local archives support offline installation. No global PATH or existing installation is changed.'
   } | ConvertTo-Json -Depth 6 | Set-Content (Join-Path $Out 'verification.json') -Encoding utf8
   Write-Host "Locked toolchain installed: $Destination"
   Write-Host "Evidence: $Out"

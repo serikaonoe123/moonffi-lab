@@ -10,11 +10,11 @@
 
 ## 准备和验证
 
-**安装状态（2026-10-24）**：官方滚动归档已不匹配当前固定内容锁，全新在线安装受阻；已有完全匹配归档可显式离线安装。失败记录和恢复边界见 [工具链状态](docs/TOOLCHAIN-LOCK.md)。
+**安装来源（2026-10-24）**：已切换到官方 `0.10.16+b1a0e846e` 固定版本地址，Windows/Linux/core 三份归档均与原内容锁一致；Windows 全新在线安装及 11 项边界检查通过。两平台云端复核仍待本次提交运行，见 [来源核对](docs/evidence/toolchain-source-recovery-20261024.json)。
 
 当前开发锁使用 moon 0.1.20261020、moonc `v0.10.16+b1a0e846e (2026-10-16)`；rc.1 的旧 CI 使用 moon 0.1.20261016。构建器更新时编译器二进制和 core 源码身份保持一致，验证状态见 [工具链记录](docs/TOOLCHAIN-LOCK.md)。依赖锁定 `moonbitlang/async@0.22.5`。版本以实际自报和内容锁为准，不等同于文档仓库标签或“最新正式版”。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools；完整环境控制入口使用 PowerShell 7.5+。本机 native 恢复记录见 [D8050 解决记录](docs/LOCAL-WINDOWS-TEMP.md)。
 
-需要安装当前锁定工具链时，可运行 `scripts/install-toolchain.ps1`，按固定 SHA-256 在新目录安装工具包和标准库，支持保留归档后的离线重装。使用方法及滚动下载地址的可用性限制见 [工具链内容锁定](docs/TOOLCHAIN-LOCK.md)。
+需要安装当前锁定工具链时，可运行 `scripts/install-toolchain.ps1`，按固定 SHA-256 在新目录安装工具包和标准库，支持保留归档后的离线重装。使用方法及固定版本地址的可用性限制见 [工具链内容锁定](docs/TOOLCHAIN-LOCK.md)。
 
 ```powershell
 $PSVersionTable.PSVersion # Major 应为 7；从开始菜单打开 PowerShell 7
