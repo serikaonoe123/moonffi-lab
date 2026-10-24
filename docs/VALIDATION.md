@@ -1,5 +1,11 @@
 # 缩减器验证记录
 
+## 合并后 main 验收：2026-10-24
+
+PR #5 合并后的 main 提交 `f464479107ea46369846a41dde090d25b28426d6` 已通过 [Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662)及 [Linux 验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560654)，八份归档摘要/大小、逐文件源码、工具链身份和原始报告均已核对，见 [main 验收快照](evidence/main-toolchain-acceptance-20261024.json)。本次是 main push 的实际提交验收，与此前 PR 合成合并验收分开记录。
+
+Windows 每项 558 份源码匹配，81+7 主模块/SDK 单测、48+8 SQLite 单测、704 生成场景及 189 次 benchmark 通过；结构指标和具体缩减结果字节仍与旧基准一致。Linux 为 81+7 单测、212 项目及 88 SDK 正确场景；两平台类型参数操作各 1024 次、ABI 边界各 23 项。每个平台 crash/ASan 各三策略均为 32→2，原始候选执行 222 次、控制执行 28 次、独立重放/对照报告 18 份，两档各五项控制全部通过。既有平台和插桩范围限制保持不变。
+
 ## 官方工具链升级：2026-10-24
 
 候选 `bda5201` 的实际 CI checkout 为 `c8a728e`，两者完整 Git 树一致。[Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40058468249)及 [Linux 验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40058468261)均通过，八份归档 SHA-256/大小、逐文件源码、固定工具链及原始报告已核对，见 [升级快照](evidence/toolchain-upgrade-20261024.json)。Windows 每项核对 558 份源码，81+7 主模块/SDK 单测、48+8 SQLite 单测、704 生成场景及 189 次缩减通过；全部 benchmark 结构指标和具体缩减结果字节与旧基准一致。

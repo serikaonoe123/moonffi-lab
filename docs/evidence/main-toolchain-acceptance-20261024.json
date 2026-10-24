@@ -1,0 +1,469 @@
+{
+  "schema": 1,
+  "state": "passed",
+  "observed_on": "2026-10-24",
+  "tested_commit": "f464479107ea46369846a41dde090d25b28426d6",
+  "source_tree": "688aaef0d7d8260e2e171430a1c351f12cbcef72",
+  "trigger": "main push after merging PR #5",
+  "pull_request": "https://github.com/serikaonoe123/moonffi-lab/pull/5",
+  "checkout_binding": "Both Actions workflow heads and actual clean-export source commits equal the recorded main merge commit; no synthetic-checkout substitution.",
+  "toolchain": {
+    "windows": {
+      "bootstrap": {
+        "schema": 1,
+        "platform": "windows-x86_64",
+        "source_mode": "official-versioned-urls-with-fixed-content-hashes",
+        "archives": [
+          {
+            "kind": "toolchain",
+            "file": "moonbit-windows-x86_64.zip",
+            "url": "https://cli.moonbitlang.com/binaries/0.10.17%2Bd971670cd/moonbit-windows-x86_64.zip",
+            "sha256": "1BE9D7F2FB47EC2F4B23CECC7BC3A775361993F07235E59BA5D7DA38C5E877DE",
+            "bytes": 91625362,
+            "upstream_checksum_url": "https://cli.moonbitlang.com/binaries/0.10.17%2Bd971670cd/moonbit-windows-x86_64.zip.sha256"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-0.10.17%2Bd971670cd.zip",
+            "sha256": "80DB8F2A2621B3EC358A495C390A0DFBD8DDAFDD87A6F69142F069937E2FE40C",
+            "bytes": 2609529
+          }
+        ]
+      },
+      "components": {
+        "moon": "0.1.20261023 (3778465 2026-10-23)",
+        "moonc": "v0.10.17+d971670cd (2026-10-23)",
+        "moonrun": "moonrun 0.1.20261023 (3778465 2026-10-23)"
+      },
+      "binary_sha256": {
+        "moon": "B88DE9E54ADAAFD440915CAB844D4F730FCC59D4BF2AE4AC39B7DAEBA729B645",
+        "moonc": "7A8CEC50BFC3B8217AAEC1A359DD8BFE964B5DE5A1E6DC9EC49A6DCF0A34534F",
+        "moonrun": "68B96F383944359919193949D1E823FC3E4F0C6711C1C25BB2C2E74BA22243F0"
+      },
+      "core_version": "0.10.17+d971670cd",
+      "core_source_identity": {
+        "files": 1213,
+        "sha256": "2B87786B731EC17A033BD8D35209D8E087C10A7F405D03BB7801073E33BC3553"
+      },
+      "async_version": "0.22.5"
+    },
+    "linux": {
+      "bootstrap": {
+        "schema": 1,
+        "platform": "linux-x86_64",
+        "source_mode": "official-versioned-urls-with-fixed-content-hashes",
+        "archives": [
+          {
+            "file": "moonbit-linux-x86_64.tar.gz",
+            "url": "https://cli.moonbitlang.com/binaries/0.10.17%2Bd971670cd/moonbit-linux-x86_64.tar.gz",
+            "sha256": "D0A96EAF91C77CFCDD7B7DF75390C5A1A95D0B8A328B1A5ED6FEE050CFBF8D50",
+            "bytes": 99835794,
+            "kind": "toolchain",
+            "upstream_checksum_url": "https://cli.moonbitlang.com/binaries/0.10.17%2Bd971670cd/moonbit-linux-x86_64.tar.gz.sha256"
+          },
+          {
+            "kind": "core",
+            "file": "core-latest.zip",
+            "url": "https://cli.moonbitlang.com/cores/core-0.10.17%2Bd971670cd.zip",
+            "sha256": "80DB8F2A2621B3EC358A495C390A0DFBD8DDAFDD87A6F69142F069937E2FE40C",
+            "bytes": 2609529
+          }
+        ]
+      },
+      "components": {
+        "moon": "0.1.20261023 (3778465 2026-10-23)",
+        "moonc": "v0.10.17+d971670cd (2026-10-23)",
+        "moonrun": "moonrun 0.1.20261023 (3778465 2026-10-23)"
+      },
+      "binary_sha256": {
+        "moon": "CE8314A2A78354B83E4A68973CFE613DE62EE19A9FBAB76CE01BE67E4BDB71D3",
+        "moonc": "45199D26697C58BA549B6ECC64893C6E6D72DA1FF5CBEC2DC7D59DAE7F2E0A4E",
+        "moonrun": "FC3BA79E37EF1844B69DF852ED8BF0450DF7FFB6CC0CF09F4D5EA0B1F99CE82F"
+      },
+      "core_version": "0.10.17+d971670cd",
+      "core_source_identity": {
+        "files": 1213,
+        "sha256": "2B87786B731EC17A033BD8D35209D8E087C10A7F405D03BB7801073E33BC3553"
+      },
+      "async_version": "0.22.5"
+    }
+  },
+  "provenance": {
+    "windows": {
+      "run_id": 40059560662,
+      "event": "push",
+      "original_head_sha": "f464479107ea46369846a41dde090d25b28426d6",
+      "original_api_metadata_sha256": "3EF037562DEBAB4866708B9A034D3313AF961F2FA77F473C05DB37BDFD31E9EC",
+      "artifact_metadata_sha256": "E523279A3EF6071581840354194A87A1AEE46E9653BCBD6903C2ACDD3CBA595E",
+      "raw_inspection_sha256": "F3C3813764FD9E2CD923AACD3B8130EFC8434DDE77BC7565C77875D4530F5DC8"
+    },
+    "linux": {
+      "run_id": 40059560654,
+      "event": "push",
+      "original_head_sha": "f464479107ea46369846a41dde090d25b28426d6",
+      "original_api_metadata_sha256": "D0C2EAF42C2561823CAAB33636C84718A1738B7F7B579A83A005C1356253B836",
+      "artifact_metadata_sha256": "97C44C3F826A7194741F593D091D23D8AB1287C7DD5AD49969B061D09461D463",
+      "raw_inspection_sha256": "0A33DC0D8EE45679E32E57173C00CDF0DDB623C477150F7CEE65DEE9160DD275"
+    }
+  },
+  "windows": {
+    "schema": 1,
+    "state": "passed",
+    "tested_commit": "f464479107ea46369846a41dde090d25b28426d6",
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662",
+    "jobs": [
+      {
+        "name": "native (sdk)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662/job/120769906841"
+      },
+      {
+        "name": "native (asan)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662/job/120769906941"
+      },
+      {
+        "name": "native (sqlite)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662/job/120769906945"
+      },
+      {
+        "name": "native (native-errors)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662/job/120769906954"
+      },
+      {
+        "name": "native (benchmark)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662/job/120769906983"
+      },
+      {
+        "name": "native (generation)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662/job/120769906995"
+      },
+      {
+        "name": "native (behavior)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662/job/120769906997"
+      }
+    ],
+    "artifacts": [
+      {
+        "name": "windows-native-sdk-40059560662",
+        "bytes": 913941,
+        "digest": "sha256:a344624b28e6f909cb8ef42e06660b2b02d12dc73109ade1782b843c6901624f",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-benchmark-40059560662",
+        "bytes": 18453433,
+        "digest": "sha256:03828e8a8a5436d5661be0aa4fb8def024c6408ad99f2825748714c6c9fde327",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-behavior-40059560662",
+        "bytes": 8115002,
+        "digest": "sha256:4338fc6fdc70ec3dacc05bb84f1e4326f6f0b4d021714f75a30d83e3f1c08cc8",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-generation-40059560662",
+        "bytes": 2968338,
+        "digest": "sha256:c53b87f1715380f9a30b2d27d591e12f53a46652bbb678676f42550bfc0cc8e5",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-asan-40059560662",
+        "bytes": 337103,
+        "digest": "sha256:331e46ea50231a5c2997cd2276a1faef88d20b4c8566206e63a5937e96781e1b",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-sqlite-40059560662",
+        "bytes": 385764,
+        "digest": "sha256:1665a175becb8e28111882dc3115bbcbce073a2ef4bc4d1f7e2a217397eeefb6",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-native-errors-40059560662",
+        "bytes": 800965,
+        "digest": "sha256:b05d318c2c44f77f9db34b8d5d3d59e20542601907ef4f86b444ff57355be826",
+        "archive_verified": true
+      }
+    ],
+    "source_files_matched_per_suite": {
+      "behavior": 558,
+      "asan": 558,
+      "benchmark": 558,
+      "generation": 558,
+      "sdk": 558,
+      "sqlite": 558,
+      "native-errors": 558
+    },
+    "root_unit_tests": 81,
+    "sdk_unit_tests": 7,
+    "benchmark_measurements": 189,
+    "benchmark_structural_and_reduced_bytes_match_39609263290": true,
+    "typed_parameter_operations": 1024,
+    "explicit_abi_boundaries": 23,
+    "native_errors": {
+      "state": "passed",
+      "reductions": [
+        {
+          "mode": "crash",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        }
+      ],
+      "raw_candidate_executions": 222,
+      "raw_independent_replay_reports": 18,
+      "crash_controls": 5,
+      "asan_controls": 5,
+      "raw_control_executions": 28,
+      "scope": "Read-only raw evidence audit; not a second test execution."
+    },
+    "sdk_source_files_matched": 45,
+    "asan_raw_canaries": 3,
+    "asan_correct_campaign_cases": 68,
+    "generation_cases": 704,
+    "sqlite_unit_tests": [
+      48,
+      8
+    ],
+    "sqlite_campaign_cases": 96,
+    "controls": {
+      "toolchain-checks": 11,
+      "script-controls": 9,
+      "release-checks": 5
+    },
+    "scope": "Seven independent Windows hosted jobs at the recorded commit; raw source, toolchain, archive and reduction audit. No release publication."
+  },
+  "linux": {
+    "schema": 1,
+    "state": "passed",
+    "tested_commit": "f464479107ea46369846a41dde090d25b28426d6",
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560654",
+    "artifacts": [
+      {
+        "name": "linux-native-errors-40059560654",
+        "bytes": 1826729,
+        "digest": "sha256:343f56248f2200b21f3bae6cdefeaf9de2de6ac410e81a39d12adefd604a2a28",
+        "archive_verified": true
+      }
+    ],
+    "ordinary": {
+      "state": "passed",
+      "tested_commit": "f464479107ea46369846a41dde090d25b28426d6",
+      "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560654",
+      "source_files_checked": 558,
+      "sdk_source_files_checked": 522,
+      "root_unit_tests": 81,
+      "sdk_unit_tests": 7,
+      "correct_project_cases": 212,
+      "correct_sdk_cases": 88,
+      "typed_parameter_operations": 1024,
+      "explicit_abi_boundaries": 23,
+      "audit_driver_sha256": "E3B721F1321841F9F4902584AF28101CC35A16BADCDA435EE800B1C9B2AD1F77",
+      "test_processes_launched": false,
+      "scope": "Read-only artifact audit and Git source export; no native tests or profile reruns."
+    },
+    "native_errors": {
+      "state": "passed",
+      "reductions": [
+        {
+          "mode": "crash",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        }
+      ],
+      "raw_candidate_executions": 222,
+      "raw_independent_replay_reports": 18,
+      "crash_controls": 5,
+      "asan_controls": 5,
+      "raw_control_executions": 28,
+      "scope": "Read-only raw evidence audit; not a second test execution."
+    },
+    "native_profile_source_files": {
+      "crash": 35,
+      "asan": 35
+    },
+    "native_dependency_source_files": {
+      "crash": 478,
+      "asan": 478
+    },
+    "scope": "Linux x86_64 Ubuntu hosted runner: ordinary native regression and owned crash/ASan reduction. Full seven Windows suites are separately audited; Linux does not claim their exact coverage."
+  },
+  "audit_drivers": {
+    "scripts\\audit-linux-ordinary.py": "E3B721F1321841F9F4902584AF28101CC35A16BADCDA435EE800B1C9B2AD1F77",
+    "results\\toolchain-recovery-20261024\\audit-windows-20261024.py": "1C432FBB6E6AD10FD0BB83DF5745BAA74AC69C34B496B5C4370E0895510B3D7F",
+    "results\\toolchain-recovery-20261024\\audit-linux-20261024.py": "4436C0A73FE67A416E39EED740618CAFC7D40D82F067263CED84B1A8AA77BFD7",
+    "results\\toolchain-recovery-20261024\\audit-native-20261024.py": "96104972B529923CBA680EA919A1E67ED591E254052424624DE7699666404C80"
+  },
+  "scope": [
+    "This records an already completed hosted regression and a read-only audit of retained artifacts; no extra test reruns are claimed.",
+    "All eight artifact archives matched GitHub digest and size metadata before extraction.",
+    "Linux coverage remains ordinary native/SDK and owned crash/ASan reduction, not an exact equivalent of all seven Windows suites.",
+    "ASan instruments declared units; the native-error profile instruments owned faults.c. Weak-evidence ASan control is synthetic; other ASan controls execute real instrumented owned faults.",
+    "No independent-user acceptance, new release, registry publication or form submission is implied."
+  ]
+}
