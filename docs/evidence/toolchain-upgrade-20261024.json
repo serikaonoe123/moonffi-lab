@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "state": "candidate-under-validation",
+  "observed_on": "2026-10-24",
+  "accepted_baseline": "fdd88491e282628ad6633ccd6267e71f2eb1a1ea",
+  "candidate": "08a8137",
+  "components": {
+    "moon": "0.1.20261023 (3778465 2026-10-23)",
+    "moonc": "v0.10.17+d971670cd (2026-10-23)",
+    "moonrun": "moonrun 0.1.20261023 (3778465 2026-10-23)"
+  },
+  "archives": [
+    {
+      "platform": "windows",
+      "file": "moonbit-windows-x86_64.zip",
+      "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip",
+      "bytes": 91625362,
+      "sha256": "1BE9D7F2FB47EC2F4B23CECC7BC3A775361993F07235E59BA5D7DA38C5E877DE",
+      "official_checksum_matched": true
+    },
+    {
+      "platform": "linux",
+      "file": "moonbit-linux-x86_64.tar.gz",
+      "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-linux-x86_64.tar.gz",
+      "bytes": 99835794,
+      "sha256": "D0A96EAF91C77CFCDD7B7DF75390C5A1A95D0B8A328B1A5ED6FEE050CFBF8D50",
+      "official_checksum_matched": true
+    },
+    {
+      "platform": "core",
+      "file": "core-latest.zip",
+      "url": "https://cli.moonbitlang.com/cores/core-latest.zip",
+      "bytes": 2609529,
+      "sha256": "80DB8F2A2621B3EC358A495C390A0DFBD8DDAFDD87A6F69142F069937E2FE40C",
+      "checksum_provenance": "Measured official HTTPS download; no independent official core checksum claimed."
+    }
+  ],
+  "fixed_version_confirmation": [
+    {
+      "platform": "windows",
+      "url": "https://cli.moonbitlang.com/binaries/0.10.17%2Bd971670cd/moonbit-windows-x86_64.zip.sha256",
+      "matches_reviewed_archive": true
+    },
+    {
+      "platform": "linux",
+      "url": "https://cli.moonbitlang.com/binaries/0.10.17%2Bd971670cd/moonbit-linux-x86_64.tar.gz.sha256",
+      "matches_reviewed_archive": true
+    },
+    {
+      "platform": "core",
+      "url": "https://cli.moonbitlang.com/cores/core-0.10.17%2Bd971670cd.zip",
+      "matches_reviewed_archive": true
+    }
+  ],
+  "unpacked_identity_checks": [
+    {
+      "platform": "windows",
+      "binary_checks": 17,
+      "binaries": {
+        "moon": "B88DE9E54ADAAFD440915CAB844D4F730FCC59D4BF2AE4AC39B7DAEBA729B645",
+        "moonc": "7A8CEC50BFC3B8217AAEC1A359DD8BFE964B5DE5A1E6DC9EC49A6DCF0A34534F",
+        "moonrun": "68B96F383944359919193949D1E823FC3E4F0C6711C1C25BB2C2E74BA22243F0"
+      },
+      "core_source_identity": {
+        "files": 1213,
+        "sha256": "2B87786B731EC17A033BD8D35209D8E087C10A7F405D03BB7801073E33BC3553"
+      },
+      "core_version": "0.10.17+d971670cd"
+    },
+    {
+      "platform": "linux",
+      "binary_checks": 17,
+      "binaries": {
+        "moon": "CE8314A2A78354B83E4A68973CFE613DE62EE19A9FBAB76CE01BE67E4BDB71D3",
+        "moonc": "45199D26697C58BA549B6ECC64893C6E6D72DA1FF5CBEC2DC7D59DAE7F2E0A4E",
+        "moonrun": "FC3BA79E37EF1844B69DF852ED8BF0450DF7FFB6CC0CF09F4D5EA0B1F99CE82F"
+      },
+      "core_source_identity": {
+        "files": 1213,
+        "sha256": "2B87786B731EC17A033BD8D35209D8E087C10A7F405D03BB7801073E33BC3553"
+      },
+      "core_version": "0.10.17+d971670cd"
+    }
+  ],
+  "windows_installation": {
+    "state": "passed",
+    "verification_sha256": "D492CEB6682209B24AF802A5D4F39D89DA4017032102C8E36F5D11938D8CBAE9",
+    "boundary_checks": 11
+  },
+  "offline_installer_unit_tests": {
+    "tests": 10,
+    "state": "passed",
+    "initial_attempt": "Sandbox temporary directory was not writable; the identical command passed through the normal approved escalation."
+  },
+  "async_version_changed": false,
+  "runtime_or_reducer_rules_changed": false,
+  "hosted_acceptance": "pending",
+  "limits": [
+    "Linux binary contents verified before execution; Linux execution requires hosted acceptance.",
+    "Core ZIP identity is measured from official HTTPS downloads, with no independent vendor checksum or signature claimed.",
+    "Historical release and accepted baseline records remain scoped to their recorded commits."
+  ]
+}

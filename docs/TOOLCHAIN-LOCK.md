@@ -1,12 +1,18 @@
 # 工具链归档内容锁定
 
+## 0.10.17 升级候选（2026-10-24）
+
+本分支评估 `moonc v0.10.17+d971670cd` 与 `moon/moonrun 0.1.20261023 (3778465)`，core 为 `0.10.17+d971670cd`、1,213 份源码。Windows/Linux 工具包均与官方归档校验文件一致，各 17 个二进制均匹配官方清单；固定版本 URL 也已核对。两平台锁及精确摘要见仓库根目录配置与[来源及验证记录](evidence/toolchain-upgrade-20261024.json)。core 摘要仍为官方 HTTPS 下载后实测，不声称独立官方校验或签名。
+
+Windows 独立安装、core 构建、11 项拒绝边界和 10 项离线安装器单测通过，业务兼容性与云端完整验收仍在进行。async 保持 0.22.5。旧锁基线 `fdd8849` 已通过合并后的 [Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40057712901)和 [Linux 验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40057712903)，可在该提交独立复现；历史证据及 rc.1 发布范围保留。升级不修改归档拒绝规则、原生错误签名或缩减确认条件。
+
 **固定来源恢复（2026-10-24）**：已找到官方 `0.10.16+b1a0e846e` 目录，Windows/Linux 工具包与 core ZIP 的实际下载大小和 SHA-256 均与原锁完全一致；无需升级工具链或修改摘要。Windows 全新在线安装、版本/二进制/core 检查及 11 项边界通过，见 [来源核对记录](evidence/toolchain-source-recovery-20261024.json)。修复候选 `33bbfea` 已在源码树一致的 PR 合成合并提交 `fee7f97` 通过 Windows 七项及 Linux 云端验收，并核对八份产物，见 [云端记录](evidence/maintenance-hosted-20261024.json)。先前 [Windows](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187741) 和 [Linux](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187610) 滚动地址拒绝记录保持原义，均未接受下载归档。
 
 2026-10-17 将 CI 的“下载并执行滚动安装器，再检查版本”改为项目内安装脚本：按 `toolchain.json` 的固定字节数与 SHA-256 核验 Windows x64 工具包和 core 归档，全部通过后才解包和运行工具。安装到新目录，不覆盖用户已有安装，不改全局 PATH 或执行策略；成功与失败都恢复调用进程的 PATH、MOON_HOME 和工作目录。
 
 这是**内容锁定**，当前来源已使用实际核验过的官方版本目录；其中 `+` 按官方安装器规则编码为 `%2B`。仍不承诺永久可下载或供应商签名验证；内容变化时安装会失败。为兼容既有离线缓存，core 的本地文件名仍为 `core-latest.zip`，下载 URL 已固定版本。保留归档可通过 `-ArchiveDirectory` 离线重装；仓库和 CI 诊断产物不分发工具包。
 
-## 当前开发锁（2026-10-21）
+## 先前开发锁（2026-10-21，历史记录）
 
 状态契约提交 0eae789 的 [六项 CI 39587481441](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39587481441) 在下载包身份检查阶段全部拒绝，接受归档为零，业务测试未运行；见 [失败快照](evidence/github-ci-39587481441-failed-bootstrap.json)。再次从官方校验清单核对新归档与三个关键二进制，在新目录 results/toolchain-review-20261021/installed-windows 安装；旧安装、旧锁对应的提交和失败证据保留。原安装器和拒绝规则保持不变。
 
@@ -84,7 +90,7 @@ moon update
 
 `scripts/verify-toolchain.ps1` 在给定安装和本地归档上进行 11 项检查：正确安装、第二份归档损坏后仍不解包、离线缺失不回退网络、越界归档路径、不安全 URL、缺失二进制摘要、版本漂移、执行前发现二进制漂移、版本不变的 core 源码漂移、已有安装及已有证据保留。探针仅在新结果目录中制造错误输入，最后检查进程环境恢复。
 
-CI 当前六项 suite 均先创建内容锁定的独立工具链，behavior 任务额外运行上述边界检查；诊断只上传 JSON 和日志，不上传下载归档、工具目录或边界测试的复制二进制。整体工程、原生内存及 SDK 验收仍按 [复现指南](REPRODUCIBILITY.md) 执行。
+CI 当前七项 suite 均先创建内容锁定的独立工具链，behavior 任务额外运行上述边界检查；诊断只上传 JSON 和日志，不上传下载归档、工具目录或边界测试的复制二进制。整体工程、原生内存及 SDK 验收仍按 [复现指南](REPRODUCIBILITY.md) 执行。
 
 [Actions run 39014758043](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39014758043) 对 `00712a7` 的五项验收通过；五份产物已下载核对，均从官方在线取得同一份锁定内容，bundle 前后 core 身份一致。11 边界、43 主模块/5 SDK 单测、704 场景、189 次完整缩减、63 组重复一致和 214 个真子集通过，见 [云端快照](evidence/github-ci-39014758043.json)。
 
@@ -92,4 +98,4 @@ CI 当前六项 suite 均先创建内容锁定的独立工具链，behavior 任�
 
 修正提交 `2b7f92c3272e154b2d3c9d488d6f20418259e6e0` 的 [Actions run 39015558264](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39015558264) 五项再次通过。全部产物已核对：五次在线安装身份一致，11 边界与 43+5 单测、704 场景通过；189 次缩减全部完成，63 组重复一致，214 个真子集通过。全部 189 行输入/结果字节哈希和结构指标与旧基准一致，不再需要规范化 JSON 键顺序才能比较。见 [最终云端快照](evidence/github-ci-39015558264.json)，完整下载在 `results/github-ci-39015558264`。
 
-本轮不锁定 Windows runner 镜像、MSVC、Windows SDK、GitHub Actions 的版本标签或 registry 内容，也不声明完整的密闭构建、供应商签名验证或任意时间均可从上游恢复历史工具链。来源 URL 和摘要同时变更时，需要重新核对来源并运行当前六项验收。
+本轮不锁定 Windows runner 镜像、MSVC、Windows SDK、GitHub Actions 的版本标签或 registry 内容，也不声明完整的密闭构建、供应商签名验证或任意时间均可从上游恢复历史工具链。来源 URL 和摘要同时变更时，需要重新核对来源并运行当前七项 Windows 及 Linux 验收。
