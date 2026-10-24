@@ -2,7 +2,7 @@
 
 仓库提供 `.github/workflows/windows-native.yml`。push 到 main 或当前 native 验收分支、pull request 和手动触发分别运行 behavior、ASan、benchmark、generation、sdk、sqlite、native-errors 七个任务。generation 验证 Buffer 的 512 个人工 fixture 场景，以及真实 Eigen 绑定的 192 个正确场景、保存输入重放、旧输入哈希和 CLI 边界；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减。sdk 在另一个工作区中用公开 core/runner 编译教学消费者；sqlite 以原样社区绑定源码验收 48+8 单测、96 场景和九项脚本控制。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单，不上传工作目录或二进制。首次使用请先看 [独立复现入口](INDEPENDENT-REPRODUCTION.md)。
 
-当前维护候选 `33bbfea` 已在 PR 合成合并提交 `fee7f97` 通过 Windows 七项和 Linux 验收；完整 Git 源码树与候选一致，八份产物的归档摘要、指定源码、工具链及原始报告已核对，见 [当前云端快照](evidence/maintenance-hosted-20261024.json)。后续候选仍须按自身提交核对 CI。sdk 任务新增 [本地源码准备控制](RELEASE-PLAN.md)，只上传清单/日志，不上传源码 ZIP；冻结清单与发布说明不表示已发布。
+当前工具链升级候选 `bda5201` 已在 PR 合成合并提交 `c8a728e` 通过 Windows 七项和 Linux 验收；完整 Git 源码树与候选一致，八份产物的归档摘要、指定源码、工具链及原始报告已核对，见 [升级快照](evidence/toolchain-upgrade-20261024.json)。旧版来源恢复和 ASan 控制验收见 [历史维护记录](evidence/maintenance-hosted-20261024.json)。后续候选仍须按自身提交核对 CI。sdk 任务新增 [本地源码准备控制](RELEASE-PLAN.md)，只上传清单/日志，不上传源码 ZIP；冻结清单与发布说明不表示已发布。
 
 工具链升级提交 `4106122` 使用固定内容的官方 0.10.16 工具链，在 [Actions run 39233803279](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279) 通过五项，全部产物已下载核对。五次在线安装、11 项工具链边界、69 主模块/6 SDK 单测、704 场景、128 份历史 Eigen 输入、189 次完整缩减和 214 个真子集通过；44 个关键源文件逐任务匹配 Git 导出，189 行输入/结果哈希及结构计数与旧 Int64 本地基准一致。见 [云端快照](evidence/github-ci-39233803279.json)。本机后续通过工作区临时目录恢复 native behavior/SDK 验收，原 D8050 失败仍保留，见 [解决记录](LOCAL-WINDOWS-TEMP.md)。
 
@@ -10,7 +10,7 @@
 
 `toolchain.json` 记录待验收或已验证的 moon、moonc、moonrun 版本、三个二进制摘要、core 版本及源码树身份，以及 Windows 工具包/core 归档的固定大小和 SHA-256。具体通过状态见 [验证记录](VALIDATION.md)。`scripts/assert-toolchain.ps1` 先核对二进制，再查询版本并按锁核对 core 源码文件数和整体摘要；漂移时保存诊断并失败。
 
-CI 调用仓库内 `scripts/install-toolchain.ps1`，全部归档校验通过后才在新目录解包、查询版本并 bundle core，不执行滚动的上游安装脚本。2026-10-24 起，来源改为官方 `0.10.16+b1a0e846e` 版本目录，三份归档与原锁的字节数及 SHA-256 一致；仍按固定摘要校验，不承诺上游永久保留该地址。保留归档可用 `-ArchiveDirectory` 离线重装。来源确认、安装及范围见 [工具链内容锁定](TOOLCHAIN-LOCK.md)。升级时须一起更新内容身份并重新验收。
+CI 调用仓库内 `scripts/install-toolchain.ps1`，全部归档校验通过后才在新目录解包、查询版本并 bundle core，不执行滚动的上游安装脚本。旧版来源恢复使用官方 `0.10.16+b1a0e846e` 目录且保留原摘要；本分支已独立验收 `0.10.17+d971670cd`，两平台锁使用新版固定版本 URL 和重新核对的内容身份。仍按固定摘要校验，不承诺上游永久保留该地址。保留归档可用 `-ArchiveDirectory` 离线重装。来源确认、安装及范围见 [工具链内容锁定](TOOLCHAIN-LOCK.md)。升级时须一起更新内容身份并重新验收。
 
 Windows runner 自带的 MSVC、Windows SDK 和全局环境不由本仓库锁定；ASan 报告保存实际运行时路径与哈希。只有查看实际云端任务、runner 镜像和验收产物后，才能记录独立环境验收成功。
 

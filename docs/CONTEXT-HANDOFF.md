@@ -20,6 +20,10 @@
 
 ASan 档五项控制已在 Windows/Linux 均执行并核对。官方固定版本地址提供与原锁完全一致的三份归档；候选 `33bbfea` 已在源码树一致的 PR 合成合并提交 `fee7f97` 通过 Windows 七项和 Linux 验收，见 [当前云端记录](evidence/maintenance-hosted-20261024.json)。先前 [安装失败记录](evidence/maintenance-20261024.json) 保留，工具链内容摘要未变。独立使用者反馈和新版发布仍待完成。
 
+## 官方工具链升级（2026-10-24）
+
+PR #4 已合并为 `fdd8849`，合并后 Windows 七项和 Linux CI 均成功。本分支候选 `bda5201` 进一步锁定官方 moonc/core 0.10.17 与 moon/moonrun 2026-10-23 构建，Windows 七项及 Linux 验收全部通过，八份产物与原始结果已核对，见 [升级记录](evidence/toolchain-upgrade-20261024.json)。benchmark 189 次结构指标及具体结果字节不变；旧安装、旧锁对应提交、rc.1 发布范围及历史失败保留。独立使用者反馈和新版发布仍待完成。
+
 ## 来源与限制
 
 工具链内容身份见 [锁定说明](TOOLCHAIN-LOCK.md)。第三方源码身份与许可保持记录。人工故障不计为未知上游缺陷；错误签名描述观测位置，不证明同根因或全局最小。

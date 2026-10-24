@@ -1,6 +1,6 @@
 # 独立使用者复现入口
 
-**安装来源（2026-10-24）**：下载已切换到与原锁内容完全一致的官方固定版本地址；Windows 全新在线安装及两平台云端验收通过。源码/归档身份、先前失败及云端复核状态见 [工具链状态](TOOLCHAIN-LOCK.md)。已有匹配归档仍可显式离线安装。
+**工具链（2026-10-24）**：本页固定候选使用官方 0.10.17 版本地址及独立内容锁，Windows 七项和 Linux 云端验收通过并完成产物核对。旧版固定来源恢复、历史失败及新版精确身份见 [工具链状态](TOOLCHAIN-LOCK.md)。离线归档必须匹配所选提交的锁。
 
 这份入口供未参与开发的人在自己的 Windows x64 或 Linux x86_64 环境中复现。此前的本机或托管 runner 成功不算独立使用者反馈。请记录你实际选择的提交、安装来源和输出；失败也保留原始结果。
 
@@ -11,15 +11,15 @@
 ```powershell
 git clone https://github.com/serikaonoe123/moonffi-lab.git
 Set-Location moonffi-lab
-# 这是原生错误/Linux 补齐合并后的固定源码提交。
+# 这是已通过官方 0.10.17 工具链验收的固定源码提交。
 # 复现其他提交时，填写该提交完整 SHA，并另行记录其实际结果。
-$candidate = '33bbfea0d68006e60b7c988f42e02a47337dc1f0'
+$candidate = 'bda5201cec5851f8221b33400fec1f01a0b58a1f'
 git checkout --detach $candidate
 git rev-parse HEAD
 git status --short
 ```
 
-此候选的 PR 合成合并提交为 `fee7f974cb9eb8f1bbfd0fa09b302b8d8b1724b8`，其完整 Git 源码树与候选一致；Windows 七项及 Linux 验收均通过并核对产物，见 [验收快照](evidence/maintenance-hosted-20261024.json)。历史 rc.1 对应 `23893d5bb3a231a21df10db506d8da821a7e984d`，仍按其六项 suite 复现；新提交使用下面七项入口。旧冻结发布清单和 prepare-release 仍绑定 rc.1，不表示已为新代码生成、批准或发布新的候选包。不要用一个提交的报告代表另一个提交已经通过。
+此候选的 PR 合成合并提交为 `c8a728ebeb9fd6609450704bdb246fe49cffe105`，其完整 Git 源码树与候选一致；Windows 七项及 Linux 验收均通过并核对产物，见 [验收快照](evidence/toolchain-upgrade-20261024.json)。历史 rc.1 对应 `23893d5bb3a231a21df10db506d8da821a7e984d`，仍按其六项 suite 复现；新提交使用下面七项入口。旧冻结发布清单和 prepare-release 仍绑定 rc.1，不表示已为新代码生成、批准或发布新的候选包。不要用一个提交的报告代表另一个提交已经通过。
 
 ## 安装与完整验收
 
@@ -58,16 +58,16 @@ try {
 
 ## Linux 环境与专项验收
 
-已有云端验证使用 Ubuntu 24.04 x86_64、Python 3.12 和 GCC/G++；其他发行版或工具组合须按实际结果记录。下面只运行 Linux 普通 native/SDK 和自有故障专项，不表示与七个 Windows suite 覆盖完全等价。源码 checkout 同样固定为 `33bbfea0d68006e60b7c988f42e02a47337dc1f0`，在仓库根目录执行；各输出和安装目录必须尚不存在。
+已有云端验证使用 Ubuntu 24.04 x86_64、Python 3.12 和 GCC/G++；其他发行版或工具组合须按实际结果记录。下面只运行 Linux 普通 native/SDK 和自有故障专项，不表示与七个 Windows suite 覆盖完全等价。源码 checkout 同样固定为 `bda5201cec5851f8221b33400fec1f01a0b58a1f`，在仓库根目录执行；各输出和安装目录必须尚不存在。
 
 ```bash
 python3 scripts/test_linux_toolchain.py
 python3 scripts/linux_toolchain.py --destination "$PWD/results/repro-linux-toolchain" --out results/repro-linux-bootstrap
-python3 scripts/verify-linux.py --toolchain "$PWD/results/repro-linux-toolchain" --ref 33bbfea0d68006e60b7c988f42e02a47337dc1f0 --out results/repro-linux-ordinary
-python3 scripts/verify-linux-native-errors.py --toolchain "$PWD/results/repro-linux-toolchain" --ref 33bbfea0d68006e60b7c988f42e02a47337dc1f0 --dependency-source results/repro-linux-ordinary/workspace/.mooncakes/moonbitlang/async --out results/repro-linux-native-errors
+python3 scripts/verify-linux.py --toolchain "$PWD/results/repro-linux-toolchain" --ref bda5201cec5851f8221b33400fec1f01a0b58a1f --out results/repro-linux-ordinary
+python3 scripts/verify-linux-native-errors.py --toolchain "$PWD/results/repro-linux-toolchain" --ref bda5201cec5851f8221b33400fec1f01a0b58a1f --dependency-source results/repro-linux-ordinary/workspace/.mooncakes/moonbitlang/async --out results/repro-linux-native-errors
 ```
 
-核对 bootstrap、ordinary 和 native-errors 各自的 verification.json；失败时保留 failure.json 和原始日志。工具链内容校验、async 实际来源、临时编译参数变更和源码清单须保留。原生错误专项的 crash/ASan 各有三策略 32→2 步缩减、同位置重放、不同位置及正确实现对照；五项不稳定等控制只覆盖 crash 档，ASan 只插桩 faults.c。详见 [协议与限制](NATIVE-ERRORS.md)。
+核对 bootstrap、ordinary 和 native-errors 各自的 verification.json；失败时保留 failure.json 和原始日志。工具链内容校验、async 实际来源、临时编译参数变更和源码清单须保留。原生错误专项的 crash/ASan 各有三策略 32→2 步缩减、同位置重放、不同位置及正确实现对照；五项不稳定等控制已覆盖 crash 和 ASan 两档；ASan 弱证据控制使用合成不完整诊断，其余 ASan 控制执行真实插桩的自有故障，专项只插桩 faults.c。详见 [协议与限制](NATIVE-ERRORS.md)。
 
 ## 反馈
 

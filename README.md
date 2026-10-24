@@ -10,9 +10,9 @@
 
 ## 准备和验证
 
-**安装来源（2026-10-24）**：已切换到官方 `0.10.16+b1a0e846e` 固定版本地址，Windows/Linux/core 三份归档均与原内容锁一致；Windows 全新在线安装及 11 项边界检查通过。Windows 七项及 Linux 云端验收均通过并核对产物，见 [来源核对](docs/evidence/toolchain-source-recovery-20261024.json) 和 [验收记录](docs/evidence/maintenance-hosted-20261024.json)。
+**工具链升级（2026-10-24）**：当前开发锁使用官方 `0.10.17+d971670cd` 固定版本地址。候选 `bda5201` 已通过 [Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40058468249)及 [Linux 验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40058468261)，八份产物的归档、源码、工具链及原始报告已核对，见 [升级记录](docs/evidence/toolchain-upgrade-20261024.json)。旧版固定来源及验收保留在 `fdd8849`，不混用两个版本的证据。
 
-当前开发锁使用 moon 0.1.20261020、moonc `v0.10.16+b1a0e846e (2026-10-16)`；rc.1 的旧 CI 使用 moon 0.1.20261016。构建器更新时编译器二进制和 core 源码身份保持一致，验证状态见 [工具链记录](docs/TOOLCHAIN-LOCK.md)。依赖锁定 `moonbitlang/async@0.22.5`。版本以实际自报和内容锁为准，不等同于文档仓库标签或“最新正式版”。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools；完整环境控制入口使用 PowerShell 7.5+。本机 native 恢复记录见 [D8050 解决记录](docs/LOCAL-WINDOWS-TEMP.md)。
+当前开发锁使用 moon/moonrun 0.1.20261023、moonc `v0.10.17+d971670cd (2026-10-23)`，core 为同版本的 1,213 份源码；rc.1 的旧 CI 使用 moon 0.1.20261016。验证状态见 [工具链记录](docs/TOOLCHAIN-LOCK.md)。依赖锁定 `moonbitlang/async@0.22.5`。版本以实际自报和内容锁为准，不等同于文档仓库标签或“最新正式版”。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools；完整环境控制入口使用 PowerShell 7.5+。本机 native 恢复记录见 [D8050 解决记录](docs/LOCAL-WINDOWS-TEMP.md)。
 
 需要安装当前锁定工具链时，可运行 `scripts/install-toolchain.ps1`，按固定 SHA-256 在新目录安装工具包和标准库，支持保留归档后的离线重装。使用方法及固定版本地址的可用性限制见 [工具链内容锁定](docs/TOOLCHAIN-LOCK.md)。
 
