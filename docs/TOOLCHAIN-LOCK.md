@@ -1,10 +1,10 @@
 # 工具链归档内容锁定
 
-## 0.10.17 升级候选（2026-10-24）
+## 0.10.17 升级验收（2026-10-24）
 
 本分支评估 `moonc v0.10.17+d971670cd` 与 `moon/moonrun 0.1.20261023 (3778465)`，core 为 `0.10.17+d971670cd`、1,213 份源码。Windows/Linux 工具包均与官方归档校验文件一致，各 17 个二进制均匹配官方清单；固定版本 URL 也已核对。两平台锁及精确摘要见仓库根目录配置与[来源及验证记录](evidence/toolchain-upgrade-20261024.json)。core 摘要仍为官方 HTTPS 下载后实测，不声称独立官方校验或签名。
 
-Windows 独立安装、core 构建、11 项拒绝边界和 10 项离线安装器单测通过，业务兼容性与云端完整验收仍在进行。async 保持 0.22.5。旧锁基线 `fdd8849` 已通过合并后的 [Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40057712901)和 [Linux 验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40057712903)，可在该提交独立复现；历史证据及 rc.1 发布范围保留。升级不修改归档拒绝规则、原生错误签名或缩减确认条件。
+Windows 独立安装、core 构建、11 项拒绝边界及 10 项离线安装器单测通过。候选 `bda5201` 在源码树一致的 PR 合成提交 `c8a728e` 通过 [Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40058468249)和 [Linux 验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40058468261)，八份产物摘要、源码、工具链及原始报告均已核对。189 次 benchmark 的结构指标和具体缩减结果字节保持旧基准；无项目运行代码适配，async 保持 0.22.5。旧锁基线 `fdd8849` 已通过合并后的 [Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40057712901)和 [Linux 验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40057712903)，可在该提交独立复现；历史证据及 rc.1 发布范围保留。升级不修改归档拒绝规则、原生错误签名或缩减确认条件。
 
 **固定来源恢复（2026-10-24）**：已找到官方 `0.10.16+b1a0e846e` 目录，Windows/Linux 工具包与 core ZIP 的实际下载大小和 SHA-256 均与原锁完全一致；无需升级工具链或修改摘要。Windows 全新在线安装、版本/二进制/core 检查及 11 项边界通过，见 [来源核对记录](evidence/toolchain-source-recovery-20261024.json)。修复候选 `33bbfea` 已在源码树一致的 PR 合成合并提交 `fee7f97` 通过 Windows 七项及 Linux 云端验收，并核对八份产物，见 [云端记录](evidence/maintenance-hosted-20261024.json)。先前 [Windows](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187741) 和 [Linux](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187610) 滚动地址拒绝记录保持原义，均未接受下载归档。
 

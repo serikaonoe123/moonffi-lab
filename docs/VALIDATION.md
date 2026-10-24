@@ -1,5 +1,13 @@
 # 缩减器验证记录
 
+## 官方工具链升级：2026-10-24
+
+候选 `bda5201` 的实际 CI checkout 为 `c8a728e`，两者完整 Git 树一致。[Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40058468249)及 [Linux 验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40058468261)均通过，八份归档 SHA-256/大小、逐文件源码、固定工具链及原始报告已核对，见 [升级快照](evidence/toolchain-upgrade-20261024.json)。Windows 每项核对 558 份源码，81+7 主模块/SDK 单测、48+8 SQLite 单测、704 生成场景及 189 次缩减通过；全部 benchmark 结构指标和具体缩减结果字节与旧基准一致。
+
+Linux 为 81+7 单测、212 项目及 88 SDK 正确场景；两平台各有 1024 类型参数操作和 23 ABI 边界。每个平台 crash/ASan 各三策略均为 32→2 步，基线/最终各三次确认，原始候选执行 222 次、控制执行 28 次、独立重放/对照报告 18 份，两个 profile 的五项控制均通过。ASan 弱证据控制为明确标注的合成不完整诊断；其余 ASan 控制执行真实插桩的自有故障。ASan 覆盖与 Linux suite 范围限制保持不变。
+
+工具链升级至 moonc/core `0.10.17+d971670cd`、moon/moonrun `0.1.20261023 (3778465)`。未修改项目运行代码、async 依赖或缩减确认规则，未发布新版或提交报名表。旧版来源恢复及维护证据仍按原提交保留。
+
 ## 原生错误与完整回归：2026-10-22
 
 提交 `520cf68738a6693ca348b7af509b4d9bfaf5780f` 的 [Windows 七项 CI 39717451261](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261) 和 [Linux CI 39717451254](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451254) 全部成功并完成产物核对；见 [统一快照](evidence/native-acceptance-20261022.json)。Windows 每任务 550 个源码输入匹配指定提交，七份归档摘要/大小、两个安装归档、三个工具和 core 身份均匹配。81 主模块、7 SDK、48+8 SQLite 单测、704 场景、ASan 三次 canary 与 68 个正确场景通过。189 次完整缩减、63 组重复、214 个真子集通过，结构计数和具体缩减结果字节与 CI 39609263290 相同。
