@@ -1,6 +1,6 @@
 # 工具链归档内容锁定
 
-**固定来源恢复（2026-10-24）**：已找到官方 `0.10.16+b1a0e846e` 目录，Windows/Linux 工具包与 core ZIP 的实际下载大小和 SHA-256 均与原锁完全一致；无需升级工具链或修改摘要。Windows 全新在线安装、版本/二进制/core 检查及 11 项边界通过，见 [来源核对记录](evidence/toolchain-source-recovery-20261024.json)。当前修改仍需对应提交的跨平台云端验收。先前 [Windows](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187741) 和 [Linux](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187610) 滚动地址拒绝记录保持原义，均未接受下载归档。
+**固定来源恢复（2026-10-24）**：已找到官方 `0.10.16+b1a0e846e` 目录，Windows/Linux 工具包与 core ZIP 的实际下载大小和 SHA-256 均与原锁完全一致；无需升级工具链或修改摘要。Windows 全新在线安装、版本/二进制/core 检查及 11 项边界通过，见 [来源核对记录](evidence/toolchain-source-recovery-20261024.json)。修复候选 `33bbfea` 已在源码树一致的 PR 合成合并提交 `fee7f97` 通过 Windows 七项及 Linux 云端验收，并核对八份产物，见 [云端记录](evidence/maintenance-hosted-20261024.json)。先前 [Windows](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187741) 和 [Linux](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40052187610) 滚动地址拒绝记录保持原义，均未接受下载归档。
 
 2026-10-17 将 CI 的“下载并执行滚动安装器，再检查版本”改为项目内安装脚本：按 `toolchain.json` 的固定字节数与 SHA-256 核验 Windows x64 工具包和 core 归档，全部通过后才解包和运行工具。安装到新目录，不覆盖用户已有安装，不改全局 PATH 或执行策略；成功与失败都恢复调用进程的 PATH、MOON_HOME 和工作目录。
 

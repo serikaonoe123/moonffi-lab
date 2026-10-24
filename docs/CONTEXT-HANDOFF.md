@@ -18,7 +18,7 @@
 
 ## 维护增量（2026-10-24）
 
-ASan 档已补齐五项控制，Windows 指定提交的本地七项回归通过；新增 Linux 控制尚未执行。两平台新 CI 均被工具链归档内容锁拒绝，接受归档数为零。下一步先恢复可核验的工具链来源，再执行云端验收；见 [维护记录](evidence/maintenance-20261024.json) 和 [安装状态](TOOLCHAIN-LOCK.md)。独立使用者反馈和新版发布仍待完成。
+ASan 档五项控制已在 Windows/Linux 均执行并核对。官方固定版本地址提供与原锁完全一致的三份归档；候选 `33bbfea` 已在源码树一致的 PR 合成合并提交 `fee7f97` 通过 Windows 七项和 Linux 验收，见 [当前云端记录](evidence/maintenance-hosted-20261024.json)。先前 [安装失败记录](evidence/maintenance-20261024.json) 保留，工具链内容摘要未变。独立使用者反馈和新版发布仍待完成。
 
 ## 来源与限制
 

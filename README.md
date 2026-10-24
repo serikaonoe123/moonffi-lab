@@ -10,7 +10,7 @@
 
 ## 准备和验证
 
-**安装来源（2026-10-24）**：已切换到官方 `0.10.16+b1a0e846e` 固定版本地址，Windows/Linux/core 三份归档均与原内容锁一致；Windows 全新在线安装及 11 项边界检查通过。两平台云端复核仍待本次提交运行，见 [来源核对](docs/evidence/toolchain-source-recovery-20261024.json)。
+**安装来源（2026-10-24）**：已切换到官方 `0.10.16+b1a0e846e` 固定版本地址，Windows/Linux/core 三份归档均与原内容锁一致；Windows 全新在线安装及 11 项边界检查通过。Windows 七项及 Linux 云端验收均通过并核对产物，见 [来源核对](docs/evidence/toolchain-source-recovery-20261024.json) 和 [验收记录](docs/evidence/maintenance-hosted-20261024.json)。
 
 当前开发锁使用 moon 0.1.20261020、moonc `v0.10.16+b1a0e846e (2026-10-16)`；rc.1 的旧 CI 使用 moon 0.1.20261016。构建器更新时编译器二进制和 core 源码身份保持一致，验证状态见 [工具链记录](docs/TOOLCHAIN-LOCK.md)。依赖锁定 `moonbitlang/async@0.22.5`。版本以实际自报和内容锁为准，不等同于文档仓库标签或“最新正式版”。需要 Windows x64、PowerShell 7 和带 C++ 工作负载及 Windows SDK 的 MSVC Build Tools；完整环境控制入口使用 PowerShell 7.5+。本机 native 恢复记录见 [D8050 解决记录](docs/LOCAL-WINDOWS-TEMP.md)。
 
@@ -104,6 +104,6 @@ Eigen 支持 `--generator stateful` 的六操作探索，以及 `--generator ari
 
 状态修整使用 MoonBit 增量依赖索引，避免反复验证全部前缀；结构和模型都接受一步后才提交依赖变化。拒绝后的状态保持约定及复杂度范围见 [适配器指南](docs/ADAPTERS.md)。
 
-当前代码验收基线：提交 `7d2716d` 的 [Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586714) 及 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586758) 均通过并核对产物，见 [固定提交证据](docs/evidence/main-acceptance-20261022.json)。后续仅文档变更不作为新的执行记录；运行代码变更须重新验收。Linux 不宣称与 Windows 七项 suite 完全等价。当前限制：ASan 仅插桩 Buffer C fixture、Eigen C++ shim（含其模板实例）及原生错误专项的 faults.c，MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
+当前维护候选 `33bbfea` 已在 PR 合成合并提交 `fee7f97`（完整源码树一致）通过 [Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40054024435) 及 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40054024444)，产物已核对，见 [固定提交证据](docs/evidence/maintenance-hosted-20261024.json)。后续仅文档变更不作为新的执行记录；运行代码变更须重新验收。Linux 不宣称与 Windows 七项 suite 完全等价。当前限制：ASan 仅插桩 Buffer C fixture、Eigen C++ shim（含其模板实例）及原生错误专项的 faults.c，MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
 
 旧 Eigen 绑定属于既有成果，新增引擎、适配器和验收脚本属于本项目工作。来源和许可见 [快照记录](vendor/eigen-binding/SNAPSHOT.md)。本项目 MIT；导入源码保留原有许可。

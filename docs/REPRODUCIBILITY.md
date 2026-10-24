@@ -2,7 +2,7 @@
 
 仓库提供 `.github/workflows/windows-native.yml`。push 到 main 或当前 native 验收分支、pull request 和手动触发分别运行 behavior、ASan、benchmark、generation、sdk、sqlite、native-errors 七个任务。generation 验证 Buffer 的 512 个人工 fixture 场景，以及真实 Eigen 绑定的 192 个正确场景、保存输入重放、旧输入哈希和 CLI 边界；benchmark 默认筛选 21 个固定输入，运行三轮、三种策略的缩减。sdk 在另一个工作区中用公开 core/runner 编译教学消费者；sqlite 以原样社区绑定源码验收 48+8 单测、96 场景和九项脚本控制。任务只申请读取仓库权限，使用新 runner，不复用项目构建或依赖缓存；失败时仍上传 JSON、候选、原始日志和源码清单，不上传工作目录或二进制。首次使用请先看 [独立复现入口](INDEPENDENT-REPRODUCTION.md)。
 
-当前已核对的运行代码基线为 `1f065527` 的 [Actions 39248905440](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440)：六项通过，68 个关键文件逐任务匹配提交归档，96 份 SQLite 输入与本地字节一致，189 次缩减与旧基准一致，见 [快照](evidence/github-ci-39248905440.json)。后续候选仍须按自身提交核对 CI。sdk 任务新增 [本地源码准备控制](RELEASE-PLAN.md)，只上传清单/日志，不上传源码 ZIP；冻结清单与发布说明不表示已发布。
+当前维护候选 `33bbfea` 已在 PR 合成合并提交 `fee7f97` 通过 Windows 七项和 Linux 验收；完整 Git 源码树与候选一致，八份产物的归档摘要、指定源码、工具链及原始报告已核对，见 [当前云端快照](evidence/maintenance-hosted-20261024.json)。后续候选仍须按自身提交核对 CI。sdk 任务新增 [本地源码准备控制](RELEASE-PLAN.md)，只上传清单/日志，不上传源码 ZIP；冻结清单与发布说明不表示已发布。
 
 工具链升级提交 `4106122` 使用固定内容的官方 0.10.16 工具链，在 [Actions run 39233803279](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39233803279) 通过五项，全部产物已下载核对。五次在线安装、11 项工具链边界、69 主模块/6 SDK 单测、704 场景、128 份历史 Eigen 输入、189 次完整缩减和 214 个真子集通过；44 个关键源文件逐任务匹配 Git 导出，189 行输入/结果哈希及结构计数与旧 Int64 本地基准一致。见 [云端快照](evidence/github-ci-39233803279.json)。本机后续通过工作区临时目录恢复 native behavior/SDK 验收，原 D8050 失败仍保留，见 [解决记录](LOCAL-WINDOWS-TEMP.md)。
 
