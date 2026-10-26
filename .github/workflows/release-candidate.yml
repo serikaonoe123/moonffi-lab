@@ -1,0 +1,37 @@
+name: Release candidate source preparation
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify rc.2 source preparation and rejection controls
+        shell: pwsh
+        run: python scripts/test_release_rc2.py --ref HEAD --out results/rc2-preparation
+      - name: Retain source preparation diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-source-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            results/rc2-preparation/verification.json
+            results/rc2-preparation/failure.json
+            results/rc2-preparation/*.log
+            results/rc2-preparation/a/candidate.json
+            results/rc2-preparation/a/scope.json
+            results/rc2-preparation/a/source-manifest.json
+            results/rc2-preparation/*/failure.json

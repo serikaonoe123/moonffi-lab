@@ -1,6 +1,27 @@
 # v0.1.0 范围与发布准备
 
-> 本页记录已发布 rc.1 的冻结范围与准备流程。当前主分支的代码验收基线为 `7d2716d`，包含后续状态契约、参数策略、原生错误缩减和 Linux 验证，见 [当前证据](evidence/main-acceptance-20261022.json)及 [复现入口](INDEPENDENT-REPRODUCTION.md)。这些新增能力尚未据此发布新版本；下文旧候选的范围和证据保持原义。
+## 下一版试用候选：v0.1.0-rc.2
+
+2026-10-26 开始准备新版源码候选，纳入显式状态契约、十类 FFI 参数、原生崩溃/ASan 缩减、Linux native 和官方 0.10.17 工具链。独立机器可读范围见 [rc.2 scope](releases/v0.1.0-rc.2-scope.json)，对外说明见 [rc.2 发布说明草稿](RELEASE-NOTES-v0.1.0-rc.2.md)。当前业务基线为 `f464479`，对应已核对的 [Windows 七项及 Linux 记录](evidence/main-toolchain-acceptance-20261024.json)；rc.1 冻结清单、标签和历史附件保持原义。
+
+准备器默认继续按 rc.1 冻结范围检查。显式选择 rc.2 时，须在已提交的候选 checkout 中运行，输出目录必须尚不存在：
+
+```powershell
+& ./scripts/prepare-release.ps1 -Ref HEAD -ScopeFile docs/releases/v0.1.0-rc.2-scope.json -Out results/rc2-candidate
+python scripts/test_release_rc2.py --ref HEAD --out results/rc2-controls
+```
+
+rc.2 入口要求已审阅锚点中的证据 Git blob、两平台工具链及来源许可保持一致；运行代码和既有验收脚本相对基线有变化时拒绝准备。本轮允许的准备器、准备控制及专用 CI 变更单独列在 candidate.json，不冒充已经包含在业务基线中。候选自身还需 Windows 七项、Linux 和专用源码准备 CI；准备成功始终是 prepared-not-published，publish_ready=false。
+
+新的源码包、清单、SHA256SUMS 和具体目标提交会先整理为可审阅的发布草案。发布批准只在具体内容可核对后再处理；本轮不创建标签、GitHub release 或 registry 包。独立使用者反馈继续单独跟踪，托管 CI 不替代该反馈。
+
+## rc.2 候选验收与拟议附件
+
+候选 `20b608d6d8546873d5d66786dc8e12642dd70e9c` 已通过 Windows 七项、Linux 和 16 项源码准备控制，九份诊断归档与原始报告已核对，见 [统一证据](evidence/rc2-preparation-20261026.json)。已生成 563 份文件的固定源码包、候选元数据、逐文件清单和 SHA256SUMS。具体目标、四附件大小/摘要、正文与限制见 [rc.2 预发布草案](PRE-RELEASE-PROPOSAL-rc.2.md)；它们仍是待批准的具体发布内容。准备时的 pending 字段保留，不冒充实时发布状态。
+
+## rc.1 冻结范围与历史发布准备
+
+> 下文保留已发布 rc.1 的冻结范围与准备流程，只描述其固定提交及当时证据。后续新增能力及当前源码准备状态见上方 rc.2 说明。
 
 当前状态：已于 2026-10-20 发布 [v0.1.0-rc.1 实验性源码预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)，尚未发布稳定版或 registry 包。`moon.mod` 中的 0.1.0 是项目自身版本；它与编译器自报的 `v0.10.16+b1a0e846e`、文档仓库标签是不同对象。
 
