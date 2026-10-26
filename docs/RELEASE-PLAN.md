@@ -1,6 +1,8 @@
 # v0.1.0 范围与发布准备
 
-## 下一版试用候选：v0.1.0-rc.2
+## 已发布试用候选：v0.1.0-rc.2
+
+2026-10-26 已按用户明确批准的草案发布 [rc.2](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.2)，标签固定指向 `20b608d`，prerelease、非 Latest；四附件回下载、正文和标签核对通过，见 [执行快照](evidence/prerelease-v0.1.0-rc.2-20261026.json)。rc.1 保持原状，独立使用者反馈仍待完成。
 
 2026-10-26 开始准备新版源码候选，纳入显式状态契约、十类 FFI 参数、原生崩溃/ASan 缩减、Linux native 和官方 0.10.17 工具链。独立机器可读范围见 [rc.2 scope](releases/v0.1.0-rc.2-scope.json)，对外说明见 [rc.2 发布说明草稿](RELEASE-NOTES-v0.1.0-rc.2.md)。当前业务基线为 `f464479`，对应已核对的 [Windows 七项及 Linux 记录](evidence/main-toolchain-acceptance-20261024.json)；rc.1 冻结清单、标签和历史附件保持原义。
 
@@ -11,13 +13,13 @@
 python scripts/test_release_rc2.py --ref HEAD --out results/rc2-controls
 ```
 
-rc.2 入口要求已审阅锚点中的证据 Git blob、两平台工具链及来源许可保持一致；运行代码和既有验收脚本相对基线有变化时拒绝准备。本轮允许的准备器、准备控制及专用 CI 变更单独列在 candidate.json，不冒充已经包含在业务基线中。候选自身还需 Windows 七项、Linux 和专用源码准备 CI；准备成功始终是 prepared-not-published，publish_ready=false。
+rc.2 入口要求已审阅锚点中的证据 Git blob、两平台工具链及来源许可保持一致；运行代码和既有验收脚本相对基线有变化时拒绝准备。本轮允许的准备器、准备控制及专用 CI 变更单独列在 candidate.json，不冒充已经包含在业务基线中。候选自身也必须具备 Windows 七项、Linux 和专用源码准备 CI 记录；准备成功始终是 prepared-not-published，publish_ready=false。
 
-新的源码包、清单、SHA256SUMS 和具体目标提交会先整理为可审阅的发布草案。发布批准只在具体内容可核对后再处理；本轮不创建标签、GitHub release 或 registry 包。独立使用者反馈继续单独跟踪，托管 CI 不替代该反馈。
+发布前已将新的源码包、清单、SHA256SUMS、具体目标和正文整理为可审阅草案；用户随后明确批准 rc.2 的标签、公开预发布及四附件，已按草案执行。原准备记录不改写为事后授权记录。registry 包与后续版本不在此次发布批准内。独立使用者反馈继续单独跟踪，托管 CI 不替代该反馈。
 
-## rc.2 候选验收与拟议附件
+## rc.2 候选验收与发布附件
 
-候选 `20b608d6d8546873d5d66786dc8e12642dd70e9c` 已通过 Windows 七项、Linux 和 16 项源码准备控制，九份诊断归档与原始报告已核对，见 [统一证据](evidence/rc2-preparation-20261026.json)。已生成 563 份文件的固定源码包、候选元数据、逐文件清单和 SHA256SUMS。具体目标、四附件大小/摘要、正文与限制见 [rc.2 预发布草案](PRE-RELEASE-PROPOSAL-rc.2.md)；它们仍是待批准的具体发布内容。准备时的 pending 字段保留，不冒充实时发布状态。
+候选 `20b608d6d8546873d5d66786dc8e12642dd70e9c` 已通过 Windows 七项、Linux 和 16 项源码准备控制，九份诊断归档与原始报告已核对，见 [统一证据](evidence/rc2-preparation-20261026.json)。已生成 563 份文件的固定源码包、候选元数据、逐文件清单和 SHA256SUMS。具体目标、四附件大小/摘要、正文与限制见 [rc.2 预发布草案](PRE-RELEASE-PROPOSAL-rc.2.md)；这些具体内容已获批准并发布，执行结果另见发布快照。准备时的 pending 字段保留，不冒充实时发布状态。
 
 ## rc.1 冻结范围与历史发布准备
 
