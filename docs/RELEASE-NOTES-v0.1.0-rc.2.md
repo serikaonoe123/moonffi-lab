@@ -1,6 +1,6 @@
 # MoonFFI Lab v0.1.0-rc.2 发布说明草稿
 
-状态：源码候选准备中，尚未创建标签、GitHub 预发布或 registry 包。候选自身 CI 与发布附件将按固定提交另行记录。项目清单版本仍为 0.1.0，拟议的试用标签为 v0.1.0-rc.2。
+状态：候选 `20b608d` 的 Windows 七项、Linux 和源码准备 CI 已通过并核对产物，具体附件见 [预发布草案](PRE-RELEASE-PROPOSAL-rc.2.md)。尚未创建标签、GitHub 预发布或 registry 包。项目清单版本仍为 0.1.0，拟议的试用标签为 v0.1.0-rc.2。
 
 MoonFFI Lab 为原生 C/C++ 绑定生成有状态调用序列，在独立进程执行，保存具体输入和原始诊断，并把可重复的失败缩减为可重放案例。
 
@@ -8,7 +8,7 @@ MoonFFI Lab 为原生 C/C++ 绑定生成有状态调用序列，在独立进程�
 
 原生错误缩减须显式启用，执行前后核对同一工作程序的字节身份；候选须保留结果类别和稳定指纹，基线及最终分别重复三次。位置签名不证明同根因，删除邻域最小不证明全局最短或参数最小。
 
-已核对的业务基线为 `f464479107ea46369846a41dde090d25b28426d6`：Windows 七项和 Linux 普通 native/SDK、原生崩溃/ASan 验收通过，八份产物及原始报告已核对，见 [基线快照](evidence/main-toolchain-acceptance-20261024.json)。Windows 有 81+7 主模块/SDK 单测、48+8 SQLite 单测、704 生成场景及 189 次固定缩减；Linux 有 81+7 单测、212 项目及 88 SDK 正确场景。两平台类型参数操作各 1024 次、显式 ABI 边界各 23 项；crash/ASan 各三策略完成 32→2，两个 profile 的五项控制均通过。这些是上述基线的结果，候选自身的云端结果须另列。
+已核对的业务基线为 `f464479107ea46369846a41dde090d25b28426d6`：Windows 七项和 Linux 普通 native/SDK、原生崩溃/ASan 验收通过，八份产物及原始报告已核对，见 [基线快照](evidence/main-toolchain-acceptance-20261024.json)。Windows 有 81+7 主模块/SDK 单测、48+8 SQLite 单测、704 生成场景及 189 次固定缩减；Linux 有 81+7 单测、212 项目及 88 SDK 正确场景。两平台类型参数操作各 1024 次、显式 ABI 边界各 23 项；crash/ASan 各三策略完成 32→2，两个 profile 的五项控制均通过。这些是上述基线的结果；候选自身的同项验收另见 [rc.2 统一证据](evidence/rc2-preparation-20261026.json)。
 
 工具链为内容锁定的官方 moonc/core `0.10.17+d971670cd`，moon/moonrun `0.1.20261023 (3778465)`，async 0.22.5；使用固定版本 URL、归档大小及 SHA-256、三个工具二进制摘要和 core 源码身份验证。Windows 需要 x64、PowerShell 7.5+、MSVC C++ 工作负载和 Windows SDK。Linux 已验证 Ubuntu 24.04 x86_64/GCC；它的覆盖不等同于 Windows 七个 suite。
 

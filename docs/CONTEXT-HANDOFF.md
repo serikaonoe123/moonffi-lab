@@ -2,6 +2,10 @@
 
 本页保留公开的技术进度；开发过程交接记录留在本地，不作为产品文档。
 
+## rc.2 准备（2026-10-26）
+
+PR #7 增加显式 rc.2 源码准备入口，默认 rc.1 冻结门槛保持原义。固定候选 `20b608d` 已通过 Windows 七项、Linux 和 16 项专用源码控制，九份诊断产物已核对；见 [统一证据](evidence/rc2-preparation-20261026.json)与 [四附件发布草案](PRE-RELEASE-PROPOSAL-rc.2.md)。候选源码有 563 文件，待办仍为独立使用者反馈及具体发布批准；尚未打标签或发布新版本。参赛者已确认通过初审，重新申报不再列为待办。
+
 ## 当前 main 状态（2026-10-24）
 
 PR #5 已合并为 `f464479`，MoonBit 0.10.17 的合并后 [Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662)及 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560654)均成功，八份产物及原始结果核对完成，见 [main 验收记录](evidence/main-toolchain-acceptance-20261024.json)。合并后复跑核对这项工作已完成。独立使用者反馈和后续版本发布仍单独跟踪；下文较早提交及证据保留各自日期和范围。

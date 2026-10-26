@@ -1,0 +1,523 @@
+{
+  "schema": 1,
+  "state": "passed-and-prepared-not-published",
+  "observed_on": "2026-10-26",
+  "proposed_tag": "v0.1.0-rc.2",
+  "candidate_head_commit": "20b608d6d8546873d5d66786dc8e12642dd70e9c",
+  "tested_commit": "9f0729bde2f3a0e5db7da3d4ed91486c62220a2b",
+  "checkout_binding": {
+    "actual_checkout": "9f0729bde2f3a0e5db7da3d4ed91486c62220a2b",
+    "workflow_head": "20b608d6d8546873d5d66786dc8e12642dd70e9c",
+    "base": "2df35d5b26d2d139e83db41916032b8bd8d4e2c7",
+    "parents_verified": true,
+    "tree": "a6460739e7031db48e04749010dd96cf9c0cafc7",
+    "checkout_tree_equals_candidate": true,
+    "canonical_git_object_sha1_matched": true
+  },
+  "pull_request": "https://github.com/serikaonoe123/moonffi-lab/pull/7",
+  "windows": {
+    "schema": 1,
+    "state": "passed",
+    "tested_commit": "9f0729bde2f3a0e5db7da3d4ed91486c62220a2b",
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40320069688",
+    "jobs": [
+      {
+        "name": "native (behavior)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40320069688/job/121562443415"
+      },
+      {
+        "name": "native (asan)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40320069688/job/121562443532"
+      },
+      {
+        "name": "native (sdk)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40320069688/job/121562443570"
+      },
+      {
+        "name": "native (benchmark)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40320069688/job/121562443573"
+      },
+      {
+        "name": "native (sqlite)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40320069688/job/121562443598"
+      },
+      {
+        "name": "native (native-errors)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40320069688/job/121562443642"
+      },
+      {
+        "name": "native (generation)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40320069688/job/121562443686"
+      }
+    ],
+    "artifacts": [
+      {
+        "name": "windows-native-generation-40320069688",
+        "bytes": 2968056,
+        "digest": "sha256:7fa229361aae4a3a174516bc45b187e9fe3e5bd8bc08ed22d0f8ec51b8ee0f8a",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-behavior-40320069688",
+        "bytes": 8115234,
+        "digest": "sha256:c6a0627f5a8f1f6b777cee7379ee9cac88f5929e224f285913e627bd875a9a92",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-asan-40320069688",
+        "bytes": 337312,
+        "digest": "sha256:dc55eef246c3459985f8bbe1b043453b77f7c95b4a4c561e60e686d6956f4a96",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-native-errors-40320069688",
+        "bytes": 801173,
+        "digest": "sha256:fbd241b1f1c5b0dfe4d301fe2673e911a1d76cc2cbb73db68c2f484f7d3de28e",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-benchmark-40320069688",
+        "bytes": 18453927,
+        "digest": "sha256:a02c3e8543b830ef9b5b5f5e27c716aa035a540af0dd48e3288b182242fd5000",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-sdk-40320069688",
+        "bytes": 914012,
+        "digest": "sha256:57ca60e10400fb27027a80553f3250d2ad82c2d4b539dd1c720c1b31805b72d6",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-sqlite-40320069688",
+        "bytes": 386108,
+        "digest": "sha256:2123bc2826f3503e48aa46de0edadbb6956262ef79b65adf8b3730c1cea58aff",
+        "archive_verified": true
+      }
+    ],
+    "source_files_matched_per_suite": {
+      "behavior": 563,
+      "asan": 563,
+      "benchmark": 563,
+      "generation": 563,
+      "sdk": 563,
+      "sqlite": 563,
+      "native-errors": 563
+    },
+    "root_unit_tests": 81,
+    "sdk_unit_tests": 7,
+    "benchmark_measurements": 189,
+    "benchmark_structural_and_reduced_bytes_match_39609263290": true,
+    "typed_parameter_operations": 1024,
+    "explicit_abi_boundaries": 23,
+    "native_errors": {
+      "state": "passed",
+      "reductions": [
+        {
+          "mode": "crash",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        }
+      ],
+      "raw_candidate_executions": 222,
+      "raw_independent_replay_reports": 18,
+      "crash_controls": 5,
+      "asan_controls": 5,
+      "raw_control_executions": 28,
+      "scope": "Read-only raw evidence audit; not a second test execution."
+    },
+    "sdk_source_files_matched": 45,
+    "asan_raw_canaries": 3,
+    "asan_correct_campaign_cases": 68,
+    "generation_cases": 704,
+    "sqlite_unit_tests": [
+      48,
+      8
+    ],
+    "sqlite_campaign_cases": 96,
+    "controls": {
+      "toolchain-checks": 11,
+      "script-controls": 9,
+      "release-checks": 5
+    },
+    "scope": "Seven independent Windows hosted jobs at the recorded commit; raw source, toolchain, archive and reduction audit. No release publication."
+  },
+  "linux": {
+    "schema": 1,
+    "state": "passed",
+    "tested_commit": "9f0729bde2f3a0e5db7da3d4ed91486c62220a2b",
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40320069753",
+    "artifacts": [
+      {
+        "name": "linux-native-errors-40320069753",
+        "bytes": 1827244,
+        "digest": "sha256:67a59901c9da95ff8d3c545aa46168f05d29e7e48fa62185ab92e17055712e52",
+        "archive_verified": true
+      }
+    ],
+    "ordinary": {
+      "state": "passed",
+      "tested_commit": "9f0729bde2f3a0e5db7da3d4ed91486c62220a2b",
+      "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40320069753",
+      "source_files_checked": 563,
+      "sdk_source_files_checked": 522,
+      "root_unit_tests": 81,
+      "sdk_unit_tests": 7,
+      "correct_project_cases": 212,
+      "correct_sdk_cases": 88,
+      "typed_parameter_operations": 1024,
+      "explicit_abi_boundaries": 23,
+      "audit_driver_sha256": "E3B721F1321841F9F4902584AF28101CC35A16BADCDA435EE800B1C9B2AD1F77",
+      "test_processes_launched": false,
+      "scope": "Read-only artifact audit and Git source export; no native tests or profile reruns."
+    },
+    "native_errors": {
+      "state": "passed",
+      "reductions": [
+        {
+          "mode": "crash",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        }
+      ],
+      "raw_candidate_executions": 222,
+      "raw_independent_replay_reports": 18,
+      "crash_controls": 5,
+      "asan_controls": 5,
+      "raw_control_executions": 28,
+      "scope": "Read-only raw evidence audit; not a second test execution."
+    },
+    "native_profile_source_files": {
+      "crash": 35,
+      "asan": 35
+    },
+    "native_dependency_source_files": {
+      "crash": 478,
+      "asan": 478
+    },
+    "scope": "Linux x86_64 Ubuntu hosted runner: ordinary native regression and owned crash/ASan reduction. Full seven Windows suites are separately audited; Linux does not claim their exact coverage."
+  },
+  "source_preparation": {
+    "state": "passed",
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40320069774",
+    "candidate_head_commit": "20b608d6d8546873d5d66786dc8e12642dd70e9c",
+    "actual_checkout": "9f0729bde2f3a0e5db7da3d4ed91486c62220a2b",
+    "source_tree": "a6460739e7031db48e04749010dd96cf9c0cafc7",
+    "source_files_matched": 563,
+    "control_checks": 16,
+    "preparer_matches_windows_checkout": true,
+    "local_and_hosted_source_manifests_byte_identical": true,
+    "local_source_archive_matches_git_blobs": true,
+    "local_archive_sha256": "1AB5296F4DC5F8CDB3862704D878151056D5025A9046CCC2C8B3333DA895D4E0",
+    "hosted_prepared_archive_sha256": "739FBADCB17510ADF6B45560EDC9FF2EC7DA7BE356230BF68295D30BB93C4F21",
+    "hosted_prepared_archive_not_downloaded": true,
+    "hosted_archive_determinism_reported_by_controls": true,
+    "archive_identity_note": "Local archive targets the candidate head; hosted archive targets the synthetic merge commit. Their ZIP hashes differ. All source Git blobs and source manifest bytes match; archive-byte equivalence is not claimed.",
+    "artifacts": [
+      {
+        "name": "release-source-40320069774",
+        "bytes": 57710,
+        "digest": "sha256:c0409e12ada4d370b67a550faaa61207e48d7887565a244f97a1f32c1132d172",
+        "archive_verified": true
+      }
+    ],
+    "checks": [
+      {
+        "name": "two-complete-source-archives",
+        "outcome": "passed",
+        "files": 563,
+        "deterministic_zip": true,
+        "deterministic_manifest": true
+      },
+      {
+        "name": "existing-output",
+        "outcome": "rejected",
+        "stage": null
+      },
+      {
+        "name": "missing-commit",
+        "outcome": "rejected",
+        "stage": "resolve-commit"
+      },
+      {
+        "name": "unsupported-scope",
+        "outcome": "rejected",
+        "stage": "select-scope"
+      },
+      {
+        "name": "missing-rc2-scope",
+        "outcome": "rejected",
+        "stage": "scope-and-evidence"
+      },
+      {
+        "name": "rc1-frozen-candidate-still-prepares",
+        "outcome": "passed"
+      },
+      {
+        "name": "rc1-rejects-new-runtime",
+        "outcome": "rejected",
+        "stage": "scope-and-evidence"
+      },
+      {
+        "name": "runtime-drift",
+        "outcome": "rejected",
+        "stage": "scope-and-evidence"
+      },
+      {
+        "name": "validation-drift",
+        "outcome": "rejected",
+        "stage": "scope-and-evidence"
+      },
+      {
+        "name": "linux-lock-drift",
+        "outcome": "rejected",
+        "stage": "scope-and-evidence"
+      },
+      {
+        "name": "evidence-drift",
+        "outcome": "rejected",
+        "stage": "scope-and-evidence"
+      },
+      {
+        "name": "notice-drift",
+        "outcome": "rejected",
+        "stage": "scope-and-evidence"
+      },
+      {
+        "name": "suite-omitted",
+        "outcome": "rejected",
+        "stage": "scope-and-evidence"
+      },
+      {
+        "name": "pending-omitted",
+        "outcome": "rejected",
+        "stage": "scope-and-evidence"
+      },
+      {
+        "name": "baseline-relabelled",
+        "outcome": "rejected",
+        "stage": "scope-and-evidence"
+      },
+      {
+        "name": "unaccepted-ci-drift",
+        "outcome": "rejected",
+        "stage": "scope-and-evidence"
+      }
+    ],
+    "source_candidate_sha256": "434A82EB45EB61BB3EB975B8D7D631D78AEE3ED0EFC37B8828B5F2E133081474"
+  },
+  "local_controls": {
+    "state": "passed",
+    "checks": 16,
+    "source_files": 563,
+    "archive_sha256": "1AB5296F4DC5F8CDB3862704D878151056D5025A9046CCC2C8B3333DA895D4E0",
+    "verification_sha256": "557F3A814DB7512A6690453E89986C4300C4613D446C0854AA235D13585182FD"
+  },
+  "legacy_controls": {
+    "state": "passed",
+    "checks": 5,
+    "verification_sha256": "022AFC221750A4169831F1C0DD24C7E10E6A5E4DEE7998E27556FC179940E754"
+  },
+  "raw_inspection_sha256": {
+    "windows": "9B13F6EE7B65FA5FCCC4B9BAC640712B71F57A516D18EA7694594837CF84768C",
+    "linux": "C1DAE6C03103F8E21B5F17FEBAF84859EDD571E7FA6D2405CA840674DD728A75",
+    "source": "E41AE9DFEC7BDD8C3A272C58750F9ECD621FBE90584AD65B9BA0B0EE9AE23BAB"
+  },
+  "proposed_assets": [
+    {
+      "file": "candidate.json",
+      "bytes": 2727,
+      "sha256": "632BC4828AC0E3271BB5849BE239DC0846914DE9AB079D9DCCDBDC5378BA9923"
+    },
+    {
+      "file": "source-manifest.json",
+      "bytes": 138501,
+      "sha256": "9B447DCCE21AA53C69E64A77AA257976AD6F6EC0563D3258FA9FEE983E550143"
+    },
+    {
+      "file": "source.zip",
+      "bytes": 1689710,
+      "sha256": "1AB5296F4DC5F8CDB3862704D878151056D5025A9046CCC2C8B3333DA895D4E0"
+    },
+    {
+      "file": "SHA256SUMS",
+      "bytes": 245,
+      "sha256": "097C357745DF9FF8A127DE94A3BD9861F667EA163E876C8B4D566D7E54C9865C"
+    }
+  ],
+  "publication_approved": false,
+  "tag_created": false,
+  "release_created": false,
+  "registry_published": false,
+  "independent_user_feedback": "pending",
+  "limits": [
+    "Source preparation is distinct from publication and independent-user acceptance.",
+    "The local source archive targets the proposed tag commit; the hosted prepared archive targets its synthetic merge checkout. ZIP digests differ; all source Git blobs and source manifest bytes match.",
+    "Linux does not duplicate all seven Windows suites. ASan instruments declared units only; weak-evidence ASan control is synthetic.",
+    "Candidate JSON and scope retain pending fields from preparation time; later hosted acceptance is recorded separately here."
+  ]
+}
