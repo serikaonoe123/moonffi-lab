@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "version": "0.1.0",
+  "module": "serikaonoe123/moonffi-lab",
+  "status": "experimental-source-candidate",
+  "public_engine_packages": [
+    "core",
+    "runner"
+  ],
+  "validated_platform": "Windows x64 native / MSVC; Linux x86_64 ordinary native, SDK, owned crash/ASan",
+  "trace_schema": 1,
+  "baseline_evidence": "docs/evidence/main-toolchain-acceptance-20261024.json",
+  "baseline_tested_commit": "f464479107ea46369846a41dde090d25b28426d6",
+  "required_suites": [
+    "behavior",
+    "asan",
+    "benchmark",
+    "generation",
+    "sdk",
+    "sqlite",
+    "native-errors"
+  ],
+  "required_notices": [
+    "LICENSE",
+    "fixtures/random/LICENSE",
+    "fixtures/random/NOTICE",
+    "vendor/eigen-binding/LICENSE",
+    "vendor/eigen-binding/SNAPSHOT.md",
+    "vendor/eigen-binding/manifest.json",
+    "vendor/eigen-binding/third_party/eigen/SOURCE.txt",
+    "vendor/eigen-binding/third_party/eigen/COPYING.MPL2"
+  ],
+  "pending": [
+    "candidate-hosted-acceptance",
+    "independent-user-reproduction",
+    "explicit-publication-approval"
+  ],
+  "claims": {
+    "unknown_upstream_defects_found": 0,
+    "registry_package_published": false,
+    "release_published": false,
+    "sqlite_asan_coverage": false,
+    "heap_leak_proof": false,
+    "cross_platform_validation": true
+  },
+  "release_tag": "v0.1.0-rc.2",
+  "evidence_anchor_commit": "2df35d5b26d2d139e83db41916032b8bd8d4e2c7",
+  "required_linux_suites": [
+    "ordinary",
+    "native-errors"
+  ],
+  "limits": [
+    "Linux does not duplicate all seven Windows suites.",
+    "Native error reduction requires explicit evidence and the unchanged executable identity, same outcome and stable fingerprint.",
+    "Owned artificial faults do not constitute unknown upstream defects.",
+    "ASan covers declared C/C++ units; weak-evidence ASan control is synthetic.",
+    "Source preparation and baseline acceptance do not imply this candidate has been independently accepted, published or approved for publication."
+  ]
+}
