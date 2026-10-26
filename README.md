@@ -4,7 +4,7 @@
 
 目前已验证 Windows x64/MSVC 的七项 native suite，以及 Linux x86_64 的普通 native、SDK 和原生崩溃/ASan 错误缩减。两平台的验证范围并不完全相同。Buffer fixture 的三种行为缺陷为人工注入；专用崩溃和超时探针用于验证控制器。Eigen 使用有来源和哈希记录的真实绑定快照。
 
-首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。 本轮四项补齐的[复审项目说明](docs/HACKATHON-SUBMISSION.md)、[成熟框架功能对照](docs/FRAMEWORK-COMPARISON.md)及[可复制报名补充材料](docs/RESUBMISSION-TEXT.md)已按固定提交整理。[v0.1.0-rc.1 预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)已提供源码及校验清单，对应代码与准备控制已通过 [六项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378)。支持范围和未完成项见 [发布记录](docs/RELEASE-PLAN.md)；独立使用者反馈仍待完成，尚未发布稳定版或 registry 包。
+首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。 本轮四项补齐的[复审项目说明](docs/HACKATHON-SUBMISSION.md)、[成熟框架功能对照](docs/FRAMEWORK-COMPARISON.md)及[可复制报名补充材料](docs/RESUBMISSION-TEXT.md)已按固定提交整理。[v0.1.0-rc.2 源码预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.2)已提供固定提交的 563 文件源码包及校验清单；候选自身 Windows 七项、Linux 和源码准备控制均通过，四份发布附件及标签已核对，见 [发布快照](docs/evidence/prerelease-v0.1.0-rc.2-20261026.json)。历史 rc.1 及其证据保持原义。支持范围和未完成项见 [发布记录](docs/RELEASE-PLAN.md)；独立使用者反馈仍待完成，尚未发布稳定版或 registry 包。
 
 首次运行失败、文档卡点和成功复现均可通过 [复现反馈表单](https://github.com/serikaonoe123/moonffi-lab/issues/new?template=independent-reproduction.yml) 记录；参与方式见 [贡献说明](CONTRIBUTING.md)。
 

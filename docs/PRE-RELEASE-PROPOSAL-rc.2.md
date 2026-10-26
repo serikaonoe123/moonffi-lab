@@ -1,6 +1,6 @@
-# v0.1.0-rc.2 预发布草案
+# v0.1.0-rc.2 预发布草案与执行记录
 
-状态：2026-10-26 已准备候选源码与四份附件，候选自身 Windows、Linux 和源码准备 CI 均通过，九份产物与原始结果已核对；尚未创建标签或发布。见 [统一证据](evidence/rc2-preparation-20261026.json)。本页列出可审阅的发布动作，不表示已获发布批准。独立使用者反馈仍待完成。
+当前状态：2026-10-26 已获用户明确批准，并按下列固定草案公开 [v0.1.0-rc.2](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.2)，保持 prerelease、非 Latest。四份附件回下载后的完整大小/SHA-256、发布正文和标签目标均匹配，rc.1 标签、正文及附件保持不变，见 [执行核验快照](evidence/prerelease-v0.1.0-rc.2-20261026.json)。以下保留发布前审阅的范围与正文；其中待批准/未发布描述只代表准备时快照。独立使用者反馈仍待完成。
 
 ## 拟议动作与固定内容
 
@@ -45,3 +45,13 @@ Windows 与 Linux 的覆盖范围不同；ASan 仅插桩列明单元，专项只
 ## 范围边界
 
 本草案只覆盖上述新标签、公开预发布和四份具体附件；不包含 registry 发布、工具链镜像上传、联系上游或修改报名表。赛事初审结果也不等同于使用者独立复现或稳定版验收。完整功能与限制见 [rc.2 发布说明](RELEASE-NOTES-v0.1.0-rc.2.md)。
+
+## 发布执行记录（2026-10-26）
+
+用户已明确批准按本页草案发布。实际 [rc.2](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.2) 标签指向 `20b608d6d8546873d5d66786dc8e12642dd70e9c`，API 与 CLI 均确认是 prerelease、非 Latest。四份上传附件的名称、大小、GitHub digest 和 asset ID 在公开前后保持一致；回下载文件完整摘要与本页表格全部相同，正文也与批准的 release-body.md 完全一致。
+
+首次 source.zip 回下载在末尾出现 TCP 超时，保留了原始部分文件；同一官方地址的标准 HTTPS Range 请求取得余下字节，完整文件的 1,689,710 字节及 SHA-256 `1AB5296F4DC5F8CDB3862704D878151056D5025A9046CCC2C8B3333DA895D4E0` 匹配后才公开。其余三份完整回下载直接匹配。此处核对的是公开前回下载和公开后相同 asset ID/大小/digest，不冒充公开后重新下载了一遍。
+
+PR #7 合并为 `381643a7352d2991402b99150e4b058ad5b0bb73` 后，[Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40323325841)及 [Linux](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40323325730)也全部通过，八份产物和原始报告核对完成；Windows 每项 565 份源码匹配，189 次 benchmark 结构指标及具体结果字节不变。该 main 验收与发布目标 `20b608d` 的候选自身 CI 分开记录，不把合并提交替代成发布标签。
+
+rc.1 仍指向 `23893d5bb3a231a21df10db506d8da821a7e984d`，旧发布正文、标记及四份附件的 ID/大小/digest 均与发布前记录一致。原 candidate.json、scope 和发布前草案 JSON 保留准备时状态，实际发布以 [新执行快照](evidence/prerelease-v0.1.0-rc.2-20261026.json) 为准。独立使用者反馈、稳定版或 registry 包仍未完成。原始元数据、回下载及失败记录留在本地 `results/publish-rc2-20261026/`。

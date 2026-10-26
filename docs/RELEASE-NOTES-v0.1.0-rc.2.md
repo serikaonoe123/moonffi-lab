@@ -1,6 +1,6 @@
 # MoonFFI Lab v0.1.0-rc.2 发布说明草稿
 
-状态：候选 `20b608d` 的 Windows 七项、Linux 和源码准备 CI 已通过并核对产物，具体附件见 [预发布草案](PRE-RELEASE-PROPOSAL-rc.2.md)。尚未创建标签、GitHub 预发布或 registry 包。项目清单版本仍为 0.1.0，拟议的试用标签为 v0.1.0-rc.2。
+状态：2026-10-26 已公开 [v0.1.0-rc.2 源码试用候选](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.2)，固定指向 `20b608d`，prerelease、非 Latest。四份附件、正文及标签均已核对，见 [发布执行记录](PRE-RELEASE-PROPOSAL-rc.2.md)与 [核验快照](evidence/prerelease-v0.1.0-rc.2-20261026.json)。稳定版和 registry 包尚未发布。项目清单版本仍为 0.1.0，拟议的试用标签为 v0.1.0-rc.2。
 
 MoonFFI Lab 为原生 C/C++ 绑定生成有状态调用序列，在独立进程执行，保存具体输入和原始诊断，并把可重复的失败缩减为可重放案例。
 
