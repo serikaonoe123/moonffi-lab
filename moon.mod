@@ -3,7 +3,6 @@ version = "0.1.0"
 readme = "README.mooncakes.md"
 license = "MIT"
 repository = "https://github.com/serikaonoe123/moonffi-lab"
-homepage = "https://github.com/serikaonoe123/moonffi-lab"
 description = "Stateful native FFI failure reproduction and dependency-aware trace reduction for MoonBit."
 keywords = ["ffi", "testing", "native", "replay", "shrinking"]
 preferred_target = "native"

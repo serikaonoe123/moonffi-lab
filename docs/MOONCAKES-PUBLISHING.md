@@ -8,7 +8,7 @@
 
 ## 本次包范围
 
-发布专用 README 为根目录 README.mooncakes.md。moon.mod 提供 repository/homepage，并明确仅支持 native。`.moonignore` 只允许元数据、MIT 许可证、core/runner 的 MoonBit 源码及各自 moon.pkg、runner/native_guard.c。第三方 Eigen、历史随机流、故障 fixture、命令示例、文档脚本、依赖缓存和构建产物不随库包上传；它们在 GitHub 完整工程中保留原样来源和许可。
+发布专用 README 为根目录 README.mooncakes.md。moon.mod 提供 repository，并明确仅支持 native。`.moonignore` 只允许元数据、MIT 许可证、core/runner 的 MoonBit 源码及各自 moon.pkg、runner/native_guard.c。第三方 Eigen、历史随机流、故障 fixture、命令示例、文档脚本、依赖缓存和构建产物不随库包上传；它们在 GitHub 完整工程中保留原样来源和许可。
 
 根 README 保留完整工程安装与演示；registry README 提供发布后的安装命令和最小调用，发布前明确标为候选用法。0.1.0 是实验性模块版本，不据此宣称稳定 API。
 
