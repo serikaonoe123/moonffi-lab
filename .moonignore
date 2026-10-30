@@ -1,0 +1,15 @@
+# Publish only the public native library and its metadata.
+/*
+!/.moonignore
+!/moon.mod
+!/README.mooncakes.md
+!/LICENSE
+!/core/
+/core/*
+!/core/*.mbt
+!/core/moon.pkg
+!/runner/
+/runner/*
+!/runner/*.mbt
+!/runner/moon.pkg
+!/runner/native_guard.c

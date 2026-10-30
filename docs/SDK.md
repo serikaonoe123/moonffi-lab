@@ -6,6 +6,10 @@
 
 后续开发增加 [有界 FFI 参数策略](ARGUMENT-STRATEGIES.md)和 cmd/parameters C 消费者，支持布尔、宽整数、按位浮点、Unicode 文本、字节、数组及可空值的生成与缩减。该消费者仅使用公开 core/runner 与自己的 C 函数，不使用私有 fixture。
 
+## Mooncakes 候选
+
+正在准备只含 core/runner 的 registry 库包，尚未上传；包名和发布账号待确认。安装示例见 [registry README](../README.mooncakes.md)，上传前归档消费及发布后真实 registry 消费必须分别记录，见 [发布准备](MOONCAKES-PUBLISHING.md)。下文已有源码工作区流程继续保留。
+
 ## 1. 建立模块与工作区
 
 仓库中的 `examples/moon.work` 把引擎目录 `..` 和示例 `adapter-starter` 作为成员。示例 `moon.mod` 声明 `serikaonoe123/moonffi-lab@0.1.0` 和 `moonbitlang/async@0.22.5`。本地引擎从工作区源码解析，async 从 registry 或已有工具缓存恢复。[MoonBit 模块文档](https://docs.moonbitlang.com/en/latest/toolchain/moon/module.html)说明了通过 `moon.work` 关联本地模块的方式；本例已用仓库锁定的工具链实际编译验证。

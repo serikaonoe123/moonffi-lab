@@ -8,6 +8,10 @@
 
 首次运行失败、文档卡点和成功复现均可通过 [复现反馈表单](https://github.com/serikaonoe123/moonffi-lab/issues/new?template=independent-reproduction.yml) 记录；参与方式见 [贡献说明](CONTRIBUTING.md)。
 
+## Mooncakes 发布准备
+
+验收要求的 registry 发布正在准备，当前还未上传。账号尚待注册和命名空间确认，暂定包名 `serikaonoe123/moonffi-lab@0.1.0`。包内容、发布后的预期安装命令及本地归档消费者验证见 [发布准备](docs/MOONCAKES-PUBLISHING.md)和 [registry README](README.mooncakes.md)。GitHub rc.2 不代替 Mooncakes 发布；这项工作仍列为未完成。
+
 ## 准备和验证
 
 **工具链升级（2026-10-24）**：当前开发锁使用官方 `0.10.17+d971670cd` 固定版本地址。候选 `bda5201` 已通过 [Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40058468249)及 [Linux 验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40058468261)，八份产物的归档、源码、工具链及原始报告已核对，见 [升级记录](docs/evidence/toolchain-upgrade-20261024.json)。旧版固定来源及验收保留在 `fdd8849`，不混用两个版本的证据。

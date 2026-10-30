@@ -19,7 +19,7 @@ jobs:
           persist-credentials: false
       - name: Verify rc.2 source preparation and rejection controls
         shell: pwsh
-        run: python scripts/test_release_rc2.py --ref HEAD --out results/rc2-preparation
+        run: python scripts/test_release_rc2.py --ref 20b608d6d8546873d5d66786dc8e12642dd70e9c --reject-ref HEAD --out results/rc2-preparation
       - name: Retain source preparation diagnostics
         if: always()
         uses: actions/upload-artifact@v4
