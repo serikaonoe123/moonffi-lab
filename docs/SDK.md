@@ -8,7 +8,7 @@
 
 ## Mooncakes 候选
 
-正在准备只含 core/runner 的 registry 库包，尚未上传；包名和发布账号待确认。安装示例见 [registry README](../README.mooncakes.md)，上传前归档消费及发布后真实 registry 消费必须分别记录，见 [发布准备](MOONCAKES-PUBLISHING.md)。下文已有源码工作区流程继续保留。
+正在准备只含 core/runner 的 registry 库包，尚未上传；发布账号已确认，候选包名为 `serikaonoe123/moonffi-lab@0.1.0`。安装示例在实际发布前不可用，见 [registry README](../README.mooncakes.md)；上传前归档消费及发布后真实 registry 消费须分别记录，见 [发布准备](MOONCAKES-PUBLISHING.md)。下文已有源码工作区流程继续保留。
 
 ## 1. 建立模块与工作区
 

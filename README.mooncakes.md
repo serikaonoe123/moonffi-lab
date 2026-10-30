@@ -2,15 +2,13 @@
 
 MoonBit 原生 C/C++ 绑定的串行、有界状态测试引擎：生成调用序列，在独立进程执行，保存具体失败输入，再按相同结果类别和稳定指纹进行缩减与重放。
 
-**发布状态：这是 Mooncakes 发布候选说明。尚未上传 registry；下列安装命令须等对应版本正式发布并核验后使用。** 暂定模块名为 `serikaonoe123/moonffi-lab`、版本 `0.1.0`，最终命名空间须由实际 Mooncakes 账号确认。GitHub 的 rc.2 源码预发布不等同于 Mooncakes 发布。
-
 ## 环境
 
 本模块仅支持 native。已验证 Windows x64/MSVC 与 Ubuntu 24.04 x86_64/GCC；两平台的测试范围不同。项目使用固定内容的 moonc/core `0.10.17+d971670cd` 和 async 0.22.5，满足竞赛要求的 moonc >=0.10.16；不承诺任意新旧工具链组合。Windows C FFI 需要 MSVC C++ 工作负载与 Windows SDK。
 
 ## 安装与最小调用
 
-以下为发布后的预期用法；在你自己的 MoonBit 模块中运行：
+在你自己的 MoonBit 模块中运行：
 
 ```sh
 moon add serikaonoe123/moonffi-lab@0.1.0

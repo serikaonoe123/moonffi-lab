@@ -6,7 +6,7 @@
 
 按新验收指南，第 8 项 registry 发布为必做，独立使用者反馈不是该指南硬性条件；初审通过后无须再提交表格。PR #9 准备仅含 core/runner 的 32 文件 native 包、完整元数据与候选安装说明。候选 e4ca0fa 的四套 CI 和十份产物核对通过，归档消费者、17 项冻结发布控制及既有 Windows/Linux 回归通过；见 [准备记录](evidence/mooncakes-preparation-20261030.json)。
 
-用户尚无 Mooncakes 账号，当前命名空间和 0.1.0 版本均为待确认方案，未登录或上传 registry，也未证明 registry-installed engine 的消费。下一步由用户注册并确认用户名，再确认包名/版本可用性、具体发布范围与发布后的新消费者安装。已发布 GitHub rc.1/rc.2 与其冻结资产不变。
+用户已注册并确认 Mooncakes 账号 `serikaonoe123`，与现有模块名一致。官方公开 manifest 接口对候选 `serikaonoe123/moonffi-lab@0.1.0` 返回 404/Package not found，同一接口对 async 0.22.5 返回 200；发布前仍须重查。本机 CLI 登录尚待完成，未上传 registry，也未证明 registry-installed engine 的消费。包说明已去除内部候选/注册过程文字，须重新生成最终归档、核对具体发布范围并取得本次上传授权。账号确认前的准备证据保留为历史快照。已发布 GitHub rc.1/rc.2 与其冻结资产不变。
 
 ## rc.2 交付（2026-10-26）
 

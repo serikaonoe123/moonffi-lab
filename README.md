@@ -10,7 +10,7 @@
 
 ## Mooncakes 发布准备
 
-验收要求的 registry 发布正在准备，当前还未上传。32 文件包的本地/云端归档消费者和 Windows/Linux 完整回归已通过，见 [准备证据](docs/evidence/mooncakes-preparation-20261030.json)。账号尚待注册和命名空间确认，暂定包名 `serikaonoe123/moonffi-lab@0.1.0`。包内容、发布后的预期安装命令及本地归档消费者验证见 [发布准备](docs/MOONCAKES-PUBLISHING.md)和 [registry README](README.mooncakes.md)。GitHub rc.2 不代替 Mooncakes 发布；这项工作仍列为未完成。
+验收要求的 registry 发布正在准备，当前还未上传。账号 `serikaonoe123` 已由用户注册并确认，候选包名为 `serikaonoe123/moonffi-lab@0.1.0`；官方公开接口本轮查询返回该版本不存在。账号确认前的 32 文件包已通过本地/云端归档消费者和 Windows/Linux 完整回归，见 [准备证据](docs/evidence/mooncakes-preparation-20261030.json)。定稿说明后的归档需重新核对，再确认发布；包内容、安装示例和后续验收见 [发布准备](docs/MOONCAKES-PUBLISHING.md)及 [registry README](README.mooncakes.md)。GitHub rc.2 不代替 Mooncakes 发布；这项工作仍列为未完成。
 
 ## 准备和验证
 
