@@ -1,0 +1,48 @@
+name: Mooncakes package preflight
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  archive-consumer:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install pinned toolchain
+        shell: pwsh
+        run: |
+          $toolchain = Join-Path $env:RUNNER_TEMP 'mooncakes-toolchain'
+          & ./scripts/install-toolchain.ps1 -Destination $toolchain -Out results/mooncakes-bootstrap
+          "MOON_HOME=$toolchain" | Add-Content $env:GITHUB_ENV
+          (Join-Path $toolchain 'bin') | Add-Content $env:GITHUB_PATH
+      - name: Package and test an external consumer of the archive
+        shell: pwsh
+        run: |
+          $out = Join-Path $env:RUNNER_TEMP 'mooncakes-preflight'
+          python scripts/verify_mooncakes.py --ref HEAD --out $out
+      - name: Retain diagnostics only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mooncakes-preflight-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            results/mooncakes-bootstrap/*.json
+            results/mooncakes-bootstrap/*.log
+            ${{ runner.temp }}/mooncakes-preflight/verification.json
+            ${{ runner.temp }}/mooncakes-preflight/failure.json
+            ${{ runner.temp }}/mooncakes-preflight/package-manifest.json
+            ${{ runner.temp }}/mooncakes-preflight/toolchain.json
+            ${{ runner.temp }}/mooncakes-preflight/*.log
+            ${{ runner.temp }}/mooncakes-preflight/sdk/**/*.json
+            ${{ runner.temp }}/mooncakes-preflight/sdk/**/*.log
+            !${{ runner.temp }}/mooncakes-preflight/sdk/**/workspace/**

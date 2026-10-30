@@ -4,9 +4,15 @@
 
 目前已验证 Windows x64/MSVC 的七项 native suite，以及 Linux x86_64 的普通 native、SDK 和原生崩溃/ASan 错误缩减。两平台的验证范围并不完全相同。Buffer fixture 的三种行为缺陷为人工注入；专用崩溃和超时探针用于验证控制器。Eigen 使用有来源和哈希记录的真实绑定快照。
 
-首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。 本轮四项补齐的[复审项目说明](docs/HACKATHON-SUBMISSION.md)、[成熟框架功能对照](docs/FRAMEWORK-COMPARISON.md)及[可复制报名补充材料](docs/RESUBMISSION-TEXT.md)已按固定提交整理。[v0.1.0-rc.2 源码预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.2)已提供固定提交的 563 文件源码包及校验清单；候选自身 Windows 七项、Linux 和源码准备控制均通过，四份发布附件及标签已核对，见 [发布快照](docs/evidence/prerelease-v0.1.0-rc.2-20261026.json)。历史 rc.1 及其证据保持原义。支持范围和未完成项见 [发布记录](docs/RELEASE-PLAN.md)；独立使用者反馈仍待完成，尚未发布稳定版或 registry 包。
+首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。 本轮四项补齐的[复审项目说明](docs/HACKATHON-SUBMISSION.md)、[成熟框架功能对照](docs/FRAMEWORK-COMPARISON.md)及[可复制报名补充材料](docs/RESUBMISSION-TEXT.md)已按固定提交整理。[v0.1.0-rc.2 源码预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.2)已提供固定提交的 563 文件源码包及校验清单；候选自身 Windows 七项、Linux 和源码准备控制均通过，四份发布附件及标签已核对，见 [发布快照](docs/evidence/prerelease-v0.1.0-rc.2-20261026.json)。历史 rc.1 及其证据保持原义。支持范围和未完成项见 [发布记录](docs/RELEASE-PLAN.md)；Mooncakes 0.1.0 实验性库包已发布，独立使用者反馈仍待完成。
 
 首次运行失败、文档卡点和成功复现均可通过 [复现反馈表单](https://github.com/serikaonoe123/moonffi-lab/issues/new?template=independent-reproduction.yml) 记录；参与方式见 [贡献说明](CONTRIBUTING.md)。
+
+## Mooncakes 安装
+
+已发布 [serikaonoe123/moonffi-lab@0.1.0](https://mooncakes.io/docs/serikaonoe123/moonffi-lab)，提供 MIT 许可的 core/runner native 库。运行 `moon add serikaonoe123/moonffi-lab@0.1.0` 安装，最小调用见 [registry README](README.mooncakes.md)，完整状态模型和 C 适配器见 [SDK 指南](docs/SDK.md)。
+
+发布的 32 文件包与批准摘要一致；全新消费者从 registry 首次下载后通过 7 项 SDK 测试、契约/重放、1024 次 C FFI 操作及 23 项 ABI 边界检查，见 [发布验收](docs/evidence/mooncakes-0.1.0-20261030.json)与 [复现入口](docs/MOONCAKES-PUBLISHING.md)。0.x 接口仍属实验性。
 
 ## 准备和验证
 

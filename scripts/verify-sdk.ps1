@@ -1,4 +1,4 @@
-param([string]$Out = '', [string]$OfflineDependencySource = '')
+param([string]$Out = '', [string]$OfflineDependencySource = '', [string]$RegistryPackage = '')
 $ErrorActionPreference='Stop'
 $PSNativeCommandUseErrorActionPreference=$false
 $projectRoot=Split-Path -Parent $PSScriptRoot
@@ -8,6 +8,7 @@ if (-not $Out) { $Out=Join-Path $projectRoot ('results/sdk-' + [guid]::NewGuid()
 $Out=[System.IO.Path]::GetFullPath($Out)
 if (Test-Path -LiteralPath $Out) { throw "Output must be new: $Out" }
 if ($OfflineDependencySource) { $OfflineDependencySource=(Resolve-Path -LiteralPath $OfflineDependencySource).Path }
+if ($RegistryPackage) { $RegistryPackage=(Resolve-Path -LiteralPath $RegistryPackage).Path }
 New-Item -ItemType Directory -Path $Out | Out-Null
 function Require([bool]$Condition,[string]$Message) { if (-not $Condition) { throw $Message } }
 function Read-Json([string]$Path) { Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json }
@@ -18,16 +19,31 @@ function Invoke-Checked([string]$Exe,[string[]]$ToolArgs,[int[]]$Expected,[strin
 }
 try {
   $stage='prepare-external-consumer'
+  $registryVerification=$null
+  $sdkScope='Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed.'
+  if ($RegistryPackage) {
+    Require (-not $OfflineDependencySource) 'Registry verification cannot use an offline dependency source'
+    $published=Read-Json $RegistryPackage
+    Require ($published.module -eq 'serikaonoe123/moonffi-lab' -and $published.version -eq '0.1.0') 'Unexpected registry module/version'
+    Require ($published.files.Count -eq 32 -and $published.archive_sha256 -match '^[A-Fa-f0-9]{64}$') 'Invalid published package identity'
+    $cachedArchive=Join-Path $env:MOON_HOME "registry/cache/serikaonoe123/moonffi-lab/$($published.version).zip"
+    $archiveCachedBefore=Test-Path -LiteralPath $cachedArchive
+    $sdkScope='Fresh consumer workspace resolves the published engine from Mooncakes, matching its archive and all source files to the approved release. Archive cache reuse is recorded explicitly. This is same-machine validation, not independent-user feedback, unknown defect discovery or a stable API guarantee.'
+  }
   $workspace=Join-Path $Out 'workspace'
   $engine=Join-Path $workspace 'engine'; $consumer=Join-Path $workspace 'consumer'
-  New-Item -ItemType Directory -Path $engine,$consumer | Out-Null
-  foreach ($name in @('core','runner','moon.mod')) { Copy-Item -LiteralPath (Join-Path $projectRoot $name) -Destination $engine -Recurse }
+  New-Item -ItemType Directory -Path $consumer | Out-Null
+  if (-not $RegistryPackage) {
+    New-Item -ItemType Directory -Path $engine | Out-Null
+    foreach ($name in @('core','runner','moon.mod')) { Copy-Item -LiteralPath (Join-Path $projectRoot $name) -Destination $engine -Recurse }
+  }
   $starter=Join-Path $projectRoot 'examples/adapter-starter'
   foreach ($name in @('counter','cmd','moon.mod','README.md','LICENSE')) { Copy-Item -LiteralPath (Join-Path $starter $name) -Destination $consumer -Recurse }
   foreach ($name in @('fixtures','vendor','cmd','.git','.mooncakes','_build')) {
     Require (-not (Test-Path -LiteralPath (Join-Path $engine $name))) 'SDK engine copy contains non-SDK sources or artifacts'
   }
-  $members=@('engine','consumer')
+  $members=@('consumer')
+  if (-not $RegistryPackage) { $members=@('engine','consumer') }
   $dependencyMode='registry-or-tool-cache'
   if ($OfflineDependencySource) {
     $stage='copy-explicit-dependency-source'
@@ -51,15 +67,41 @@ try {
   $sourceManifest | ConvertTo-Json -Depth 4 | Set-Content (Join-Path $Out 'source-manifest.json') -Encoding utf8
   Set-Location -LiteralPath $consumer
   $stage='resolve-and-check'
+  if ($RegistryPackage) {
+    Require ((Get-Content -LiteralPath (Join-Path $consumer 'moon.mod') -Raw).Contains("serikaonoe123/moonffi-lab@$($published.version)")) 'Consumer dependency differs from the published version'
+    Invoke-Checked 'moon' @('update') @(0) (Join-Path $Out 'registry-update.log')
+    $dependencyMode='registry-engine-and-dependencies'
+  }
   $checkArgs=@('check','--target','native','--deny-warn','counter','cmd/main')
   if ($OfflineDependencySource) { $checkArgs += '--frozen' }
   Invoke-Checked 'moon' $checkArgs @(0) (Join-Path $Out 'check.log')
   Invoke-Checked 'moon' @('tree','--json') @(0) (Join-Path $Out 'module-tree.json')
   Invoke-Checked 'moon' @('tree','--package','--json') @(0) (Join-Path $Out 'package-tree.json')
   $tree=Read-Json (Join-Path $Out 'module-tree.json')
-  foreach ($entry in @(@{name='serikaonoe123/moonffi-lab';path=$engine},@{name='moonffi-example/counter-lab';path=$consumer})) {
+  $localModules=@(@{name='moonffi-example/counter-lab';path=$consumer})
+  if (-not $RegistryPackage) { $localModules+=@{name='serikaonoe123/moonffi-lab';path=$engine} }
+  foreach ($entry in $localModules) {
     $found=@($tree.modules | Where-Object name -eq $entry.name)
     Require ($found.Count -eq 1 -and $found[0].source.kind -eq 'local' -and $found[0].source.path -eq $entry.path) 'SDK did not resolve the intended local modules'
+  }
+  if ($RegistryPackage) {
+    $stage='verify-registry-source'
+    $registered=@($tree.modules | Where-Object name -eq $published.module)
+    Require ($registered.Count -eq 1 -and $registered[0].source.kind -eq 'registry' -and $registered[0].version -eq $published.version -and -not $registered[0].workspace_member) 'Engine did not resolve from the intended registry release'
+    Require (-not (Test-Path -LiteralPath (Join-Path $workspace 'engine'))) 'Registry consumer contains a local engine member'
+    $locations=@(@((Join-Path $workspace '.mooncakes/serikaonoe123/moonffi-lab'),(Join-Path $consumer '.mooncakes/serikaonoe123/moonffi-lab')) | Where-Object { Test-Path -LiteralPath $_ -PathType Container })
+    Require ($locations.Count -eq 1) 'Registry engine source location is ambiguous'
+    $engine=(Resolve-Path -LiteralPath $locations[0]).Path
+    Require ((Get-FileHash -LiteralPath $cachedArchive).Hash -eq $published.archive_sha256 -and (Get-Item -LiteralPath $cachedArchive).Length -eq $published.archive_bytes) 'Downloaded registry archive differs from the approved release'
+    foreach ($file in $published.files) {
+      $path=[System.IO.Path]::GetFullPath((Join-Path $engine $file.path))
+      Require ($path.StartsWith($engine+[System.IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)) 'Unsafe registry manifest path'
+      Require ((Get-FileHash -LiteralPath $path).Hash -eq $file.sha256 -and (Get-Item -LiteralPath $path).Length -eq $file.bytes) 'Installed registry source differs from the approved release'
+      $sourceManifest += [ordered]@{path=('registry-engine/'+$file.path);sha256=$file.sha256}
+    }
+    $sourceManifest | ConvertTo-Json -Depth 4 | Set-Content (Join-Path $Out 'source-manifest.json') -Encoding utf8
+    $registryVerification=[ordered]@{module=$published.module;version=$published.version;source_kind='registry';workspace_engine_member=$false;archive_cached_before=$archiveCachedBefore;archive_sha256=$published.archive_sha256;archive_bytes=$published.archive_bytes;source_files_matched=$published.files.Count}
+    $registryVerification | ConvertTo-Json | Set-Content (Join-Path $Out 'registry-engine.json') -Encoding utf8
   }
   $packageTree=Read-Json (Join-Path $Out 'package-tree.json')
   $enginePackages=@($packageTree.nodes | Where-Object module -eq 'serikaonoe123/moonffi-lab')
@@ -222,7 +264,7 @@ try {
     preflight_rejection=$true;output_reuse_rejected=$true;separate_process_determinism=$true;toolchain=@(& moon version --all)
     explicit_state_contracts=$contracts
     typed_ffi_parameters=$parameters
-    independent_environment=$false;scope='Separate consumer module built from a fresh workspace containing only public core/runner sources and the teaching fixture. No registry publication, real defect discovery, full SDK stability or ASan coverage of the counter is claimed.'
+    registry_engine=$registryVerification;independent_environment=$false;scope=$sdkScope
   } | ConvertTo-Json -Depth 6 | Set-Content (Join-Path $Out 'verification.json') -Encoding utf8
   Write-Host "External SDK verification passed. Evidence: $Out"
 } catch {

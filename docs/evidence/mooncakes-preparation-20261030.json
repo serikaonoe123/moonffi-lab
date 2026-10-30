@@ -1,0 +1,461 @@
+{
+  "schema": 1,
+  "observed_on": "2026-10-30",
+  "state": "preparation-validated-registry-publication-pending",
+  "candidate_head_commit": "e4ca0fafc08b75237f59fba0714d6e61645a42a8",
+  "tested_commit": "960933fcd902ab97188df2ea18f835524e7cda1f",
+  "checkout_binding": {
+    "actual_checkout": "960933fcd902ab97188df2ea18f835524e7cda1f",
+    "workflow_head": "e4ca0fafc08b75237f59fba0714d6e61645a42a8",
+    "base": "6653cbc0e5ffe83efff1a8597f483b7d88f5d06c",
+    "tree": "0fafa88ddf2381a1dec0d8f8dfa1ea1cfb33eca4",
+    "parents_verified": true,
+    "checkout_tree_equals_candidate": true,
+    "canonical_git_object_sha1_matched": true
+  },
+  "pull_request": "https://github.com/serikaonoe123/moonffi-lab/pull/9",
+  "provisional_module": "serikaonoe123/moonffi-lab",
+  "provisional_version": "0.1.0",
+  "namespace_confirmed": false,
+  "account_status": "User reports no Mooncakes account yet",
+  "publish_ready": false,
+  "registry_published": false,
+  "registry_install_verified": false,
+  "package_preflight": {
+    "state": "passed",
+    "candidate": "e4ca0fafc08b75237f59fba0714d6e61645a42a8",
+    "actual_checkout": "960933fcd902ab97188df2ea18f835524e7cda1f",
+    "package_files": 32,
+    "archive_bytes": 45488,
+    "reported_archive_sha256": "1D9F15C0D55CB6860603586B971A41A3E0F9A9011B63E7CBA6338C0A539CBC99",
+    "reported_archive_digest_equals_local": true,
+    "cloud_zip_not_downloaded": true,
+    "package_manifest_sources_match_git": true,
+    "engine_inputs_matched": 29,
+    "sdk_unit_tests": 7,
+    "typed_ffi_operations": 1024,
+    "explicit_abi_boundaries": 23,
+    "frozen_release_controls": 17,
+    "frozen_release_manifest_unchanged": true,
+    "registry_engine_installation_verified": false,
+    "registry_published": false,
+    "package_run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558261",
+    "freeze_run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558111",
+    "artifacts": [
+      {
+        "name": "mooncakes-preflight-40999558261",
+        "bytes": 637217,
+        "digest": "sha256:7e0197c7a35c1ec3e52f31612fe76030c82da01dc040f9a7a0ac0602eb644de4",
+        "archive_verified": true
+      },
+      {
+        "name": "release-source-40999558111",
+        "bytes": 58459,
+        "digest": "sha256:2307b169f3dc68c16e69524130a1d4ab4b29ca4143b950e626b7d0b5a2c2fb40",
+        "archive_verified": true
+      }
+    ],
+    "scope": "Read-only diagnostic and source audit. Actual ZIP consumption was executed by CI; this audit does not re-execute native tests or prove registry installation."
+  },
+  "local_preflight": {
+    "state": "package-and-archive-consumer-passed-not-published",
+    "source_commit": "8beefaabdbf660bb592c738a8f320af9dbe8ebe8",
+    "archive_sha256": "1D9F15C0D55CB6860603586B971A41A3E0F9A9011B63E7CBA6338C0A539CBC99",
+    "archive_bytes": 45488,
+    "package_files": 32,
+    "excluded_probes": [
+      "core/mooncakes-omit-probe.txt",
+      "runner/generated-probe.obj",
+      ".credentials-probe"
+    ],
+    "engine_inputs_matched": 29,
+    "sdk_unit_tests": 7,
+    "typed_ffi_operations": 1024,
+    "explicit_abi_boundaries": 23,
+    "dependency_mode": "explicit-local-async-source",
+    "engine_resolution": "Local workspace engine extracted only from the actual package ZIP",
+    "registry_installed_engine": false,
+    "registry_published": false,
+    "scope": "Archive consumption, not registry publication or installation."
+  },
+  "windows": {
+    "schema": 1,
+    "state": "passed",
+    "tested_commit": "960933fcd902ab97188df2ea18f835524e7cda1f",
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558109",
+    "jobs": [
+      {
+        "name": "native (sqlite)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558109/job/123880513128"
+      },
+      {
+        "name": "native (behavior)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558109/job/123880513252"
+      },
+      {
+        "name": "native (generation)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558109/job/123880513297"
+      },
+      {
+        "name": "native (asan)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558109/job/123880513300"
+      },
+      {
+        "name": "native (sdk)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558109/job/123880513340"
+      },
+      {
+        "name": "native (native-errors)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558109/job/123880513403"
+      },
+      {
+        "name": "native (benchmark)",
+        "conclusion": "success",
+        "url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558109/job/123880513419"
+      }
+    ],
+    "artifacts": [
+      {
+        "name": "windows-native-behavior-40999558109",
+        "bytes": 8111835,
+        "digest": "sha256:6d78da814d7c0ab95ce4b14efd96f6d93718be555da88feb642edc47e84fcabd",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-generation-40999558109",
+        "bytes": 2968141,
+        "digest": "sha256:d992c1c53e2a7b659c2c382148d7e6d68590a808c4a2df9f18f55a4ae10b8901",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-native-errors-40999558109",
+        "bytes": 801782,
+        "digest": "sha256:785a96d7ccad102905954999d5acb0d95b326a44ef619f85e2e61a97274702f4",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-benchmark-40999558109",
+        "bytes": 18452111,
+        "digest": "sha256:a2f50b91ef7710d997edbde26b17c3d9527b97e28a8aaa7e1aa178cd5602e100",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-sdk-40999558109",
+        "bytes": 914404,
+        "digest": "sha256:954d4d5d4b5c101d2a560ebfb8a7a7eaf0b33b72aa755557614220dc10da6039",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-asan-40999558109",
+        "bytes": 337668,
+        "digest": "sha256:2af8762928f3fc3d1f91ed61e13fded054473d317a8374edf440950401c7aeba",
+        "archive_verified": true
+      },
+      {
+        "name": "windows-native-sqlite-40999558109",
+        "bytes": 386489,
+        "digest": "sha256:51fca3fa3397da46f5f7fed7f0d03dabb436ed1742ee53e3c7500ff811f592e4",
+        "archive_verified": true
+      }
+    ],
+    "source_files_matched_per_suite": {
+      "behavior": 571,
+      "asan": 571,
+      "benchmark": 571,
+      "generation": 571,
+      "sdk": 571,
+      "sqlite": 571,
+      "native-errors": 571
+    },
+    "root_unit_tests": 81,
+    "sdk_unit_tests": 7,
+    "benchmark_measurements": 189,
+    "benchmark_structural_and_reduced_bytes_match_39609263290": true,
+    "typed_parameter_operations": 1024,
+    "explicit_abi_boundaries": 23,
+    "native_errors": {
+      "state": "passed",
+      "reductions": [
+        {
+          "mode": "crash",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        }
+      ],
+      "raw_candidate_executions": 222,
+      "raw_independent_replay_reports": 18,
+      "crash_controls": 5,
+      "asan_controls": 5,
+      "raw_control_executions": 28,
+      "scope": "Read-only raw evidence audit; not a second test execution."
+    },
+    "sdk_source_files_matched": 45,
+    "asan_raw_canaries": 3,
+    "asan_correct_campaign_cases": 68,
+    "generation_cases": 704,
+    "sqlite_unit_tests": [
+      48,
+      8
+    ],
+    "sqlite_campaign_cases": 96,
+    "controls": {
+      "toolchain-checks": 11,
+      "script-controls": 9,
+      "release-checks": 5
+    },
+    "scope": "Seven independent Windows hosted jobs at the recorded commit; raw source, toolchain, archive and reduction audit. No release publication."
+  },
+  "linux": {
+    "schema": 1,
+    "state": "passed",
+    "tested_commit": "960933fcd902ab97188df2ea18f835524e7cda1f",
+    "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558243",
+    "artifacts": [
+      {
+        "name": "linux-native-errors-40999558243",
+        "bytes": 1827891,
+        "digest": "sha256:908127605327c9625564e74525dc0a6658d55015f3598028e19d185b1e8c8e71",
+        "archive_verified": true
+      }
+    ],
+    "ordinary": {
+      "state": "passed",
+      "tested_commit": "960933fcd902ab97188df2ea18f835524e7cda1f",
+      "run_url": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558243",
+      "source_files_checked": 571,
+      "sdk_source_files_checked": 522,
+      "root_unit_tests": 81,
+      "sdk_unit_tests": 7,
+      "correct_project_cases": 212,
+      "correct_sdk_cases": 88,
+      "typed_parameter_operations": 1024,
+      "explicit_abi_boundaries": 23,
+      "audit_driver_sha256": "E3B721F1321841F9F4902584AF28101CC35A16BADCDA435EE800B1C9B2AD1F77",
+      "test_processes_launched": false,
+      "scope": "Read-only artifact audit and Git source export; no native tests or profile reruns."
+    },
+    "native_errors": {
+      "state": "passed",
+      "reductions": [
+        {
+          "mode": "crash",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "crash",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "plain",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 33,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "dependency",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        },
+        {
+          "mode": "asan",
+          "strategy": "state",
+          "steps": [
+            32,
+            2
+          ],
+          "executions": 39,
+          "baseline_checks": 3,
+          "final_checks": 3,
+          "replay_same_site": true,
+          "different_site_distinguished": true,
+          "correct_control": "Pass"
+        }
+      ],
+      "raw_candidate_executions": 222,
+      "raw_independent_replay_reports": 18,
+      "crash_controls": 5,
+      "asan_controls": 5,
+      "raw_control_executions": 28,
+      "scope": "Read-only raw evidence audit; not a second test execution."
+    },
+    "native_profile_source_files": {
+      "crash": 35,
+      "asan": 35
+    },
+    "native_dependency_source_files": {
+      "crash": 478,
+      "asan": 478
+    },
+    "scope": "Linux x86_64 Ubuntu hosted runner: ordinary native regression and owned crash/ASan reduction. Full seven Windows suites are separately audited; Linux does not claim their exact coverage."
+  },
+  "initial_failures": [
+    {
+      "kind": "local manifest parser",
+      "commit": "2988743",
+      "cause": "Pinned builder rejected optional homepage metadata; retained repository metadata instead.",
+      "failure_log_sha256": "350ABDA76CC0F51850A436DC2219A2F9BB535D5C65DB6307E22B850D5AE366D2"
+    },
+    {
+      "kind": "hosted package preflight",
+      "run_id": 40998791303,
+      "candidate": "8beefaabdbf660bb592c738a8f320af9dbe8ebe8",
+      "cause": "moon update restored only the registry index. Frozen packaging correctly rejected missing installed dependencies.",
+      "resolution": "Normal unfrozen dependency check installs declared async first; frozen packaging and explicit async version check remain enabled.",
+      "failure_archive_sha256": "00C42494A8B04A5FFACD7E03A3E326A26BB94DA9BF0A2F462FAEA4E0305324C4",
+      "archive_or_consumer_success_claimed": false
+    }
+  ],
+  "scope": [
+    "Archive consumer validation is distinct from installing the engine from Mooncakes.",
+    "Cloud package ZIP was not downloaded; CI audited and consumed it. The diagnostic manifest matches Git, and its reported digest equals the independently audited local ZIP.",
+    "Old rc.1/rc.2 source preparation remains frozen; current development is required to be rejected by the old gate.",
+    "No registry login, account creation, upload or existing release modification was performed."
+  ],
+  "pending": [
+    "Register Mooncakes account and confirm namespace",
+    "Confirm exact module/version availability and finalize the registry-facing README",
+    "Approve the exact final publication scope and archive",
+    "Upload and verify a genuinely clean registry-installed external consumer"
+  ],
+  "raw_inspection_sha256": {
+    "windows": "E9196E87F0569DB819CD39F2FD105895A7ADEC8870CF63307C7CB42BA41EAE13",
+    "linux": "E992D2905A36EF8A45165BF3013835078E9850D87272365B86E464CC71837346",
+    "package_and_freeze": "D333489FD339E99EDAD9E93E0A791B6CA2EB2614DD841C9C71D1F0A75F3251B0"
+  }
+}

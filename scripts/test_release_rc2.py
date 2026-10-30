@@ -29,6 +29,7 @@ def git(*args, data=None, env=None):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--ref', default='HEAD')
+    parser.add_argument('--reject-ref')
     parser.add_argument('--out', required=True)
     args = parser.parse_args()
     out = Path(args.out).resolve()
@@ -133,6 +134,8 @@ def main():
         changed = mutation('unaccepted-ci-drift', '.github/workflows/unaccepted-control.yml',
                            lambda b: b'name: labelled control only\n')
         prepare('unaccepted-ci-drift', ref=changed, error='Runtime or validation scripts differ', stage='scope-and-evidence')
+        if args.reject_ref:
+            prepare('new-development-rejected-by-rc2', ref=args.reject_ref, error='Runtime or validation scripts differ', stage='scope-and-evidence')
         assert git('rev-parse', 'HEAD') == original_head and git('write-tree') == original_index
         summary = {'state': 'passed', 'source_commit': commit, 'checks': checks,
                    'source_files_checked': len(entries), 'archive_sha256': first['archive_sha256'],

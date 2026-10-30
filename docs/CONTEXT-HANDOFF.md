@@ -2,6 +2,12 @@
 
 本页保留公开的技术进度；开发过程交接记录留在本地，不作为产品文档。
 
+## Mooncakes 发布与真实安装验收（2026-10-30）
+
+已公开发布 [serikaonoe123/moonffi-lab@0.1.0](https://mooncakes.io/docs/serikaonoe123/moonffi-lab)。指定提交 `ab41b68` 的 32 文件包为 45,277 字节，公开服务与实际下载的 SHA-256 均等于批准摘要。发布前四套 CI 与十份诊断归档已审计；发布后无本地引擎成员、无预存引擎 archive 的新消费者通过 registry 下载，匹配全部文件并完成 7 项 SDK 测试、契约/重放、1024 次 C FFI 操作与 23 项 ABI 边界。README 原始最小例与原工作区 SDK 回归也通过，见 [发布验收](evidence/mooncakes-0.1.0-20261030.json)。
+
+新增 `verify-sdk.ps1 -RegistryPackage` 复现入口及固定包清单。预上传索引缺失、临时解包目录的 frozen 依赖恢复失败和首次 C 编译 TEMP 问题均保留记录；正式使用官方默认发布自检流程，独立 frozen 打包及内容锁不变。按新验收指南第 8 项已完成，独立使用者反馈不属其硬性条件，初审通过后无需再填表。账号确认前的准备证据与 GitHub rc.1/rc.2 冻结资产保持原义。后续版本须单独确认。
+
 ## rc.2 交付（2026-10-26）
 
 PR #7 已合并为 `381643a`，合并后 Windows 七项及 Linux CI 全部成功，八份产物及原始结果核对完成。用户随后明确批准固定草案，已公开 [rc.2](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.2)，标签指向已测候选 `20b608d`，prerelease、非 Latest；563 文件源码包及另外三附件完整回下载匹配，rc.1 保持不变。见 [执行快照](evidence/prerelease-v0.1.0-rc.2-20261026.json)与 [草案/执行记录](PRE-RELEASE-PROPOSAL-rc.2.md)。独立使用者反馈仍待完成，稳定版及 registry 包未发布；参赛者已确认通过初审，重新申报不再列为待办。

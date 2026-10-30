@@ -1,0 +1,170 @@
+{
+  "schema": 1,
+  "module": "serikaonoe123/moonffi-lab",
+  "version": "0.1.0",
+  "source_commit": "ab41b683ce199bda2ac47f8e8792e744e5f71b8d",
+  "archive_bytes": 45277,
+  "archive_sha256": "BFB879EF357DC4700CB665DAE7C3BB6D44A93D9DEC9993584312D2D5B43BD95D",
+  "files": [
+    {
+      "path": ".moonignore",
+      "bytes": 241,
+      "sha256": "9B4E9FDDFAF5EE0754B445A23DF66887B80A3D502B7982493178055FE63B03BE"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1081,
+      "sha256": "E58B96BD4E29D058BBDF65A3B2DAD7A001437AF56AD08CCB61BA5BBB99D271EA"
+    },
+    {
+      "path": "README.mooncakes.md",
+      "bytes": 2688,
+      "sha256": "D021D90F7DFD6850CC0D88103960663C6509481A7C5AA72121F812D98B7104D6"
+    },
+    {
+      "path": "core/arguments.mbt",
+      "bytes": 3003,
+      "sha256": "99A9FB00446C9C083CEC796FA12A6978BCE30AEEE7F54AE75BB8D24A022B9A2C"
+    },
+    {
+      "path": "core/arguments_wbtest.mbt",
+      "bytes": 4962,
+      "sha256": "E74130F0924684AF9AB5F65063E5A08364030A4F0EDDE6C192AAA43DBECAEB60"
+    },
+    {
+      "path": "core/contracts.mbt",
+      "bytes": 6598,
+      "sha256": "221869B5BCCBE67102822BA4975B2F1FF5016F70F395EE8F79CA7564EFBAC78A"
+    },
+    {
+      "path": "core/contracts_wbtest.mbt",
+      "bytes": 6395,
+      "sha256": "79FCCF0C62712269A2FA767D9791F189C3426E0F33F1F3316A52D09265CFDD02"
+    },
+    {
+      "path": "core/core_wbtest.mbt",
+      "bytes": 3342,
+      "sha256": "55DF3EE56F9E84B1E1724336FB2C9B2FB4B0B03FC54A83A601B1CB73A99C1D95"
+    },
+    {
+      "path": "core/dependencies.mbt",
+      "bytes": 2042,
+      "sha256": "F77741CBB010684D7F1D343A3164B7CB4F4DFB56BE13A4ED097BCC7A18530E03"
+    },
+    {
+      "path": "core/dependencies_wbtest.mbt",
+      "bytes": 7887,
+      "sha256": "21B57BC79A871076B0D7469E79EDDA8D4B8BFC5CD9176CDA2D924CAC04DB7A6B"
+    },
+    {
+      "path": "core/extends.mbt",
+      "bytes": 1088,
+      "sha256": "8FEDB3B1B0D16878AB519F9E81C81DBC4CA8024537A50A4376164E4CB91C12BA"
+    },
+    {
+      "path": "core/ffi_order.mbt",
+      "bytes": 3202,
+      "sha256": "FFA03ABC88A30630A80127F0CD6E9D4B7A0AB4DD642B2C51F2F7CF4156330B32"
+    },
+    {
+      "path": "core/integers.mbt",
+      "bytes": 1428,
+      "sha256": "DCA7BB509CA4610347F9DD3A307B68DFE7E87D120832BA51D9C877588B202AED"
+    },
+    {
+      "path": "core/integers64_wbtest.mbt",
+      "bytes": 4710,
+      "sha256": "64E1E65A3435A2189CA2F4A82C701646AFAA75FA346E8CA048516FB4A3B933BC"
+    },
+    {
+      "path": "core/integers_wbtest.mbt",
+      "bytes": 3222,
+      "sha256": "3C5EC3C39F21184862DA872547AD7EDC6C2F5BEED854532F6C9765D9C8D60B50"
+    },
+    {
+      "path": "core/moon.pkg",
+      "bytes": 105,
+      "sha256": "5E5764A7F030E86F04F24C37DFF1C7C0EEC8D4236B293108A376134A46FB4D46"
+    },
+    {
+      "path": "core/repair.mbt",
+      "bytes": 3295,
+      "sha256": "E5AE7CC03CD232489CFFBA429713DE5C4E99375833C047578C853FC6F178A8BD"
+    },
+    {
+      "path": "core/repair_wbtest.mbt",
+      "bytes": 1911,
+      "sha256": "08F0EE85928590DE80C105B8A9E5B99B5BACB7B954E63A2D168C7A3CD813280D"
+    },
+    {
+      "path": "core/strategies.mbt",
+      "bytes": 12605,
+      "sha256": "2BC36CE4994B52082324667153407E80F675646465339E1AF1794C743EEB2FEC"
+    },
+    {
+      "path": "core/strategies_wbtest.mbt",
+      "bytes": 6908,
+      "sha256": "1706AE28B8B46D21843BB8B0ACDEC1A8F8FA65C8B7FE58A86C6EF863635FA1E1"
+    },
+    {
+      "path": "core/types.mbt",
+      "bytes": 3512,
+      "sha256": "009345EFB42644AFE9760A22577476DDE096306F9642DFC539AB496CCA209E4B"
+    },
+    {
+      "path": "moon.mod",
+      "bytes": 431,
+      "sha256": "B3A41D2A3AB54DE7188D1100047E1930EC8E2AA049F611EE0C225A780B1030F6"
+    },
+    {
+      "path": "runner/cli.mbt",
+      "bytes": 5142,
+      "sha256": "8E6E6EC1A96955BE07D957B10D8A19C090336383A7733B5EDC3B65AF8584E2D2"
+    },
+    {
+      "path": "runner/extends.mbt",
+      "bytes": 367,
+      "sha256": "D666FDC77A262FE7DB0D51C4C4927653E70AD926A2B75338D7DC8CB39ED2B5BF"
+    },
+    {
+      "path": "runner/moon.pkg",
+      "bytes": 282,
+      "sha256": "20B4ED4232A830DF21D6A469B12156E84DB2731FDBAFE881ADEC432480A34817"
+    },
+    {
+      "path": "runner/native_errors.mbt",
+      "bytes": 4049,
+      "sha256": "2F1FFB8A1F3995D4C6217D5053AAE578E134809071DE31F88E399869B6E99E86"
+    },
+    {
+      "path": "runner/native_errors_wbtest.mbt",
+      "bytes": 2420,
+      "sha256": "FFC43465636A706D1BA4CBF264C3E1A0EDF5EFFEE33C7270612321AED46DDA22"
+    },
+    {
+      "path": "runner/native_guard.c",
+      "bytes": 4855,
+      "sha256": "56102A1718A649C4C0BF70CC44C759844A5CBAB2205EB88F7C4A005A4CABB931"
+    },
+    {
+      "path": "runner/runner.mbt",
+      "bytes": 10255,
+      "sha256": "9DEEAC91759BCB6FDF3DAB64F7729AB48968AF175F3BBACB0A0FFED9E6711F50"
+    },
+    {
+      "path": "runner/runner_wbtest.mbt",
+      "bytes": 4431,
+      "sha256": "DC1123C6FCFC25CB5B6F23B17C4F6DF8E6B7E6868F9D658718E7ACF3A293439A"
+    },
+    {
+      "path": "runner/sanitizer.mbt",
+      "bytes": 628,
+      "sha256": "7F3A2FC914CDE5716673860F35FA067230BF4DC925A4048D61A16D7F868A7768"
+    },
+    {
+      "path": "runner/shrink.mbt",
+      "bytes": 15132,
+      "sha256": "756A951FED9810861FD348A6B040922C2E60AF7CA7D67A343165CF0E27321857"
+    }
+  ]
+}
