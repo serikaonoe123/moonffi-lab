@@ -52,7 +52,7 @@ def main():
         with tarfile.open(fileobj=io.BytesIO(data)) as archive:
             for item in archive:
                 path = PurePosixPath(item.name)
-                if path.is_absolute() or '..' in path.parts or '\\' in item.name or ':' in item.name:
+                if path.is_absolute() or '..' in path.parts or chr(92) in item.name or ':' in item.name:
                     raise ValueError('Unsafe source path')
                 if item.isdir():
                     continue
@@ -83,6 +83,10 @@ def main():
             (out / 'moon.work').write_text('members = ["source", "async"]\n', encoding='utf-8')
         else:
             run(['moon', '-C', str(source), 'update'], 'update.log')
+            # update restores the index; an unfrozen check installs the declared dependencies.
+            run(['moon', '-C', str(source), 'check', '--target', 'native', '--deny-warn'], 'dependency-check.log')
+            installed = source / '.mooncakes/moonbitlang/async/moon.mod'
+            assert 'version = "0.22.5"' in installed.read_text(encoding='utf-8')
         # Labelled untracked files prove the archive policy excludes generated/private-shaped inputs.
         probes = ['core/mooncakes-omit-probe.txt', 'runner/generated-probe.obj', '.credentials-probe']
         for name in probes:
