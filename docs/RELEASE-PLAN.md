@@ -1,5 +1,11 @@
 # v0.1.0 范围与发布准备
 
+## Mooncakes 0.1.0 库包（2026-10-30）
+
+已按单独批准的具体方案公开发布 [serikaonoe123/moonffi-lab@0.1.0](https://mooncakes.io/docs/serikaonoe123/moonffi-lab)。源码为 `ab41b68`，包仅含 32 份 MIT 元数据、core/runner 源码和公开 native stub；[固定身份与文件清单](releases/mooncakes-0.1.0.json)记录 45,277 字节 ZIP 及摘要。公开 metadata、实际首次下载和全部安装文件一致，Windows registry 消费者、README 最小例及原工作区 SDK 回归通过，见 [验收快照](evidence/mooncakes-0.1.0-20261030.json)。
+
+这是实验性 native 模块版本。GitHub rc.1/rc.2 标签、附件及各自冻结范围保持原发布记录；后续包版本需要新的具体发布确认。独立使用者反馈仍单独跟踪，验收指南第 8 项 registry 发布已完成。
+
 ## 已发布试用候选：v0.1.0-rc.2
 
 2026-10-26 已按用户明确批准的草案发布 [rc.2](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.2)，标签固定指向 `20b608d`，prerelease、非 Latest；四附件回下载、正文和标签核对通过，见 [执行快照](evidence/prerelease-v0.1.0-rc.2-20261026.json)。rc.1 保持原状，独立使用者反馈仍待完成。

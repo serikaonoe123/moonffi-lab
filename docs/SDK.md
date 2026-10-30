@@ -1,14 +1,22 @@
 # 从外部模块接入 MoonFFI Lab
 
-本轮提供可编译的独立模块 [adapter-starter](../examples/adapter-starter/README.md)，用一个小型 C 计数器展示 SDK 的完整流程。示例只导入公开 `core`/`runner`，不需要修改引擎。当前交付形式是源码工作区，没有发布 Mooncakes 包，也没有将 0.1.0 的接口声明为长期稳定 API。
+本轮提供可编译的独立模块 [adapter-starter](../examples/adapter-starter/README.md)，用一个小型 C 计数器展示 SDK 的完整流程。示例只导入公开 `core`/`runner`，不需要修改引擎。可使用源码工作区或已发布的 Mooncakes 0.1.0 库包；0.x 接口仍属实验性。
 
 开发版本新增可选的 [显式状态契约](STATE-CONTRACTS.md)：将初态、命令生成、前置条件、预期状态推进、后置条件和不变量分开，再通过 ContractAdapter 使用原 runner。新的 cmd/contracts 示例复用同一 C 目标；原 cmd/main 接口保留。已发布 rc.1 不包含这些后续开发改动。
 
 后续开发增加 [有界 FFI 参数策略](ARGUMENT-STRATEGIES.md)和 cmd/parameters C 消费者，支持布尔、宽整数、按位浮点、Unicode 文本、字节、数组及可空值的生成与缩减。该消费者仅使用公开 core/runner 与自己的 C 函数，不使用私有 fixture。
 
-## Mooncakes 候选
+## Mooncakes 安装与验证
 
-正在准备只含 core/runner 的 registry 库包，尚未上传；发布账号已确认，候选包名为 `serikaonoe123/moonffi-lab@0.1.0`。安装示例在实际发布前不可用，见 [registry README](../README.mooncakes.md)；上传前归档消费及发布后真实 registry 消费须分别记录，见 [发布准备](MOONCAKES-PUBLISHING.md)。下文已有源码工作区流程继续保留。
+安装 [serikaonoe123/moonffi-lab@0.1.0](https://mooncakes.io/docs/serikaonoe123/moonffi-lab)：`moon add serikaonoe123/moonffi-lab@0.1.0`。包只含 core/runner 及公开 native stub，最小调用见 [registry README](../README.mooncakes.md)。
+
+在配置好锁定工具链、MSVC 和可写 TEMP/TMP 的 Windows 终端中，可从仓库根目录运行：
+
+```powershell
+pwsh -NoProfile -File scripts/verify-sdk.ps1 -Out ../moonffi-registry-sdk-check -RegistryPackage docs/releases/mooncakes-0.1.0.json
+```
+
+输出目录须尚不存在。此模式只创建消费者成员，从 registry 解析引擎，核对下载 ZIP 与 [固定包清单](releases/mooncakes-0.1.0.json)的全部 32 文件，再执行相同 SDK、契约、重放和 C ABI 路径；报告明确记录是否命中 archive 缓存。本轮验收从无引擎缓存开始，真实下载与安装后全部通过，见 [发布记录](evidence/mooncakes-0.1.0-20261030.json)。这是当前 Windows 主机的 registry 验证，Linux 已有源码验收与独立使用者反馈分别记录。下文保留源码工作区流程。
 
 ## 1. 建立模块与工作区
 

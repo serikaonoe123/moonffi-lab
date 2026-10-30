@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "observed_at": "2026-10-30T11:12:39.920948+00:00",
+  "state": "published-and-registry-consumer-verified",
+  "module": "serikaonoe123/moonffi-lab",
+  "version": "0.1.0",
+  "published_at": "2026-10-30T10:59:35.659873+00:00",
+  "module_url": "https://mooncakes.io/docs/serikaonoe123/moonffi-lab",
+  "manifest_url": "https://mooncakes.io/api/v0/manifest/serikaonoe123/moonffi-lab@0.1.0",
+  "source_commit": "ab41b683ce199bda2ac47f8e8792e744e5f71b8d",
+  "archive_bytes": 45277,
+  "archive_sha256": "BFB879EF357DC4700CB665DAE7C3BB6D44A93D9DEC9993584312D2D5B43BD95D",
+  "package_files": 32,
+  "anonymous_manifest_http_status": 200,
+  "public_module_page_http_status": 200,
+  "rendered_browser_ui_checked": false,
+  "published_checksum_matches_approved": true,
+  "prepublication": {
+    "candidate": "ab41b683ce199bda2ac47f8e8792e744e5f71b8d",
+    "actual_checkout": "0f9585383330d3acec1ce30bb25746374630ea88",
+    "windows_run": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/41002669754",
+    "linux_run": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/41002669748",
+    "archive_consumer_run": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/41002669723",
+    "frozen_release_controls_run": "https://github.com/serikaonoe123/moonffi-lab/actions/runs/41002669810",
+    "diagnostic_artifacts_verified": 10
+  },
+  "registry_consumer": {
+    "platform": "Windows x64/MSVC",
+    "engine_source_kind": "registry",
+    "engine_workspace_member": false,
+    "archive_cached_before": false,
+    "fresh_download_log_observed": true,
+    "source_files_matched_after_execution": 32,
+    "sdk_unit_tests": 7,
+    "pure_oracle_traces": 768,
+    "repair_subsets": 128,
+    "contracts": "passed",
+    "typed_ffi_operations": 1024,
+    "explicit_abi_boundaries": 23,
+    "parameter_strategies": [
+      "plain",
+      "dependency",
+      "state"
+    ],
+    "counter_reduction_steps": 2,
+    "counter_replay": "passed",
+    "driver_sha256": "86C56E38534797FD0C8D3F3869DCF72B3C9DDE2FCE1DE1134DD67C01CE444BD3",
+    "driver_git_blob": "221923386ba34d72d2858b97281109b1a5e5a0f0",
+    "independent_environment": false,
+    "linux_registry_consumer_tested": false
+  },
+  "readme_example": {
+    "state": "passed",
+    "code_source": "Exact two MoonBit fences from the approved package README",
+    "compiler_warning": "Deprecated Show debug printing; example exits successfully"
+  },
+  "workspace_sdk_regression": "passed",
+  "preserved_failures": [
+    "Pre-upload missing registry index",
+    "Pre-upload frozen dependency installation refused in newly extracted package",
+    "Initial real registry consumer C compilation failed with MSVC D8050; project-local TEMP/TMP resolved it"
+  ],
+  "publisher_mode": "Official default moon publish with complete extracted-package compilation; separate frozen package verification retained exact approved ZIP",
+  "existing_github_releases_unchanged": true,
+  "acceptance_item_8_complete": true,
+  "scope": "Public registry publication and same-machine fresh Windows registry installation, full SDK and C ABI validation. No independent-user feedback, stable API guarantee, new upstream defects or Linux registry install is claimed."
+}

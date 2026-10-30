@@ -2,11 +2,11 @@
 
 本页保留公开的技术进度；开发过程交接记录留在本地，不作为产品文档。
 
-## Mooncakes 验收缺口准备（2026-10-30）
+## Mooncakes 发布与真实安装验收（2026-10-30）
 
-按新验收指南，第 8 项 registry 发布为必做，独立使用者反馈不是该指南硬性条件；初审通过后无须再提交表格。PR #9 准备仅含 core/runner 的 32 文件 native 包、完整元数据与候选安装说明。候选 e4ca0fa 的四套 CI 和十份产物核对通过，归档消费者、17 项冻结发布控制及既有 Windows/Linux 回归通过；见 [准备记录](evidence/mooncakes-preparation-20261030.json)。
+已公开发布 [serikaonoe123/moonffi-lab@0.1.0](https://mooncakes.io/docs/serikaonoe123/moonffi-lab)。指定提交 `ab41b68` 的 32 文件包为 45,277 字节，公开服务与实际下载的 SHA-256 均等于批准摘要。发布前四套 CI 与十份诊断归档已审计；发布后无本地引擎成员、无预存引擎 archive 的新消费者通过 registry 下载，匹配全部文件并完成 7 项 SDK 测试、契约/重放、1024 次 C FFI 操作与 23 项 ABI 边界。README 原始最小例与原工作区 SDK 回归也通过，见 [发布验收](evidence/mooncakes-0.1.0-20261030.json)。
 
-用户已注册并确认 Mooncakes 账号 `serikaonoe123`，与现有模块名一致。官方公开 manifest 接口对候选 `serikaonoe123/moonffi-lab@0.1.0` 返回 404/Package not found，同一接口对 async 0.22.5 返回 200；发布前仍须重查。本机 CLI 登录尚待完成，未上传 registry，也未证明 registry-installed engine 的消费。包说明已去除内部候选/注册过程文字，须重新生成最终归档、核对具体发布范围并取得本次上传授权。账号确认前的准备证据保留为历史快照。已发布 GitHub rc.1/rc.2 与其冻结资产不变。
+新增 `verify-sdk.ps1 -RegistryPackage` 复现入口及固定包清单。预上传索引缺失、临时解包目录的 frozen 依赖恢复失败和首次 C 编译 TEMP 问题均保留记录；正式使用官方默认发布自检流程，独立 frozen 打包及内容锁不变。按新验收指南第 8 项已完成，独立使用者反馈不属其硬性条件，初审通过后无需再填表。账号确认前的准备证据与 GitHub rc.1/rc.2 冻结资产保持原义。后续版本须单独确认。
 
 ## rc.2 交付（2026-10-26）
 
