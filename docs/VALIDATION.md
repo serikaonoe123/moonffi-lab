@@ -1,5 +1,11 @@
 # 缩减器验证记录
 
+## Linux Mooncakes 消费者：2026-10-31
+
+候选 `8c67523` 的 PR checkout `ed8c632` 与候选源码树一致，[Linux registry 任务](https://github.com/serikaonoe123/moonffi-lab/actions/runs/41180522584/job/124476810054)实际从 Mooncakes 下载 0.1.0 与 async 0.22.5。下载前无引擎 ZIP 缓存，工作区仅包含消费者；批准 ZIP 和全部 32 份安装文件在 SDK 执行前后均匹配。7 项 SDK 单测、88 个正确场景（5632 步）、1024 次参数 C FFI 操作及 23 项 ABI 边界通过。9 项离线身份/解析控制也通过。
+
+已下载诊断归档并匹配 GitHub 提供的 SHA-256/大小，四份执行驱动和 14 份消费者输入匹配 Git；工具链版本、二进制、core 与安装归档匹配原锁，逐一核对 88 份原始报告和边界重放。见 [专项证据](evidence/linux-registry-consumer-20261031.json)与 [复现入口](MOONCAKES-PUBLISHING.md#linux-registry-消费者维护入口2026-10-31)。此快照只证明该候选的 Linux registry 正确路径；原生错误/ASan、完整回归及合并状态分别跟踪，不宣称独立使用者反馈或新的发布。
+
 ## 合并后 main 验收：2026-10-24
 
 PR #5 合并后的 main 提交 `f464479107ea46369846a41dde090d25b28426d6` 已通过 [Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560662)及 [Linux 验收](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40059560654)，八份归档摘要/大小、逐文件源码、工具链身份和原始报告均已核对，见 [main 验收快照](evidence/main-toolchain-acceptance-20261024.json)。本次是 main push 的实际提交验收，与此前 PR 合成合并验收分开记录。

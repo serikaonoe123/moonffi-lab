@@ -2,6 +2,10 @@
 
 本页保留公开的技术进度；开发过程交接记录留在本地，不作为产品文档。
 
+## Linux registry 消费者（2026-10-31）
+
+候选 `8c67523` 在源码树一致的 PR checkout `ed8c632` 实际下载并验证 Mooncakes 0.1.0：无预存引擎 ZIP、无本地引擎或 async 成员，ZIP 与全部 32 个文件匹配批准内容；7 项 SDK 单测、88 个正确场景、1024 次 C FFI 操作及 23 项 ABI 边界通过。归档摘要与原始报告已核对，见 [本轮证据](evidence/linux-registry-consumer-20261031.json)及 [PR #10](https://github.com/serikaonoe123/moonffi-lab/pull/10)。新入口与原源码回归共用 SDK 驱动；PR/main 的 package preflight 持续执行该检查。此记录限定该候选和专项任务，合并状态与其余回归以 PR 检查为准；独立使用者反馈仍待完成，未发布新版本。
+
 ## Mooncakes 发布与真实安装验收（2026-10-30）
 
 已公开发布 [serikaonoe123/moonffi-lab@0.1.0](https://mooncakes.io/docs/serikaonoe123/moonffi-lab)。指定提交 `ab41b68` 的 32 文件包为 45,277 字节，公开服务与实际下载的 SHA-256 均等于批准摘要。发布前四套 CI 与十份诊断归档已审计；发布后无本地引擎成员、无预存引擎 archive 的新消费者通过 registry 下载，匹配全部文件并完成 7 项 SDK 测试、契约/重放、1024 次 C FFI 操作与 23 项 ABI 边界。README 原始最小例与原工作区 SDK 回归也通过，见 [发布验收](evidence/mooncakes-0.1.0-20261030.json)。

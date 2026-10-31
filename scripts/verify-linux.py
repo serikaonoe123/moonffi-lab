@@ -76,23 +76,40 @@ def executable(build_root, name):
     return found[0]
 
 
-def sdk(workspace, out, env):
+def sdk(workspace, out, env, registry_package=None):
     out.mkdir()
     root = out / 'workspace'
     engine, consumer = root / 'engine', root / 'consumer'
-    engine.mkdir(parents=True)
-    consumer.mkdir()
-    for name in ('core', 'runner'):
-        copy_source(workspace / name, engine / name)
-    shutil.copy2(workspace / 'moon.mod', engine / 'moon.mod')
+    consumer.mkdir(parents=True)
+    if registry_package is None:
+        engine.mkdir()
+        for name in ('core', 'runner'):
+            copy_source(workspace / name, engine / name)
+        shutil.copy2(workspace / 'moon.mod', engine / 'moon.mod')
     starter = workspace / 'examples/adapter-starter'
     for name in ('counter', 'cmd'):
         copy_source(starter / name, consumer / name)
     shutil.copy2(starter / 'moon.mod', consumer / 'moon.mod')
-    copy_source(workspace / '.mooncakes/moonbitlang/async', root / 'async')
-    (root / 'moon.work').write_text('members = ["engine", "consumer", "async"]\n', encoding='utf-8')
+    registry_result = None
+    if registry_package is None:
+        copy_source(workspace / '.mooncakes/moonbitlang/async', root / 'async')
+        members = '["engine", "consumer", "async"]'
+    else:
+        from registry_consumer import validate_identity, verify_registry
+        validate_identity(registry_package)
+        require(('serikaonoe123/moonffi-lab@' + registry_package['version']) in
+                (consumer / 'moon.mod').read_text(encoding='utf-8'), 'Consumer version differs from release')
+        archive = Path(env['MOON_HOME']) / 'registry/cache' / registry_package['module'] / (registry_package['version'] + '.zip')
+        require(not archive.exists(), 'Fresh registry validation requires an uncached engine archive')
+        members = '["consumer"]'
+    (root / 'moon.work').write_text('members = ' + members + '\n', encoding='utf-8')
     before = manifest(root)
     write_json(out / 'source-manifest.json', before)
+    if registry_package is not None:
+        run(['moon', 'update'], consumer, env, out / 'registry-update.log')
+        run(['moon', 'check', '--target', 'native', '--deny-warn', 'counter',
+             'cmd/main', 'cmd/contracts', 'cmd/parameters'], consumer, env, out / 'registry-check.log')
+        registry_result = verify_registry(root, consumer, env, out, registry_package, False)
     run(['moon', 'check', '--target', 'native', '--frozen', '--deny-warn', 'counter',
          'cmd/main', 'cmd/contracts', 'cmd/parameters'], consumer, env, out / 'check.log')
     run(['moon', 'test', '--target', 'native', '--frozen', '--deny-warn', '-j', '1', 'counter'],
@@ -127,6 +144,10 @@ def sdk(workspace, out, env):
     require(manifest(root) == before, 'SDK source inputs changed during validation')
     result = {'state': 'passed', 'unit_tests': 7, 'campaigns': campaigns,
               'typed_parameter_operations': 1024, 'explicit_parameter_boundaries': 23}
+    if registry_package is not None:
+        require(verify_registry(root, consumer, env, out, registry_package, False) == registry_result,
+                'Registry identity changed during SDK execution')
+        result['registry_engine'] = registry_result
     write_json(out / 'verification.json', result)
     return result
 

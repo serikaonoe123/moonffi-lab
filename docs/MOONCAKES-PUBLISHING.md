@@ -20,6 +20,20 @@ pwsh -NoProfile -File scripts/verify-sdk.ps1 -Out ../moonffi-registry-sdk-check 
 
 该入口只创建消费者工作区成员，通过 registry 解析引擎，匹配批准 ZIP 与全部源文件，再运行完整 SDK 路径。报告的 `registry_engine.archive_cached_before` 明确区分首次下载与 archive 缓存命中；本轮正式验收为 false，重复运行若命中缓存不能再次称为首次下载。README 的原始安装命令及两段最小代码也已独立运行成功；数组打印会有 Show 弃用提示，退出码为 0。
 
+## Linux registry 消费者维护入口（2026-10-31）
+
+新增 Linux x86_64 专用入口，从指定 Git 提交导出测试驱动，但不把仓库引擎或 async 加入消费者工作区。它要求下载前没有该引擎 ZIP 缓存，通过 registry 解析并核对模块树、批准 ZIP、全部 32 份源文件；执行前后均检查包内容。执行范围为 7 项 SDK 单测、88 个正确场景、1024 次类型参数 C FFI 操作及 23 项 ABI 边界，与既有源码 SDK 检查共用驱动。
+
+```bash
+python3 scripts/test_registry_consumer.py
+python3 scripts/linux_toolchain.py --destination "$PWD/results/registry-linux-toolchain" --out results/registry-linux-bootstrap
+python3 scripts/verify-linux-registry.py --toolchain "$PWD/results/registry-linux-toolchain" --ref HEAD --out results/registry-linux-consumer
+```
+
+安装和输出目录必须尚不存在；工具链内容锁保持不变，async 要求从 registry 解析为 0.22.5。9 项离线控制已本地及云端通过。候选 `8c67523` 在源码树一致的 PR checkout `ed8c632` 完成真实 Linux 下载与全部上述检查；归档大小/摘要、四份驱动、14 份消费者输入、88 份原始正确报告及 ABI 边界已核对，见 [Linux registry 证据](evidence/linux-registry-consumer-20261031.json)。这是该候选的托管 Linux 消费者结果，与 0.1.0 发布时的 Windows 验收、源码 Linux 回归及独立使用者反馈分别记录。
+
+`Mooncakes package preflight` 在 PR、main push 及手动触发时分别执行归档消费者和 Linux registry 消费者，并保存 JSON/日志，不上传消费者或工具链工作区。此入口不发布新版本，也不执行原生错误/ASan 缩减；既有专项仍由原 Linux CI 验收。
+
 ## 账号确认前的准备验收
 
 候选 `e4ca0fafc08b75237f59fba0714d6e61645a42a8` 在源码树一致的 PR checkout `960933f` 完成 [Windows 七项](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558109)、[Linux](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558243)、[实际归档消费者](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558261)和 [17 项冻结发布控制](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40999558111)，十份诊断归档及原始记录已核对，见 [准备证据](evidence/mooncakes-preparation-20261030.json)。Windows 每项 571 文件匹配，189 次 benchmark 结构指标和具体结果字节与旧基准一致。
