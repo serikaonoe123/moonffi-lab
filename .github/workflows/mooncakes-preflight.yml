@@ -1,6 +1,8 @@
 name: Mooncakes package preflight
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -9,6 +11,35 @@ permissions:
   contents: read
 
 jobs:
+  linux-registry-consumer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check registry identity controls
+        run: python3 scripts/test_registry_consumer.py
+      - name: Install content-locked Linux toolchain
+        run: |
+          python3 scripts/test_linux_toolchain.py
+          python3 scripts/linux_toolchain.py --destination "$RUNNER_TEMP/moonffi-registry-linux" --out results/linux-registry-bootstrap
+      - name: Download and validate published package as a fresh consumer
+        run: python3 scripts/verify-linux-registry.py --toolchain "$RUNNER_TEMP/moonffi-registry-linux" --out results/linux-registry
+      - name: Retain registry consumer diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-registry-consumer-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            results/linux-registry-bootstrap/*.json
+            results/linux-registry-bootstrap/*.log
+            results/linux-registry/**/*.json
+            results/linux-registry/**/*.log
+            !results/linux-registry/**/workspace/**
+            !results/linux-registry/**/harness/**
   archive-consumer:
     runs-on: windows-latest
     timeout-minutes: 20
