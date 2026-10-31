@@ -30,7 +30,9 @@ python3 scripts/linux_toolchain.py --destination "$PWD/results/registry-linux-to
 python3 scripts/verify-linux-registry.py --toolchain "$PWD/results/registry-linux-toolchain" --ref HEAD --out results/registry-linux-consumer
 ```
 
-安装和输出目录必须尚不存在；工具链内容锁保持不变，async 要求从 registry 解析为 0.22.5。9 项离线控制已本地通过，真实 Linux 下载/构建结果仍待本轮 CI 验收；不能把 Windows 发布验收或 Linux 源码回归替代它。`Mooncakes package preflight` 在 PR、main push 及手动触发时分别执行归档消费者和 Linux registry 消费者，并保存 JSON/日志，不上传消费者或工具链工作区。此入口不发布新版本，也不执行原生错误/ASan 缩减；既有专项仍由原 Linux CI 验收。
+安装和输出目录必须尚不存在；工具链内容锁保持不变，async 要求从 registry 解析为 0.22.5。9 项离线控制已本地及云端通过。候选 `8c67523` 在源码树一致的 PR checkout `ed8c632` 完成真实 Linux 下载与全部上述检查；归档大小/摘要、四份驱动、14 份消费者输入、88 份原始正确报告及 ABI 边界已核对，见 [Linux registry 证据](evidence/linux-registry-consumer-20261031.json)。这是该候选的托管 Linux 消费者结果，与 0.1.0 发布时的 Windows 验收、源码 Linux 回归及独立使用者反馈分别记录。
+
+`Mooncakes package preflight` 在 PR、main push 及手动触发时分别执行归档消费者和 Linux registry 消费者，并保存 JSON/日志，不上传消费者或工具链工作区。此入口不发布新版本，也不执行原生错误/ASan 缩减；既有专项仍由原 Linux CI 验收。
 
 ## 账号确认前的准备验收
 
