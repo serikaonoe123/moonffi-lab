@@ -1,5 +1,7 @@
 # 真实社区 SQLite 绑定接入
 
+本页记录 2026-10-19 的 SQLite 接入验证，计数和限制保留当时范围。后续 rc.1/rc.2 源码预发布与 Mooncakes 0.1.0 库包均已发布，Windows/Linux registry 消费者已验证；见 [项目状态](PROJECT-STATUS.md)。文末发布待办属于历史记录。
+
 2026-10-19，独立消费者 `moonffi-example/sqlite-lab` 通过公开 core/runner 接入 [moonbit-community/sqlite3.mbt](https://github.com/moonbit-community/sqlite3.mbt)，引擎没有增加 SQLite 专用逻辑。固定提交、归档 SHA-256、49 个 Git blob 和使用方式见 [例子](../examples/sqlite-lab/README.md)。来源按 Apache-2.0 保留，仓库只新增适配代码和来源元数据；没有上传第三方工具包、联系上游或发布版本。
 
 ## 已通过的本地验证

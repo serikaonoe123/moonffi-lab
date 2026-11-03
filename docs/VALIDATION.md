@@ -1,5 +1,7 @@
 # 缩减器验证记录
 
+最新发布与验收索引见 [项目状态](PROJECT-STATUS.md)。下文按日期保留原始验证过程；某轮“未发布”或“仅 crash 控制”等表述只适用于该提交，不能视为当前状态。
+
 ## Linux Mooncakes 消费者：2026-10-31
 
 候选 `8c67523` 的 PR checkout `ed8c632` 与候选源码树一致，[Linux registry 任务](https://github.com/serikaonoe123/moonffi-lab/actions/runs/41180522584/job/124476810054)实际从 Mooncakes 下载 0.1.0 与 async 0.22.5。下载前无引擎 ZIP 缓存，工作区仅包含消费者；批准 ZIP 和全部 32 份安装文件在 SDK 执行前后均匹配。7 项 SDK 单测、88 个正确场景（5632 步）、1024 次参数 C FFI 操作及 23 项 ABI 边界通过。9 项离线身份/解析控制也通过。
