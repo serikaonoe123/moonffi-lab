@@ -32,7 +32,7 @@
 
 ## 已验证范围
 
-主分支提交 `7d2716dd345224402437466f41ee9a34564749cf` 的 [Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586714)和 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586758)同样全部成功并完成产物核对，见[当前快照](evidence/main-acceptance-20261022.json)。以下保留早期验收及修复过程。
+主分支提交 `7d2716dd345224402437466f41ee9a34564749cf` 的 [Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586714)和 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39720586758)同样全部成功并完成产物核对，见[当时快照](evidence/main-acceptance-20261022.json)。当前两档五项控制及发布状态见[项目状态](PROJECT-STATUS.md)；以下保留早期验收及修复过程。
 
 提交 `520cf68738a6693ca348b7af509b4d9bfaf5780f` 已完成 [Windows 七项 CI 39717451261](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451261) 和 [Linux CI 39717451254](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39717451254)，全部产物已下载并按 GitHub 归档摘要、指定提交源码和原始报告核对。结构化计数、归档身份和限制见 [统一验收证据](evidence/native-acceptance-20261022.json)。环境准备见 [复现约定](REPRODUCIBILITY.md)。
 

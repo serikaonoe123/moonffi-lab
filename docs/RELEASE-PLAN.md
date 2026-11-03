@@ -1,5 +1,7 @@
 # v0.1.0 范围与发布准备
 
+状态核对：2026-11-03。[项目状态](PROJECT-STATUS.md)统一列出当前验收基线、Mooncakes 库包与 GitHub 源码预发布。独立使用者反馈仍待收集，后续版本另行确认。
+
 ## Mooncakes 0.1.0 库包（2026-10-30）
 
 已按单独批准的具体方案公开发布 [serikaonoe123/moonffi-lab@0.1.0](https://mooncakes.io/docs/serikaonoe123/moonffi-lab)。源码为 `ab41b68`，包仅含 32 份 MIT 元数据、core/runner 源码和公开 native stub；[固定身份与文件清单](releases/mooncakes-0.1.0.json)记录 45,277 字节 ZIP 及摘要。公开 metadata、实际首次下载和全部安装文件一致，Windows registry 消费者、README 最小例及原工作区 SDK 回归通过，见 [验收快照](evidence/mooncakes-0.1.0-20261030.json)。
@@ -10,7 +12,7 @@
 
 2026-10-26 已按用户明确批准的草案发布 [rc.2](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.2)，标签固定指向 `20b608d`，prerelease、非 Latest；四附件回下载、正文和标签核对通过，见 [执行快照](evidence/prerelease-v0.1.0-rc.2-20261026.json)。rc.1 保持原状，独立使用者反馈仍待完成。
 
-2026-10-26 开始准备新版源码候选，纳入显式状态契约、十类 FFI 参数、原生崩溃/ASan 缩减、Linux native 和官方 0.10.17 工具链。独立机器可读范围见 [rc.2 scope](releases/v0.1.0-rc.2-scope.json)，对外说明见 [rc.2 发布说明草稿](RELEASE-NOTES-v0.1.0-rc.2.md)。当前业务基线为 `f464479`，对应已核对的 [Windows 七项及 Linux 记录](evidence/main-toolchain-acceptance-20261024.json)；rc.1 冻结清单、标签和历史附件保持原义。
+2026-10-26 开始准备新版源码候选，纳入显式状态契约、十类 FFI 参数、原生崩溃/ASan 缩减、Linux native 和官方 0.10.17 工具链。独立机器可读范围见 [rc.2 scope](releases/v0.1.0-rc.2-scope.json)，对外说明见 [rc.2 发布说明草稿](RELEASE-NOTES-v0.1.0-rc.2.md)。该次 rc.2 准备的业务基线为 `f464479`，对应已核对的 [Windows 七项及 Linux 记录](evidence/main-toolchain-acceptance-20261024.json)；rc.1 冻结清单、标签和历史附件保持原义。
 
 准备器默认继续按 rc.1 冻结范围检查。显式选择 rc.2 时，须在已提交的候选 checkout 中运行，输出目录必须尚不存在：
 
@@ -29,9 +31,9 @@ rc.2 入口要求已审阅锚点中的证据 Git blob、两平台工具链及来
 
 ## rc.1 冻结范围与历史发布准备
 
-> 下文保留已发布 rc.1 的冻结范围与准备流程，只描述其固定提交及当时证据。后续新增能力及当前源码准备状态见上方 rc.2 说明。
+> 下文保留已发布 rc.1 的冻结范围与准备流程，只描述其固定提交及当时证据。后续新增能力见上方 rc.2 说明，Mooncakes 发布和当前状态见本页开头及项目状态索引。
 
-当前状态：已于 2026-10-20 发布 [v0.1.0-rc.1 实验性源码预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)，尚未发布稳定版或 registry 包。`moon.mod` 中的 0.1.0 是项目自身版本；它与编译器自报的 `v0.10.16+b1a0e846e`、文档仓库标签是不同对象。
+rc.1 发布时状态（2026-10-20）：已发布 [v0.1.0-rc.1 实验性源码预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)，尚未发布稳定版或 registry 包。`moon.mod` 中的 0.1.0 是项目自身版本；它与编译器自报的 `v0.10.16+b1a0e846e`、文档仓库标签是不同对象。
 
 本轮候选代码提交 `23893d5bb3a231a21df10db506d8da821a7e984d` 已通过 [六项 CI 39361478378](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39361478378) 及产物核对。四项源码准备控制在本地和云端通过，498 份源码逐文件一致，75 个关键文件逐任务匹配提交归档，原有运行/缩减基准不变。见 [本地准备记录](evidence/release-preparation-20261020.json)与[本轮云端记录](evidence/github-ci-39361478378.json)。后续文档收尾不改变该提交的运行代码。
 
@@ -72,10 +74,10 @@ rc.2 入口要求已审阅锚点中的证据 Git blob、两平台工具链及来
 
 用户明确批准具体草案后，已创建固定指向 23893d5 的预发布标签，上传四份审阅过的附件，不标记 Latest。四份附件回下载后大小/SHA-256、标签目标及发布正文全部匹配，见 [执行记录](PRE-RELEASE-PROPOSAL.md)与[核验快照](evidence/prerelease-v0.1.0-rc.1-20261020.json)。原 candidate.json / publication-proposal.json 保留准备时状态，不作为实时发布状态。
 
-候选自身六项 CI、准备控制和产物核对已经完成。稳定版前仍需：
+rc.1 候选自身六项 CI、准备控制和产物核对当时已完成。以下保留该轮后续安排；rc.2 和 Mooncakes 0.1.0 已按各自后续授权发布，独立使用者反馈仍待收集：
 
 1. 请独立使用者按 [复现入口](INDEPENDENT-REPRODUCTION.md) 提供 [反馈记录](templates/INDEPENDENT-REPRODUCTION.md)；自动化或托管 runner 不替代真实使用者反馈。
-2. 根据反馈决定是否修复，变更代码时重新验证对应提交；后续稳定版或 registry 发布须另行明确目标及附件，本次批准仅覆盖 rc.1 草案。
+2. 根据反馈决定是否修复，变更代码时重新验证对应提交；后续稳定版或 registry 发布须另行明确目标及附件，此处记录的 2026-10-20 批准仅覆盖 rc.1 草案，后续 rc.2 和 Mooncakes 发布另有独立确认及记录。
 
 预发布用于收集试用反馈，不表示已获得独立使用者验收或赛事审核通过。复现反馈可以通过 [贡献入口](../CONTRIBUTING.md) 手动提交；十月黑客松申报说明草稿见 [项目说明](HACKATHON-SUBMISSION.md)。
 

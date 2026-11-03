@@ -16,7 +16,7 @@
 pwsh -NoProfile -File scripts/verify-sdk.ps1 -Out ../moonffi-registry-sdk-check -RegistryPackage docs/releases/mooncakes-0.1.0.json
 ```
 
-输出目录须尚不存在。此模式只创建消费者成员，从 registry 解析引擎，核对下载 ZIP 与 [固定包清单](releases/mooncakes-0.1.0.json)的全部 32 文件，再执行相同 SDK、契约、重放和 C ABI 路径；报告明确记录是否命中 archive 缓存。本轮验收从无引擎缓存开始，真实下载与安装后全部通过，见 [发布记录](evidence/mooncakes-0.1.0-20261030.json)。这是当前 Windows 主机的 registry 验证，Linux 已有源码验收与独立使用者反馈分别记录。下文保留源码工作区流程。
+输出目录须尚不存在。此模式只创建消费者成员，从 registry 解析引擎，核对下载 ZIP 与 [固定包清单](releases/mooncakes-0.1.0.json)的全部 32 文件，再执行相同 SDK、契约、重放和 C ABI 路径；报告明确记录是否命中 archive 缓存。本轮验收从无引擎缓存开始，真实下载与安装后全部通过，见 [发布记录](evidence/mooncakes-0.1.0-20261030.json)。该发布记录对应 Windows registry 验收；Linux x86_64 随后也已通过真实 registry 消费者验证，见 [Linux 证据](evidence/linux-registry-consumer-20261031.json)和[复现命令](MOONCAKES-PUBLISHING.md#linux-registry-消费者维护入口2026-10-31)。独立使用者反馈仍待收集。下文保留源码工作区流程。
 
 ## 1. 建立模块与工作区
 
@@ -82,7 +82,7 @@ members = ["moonffi-lab", "my-counter"]
 & .\scripts\verify-sdk.ps1 -OfflineDependencySource .\.mooncakes
 ```
 
-脚本在新工作区中只复制引擎的 core、runner、模块清单和独立消费者；不会复制引擎 fixtures、vendor、cmd、构建产物或 Git 数据。它核对 `moon tree` 的模块路径，并要求引擎包图恰为 core/runner；随后使用 warning 作为错误的检查、6 项单测及全新 native 构建。第六项从独立模块消费公开的 `core.shrink_int`，核对元数据、正负错误边界及纯候选阶段没有原生调用。下面的五项单测和执行计数是早期验收记录；本轮整数候选结果见 [缩减器验证记录](VALIDATION.md)。
+脚本在新工作区中只复制引擎的 core、runner、模块清单和独立消费者；不会复制引擎 fixtures、vendor、cmd、构建产物或 Git 数据。它核对 `moon tree` 的模块路径，并要求引擎包图恰为 core/runner；随后执行 warning 作为错误的检查、7 项单测及全新 native 构建，包含显式状态契约和公开整数候选的纯模型检查。下表的五项单测和执行计数保留早期验收范围；当前执行记录见[项目状态](PROJECT-STATUS.md)和[缩减器验证记录](VALIDATION.md)。
 
 本地显式依赖源码复用验收在 `results/sdk-external-offline-20261017`：
 

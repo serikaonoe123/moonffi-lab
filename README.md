@@ -4,7 +4,7 @@
 
 目前已验证 Windows x64/MSVC 的七项 native suite，以及 Linux x86_64 的普通 native、SDK 和原生崩溃/ASan 错误缩减。两平台的验证范围并不完全相同。Buffer fixture 的三种行为缺陷为人工注入；专用崩溃和超时探针用于验证控制器。Eigen 使用有来源和哈希记录的真实绑定快照。
 
-首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。 本轮四项补齐的[复审项目说明](docs/HACKATHON-SUBMISSION.md)、[成熟框架功能对照](docs/FRAMEWORK-COMPARISON.md)及[可复制报名补充材料](docs/RESUBMISSION-TEXT.md)已按固定提交整理。[v0.1.0-rc.2 源码预发布](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.2)已提供固定提交的 563 文件源码包及校验清单；候选自身 Windows 七项、Linux 和源码准备控制均通过，四份发布附件及标签已核对，见 [发布快照](docs/evidence/prerelease-v0.1.0-rc.2-20261026.json)。历史 rc.1 及其证据保持原义。支持范围和未完成项见 [发布记录](docs/RELEASE-PLAN.md)；Mooncakes 0.1.0 实验性库包已发布，独立使用者反馈仍待完成。
+首次使用请从 [独立复现入口](docs/INDEPENDENT-REPRODUCTION.md) 开始。[当前项目状态](docs/PROJECT-STATUS.md)汇总已发布的 Mooncakes 0.1.0 实验性库包、GitHub rc.1/rc.2 源码预发布及 Windows/Linux 验收。最近验收源码基线为 `666ddb4`；独立使用者反馈仍待收集。项目能力与边界见[项目说明](docs/HACKATHON-SUBMISSION.md)和[成熟框架功能对照](docs/FRAMEWORK-COMPARISON.md)，各发布的固定提交及附件见[发布记录](docs/RELEASE-PLAN.md)。
 
 首次运行失败、文档卡点和成功复现均可通过 [复现反馈表单](https://github.com/serikaonoe123/moonffi-lab/issues/new?template=independent-reproduction.yml) 记录；参与方式见 [贡献说明](CONTRIBUTING.md)。
 
@@ -98,7 +98,7 @@ Eigen 支持 `--generator stateful` 的六操作探索，以及 `--generator ari
 
 见 [适配器指南](docs/ADAPTERS.md) 和 [缩减器验证记录](docs/VALIDATION.md)。`core` 和 `runner` 不包含矩阵专用规则。适配器通过编译期接入；每条完整轨迹在同一个新工作进程中保留状态，每个缩减候选使用另一个新进程。
 
-[SDK 接入指南](docs/SDK.md) 和[独立计数器模块](examples/adapter-starter/README.md)提供可运行的接入起点，覆盖纯模型、C FFI、额外生成器、失败保存、缩减及正确实现重放。`scripts/verify-sdk.ps1` 会在新工作区中只用 core/runner 公开包编译消费者并验收；当前使用本地源码工作区，没有发布 registry SDK 包。
+[SDK 接入指南](docs/SDK.md) 和[独立计数器模块](examples/adapter-starter/README.md)提供可运行的接入起点，覆盖纯模型、C FFI、额外生成器、失败保存、缩减及正确实现重放。`scripts/verify-sdk.ps1` 会在新工作区中只用 core/runner 公开包编译消费者并验收，默认使用本地源码工作区；指定 `-RegistryPackage docs/releases/mooncakes-0.1.0.json` 时，从已发布的 Mooncakes 0.1.0 安装并核对包内容。Windows/Linux 的真实 registry 消费者验收见[发布与复现](docs/MOONCAKES-PUBLISHING.md)。
 
 [社区 SQLite 独立消费者](examples/sqlite-lab/README.md)接入未经修改的 `moonbit-community/sqlite3` 固定源码，通过公开 core/runner 检查绑定参数、查询状态及连接/语句生命周期。[验收记录](docs/SQLITE-INTEGRATION.md)包含 48 项上游测试、8 项适配测试及 96 个隔离场景；[六项 Windows CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/39248905440) 全部通过且产物已核对。这证明真实绑定可以复用协议，尚未发现未知缺陷。
 
@@ -110,6 +110,6 @@ Eigen 支持 `--generator stateful` 的六操作探索，以及 `--generator ari
 
 状态修整使用 MoonBit 增量依赖索引，避免反复验证全部前缀；结构和模型都接受一步后才提交依赖变化。拒绝后的状态保持约定及复杂度范围见 [适配器指南](docs/ADAPTERS.md)。
 
-当前维护候选 `33bbfea` 已在 PR 合成合并提交 `fee7f97`（完整源码树一致）通过 [Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40054024435) 及 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40054024444)，产物已核对，见 [固定提交证据](docs/evidence/maintenance-hosted-20261024.json)。后续仅文档变更不作为新的执行记录；运行代码变更须重新验收。Linux 不宣称与 Windows 七项 suite 完全等价。当前限制：ASan 仅插桩 Buffer C fixture、Eigen C++ shim（含其模板实例）及原生错误专项的 faults.c，MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
+2026-10-24 的维护候选 `33bbfea` 已在 PR 合成合并提交 `fee7f97`（完整源码树一致）通过 [Windows 七项 CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40054024435) 及 [Linux CI](https://github.com/serikaonoe123/moonffi-lab/actions/runs/40054024444)，产物已核对，见 [固定提交证据](docs/evidence/maintenance-hosted-20261024.json)。后续仅文档变更不作为新的执行记录；运行代码变更须重新验收。Linux 不宣称与 Windows 七项 suite 完全等价。当前限制：ASan 仅插桩 Buffer C fixture、Eigen C++ shim（含其模板实例）及原生错误专项的 faults.c，MoonBit 生成的 C、运行时、async stubs 和其他预编译库未插桩。等长小数或指数编码尚无专门简化规则，也不保证参数最小。Eigen 的释放步骤只删除 MoonBit 引用，不验证 finalizer 的精确时刻或原生分配平衡。进程隔离是故障隔离机制。
 
 旧 Eigen 绑定属于既有成果，新增引擎、适配器和验收脚本属于本项目工作。来源和许可见 [快照记录](vendor/eigen-binding/SNAPSHOT.md)。本项目 MIT；导入源码保留原有许可。

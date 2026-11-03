@@ -1,6 +1,6 @@
 # 四项补齐与复审验收回应
 
-更新：2026-10-22。本次回答反馈中的四项技术建议，并明确实现范围。固定验收提交为 [`7d2716dd345224402437466f41ee9a34564749cf`](https://github.com/serikaonoe123/moonffi-lab/tree/7d2716dd345224402437466f41ee9a34564749cf)，不是旧 rc.1 发布提交。
+状态核对：2026-11-03。最新发布与验收见 [项目状态](PROJECT-STATUS.md)。下方四项技术回应和执行计数保留 2026-10-22 的固定提交基线，后续成果另列，不改写旧结果。固定验收提交为 [`7d2716dd345224402437466f41ee9a34564749cf`](https://github.com/serikaonoe123/moonffi-lab/tree/7d2716dd345224402437466f41ee9a34564749cf)，不是旧 rc.1 发布提交。
 
 ## 逐项完成情况
 
@@ -25,12 +25,12 @@
 
 这些数字不跨平台相加冒充不同测试覆盖；CI、接入者实例及声明范围共同构成证据。独立复现按 [INDEPENDENT-REPRODUCTION](INDEPENDENT-REPRODUCTION.md) 选择固定提交。
 
-## 必须保留的限制
+## 当前限制与后续补齐
 
 - 故障缩减使用自有、标注的人工崩溃和内存错误，不计为未知上游缺陷。相同签名只描述同一未变可执行文件的观测位置，不证明同根因。
-- 五项不稳定基线/最终、弱证据、预算及默认关闭控制只在 crash 档执行。ASan 档未完成这五项控制，不宣称相同控制覆盖。
+- 2026-10-22 的上述基线仅执行 crash 档五项控制；后续 Windows/Linux 已补齐 crash/ASan 两档各五项控制，见 [维护验收](evidence/maintenance-hosted-20261024.json)。ASan 弱证据控制为明确标注的合成诊断，其余 ASan 控制执行真实插桩的自有故障。
 - 专项 ASan 仅插桩 faults.c；Windows 通用 ASan 另覆盖 Buffer C 和 Eigen shim，未插桩全部 MoonBit 生成 C、运行时或依赖。
 - Linux 包含实际普通及故障回归，但不宣称与七个 Windows suite 完全等价。deletion_minimal 仅指声明的删除邻域，不保证全局最短或参数最小。
-- 独立使用者反馈、新版源码包及正式复审结果不在当前已完成成果中；旧 rc.1 标签和附件不作为新能力的发布证据。
+- rc.2 源码预发布和 Mooncakes 0.1.0 库包已发布，Windows/Linux registry 消费者均已验证；各自范围见 [项目状态](PROJECT-STATUS.md)。独立使用者反馈仍待收集；参赛者已确认通过初审，不能据此宣称最终赛事验收通过。旧 rc.1 标签和附件不作为后续新增能力的发布证据。
 
 可用于更新报名材料的正文见 [RESUBMISSION-TEXT](RESUBMISSION-TEXT.md)，一页式项目说明见 [HACKATHON-SUBMISSION](HACKATHON-SUBMISSION.md)。历史补齐过程、失败和修复见 [VALIDATION](VALIDATION.md)及 [native-acceptance-20261022](evidence/native-acceptance-20261022.json)。

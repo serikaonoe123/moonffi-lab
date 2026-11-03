@@ -1,5 +1,7 @@
 # MoonFFI Lab v0.1.0 发布说明草稿
 
+> 本页保留该候选发布时的固定范围和原审阅正文，不代表当前项目全貌。Mooncakes 0.1.0 后续已于 2026-10-30 发布；当前状态见 [项目状态](PROJECT-STATUS.md)。下文“未发布 registry”等描述仅指当时快照，不改写已发布标签、附件或核验记录。
+
 状态：稳定版 v0.1.0 的说明草稿。2026-10-20 已发布 [v0.1.0-rc.1 源码试用候选](https://github.com/serikaonoe123/moonffi-lab/releases/tag/v0.1.0-rc.1)，稳定版和 registry 包尚未发布。具体候选提交、文件清单和 SHA-256 见附件；准备时的 `candidate.json` 保持原样，实际发布状态见 [核验记录](evidence/prerelease-v0.1.0-rc.1-20261020.json)。
 
 MoonFFI Lab 用 MoonBit 为原生绑定生成有状态调用序列，在独立进程中保存执行证据，并把可稳定重放的性质失败缩减为更小的具体输入。
